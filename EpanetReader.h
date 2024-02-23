@@ -14,8 +14,8 @@ using namespace std;
 struct JunctionReader
 {
     string ID;
-    int Elev;
-    int Head;
+    double Elev;
+    double Head;
     double Demand;
     int Pattern;
     vector<int> idxPipe;
@@ -26,14 +26,14 @@ struct JunctionReader
 struct ReservoirReader
 {
     string ID;
-    int Head;
+    double Head;
     int Pattern;
 };
 
 struct TankReader
 {
     string ID;
-    int Elevation;
+    double Elevation;
     int InitLevel;
     int MinLevel;
     double MaxLevel;
@@ -91,7 +91,6 @@ public:
     vector<int> con_at_edge_end;
 
     void readFromFile(const std::string &filename);
-    void convertToRunner();
     void convertToRunner2();
     int nextPipeAtNode(int idx);
     string getOtherNodeOfPipe(int idxPipe, string Node);
