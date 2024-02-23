@@ -20,12 +20,12 @@ class SCP: public PSToolboxBaseEdge, Units
 {
   private:
     //Data
-    double t, L, D, A, lambda, he, hv, ro, a, roa, dt, lambda_p_2D, S0, g;
+    double L, D, A, lambda, he, hv, ro, a, roa, lambda_p_2D, S0, g;
     //string name, node_from, node_to;
     string node_from, node_to;
     double phi, alpha, gamma, mu;
     int Npts; //!< number of points the pipe is separated to during
-    VectorXd x, v, p;
+    VectorXd x, v, p, vnew, pnew;
     bool ini_done; //!< whether the pipe has been initialised or not
     void BCLeft(string type, double val, double &pstart, double &vstart);
     void BCRight(string type, double val, double &pend, double &vend);
@@ -57,9 +57,9 @@ class SCP: public PSToolboxBaseEdge, Units
     string GetName();
     //string Info(bool show_pts);
     string Info();
-    double Get_t(){return t;};
-    double Get_dt(){return dt;};
-    double Get_tnext(){return (t+dt);};
+    //double Get_t(){return t;};
+    //double Get_dt(){return dt;};
+    //double Get_tnext(){return (t+dt);};
 
     void Ini();
     void Ini(int Npts_mul);
@@ -75,7 +75,8 @@ class SCP: public PSToolboxBaseEdge, Units
         string BC_end_type, double BC_end_val);
     void Step();
 void Update(double t_target);
-    void Set_BC_Left(string type, double val);
+void UpdateTime(double);
+void Set_BC_Left(string type, double val);
     void Set_BC_Right(string type, double val);
 
 
@@ -84,6 +85,7 @@ void Update(double t_target);
     double GetAlphaPrimitiveAtEnd(double t_target); // alias
     double GetBetaPrimitiveAtFront(double t_target); // alias
     void Save_data();
+    void Write_data();
     void Save_status(bool newfile, bool atonce);
     float GetPenult(string what);
     vector<double> Get_dvprop(string prop_string);

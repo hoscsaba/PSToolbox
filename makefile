@@ -21,12 +21,15 @@ EXEC := output
 # Build rule
 $(EXEC): $(OBJS)
 	libtool -static -o libmy_tools.a my_tools.o
-	libtool -static -o libPSToolbox.a PSToolBoxRunner.o PSToolboxBaseEdge.o Gas.o IdealGas.o FrozenMixtureLiquidGas.o Units.o LWP.o SCP.o Reservoir.o Valve.o Connector.o CoolPropGas.o CoolPropHA.o Valve_with_Absorber.o
+	libtool -static -o libPSToolbox.a PSToolboxPlotter.o PSToolBoxRunner.o PSToolboxBaseEdge.o Gas.o IdealGas.o FrozenMixtureLiquidGas.o Units.o LWP.o SCP.o Reservoir.o Valve.o Connector.o CoolPropGas.o CoolPropHA.o Valve_with_Absorber.o
 #$(CXX) $(CXXFLAGS) $^ -o $@
 
 # Compile rule for each source file
 my_tools.o: my_tools.cpp 
 	$(CXX) $(INC) $(CFLAGS) my_tools.cpp -c -o my_tools.o
+
+PSToolboxPlotter.o: PSToolboxPlotter.cpp 
+	$(CXX) $(INC) $(CFLAGS) PSToolboxPlotter.cpp -c -o PSToolboxPlotter.o
 
 PSToolboxRunner.o: PSToolboxRunner.cpp 
 	$(CXX) $(INC) $(CFLAGS) PSToolboxRunner.cpp -c -o PSToolboxRunner.o

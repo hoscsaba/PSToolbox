@@ -25,21 +25,25 @@ Connector::Connector(bool _DEBUG) {
 Connector::~Connector() {}
 
 // ! Edges junction for two edges
-Connector::Connector(PSToolboxBaseEdge *_e1,bool _is_front1, 
-    PSToolboxBaseEdge *_e2, bool _is_front2, 
-    double _demand, bool _DEBUG){
+Connector::Connector(
+    string name,
+    PSToolboxBaseEdge* _e1, bool _is_front1, 
+    PSToolboxBaseEdge* _e2, bool _is_front2, 
+    double _demand, bool _DEBUG, vector<int> _edges_idx){
   e1=_e1;
   e2=_e2;
   is_front1=_is_front1;
-  is_front1=_is_front2;
+  is_front2=_is_front2;
   demand=_demand;
   DEBUG=_DEBUG;
-
-  type = 1;
+  edges_idx=_edges_idx;
+  type = 2;
 }
 
 // ! Edge-to simple BC
-Connector::Connector(PSToolboxBaseEdge *_e1, bool _is_front1, 
+Connector::Connector(
+    string name,
+    PSToolboxBaseEdge* _e1, bool _is_front1, 
     string _BC_type, double _BC_value,
     double _demand, bool _DEBUG){
 
@@ -50,19 +54,47 @@ Connector::Connector(PSToolboxBaseEdge *_e1, bool _is_front1,
   demand=_demand;
   DEBUG=_DEBUG;
 
-  type=2;
+  type=1;
 }
 
+// ! 3 SCP pipes
+Connector::Connector(
+    string name,
+    PSToolboxBaseEdge* _e1, bool _is_front1, 
+    PSToolboxBaseEdge* _e2, bool _is_front2, 
+    PSToolboxBaseEdge* _e3, bool _is_front3, 
+    double _demand, bool _DEBUG, vector<int> _edges_idx){
+
+  e1=_e1;
+  e2=_e2;
+  e3=_e3;
+  is_front1=_is_front1;
+  is_front2=_is_front2;
+  is_front3=_is_front3;
+  demand=_demand;
+  DEBUG=_DEBUG;
+  edges_idx=_edges_idx;
+
+  type=3;
+}
+
+
 // This is the main update function
-void Connector::Update(double t_target){
+void Connector::Update(double t_target,int update_idx){
+
   switch (type) {
     case 1:
-      Connector_SCP_Pipes(t_target);
+      Connector_SCP_Pipe_Simple_BC(t_target); 
       break;
 
     case 2:
-      Connector_SCP_Pipe_Simple_BC(t_target); 
+      Connector_SCP_2Pipes(t_target,update_idx);
       break;
+
+    case 3:
+      Connector_SCP_3Pipes(t_target,update_idx); 
+      break;
+
 
     default:
       cout<<endl<<"ERROR!!!";
@@ -171,7 +203,7 @@ bool Connector::Connector_LWP_Pipe_Back_and_Valve(double t_target,
   //p1->GetAllPrimitiveAtEnd(t_target, pL, v, T, rho);
   alpha = p1->GetAlphaPrimitiveAtEnd(t_target);
 
-  double err1, err2, err = 1.e5, mp, TOL = 1e-5;
+  double err1=0., err2, err = 1.e5, mp, TOL = 1e-5;
   int iter = 0, MAX_ITER = 10;
   double p = p1->Get_dprop("p_back");
   double T = p1->Get_dprop("T_back");
@@ -725,26 +757,38 @@ void Connector::Connector_SCP_Pipe_Simple_BC(double t_target){
     e1->Set_BC_Left(BC_type,BC_value);
   else 
     e1->Set_BC_Right(BC_type,BC_value);
-
 }
 
 
 // ! This function maps the internally stored SCP pipe pointers
 // e1 and e2 to the more general 
 // Connector_SCP_Pipes(t,*p1,bool,*p2,bool,mpout,p,v1,v2) function
+/*
+   void Connector::Connector_SCP_Pipes(double t_target){
+   double p,v1,v2;
 
-void Connector::Connector_SCP_Pipes(double t_target){
-  double p,v1,v2;
-  SCP* _e1 = static_cast<SCP*>(e1);
-  SCP* _e2 = static_cast<SCP*>(e2);
-  Connector_SCP_Pipes(t_target,_e1,is_front1,_e2,is_front2,demand,p,v1,v2);
-}
-
-void Connector::Connector_SCP_Pipes(double t_target,
-    SCP *p1, bool is_front1,
-    SCP *p2, bool is_front2,
-    double mpout,
-    double& p, double& v1, double& v2) {
+   switch (type){
+   case 2:
+   {
+   Connector_SCP_2Pipes(t_target,demand,p,v1,v2);
+   break;
+   }
+   case 3:
+   {
+   double v3;
+   Connector_SCP_3Pipes(t_target,demand,p,v1,v2,v3);
+   break;
+   }
+   default:
+   {
+   cout<<endl<<"Connector_SCP_Pipes WTF????"<<endl;
+   cin.get();
+   }
+   }
+   }
+   */
+void Connector::Connector_SCP_2Pipes(double t_target, int update_idx)
+{
 
   // Solves:
   // p + d1*rho*a*v1 = alpha1
@@ -757,82 +801,136 @@ void Connector::Connector_SCP_Pipes(double t_target,
   // is_front = true  -> d1=-1, alpha=pR-rho*a*vR
 
   double alpha1, alpha2;
-  double A1  = p1->Get_dprop("A");
-  double A2  = p2->Get_dprop("A");
-  double rho = p1->Get_dprop("rho");
-  double a   = p1->Get_dprop("a");
+  double A1  = e1->Get_dprop("A");
+  double A2  = e2->Get_dprop("A");
+  double rho1 = e1->Get_dprop("rho");
+  double a1   = e1->Get_dprop("a");
+  double rho2 = e2->Get_dprop("rho");
+  double a2   = e2->Get_dprop("a");
+
   int d1 = 1, d2 = 1;
   if (is_front1) {
-    alpha1 = p1->GetBetaAtFront(t_target);
+    alpha1 = e1->GetBetaAtFront(t_target);
     d1 = -1;
   }
   else
-    alpha1 = p1->GetAlphaAtEnd(t_target);
+    alpha1 = e1->GetAlphaAtEnd(t_target);
 
   if (is_front2) {
-    alpha2 = p2->GetBetaAtFront(t_target);
+    alpha2 = e2->GetBetaAtFront(t_target);
     d2 = -1;
   }
   else
-    alpha2 = p2->GetAlphaAtEnd(t_target);
+    alpha2 = e2->GetAlphaAtEnd(t_target);
 
-  p  = (A1 * alpha1 + A2 * alpha2 - mpout * a) / (A1 + A2);
-  v1 = (alpha1 - p) / (d1 * rho * a);
-  v2 = (alpha2 - p) / (d2 * rho * a);
+  double p,v1,v2,B1,B2;
+  B1=d1*rho1*a1/A1;
+  B2=d2*rho2*a2/A2;
+  p=(alpha2*B1-alpha1*B2)/(B1-B2);
+  v1=(alpha1-alpha2)/(B1-B2)/A1;
+  v2=(alpha1-alpha2)/(B1-B2)/A2;
+  //p  = (A1 * alpha1 + A2 * alpha2 - demand * a) / (A1 + A2);
+  //v1 = (alpha1 - p) / (d1 * rho * a);
+  //v2 = (alpha2 - p) / (d2 * rho * a);
 
-}
-
-void Connector::Connector_SCP_Pipes(double t_target,
-    SCP *p1, bool is_front1,
-    SCP *p2, bool is_front2,
-    SCP *p3, bool is_front3,
-    double mpout,
-    double& p, double& v1, double& v2, double& v3) {
-
-  // Solves:
-  // p + d1*rho*a*v1 = alpha1
-  // p + d2*rho*a*v2 = alpha2
-  // p + d3*rho*a*v3 = alpha3
-  // d1*A1*v1 + d2*A2*v2 + d3*A3*v3 = mpout/rho
-  //
-  // Solution: p=(sum Ai*alphai-mpout*a)/(sum Ai)
-  //
-  // is_front = false -> d1=+1, alpha=pL+rho*a*vL
-  // is_front = true  -> d1=-1, alpha=pR-rho*a*vR
-
-  double alpha1, alpha2, alpha3;
-  double A1  = p1->Get_dprop("A");
-  double A2  = p2->Get_dprop("A");
-  double A3  = p3->Get_dprop("A");
-  double rho = p1->Get_dprop("rho");
-  double a   = p1->Get_dprop("a");
-  int d1 = 1, d2 = 1, d3 = 1;
-  if (is_front1) {
-    alpha1 = p1->GetBetaAtFront(t_target);
-    d1 = -1;
+  if (update_idx==edges_idx.at(0)){ 
+    if (is_front1)
+      e1->Set_BC_Left("Pressure",p);
+    else 
+      e1->Set_BC_Right("Pressure",p);
   }
-  else
-    alpha1 = p1->GetAlphaAtEnd(t_target);
 
-  if (is_front2) {
-    alpha2 = p2->GetBetaAtFront(t_target);
-    d2 = -1;
-  }
-  else
-    alpha2 = p2->GetAlphaAtEnd(t_target);
+  if (update_idx==edges_idx.at(1)){ 
+      if (is_front2)
+      e2->Set_BC_Left("Pressure",p);
+      else 
+      e2->Set_BC_Right("Pressure",p);
+      }
+      //  cout<<endl<<"is_front1: "<<is_front1<<", alpha1="<<alpha1;
+      //  cout<<endl<<"is_front2: "<<is_front2<<", alpha2="<<alpha1;
+      //cout<<endl<<"demand="<<demand;
+      //cout<<endl<<"v1=    "<<v1;
+      //cout<<endl<<"v2=    "<<v2;
+      //cout<<endl<<"p=     "<<p;
+      //cout<<e1->Info();
+      //cout<<e2->Info();
+      //cin.get();
 
-  if (is_front3) {
-    alpha3 = p3->GetBetaAtFront(t_target);
-    d3 = -1;
-  }
-  else
-    alpha3 = p3->GetAlphaAtEnd(t_target);
+      }
 
-  p  = (A1 * alpha1 + A2 * alpha2 + A3 * alpha3 - mpout * a) / (A1 + A2 + A3);
-  v1 = (alpha1 - p) / (d1 * rho * a);
-  v2 = (alpha2 - p) / (d2 * rho * a);
-  v3 = (alpha3 - p) / (d3 * rho * a);
-}
+      void Connector::Connector_SCP_3Pipes(double t_target,int update_idx)
+      {
+
+        // Solves:
+        // p + d1*rho*a*v1 = alpha1
+        // p + d2*rho*a*v2 = alpha2
+        // p + d3*rho*a*v3 = alpha3
+        // d1*A1*v1 + d2*A2*v2 + d3*A3*v3 = mpout/rho
+        //
+        // Solution: p=(sum Ai*alphai-mpout*a)/(sum Ai)
+        //
+        // is_front = false -> d1=+1, alpha=pL+rho*a*vL
+        // is_front = true  -> d1=-1, alpha=pR-rho*a*vR
+
+        double alpha1, alpha2, alpha3;
+        double A1  = e1->Get_dprop("A");
+        double A2  = e2->Get_dprop("A");
+        double A3  = e3->Get_dprop("A");
+        double rho1 = e1->Get_dprop("rho");
+        double rho2 = e2->Get_dprop("rho");
+        double rho3 = e3->Get_dprop("rho");
+        double a1   = e1->Get_dprop("a");
+        double a2   = e2->Get_dprop("a");
+        double a3   = e3->Get_dprop("a");
+        int d1 = 1, d2 = 1, d3 = 1;
+        if (is_front1) {
+          alpha1 = e1->GetBetaAtFront(t_target);
+          d1 = -1;
+        }
+        else
+          alpha1 = e1->GetAlphaAtEnd(t_target);
+
+        if (is_front2) {
+          alpha2 = e2->GetBetaAtFront(t_target);
+          d2 = -1;
+        }
+        else
+          alpha2 = e2->GetAlphaAtEnd(t_target);
+
+        if (is_front3) {
+          alpha3 = e3->GetBetaAtFront(t_target);
+          d3 = -1;
+        }
+        else
+          alpha3 = e3->GetAlphaAtEnd(t_target);
+        double p, v1,v2,v3, rhoa1, rhoa2,rhoa3;
+        rhoa1=rho1*a1;
+        rhoa2=rho2*a2;
+        rhoa3=rho3*a3;
+        p  = (A1 * alpha1 + A2 * alpha2 + A3 * alpha3 - demand * a) / (A1 + A2 + A3);
+        v1 = (alpha1 - p) / (d1 * rhoa1);
+        v2 = (alpha2 - p) / (d2 * rhoa2);
+        v3 = (alpha3 - p) / (d3 * rhoa3);
+
+        if (update_idx==edges_idx.at(0)){ 
+          if (is_front1)
+            e1->Set_BC_Left("Pressure",p);
+          else 
+            e1->Set_BC_Right("Pressure",p);
+        } 
+        if (update_idx==edges_idx.at(1)){ 
+          if (is_front2)
+            e2->Set_BC_Left("Pressure",p);
+          else 
+            e2->Set_BC_Right("Pressure",p);
+        }
+        if (update_idx==edges_idx.at(2)){ 
+          if (is_front3)
+            e3->Set_BC_Left("Pressure",p);
+          else 
+            e3->Set_BC_Right("Pressure",p);
+        }
+      }
 
 void Connector::Connector_LWP_Pipes(double t_target,
     LWP *p1, bool is_front1,
