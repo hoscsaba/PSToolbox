@@ -38,6 +38,16 @@ class Connector
         PSToolboxBaseEdge *e3, bool is_front3, 
         double demand, bool DEBUG, vector<int> edges_idx);
 
+    // type=4
+    Connector(
+        string name,
+        PSToolboxBaseEdge *e1,bool is_front1, 
+        PSToolboxBaseEdge *e2, bool is_front2, 
+        PSToolboxBaseEdge *e3, bool is_front3, 
+        PSToolboxBaseEdge *e4, bool is_front4, 
+        double demand, bool DEBUG, vector<int> edges_idx);
+
+
     ~Connector();
 
     void Update(double t_target, int update_idx);
@@ -85,6 +95,8 @@ class Connector
     void Connector_SCP_2Pipes(double t_target, int update_idx);
 
     void Connector_SCP_3Pipes(double t_target, int update_idx);
+    
+    void Connector_SCP_4Pipes(double t_target, int update_idx);
 
     void Connector_LWP_Pipes(double t_target, LWP *p1, LWP *p2); 
 
@@ -99,7 +111,8 @@ class Connector
     PSToolboxBaseEdge *e1;
     PSToolboxBaseEdge *e2;
     PSToolboxBaseEdge *e3;
-    bool is_front1, is_front2, is_front3;
+    PSToolboxBaseEdge *e4;
+    bool is_front1, is_front2, is_front3, is_front4;
     vector<int> edge_idx;
     string BC_type;
     double BC_value;

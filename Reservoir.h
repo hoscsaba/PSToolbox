@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <cmath>
-#include <Eigen/Dense>
+#include <Eigen/Core>
 #include "Units.h"
 #include "IdealGas.h"
 //#include "/Users/hoscsaba/program/matplotlib-cpp/matplotlibcpp.h"

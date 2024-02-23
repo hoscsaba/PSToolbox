@@ -28,6 +28,9 @@ $(EXEC): $(OBJS)
 my_tools.o: my_tools.cpp 
 	$(CXX) $(INC) $(CFLAGS) my_tools.cpp -c -o my_tools.o
 
+EpanetReader.o: EpanetReader.cpp 
+	$(CXX) $(INC) $(CFLAGS) EpanetReader.cpp -c -o EpanetReader.o
+
 PSToolboxPlotter.o: PSToolboxPlotter.cpp 
 	$(CXX) $(INC) $(CFLAGS) PSToolboxPlotter.cpp -c -o PSToolboxPlotter.o
 

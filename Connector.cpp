@@ -26,7 +26,7 @@ Connector::~Connector() {}
 
 // ! Edges junction for two edges
 Connector::Connector(
-    string name,
+    string name, 
     PSToolboxBaseEdge* _e1, bool _is_front1, 
     PSToolboxBaseEdge* _e2, bool _is_front2, 
     double _demand, bool _DEBUG, vector<int> _edges_idx){
@@ -77,6 +77,30 @@ Connector::Connector(
 
   type=3;
 }
+// ! 4 SCP pipes
+Connector::Connector(
+    string name,
+    PSToolboxBaseEdge* _e1, bool _is_front1, 
+    PSToolboxBaseEdge* _e2, bool _is_front2, 
+    PSToolboxBaseEdge* _e3, bool _is_front3, 
+    PSToolboxBaseEdge* _e4, bool _is_front4, 
+    double _demand, bool _DEBUG, vector<int> _edges_idx){
+
+  e1=_e1;
+  e2=_e2;
+  e3=_e3;
+  e4=_e4;
+  is_front1=_is_front1;
+  is_front2=_is_front2;
+  is_front3=_is_front3;
+  is_front4=_is_front4;
+  demand=_demand;
+  DEBUG=_DEBUG;
+  edges_idx=_edges_idx;
+
+  type=4;
+}
+
 
 
 // This is the main update function
@@ -95,6 +119,9 @@ void Connector::Update(double t_target,int update_idx){
       Connector_SCP_3Pipes(t_target,update_idx); 
       break;
 
+    case 4:
+      Connector_SCP_4Pipes(t_target,update_idx); 
+      break;
 
     default:
       cout<<endl<<"ERROR!!!";
@@ -841,96 +868,184 @@ void Connector::Connector_SCP_2Pipes(double t_target, int update_idx)
   }
 
   if (update_idx==edges_idx.at(1)){ 
-      if (is_front2)
+    if (is_front2)
       e2->Set_BC_Left("Pressure",p);
-      else 
+    else 
       e2->Set_BC_Right("Pressure",p);
-      }
-      //  cout<<endl<<"is_front1: "<<is_front1<<", alpha1="<<alpha1;
-      //  cout<<endl<<"is_front2: "<<is_front2<<", alpha2="<<alpha1;
-      //cout<<endl<<"demand="<<demand;
-      //cout<<endl<<"v1=    "<<v1;
-      //cout<<endl<<"v2=    "<<v2;
-      //cout<<endl<<"p=     "<<p;
-      //cout<<e1->Info();
-      //cout<<e2->Info();
-      //cin.get();
+  }
+  //  cout<<endl<<"is_front1: "<<is_front1<<", alpha1="<<alpha1;
+  //  cout<<endl<<"is_front2: "<<is_front2<<", alpha2="<<alpha1;
+  //cout<<endl<<"demand="<<demand;
+  //cout<<endl<<"v1=    "<<v1;
+  //cout<<endl<<"v2=    "<<v2;
+  //cout<<endl<<"p=     "<<p;
+  //cout<<e1->Info();
+  //cout<<e2->Info();
+  //cin.get();
 
-      }
+}
 
-      void Connector::Connector_SCP_3Pipes(double t_target,int update_idx)
-      {
+void Connector::Connector_SCP_3Pipes(double t_target,int update_idx)
+{
+  // Solves:
+  // p + d1*rho*a*v1 = alpha1
+  // p + d2*rho*a*v2 = alpha2
+  // p + d3*rho*a*v3 = alpha3
+  // d1*A1*v1 + d2*A2*v2 + d3*A3*v3 = mpout/rho
+  //
+  // Solution: p=(sum Ai*alphai-mpout*a)/(sum Ai)
+  //
+  // is_front = false -> d1=+1, alpha=pL+rho*a*vL
+  // is_front = true  -> d1=-1, alpha=pR-rho*a*vR
 
-        // Solves:
-        // p + d1*rho*a*v1 = alpha1
-        // p + d2*rho*a*v2 = alpha2
-        // p + d3*rho*a*v3 = alpha3
-        // d1*A1*v1 + d2*A2*v2 + d3*A3*v3 = mpout/rho
-        //
-        // Solution: p=(sum Ai*alphai-mpout*a)/(sum Ai)
-        //
-        // is_front = false -> d1=+1, alpha=pL+rho*a*vL
-        // is_front = true  -> d1=-1, alpha=pR-rho*a*vR
+  double alpha1, alpha2, alpha3;
+  double A1  = e1->Get_dprop("A");
+  double A2  = e2->Get_dprop("A");
+  double A3  = e3->Get_dprop("A");
+  double rho1 = e1->Get_dprop("rho");
+  double rho2 = e2->Get_dprop("rho");
+  double rho3 = e3->Get_dprop("rho");
+  double a1   = e1->Get_dprop("a");
+  double a2   = e2->Get_dprop("a");
+  double a3   = e3->Get_dprop("a");
+  int d1 = 1, d2 = 1, d3 = 1;
+  if (is_front1) {
+    alpha1 = e1->GetBetaAtFront(t_target);
+    d1 = -1;
+  }
+  else
+    alpha1 = e1->GetAlphaAtEnd(t_target);
 
-        double alpha1, alpha2, alpha3;
-        double A1  = e1->Get_dprop("A");
-        double A2  = e2->Get_dprop("A");
-        double A3  = e3->Get_dprop("A");
-        double rho1 = e1->Get_dprop("rho");
-        double rho2 = e2->Get_dprop("rho");
-        double rho3 = e3->Get_dprop("rho");
-        double a1   = e1->Get_dprop("a");
-        double a2   = e2->Get_dprop("a");
-        double a3   = e3->Get_dprop("a");
-        int d1 = 1, d2 = 1, d3 = 1;
-        if (is_front1) {
-          alpha1 = e1->GetBetaAtFront(t_target);
-          d1 = -1;
-        }
-        else
-          alpha1 = e1->GetAlphaAtEnd(t_target);
+  if (is_front2) {
+    alpha2 = e2->GetBetaAtFront(t_target);
+    d2 = -1;
+  }
+  else
+    alpha2 = e2->GetAlphaAtEnd(t_target);
 
-        if (is_front2) {
-          alpha2 = e2->GetBetaAtFront(t_target);
-          d2 = -1;
-        }
-        else
-          alpha2 = e2->GetAlphaAtEnd(t_target);
+  if (is_front3) {
+    alpha3 = e3->GetBetaAtFront(t_target);
+    d3 = -1;
+  }
+  else
+    alpha3 = e3->GetAlphaAtEnd(t_target);
 
-        if (is_front3) {
-          alpha3 = e3->GetBetaAtFront(t_target);
-          d3 = -1;
-        }
-        else
-          alpha3 = e3->GetAlphaAtEnd(t_target);
-        double p, v1,v2,v3, rhoa1, rhoa2,rhoa3;
-        rhoa1=rho1*a1;
-        rhoa2=rho2*a2;
-        rhoa3=rho3*a3;
-        p  = (A1 * alpha1 + A2 * alpha2 + A3 * alpha3 - demand * a) / (A1 + A2 + A3);
-        v1 = (alpha1 - p) / (d1 * rhoa1);
-        v2 = (alpha2 - p) / (d2 * rhoa2);
-        v3 = (alpha3 - p) / (d3 * rhoa3);
+  double p, v1,v2,v3, rhoa1, rhoa2,rhoa3;
+  rhoa1=rho1*a1;
+  rhoa2=rho2*a2;
+  rhoa3=rho3*a3;
+  p  = (alpha1/rhoa1 + alpha2/rhoa2 + alpha3/rhoa3 - demand) / (1./A1 + 1./A2 + 1./A3);
+  v1 = (alpha1 - p) / (d1 * rhoa1);
+  v2 = (alpha2 - p) / (d2 * rhoa2);
+  v3 = (alpha3 - p) / (d3 * rhoa3);
 
-        if (update_idx==edges_idx.at(0)){ 
-          if (is_front1)
-            e1->Set_BC_Left("Pressure",p);
-          else 
-            e1->Set_BC_Right("Pressure",p);
-        } 
-        if (update_idx==edges_idx.at(1)){ 
-          if (is_front2)
-            e2->Set_BC_Left("Pressure",p);
-          else 
-            e2->Set_BC_Right("Pressure",p);
-        }
-        if (update_idx==edges_idx.at(2)){ 
-          if (is_front3)
-            e3->Set_BC_Left("Pressure",p);
-          else 
-            e3->Set_BC_Right("Pressure",p);
-        }
-      }
+  if (update_idx==edges_idx.at(0)){ 
+    if (is_front1)
+      e1->Set_BC_Left("Pressure",p);
+    else 
+      e1->Set_BC_Right("Pressure",p);
+  } 
+
+  if (update_idx==edges_idx.at(1)){ 
+    if (is_front2)
+      e2->Set_BC_Left("Pressure",p);
+    else 
+      e2->Set_BC_Right("Pressure",p);
+  }
+
+  if (update_idx==edges_idx.at(2)){ 
+    if (is_front3)
+      e3->Set_BC_Left("Pressure",p);
+    else 
+      e3->Set_BC_Right("Pressure",p);
+  }
+}
+
+void Connector::Connector_SCP_4Pipes(double t_target,int update_idx)
+{
+
+  double alpha1, alpha2, alpha3, alpha4;
+  double A1  = e1->Get_dprop("A");
+  double A2  = e2->Get_dprop("A");
+  double A3  = e3->Get_dprop("A");
+  double A4  = e4->Get_dprop("A");
+  double rho1 = e1->Get_dprop("rho");
+  double rho2 = e2->Get_dprop("rho");
+  double rho3 = e3->Get_dprop("rho");
+  double rho4 = e4->Get_dprop("rho");
+  double a1   = e1->Get_dprop("a");
+  double a2   = e2->Get_dprop("a");
+  double a3   = e3->Get_dprop("a");
+  double a4   = e4->Get_dprop("a");
+  int d1 = 1, d2 = 1, d3 = 1, d4 = 1;
+  if (is_front1) {
+    alpha1 = e1->GetBetaAtFront(t_target);
+    d1 = -1;
+  }
+  else
+    alpha1 = e1->GetAlphaAtEnd(t_target);
+
+  if (is_front2) {
+    alpha2 = e2->GetBetaAtFront(t_target);
+    d2 = -1;
+  }
+  else
+    alpha2 = e2->GetAlphaAtEnd(t_target);
+
+  if (is_front3) {
+    alpha3 = e3->GetBetaAtFront(t_target);
+    d3 = -1;
+  }
+  else
+    alpha3 = e3->GetAlphaAtEnd(t_target);
+
+  if (is_front4) {
+    alpha4 = e4->GetBetaAtFront(t_target);
+    d4 = -1;
+  }
+  else
+    alpha4 = e4->GetAlphaAtEnd(t_target);
+
+  double p, v1,v2,v3,v4, rhoa1, rhoa2,rhoa3, rhoa4;
+  rhoa1=rho1*a1;
+  rhoa2=rho2*a2;
+  rhoa3=rho3*a3;
+  rhoa4=rho4*a4;
+  p  = (alpha1/rhoa1 + alpha2/rhoa2 + alpha3/rhoa3+alpha4/rhoa4 - demand) / (1./A1 + 1./A2 + 1./A3+1./A4);
+  v1 = (alpha1 - p) / (d1 * rhoa1);
+  v2 = (alpha2 - p) / (d2 * rhoa2);
+  v3 = (alpha3 - p) / (d3 * rhoa3);
+  v4 = (alpha4 - p) / (d4 * rhoa4);
+
+  if (update_idx==edges_idx.at(0)){ 
+    if (is_front1)
+      e1->Set_BC_Left("Pressure",p);
+    else 
+      e1->Set_BC_Right("Pressure",p);
+  } 
+
+  if (update_idx==edges_idx.at(1)){ 
+    if (is_front2)
+      e2->Set_BC_Left("Pressure",p);
+    else 
+      e2->Set_BC_Right("Pressure",p);
+  }
+
+  if (update_idx==edges_idx.at(2)){ 
+    if (is_front3)
+      e3->Set_BC_Left("Pressure",p);
+    else 
+      e3->Set_BC_Right("Pressure",p);
+
+    if (update_idx==edges_idx.at(3)){ 
+      if (is_front4)
+        e4->Set_BC_Left("Pressure",p);
+      else 
+        e4->Set_BC_Right("Pressure",p);
+    }
+  }
+}
+
 
 void Connector::Connector_LWP_Pipes(double t_target,
     LWP *p1, bool is_front1,
