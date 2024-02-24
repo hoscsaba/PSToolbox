@@ -20,9 +20,9 @@ int main(int argc, char **argv) {
 
   //=============== THIS SECTION GOES TO THE DATA READER
   // define edges
-  edges.push_back(new SCP("p1","n1","n2",1000,1100,100,0.1,0.02,0,0,save_data));
-  edges.push_back(new SCP("p2","n2","n3",1000,1300, 70,0.1,0.02,0,0,save_data));
-  edges.push_back(new SCP("p3","n2","n4",1000, 900,100,0.1,0.02,0,0,save_data));
+  edges.push_back(new SCP("p1","n1","n2",1000,1300,100,0.1,0.02,0,0,save_data));
+  edges.push_back(new SCP("p2","n2","n3",1000,1300,120,0.1,0.02,0,0,save_data));
+  edges.push_back(new SCP("p3","n3","n4",1000,1300,110,0.1,0.02,0,0,save_data));
 
   // define nodes (connectors)
   double demand1 = 0.;
@@ -32,12 +32,13 @@ int main(int argc, char **argv) {
   vector<int> id1;
   id1.push_back(0);
   id1.push_back(1);
-  id1.push_back(2);
-  //  vector<int> id1{1};
+  vector<int> id2;
+  id2.push_back(1);
+  id2.push_back(2);
   cons.push_back(new Connector("n1",edges.at(0),true,"Pressure",3.e5,demand1,DEBUG));
-  cons.push_back(new Connector("n2",edges.at(0),false,edges.at(1),true,edges.at(2),true,demand2,DEBUG,id1));
-  cons.push_back(new Connector("n3",edges.at(1),false,"Pressure",1.e5,demand3,DEBUG));
-  cons.push_back(new Connector("n4",edges.at(2),false,"Pressure",2.e5,demand4,DEBUG));
+  cons.push_back(new Connector("n2",edges.at(0),false,edges.at(1),true,demand2,DEBUG,id1));
+  cons.push_back(new Connector("n3",edges.at(1),false,edges.at(2),true,demand2,DEBUG,id2));
+  cons.push_back(new Connector("n4",edges.at(2),false,"Pressure",1.e5,demand3,DEBUG));
 
   // We need to add here connectivity info, e.g. by adding edge pointer + start/end info if relevant
   // con_at_edge_start.at(i) stores the idx of the connector connected to the start of the edge 
@@ -46,10 +47,10 @@ int main(int argc, char **argv) {
   vector<int> con_at_edge_end(edges.size(),-1);
   con_at_edge_start.at(0)=0; con_at_edge_end.at(0)=1;
   con_at_edge_start.at(1)=1; con_at_edge_end.at(1)=2;
-  con_at_edge_start.at(2)=1; con_at_edge_end.at(2)=3;
+  con_at_edge_start.at(2)=2; con_at_edge_end.at(2)=3;
   // =============== END OF DATA READER SECTION
 
-  PSToolboxRunner r(edges,cons,con_at_edge_end, con_at_edge_end);
+  PSToolboxRunner r(edges,cons,con_at_edge_start, con_at_edge_end);
   r.Set_Save_data(true);
   r.Run(10.);
 

@@ -780,12 +780,15 @@ void Connector::Connector_SCP_Reservoir_and_Pipe_Front(double t_target,
 }
 
 void Connector::Connector_SCP_Pipe_Simple_BC(double t_target){
-  if (is_front1)
+  if (is_front1){
     e1->Set_BC_Left(BC_type,BC_value);
-  else 
+//  cout<<endl<<"Simple_BC - updated front of pipe "<<e1->Get_name();
+  }
+    else{ 
     e1->Set_BC_Right(BC_type,BC_value);
+ // cout<<endl<<"Simple_BC - updated back of pipe "<<e1->Get_name();
 }
-
+}
 
 // ! This function maps the internally stored SCP pipe pointers
 // e1 and e2 to the more general 
@@ -934,10 +937,10 @@ void Connector::Connector_SCP_3Pipes(double t_target,int update_idx)
   rhoa1=rho1*a1;
   rhoa2=rho2*a2;
   rhoa3=rho3*a3;
-  p  = (alpha1/rhoa1 + alpha2/rhoa2 + alpha3/rhoa3 - demand) / (1./A1 + 1./A2 + 1./A3);
-  v1 = (alpha1 - p) / (d1 * rhoa1);
-  v2 = (alpha2 - p) / (d2 * rhoa2);
-  v3 = (alpha3 - p) / (d3 * rhoa3);
+  p  = (alpha1*A1/rhoa1 + alpha2*A2/rhoa2 + alpha3*A3/rhoa3 - demand) / (A1/rhoa1 + A2/rhoa2 + A3/rhoa3);
+  //v1 = (alpha1 - p) / (d1 * rhoa1);
+  //v2 = (alpha2 - p) / (d2 * rhoa2);
+  //v3 = (alpha3 - p) / (d3 * rhoa3);
 
   if (update_idx==edges_idx.at(0)){ 
     if (is_front1)
