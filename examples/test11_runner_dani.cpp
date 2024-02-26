@@ -1,4 +1,4 @@
-// g++ -I/usr/local/include/eigen3 -L/Users/hoscsaba/program/PSToolbox -lpython2.7 -lPSToolbox -lmy_tools -pedantic -O3 -Wall -Wno-c++11-long-long test11_runner_Csaba.cpp
+// g++ -I/usr/local/include/eigen3 -L/Users/hoscsaba/program/PSToolbox -lpython2.7 -lPSToolbox -lmy_tools -pedantic -O3 -Wall -Wno-c++11-long-long test11_runner_dani.cpp
 
 #include <stdio.h>
 #include <iostream> 
@@ -15,12 +15,10 @@ using namespace std;
 int main(int argc, char **argv) {
 
   EpanetReader reader;
-  string location = "dummy_v1.inp";
-  //beolvasás
+  //string location = "dummy_v1.inp";
+  string location = "ipar_v2_without_pump_1.inp";
   reader.readFromFile(location);
-  //peti adatai alapján Roughness -> Delta és a
-  calculatePropagationVelocity(reader); 
-  //ez a függvény hozza létre az edges, cons stb... dolgokat
+  calculatePropagationVelocity(reader);   
   reader.convertToRunner2();
 
   //adatok kinyerése a reader osztályból

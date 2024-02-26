@@ -876,16 +876,15 @@ void Connector::Connector_SCP_2Pipes(double t_target, int update_idx)
     else 
       e2->Set_BC_Right("Pressure",p);
   }
-  //  cout<<endl<<"is_front1: "<<is_front1<<", alpha1="<<alpha1;
-  //  cout<<endl<<"is_front2: "<<is_front2<<", alpha2="<<alpha1;
-  //cout<<endl<<"demand="<<demand;
-  //cout<<endl<<"v1=    "<<v1;
-  //cout<<endl<<"v2=    "<<v2;
-  //cout<<endl<<"p=     "<<p;
-  //cout<<e1->Info();
-  //cout<<e2->Info();
-  //cin.get();
-
+ /* 
+  cout<<endl<<"t_target="<<t_target;
+    cout<<endl<<"pipe "<<edges_idx.at(0)<<" - is_front1: "<<is_front1<<", alpha1="<<alpha1;
+    cout<<endl<<"pipe "<<edges_idx.at(1)<<" - is_front2: "<<is_front2<<", alpha2="<<alpha2;
+  cout<<endl<<"v1=    "<<v1;
+  cout<<endl<<"v2=    "<<v2;
+  cout<<endl<<"p=     "<<p;
+  cin.get();
+*/
 }
 
 void Connector::Connector_SCP_3Pipes(double t_target,int update_idx)

@@ -32,12 +32,14 @@ int main(int argc, char **argv) {
   vector<int> id1;
   id1.push_back(0);
   id1.push_back(1);
-  vector<int> id2;
-  id2.push_back(1);
-  id2.push_back(2);
+  id1.push_back(2);
+ // vector<int> id2;
+ // id2.push_back(1);
+ // id2.push_back(2);
   cons.push_back(new Connector("n1",edges.at(0),true,"Pressure",3.e5,demand1,DEBUG));
-  cons.push_back(new Connector("n2",edges.at(0),false,edges.at(1),true,demand2,DEBUG,id1));
-  cons.push_back(new Connector("n3",edges.at(1),false,edges.at(2),true,demand2,DEBUG,id2));
+  cons.push_back(new Connector("n2",edges.at(0),false,edges.at(1),true,edges.at(2),true,demand2,DEBUG,id1));
+//  cons.push_back(new Connector("n3",edges.at(0),false,edges.at(2),true,demand2,DEBUG,id2));
+  cons.push_back(new Connector("n4",edges.at(1),false,"Pressure",1.e5,demand3,DEBUG));
   cons.push_back(new Connector("n4",edges.at(2),false,"Pressure",1.e5,demand3,DEBUG));
 
   // We need to add here connectivity info, e.g. by adding edge pointer + start/end info if relevant
@@ -45,13 +47,15 @@ int main(int argc, char **argv) {
   // con_at_edge_end.at(i)   stores the idx of the connector connected to the end of the edge 
   vector<int> con_at_edge_start(edges.size(),-1);
   vector<int> con_at_edge_end(edges.size(),-1);
-  con_at_edge_start.at(0)=0; con_at_edge_end.at(0)=1;
+  con_at_edge_start.at(0)=0; con_at_edge_end.at(0)=11;
   con_at_edge_start.at(1)=1; con_at_edge_end.at(1)=2;
-  con_at_edge_start.at(2)=2; con_at_edge_end.at(2)=3;
+  con_at_edge_start.at(2)=1; con_at_edge_end.at(2)=3;
   // =============== END OF DATA READER SECTION
 
   PSToolboxRunner r(edges,cons,con_at_edge_start, con_at_edge_end);
   r.Set_Save_data(true);
+  r.Set_DEBUG(false);
+  r.Set_Node_mul(5);
   r.Run(10.);
 
   PSToolboxPlotter pl1("p1.dat"); pl1.Plot();

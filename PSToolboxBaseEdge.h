@@ -28,12 +28,13 @@ class PSToolboxBaseEdge
 
     virtual void Set_BC_Left(string type, double val)=0;
     virtual void Set_BC_Right(string type, double val)=0;
-    virtual void Step()=0;
+//    virtual void Step()=0;
     virtual void Save_data()=0;
     virtual void Write_data()=0;
     virtual double GetBetaAtFront(double)=0;
     virtual double GetAlphaAtEnd(double)=0;
     virtual double Get_dprop(string)=0;
+    virtual void UpdateInternal()=0;
     virtual void UpdateTime(double)=0;
 };
 #endif

@@ -12,24 +12,30 @@ PSToolboxRunner::PSToolboxRunner(
   con_at_edge_start = _con_at_edge_start;
   con_at_edge_end = _con_at_edge_end;
   save_data=false;
+  DEBUG=false;
+  Node_mul=1;
 };
 
 
 void PSToolboxRunner::Run(double t_max){
-  bool DEBUG=false;
 
   // Initialization
   for (unsigned int i=0; i<edges.size(); i++)
-    edges.at(i)->Ini(1);
+    edges.at(i)->Ini(Node_mul);
 
   // Simulation
   double t_global=0., dt_out=t_max/10., t_out=-1.e-10;
   double t_next;
   int update_idx;
   vector<bool> update_edges(edges.size());
-
+  int STEP=0;
 
   while (t_global<t_max){
+    STEP++;
+    if (DEBUG){
+      cout<<endl<<"STEP     : "<<STEP;
+      cout<<endl<<"t_global : "<<t_global;
+    }
     //outputFile<<t_global<<endl;
     if (t_global>t_out){
       cout<<endl<<round(t_global/t_max*100)<<"%";
@@ -57,23 +63,22 @@ void PSToolboxRunner::Run(double t_max){
     }
     if (DEBUG){ 
       cout<<endl<<"Updating element "<<update_idx;
-    cin.get();
+      cin.get();
     }
 
     update_edges.at(update_idx)=true;
 
-    edges.at(update_idx)->Step();
+    edges.at(update_idx)->UpdateInternal();
 
     cons.at(con_at_edge_start.at(update_idx))->Update(t_next,update_idx);
 
     cons.at(con_at_edge_end.at(update_idx))->Update(t_next,update_idx);
 
     edges.at(update_idx)->UpdateTime(t_next);
-
     t_global=t_next;
-
+    
     if (save_data)
-        edges.at(update_idx)->Save_data();
+      edges.at(update_idx)->Save_data();
 
   }
 

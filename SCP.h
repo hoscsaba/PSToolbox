@@ -73,8 +73,8 @@ class SCP: public PSToolboxBaseEdge, Units
     void Step(
         string BC_start_type, double BC_start_val,
         string BC_end_type, double BC_end_val);
-    void Step();
-void Update(double t_target);
+    void UpdateInternal();
+////void Update(double t_target);
 void UpdateTime(double);
 void Set_BC_Left(string type, double val);
     void Set_BC_Right(string type, double val);

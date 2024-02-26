@@ -6,6 +6,7 @@
 #include <vector>
 #include <sstream>
 #include "PSToolboxBaseEdge.h"
+#include "EpanetReader.h"
 #include "Connector.h"
 #include "SCP.h"
 

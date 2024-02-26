@@ -134,7 +134,7 @@ void SCP::Ini(){
 void SCP::Ini(int Npts_mul) {
   t = 0.;
 
-  Npts = 20 * Npts_mul; //20 times as many points created
+  Npts = 10 * Npts_mul; //20 times as many points created
   x = VectorXd::Zero(Npts);
   p = VectorXd::Zero(Npts);
   v = VectorXd::Zero(Npts);
@@ -399,16 +399,9 @@ void SCP::Set_dprop(string prop_string, double val) {
   }
 }
 
-void SCP::Step(){
 
-  for (int i = 0; i < Npts; i++) {
-    p(i) = pnew(i);
-    v(i) = vnew(i);
-  }
-
+void SCP::UpdateInternal(){
   double a, b;
-  //VectorXd pnew = VectorXd::Zero(Npts); //new pressure vector
-  //VectorXd vnew = VectorXd::Zero(Npts); //new velocity vector
   for (int i = 1; i < Npts - 1; i++) {
     a = (p(i - 1) + roa * v(i - 1)) + dt * roa * Source(i - 1); //
     b = (p(i + 1) - roa * v(i + 1)) - dt * roa * Source(i + 1);
@@ -419,7 +412,12 @@ void SCP::Step(){
 
 void SCP::UpdateTime(double _dt){
   // _dt is an external dummy variable, for compatibility reasons.
-  t+=dt;
+  for (int i = 0; i < Npts; i++) {
+    p(i) = pnew(i);
+    v(i) = vnew(i);
+  }
+
+  t=_dt;
 }
 
 /*! \brief Take a timestep.
@@ -435,7 +433,7 @@ void SCP::Step(
     string BC_start_type, double BC_start_val,
     string BC_end_type, double BC_end_val) {
 
-  Step();
+  UpdateInternal();
 
   BCLeft(BC_start_type, BC_start_val, pnew(0), vnew(0));
 
@@ -552,6 +550,8 @@ double SCP::GetAlphaAtEnd(double t_target) {
   double delta_t = t_target - t;
   double TOL = dt / 1000.;
 
+  //cout<<endl<<"    GetAlphaAtEnd() delta_t="<<delta_t<<", delta_t/dt="<<delta_t/dt<<", t_target="<<t_target;
+
   if (delta_t < 0) {
     if (fabs(delta_t) < TOL)
       delta_t = 0.;
@@ -591,6 +591,7 @@ double SCP::GetAlphaPrimitiveAtEnd(double t_target){
 double SCP::GetBetaAtFront(double t_target) {
   double delta_t = t_target - t;
   double TOL = dt / 1000.;
+  //cout<<endl<<"    GetBetaAtFront() delta_t="<<delta_t<<", delta_t/dt="<<delta_t/dt<<", t_target="<<t_target;
 
   if (delta_t < 0) {
     if (fabs(delta_t) < TOL)
