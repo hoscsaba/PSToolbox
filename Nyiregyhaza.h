@@ -16,8 +16,8 @@ using namespace std;
 double getPN10Delta(double D)
 {
     int N = 9;
-    double Dn[N] = {0.09, 0.11, 0.14, 0.18, 0.20, 0.225, 0.28, 0.315, 0.4};
-    double Delta[N] = {5.4e-3, 6.6e-3, 8.3e-3, 10.7e-3, 11.9e-3, 13.4e-3, 16.6e-3, 18.7e-3, 23.7e-3};
+    double Dn[9] = {0.09, 0.11, 0.14, 0.18, 0.20, 0.225, 0.28, 0.315, 0.4};
+    double Delta[9] = {5.4e-3, 6.6e-3, 8.3e-3, 10.7e-3, 11.9e-3, 13.4e-3, 16.6e-3, 18.7e-3, 23.7e-3};
 
     int idx = -1;
     for(int i = 0; i < N; i++)
