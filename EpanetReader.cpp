@@ -1,5 +1,3 @@
-#pragma once
-
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -365,3 +363,4 @@ ValveReader EpanetReader::parseValve(const std::string &line)
     iss >> valve.ID >> valve.Node1 >> valve.Node2 >> valve.Diameter >> valve.Type >> valve.Setting >> valve.MinorLoss;
     return valve;
 }
+

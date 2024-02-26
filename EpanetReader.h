@@ -107,3 +107,4 @@ public:
     PumpReader parsePump(const std::string &line);
     ValveReader parseValve(const std::string &line);
 };
+
