@@ -30,20 +30,25 @@ void PSToolboxRunner::Run(double t_max){
   vector<bool> update_edges(edges.size());
   int STEP=0;
 
+  double T_TOL=1.e-3;
+  for (unsigned int i=0; i<edges.size(); i++)
+    if (edges.at(i)->Get_dt()<T_TOL)
+      T_TOL=edges.at(i)->Get_dt();
+  T_TOL/=100.;
+
+
   while (t_global<t_max){
     STEP++;
     if (DEBUG){
       cout<<endl<<"STEP     : "<<STEP;
       cout<<endl<<"t_global : "<<t_global;
     }
-    //outputFile<<t_global<<endl;
     if (t_global>t_out){
       cout<<endl<<round(t_global/t_max*100)<<"%";
       t_out+=dt_out;
     }
-    // Find the edge that needs update
-    // TODO: if two edges are very close to each other, we need to update them at once
 
+    // Find smallest next target time
     fill(update_edges.begin(),update_edges.end(),false);
 
     update_idx=0;
@@ -61,31 +66,43 @@ void PSToolboxRunner::Run(double t_max){
           cout<<"  <-- t_target ";
       }
     }
-    if (DEBUG){ 
-      cout<<endl<<"Updating element "<<update_idx;
-      cin.get();
-    }
-
     update_edges.at(update_idx)=true;
 
-    edges.at(update_idx)->UpdateInternal();
+    // Now find all elements within T_GLOBAL_TOL
+    for (unsigned int i=0; i<edges.size(); i++)
+      if (fabs((edges.at(i)->Get_tnext())-t_next)<T_TOL)
+        update_edges.at(i)=true;
+    if (DEBUG){
+      cout<<endl<<endl<<"The following edges will be updated: ";
+      for (unsigned int i=0; i<edges.size(); i++)
+        if (update_edges.at(i))
+          cout<<" "<<i;
+    }
 
-    cons.at(con_at_edge_start.at(update_idx))->Update(t_next,update_idx);
+    for (unsigned int i=0; i<edges.size(); i++){ 
+      if (update_edges.at(i)){
+        if (DEBUG)
+          cout<<endl<<"\t Updating edge "<<i<<" ... ";
+        edges.at(i)->UpdateInternal();
 
-    cons.at(con_at_edge_end.at(update_idx))->Update(t_next,update_idx);
+        cons.at(con_at_edge_start.at(i))->Update(t_next,i);
 
-    edges.at(update_idx)->UpdateTime(t_next);
+        cons.at(con_at_edge_end.at(i))->Update(t_next,i);
+
+        edges.at(i)->UpdateTime(t_next);
+        if (DEBUG)
+          cout<<"done.";
+        if (save_data)
+          edges.at(i)->Save_data();
+      }
+    }
+    if (DEBUG)
+      cin.get();
+
     t_global=t_next;
-    
-    if (save_data)
-      edges.at(update_idx)->Save_data();
-
   }
-
   if (save_data)
     for (unsigned int i=0; i<edges.size(); i++)
       edges.at(i)->Write_data();
-  //outputFile.close();
-
 
 }
