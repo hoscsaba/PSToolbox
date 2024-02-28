@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <cmath>
-#include <Eigen/Dense>
+#include <Eigen/Core>
 #include "Units.h"
 #include "IdealGas.h"
 //#include "/Users/hoscsaba/program/matplotlib-cpp/matplotlibcpp.h"
@@ -53,7 +53,7 @@ class Reservoir: public Units
         IdealGas* gas,
         double n_poly,
         const bool _save_data,
-        cons double Tt);
+        const double Tt);
     Reservoir(const string _name,
         const double _vol,
         Gas* gas,

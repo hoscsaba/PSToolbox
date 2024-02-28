@@ -16,18 +16,41 @@ class Connector
   public:
     Connector(bool DEBUG);
 
+// type=1
     Connector(
-        PSToolboxBaseEdge *e1,bool is_front1, 
-        PSToolboxBaseEdge *e2, bool is_front2, 
-        double demand, bool DEBUG);
-
-    Connector(PSToolboxBaseEdge *e1,bool is_front, 
+        string name,
+        PSToolboxBaseEdge *e1,bool is_front, 
         string BC_type, double BC_value,
         double demand, bool DEBUG);
 
+    // type=2
+    Connector(
+        string name,
+        PSToolboxBaseEdge *e1,bool is_front1, 
+        PSToolboxBaseEdge *e2, bool is_front2, 
+        double demand, bool DEBUG, vector<int> edges_idx);
+
+    // type=3
+    Connector(
+        string name,
+        PSToolboxBaseEdge *e1,bool is_front1, 
+        PSToolboxBaseEdge *e2, bool is_front2, 
+        PSToolboxBaseEdge *e3, bool is_front3, 
+        double demand, bool DEBUG, vector<int> edges_idx);
+
+    // type=4
+    Connector(
+        string name,
+        PSToolboxBaseEdge *e1,bool is_front1, 
+        PSToolboxBaseEdge *e2, bool is_front2, 
+        PSToolboxBaseEdge *e3, bool is_front3, 
+        PSToolboxBaseEdge *e4, bool is_front4, 
+        double demand, bool DEBUG, vector<int> edges_idx);
+
+
     ~Connector();
 
-    void Update(double t_target);
+    void Update(double t_target, int update_idx);
 
     void Connector_Reservoir_and_Valve_Inlet(double t_target, 
         Reservoir* r, Valve *v, bool INLET_PRESSURE_DROP, double pd, double& p, double& mp);
@@ -69,18 +92,11 @@ class Connector
         double mpout,
         double& p, double& v1, double& v2);
     
-    void Connector_SCP_Pipes(double t_target, 
-        SCP* p1, bool is_front1,
-        SCP* p2, bool is_front2,
-        double mpout,
-        double& p, double& v1, double& v2);
+    void Connector_SCP_2Pipes(double t_target, int update_idx);
 
-    void Connector_SCP_Pipes(double t_target, 
-        SCP *p1, bool is_front1,
-        SCP *p2, bool is_front2,
-        SCP *p3, bool is_front3,
-        double mpout,
-        double& p, double& v1, double& v2, double& v3);
+    void Connector_SCP_3Pipes(double t_target, int update_idx);
+    
+    void Connector_SCP_4Pipes(double t_target, int update_idx);
 
     void Connector_LWP_Pipes(double t_target, LWP *p1, LWP *p2); 
 
@@ -94,11 +110,15 @@ class Connector
     bool DEBUG;
     PSToolboxBaseEdge *e1;
     PSToolboxBaseEdge *e2;
-    bool is_front1, is_front2;
+    PSToolboxBaseEdge *e3;
+    PSToolboxBaseEdge *e4;
+    bool is_front1, is_front2, is_front3, is_front4;
+    vector<int> edge_idx;
     string BC_type;
     double BC_value;
     double demand; // kg/s
     int type;
+vector<int> edges_idx;
 
     void Set_LWP_BC(LWP* p1, const bool is_front, 
         const double p, const double T, const double v);
