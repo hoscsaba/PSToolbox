@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vector>
 #include "PSToolboxBaseEdge.h"
 #include "Connector.h"
@@ -5,7 +7,7 @@
 class PSToolboxRunner
 {
   public:
-    PSToolboxRunner(vector<PSToolboxBaseEdge *>&, vector<Connector *>&,vector<int>,vector<int>);
+    PSToolboxRunner(vector<PSToolboxBaseEdge *>&, vector<Connector *>&,vector<int>&,vector<int>&);
     void Run(double);
     void Set_Save_data(bool newval){save_data=newval;};
     void Set_DEBUG(bool newval){DEBUG=newval;};

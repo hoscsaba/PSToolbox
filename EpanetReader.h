@@ -51,6 +51,7 @@ struct PipeReader
     double Length;
     double Diameter;
     double Roughness;
+    double Lambda;
     double Delta;
     double SpeedOfSound;
     double MinorLoss;
@@ -95,6 +96,7 @@ public:
     int nextPipeAtNode(int idx);
     string getOtherNodeOfPipe(int idxPipe, string Node);
     void printEdgesAndCons();
+    void PrintData();
     void unifyJunctions();
     int findNodeByID(const std::string ID);
     int findReservoirByID(const std::string ID);

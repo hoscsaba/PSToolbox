@@ -118,10 +118,22 @@ void EpanetReader::convertToRunner2()
         double a = pipes[i].SpeedOfSound; //m/s
         double L = pipes[i].Length; //m
         double D = 0.001 * pipes[i].Diameter; //m
-        double lambda = 1e-6*pipes[i].Roughness; //m?
-        double he = junctions[findNodeByID(pipes[i].Node1)].Elev; 
-        double hv = junctions[findNodeByID(pipes[i].Node2)].Elev;
-        edges.push_back(new SCP(pipes[i].ID, pipes[i].Node1, pipes[i].Node2, 1000, a, L, D, lambda, he, hv, false));
+        double lambda = pipes[i].Lambda; //
+        int idx_e = findNodeByID(pipes[i].Node1);
+        int idx_v = findNodeByID(pipes[i].Node2);
+        double he = junctions[idx_e].Elev; //m
+        double hv = junctions[idx_v].Elev; //m
+
+        if(junctions[idx_e].type == 1) //reservoir at the start of pipe
+        {
+            he = hv;
+        }
+        if(junctions[idx_v].type == 1) //reservoir at the end of pipe
+        {
+            hv = he;
+        }
+
+        edges.push_back(new SCP(pipes[i].ID, pipes[i].Node1, pipes[i].Node2, 1000, a, L, D, lambda, he, hv, true));
         cout << "Pipe Call SCP (" <<  pipes[i].ID << ",\t" << pipes[i].Node1 << ",\t" << pipes[i].Node2 << ",\t1000," << a << ",\tL=" << L << ",\tD=" << D << ",\tlambda=" << lambda << ",\the=" << he << ",\thv=" << hv << ",false)" << endl; 
     }
     cout << "SCP pipes ready!\n";
@@ -147,6 +159,13 @@ void EpanetReader::convertToRunner2()
     for (int i = 0; i < junctions.size(); i++)
     {
         int size = junctions[i].idxPipe.size();
+            cout << "i = " << i << "\tsize =" << size <<"\t";
+
+        if(size == 0 || size > 4)
+        {
+            cout << "Undefined number of connections! Stopping code" << endl;
+            while(true) 1;
+        }
         if (size == 1)
         {
             // Connect pipe-BC
@@ -157,18 +176,21 @@ void EpanetReader::convertToRunner2()
             // check type
             if (junctions[i].type == 0) //"free" end
             {
-                double demand = junctions[i].Demand;
-                cons.push_back(new Connector(name,edges[idx1], end1, "Velocity", 0, demand, false));
-                cout << "Node " << name << "\t call Connector(" << pipes[idx1].ID << "," << end1 << ",Velocity,0," << demand << ")\n";
+                double demand = junctions[i].Demand / 3600.0;
+                double D = pipes[idx1].Diameter*0.001;
+                double A = 0.25*D*D*3.14159265;
+                double v = demand / A; //????
+                cons.push_back(new Connector(name,edges[idx1], end1, "Velocity", v, demand, true));
+                cout << "Node " << name << "\t call Connector(" << pipes[idx1].ID << "," << end1 << ",Velocity," << v <<"," << demand << ")\n";
             }
             if (junctions[i].type == 1) // reservoir
             {
                 double head = junctions[i].Head;
                 int idx_other = findNodeByID(getOtherNodeOfPipe(idx1,junctions[i].ID));
                 double elev = junctions[idx_other].Elev;
-                double p = (head-elev)*1000.0*9.81;
+                double p = (head-elev)*1000.0*9.81; //????
                 double demand = 0;
-                cons.push_back(new Connector(name,edges[idx1], end1, "Pressure", p, demand, false));
+                cons.push_back(new Connector(name,edges[idx1], end1, "Pressure", p, demand, true));
                 cout << "Node " << name << "\t call Connector(" << pipes[idx1].ID << "," << end1 << ",Pressure,"<< p << "," << demand << ")\n";
             }
         }
@@ -180,12 +202,12 @@ void EpanetReader::convertToRunner2()
             int idx2 = junctions[i].idxPipe[1];
             bool end1 = junctions[i].end[0];
             bool end2 = junctions[i].end[1];
-            double demand = junctions[i].Demand;
+            double demand = junctions[i].Demand / 3600.0;
             string name = junctions[i].ID;
             vector<int> idx_edge;
             idx_edge.push_back(idx1);
             idx_edge.push_back(idx2);
-            cons.push_back(new Connector(name, edges[idx1], end1, edges[idx2], end2, demand, false, idx_edge));
+            cons.push_back(new Connector(name, edges[idx1], end1, edges[idx2], end2, demand, true, idx_edge));
             cout << "Node " << name << "\t call Connector(" << pipes[idx1].ID << "," << end1 << "," << pipes[idx2].ID << "," << end2 << "," << demand << ")\n";
         }
         if (size == 3)
@@ -197,15 +219,65 @@ void EpanetReader::convertToRunner2()
             bool end1 = junctions[i].end[0];
             bool end2 = junctions[i].end[1];
             bool end3 = junctions[i].end[2];
-            double demand = junctions[i].Demand;
+            double demand = junctions[i].Demand / 3600.0;
             string name = junctions[i].ID;
             vector<int> idx_edge;
             idx_edge.push_back(idx1);
             idx_edge.push_back(idx2);
             idx_edge.push_back(idx3);
-            cons.push_back(new Connector(name,edges[idx1],end1,edges[idx2],end2,edges[idx3],end3,demand,false,idx_edge));
+            cons.push_back(new Connector(name,edges[idx1],end1,edges[idx2],end2,edges[idx3],end3,demand,true,idx_edge));
             cout << "Node " << junctions[i].ID << "\t call Connector(" << pipes[idx1].ID << "," << end1 << "," << pipes[idx2].ID << "," << end2 << "," << pipes[idx3].ID << "," << end3  << "," << demand << ")\n";
         }
+        if (size == 4)
+        {
+            // Connect pipe-pipe-pipe
+            int idx1 = junctions[i].idxPipe[0];
+            int idx2 = junctions[i].idxPipe[1];
+            int idx3 = junctions[i].idxPipe[2];
+            int idx4 = junctions[i].idxPipe[3];
+            bool end1 = junctions[i].end[0];
+            bool end2 = junctions[i].end[1];
+            bool end3 = junctions[i].end[2];
+            bool end4 = junctions[i].end[3];
+            double demand = junctions[i].Demand / 3600.0;
+            string name = junctions[i].ID;
+            vector<int> idx_edge;
+            idx_edge.push_back(idx1);
+            idx_edge.push_back(idx2);
+            idx_edge.push_back(idx3);
+            idx_edge.push_back(idx4);
+            cons.push_back(new Connector(name,edges[idx1],end1,edges[idx2],end2,edges[idx3],end3,edges[idx4],end4,demand,false,idx_edge));
+            cout << "Node " << junctions[i].ID << "\t call Connector(" << pipes[idx1].ID << "," << end1 << "," << pipes[idx2].ID << "," << end2 << "," << pipes[idx3].ID << "," << end3  << "," << pipes[idx4].ID << "," << end4  << "," << demand << ")\n";
+        }
+    }
+}
+
+void EpanetReader::PrintData()
+{
+    cout << endl << endl << "------------------CPP FILE--------------------" << endl << endl;
+    cout << "Size of edges:\t" << edges.size() << endl;
+    for (int i = 0; i < edges.size(); i++)
+    {
+        cout << "i = " << i << "\t" << edges[i]->name << endl;
+    }
+
+
+    cout << " Size of cons:\t" << cons.size() << endl;
+    for (int i = 0; i < cons.size(); i++)
+    {
+        cout << "i = " << i << "\t BC: " << cons[i]->BC_type << "\t size of edgeidx: "<< cons[i]->edges_idx.size() << endl;
+    }
+
+    cout << "Size of start:\t" << con_at_edge_start.size() << endl;
+    for (int i = 0; i < con_at_edge_start.size(); i++)
+    {
+        cout << "i = " << i << "\t" << con_at_edge_start[i] << endl;
+    }
+
+    cout << "  Size of end:\t" << con_at_edge_end.size() << endl;
+    for (int i = 0; i < con_at_edge_end.size(); i++)
+    {
+        cout << "i = " << i << "\t" << con_at_edge_end[i] << endl;
     }
 }
 

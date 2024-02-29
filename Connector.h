@@ -28,7 +28,7 @@ class Connector
         string name,
         PSToolboxBaseEdge *e1,bool is_front1, 
         PSToolboxBaseEdge *e2, bool is_front2, 
-        double demand, bool DEBUG, vector<int> edges_idx);
+        double demand, bool DEBUG, vector<int>& edges_idx);
 
     // type=3
     Connector(
@@ -36,7 +36,7 @@ class Connector
         PSToolboxBaseEdge *e1,bool is_front1, 
         PSToolboxBaseEdge *e2, bool is_front2, 
         PSToolboxBaseEdge *e3, bool is_front3, 
-        double demand, bool DEBUG, vector<int> edges_idx);
+        double demand, bool DEBUG, vector<int>& edges_idx);
 
     // type=4
     Connector(
@@ -45,7 +45,7 @@ class Connector
         PSToolboxBaseEdge *e2, bool is_front2, 
         PSToolboxBaseEdge *e3, bool is_front3, 
         PSToolboxBaseEdge *e4, bool is_front4, 
-        double demand, bool DEBUG, vector<int> edges_idx);
+        double demand, bool DEBUG, vector<int>& edges_idx);
 
 
     ~Connector();
@@ -106,14 +106,13 @@ class Connector
         LWP *p3, bool is_front3,
         const double mpout, const double T);
 
-  private:
+  //private:
     bool DEBUG;
     PSToolboxBaseEdge *e1;
     PSToolboxBaseEdge *e2;
     PSToolboxBaseEdge *e3;
     PSToolboxBaseEdge *e4;
     bool is_front1, is_front2, is_front3, is_front4;
-    vector<int> edge_idx;
     string BC_type;
     double BC_value;
     double demand; // kg/s

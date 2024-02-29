@@ -29,7 +29,7 @@ Connector::Connector(
     string name, 
     PSToolboxBaseEdge* _e1, bool _is_front1, 
     PSToolboxBaseEdge* _e2, bool _is_front2, 
-    double _demand, bool _DEBUG, vector<int> _edges_idx){
+    double _demand, bool _DEBUG, vector<int> &_edges_idx){
   e1=_e1;
   e2=_e2;
   is_front1=_is_front1;
@@ -63,7 +63,7 @@ Connector::Connector(
     PSToolboxBaseEdge* _e1, bool _is_front1, 
     PSToolboxBaseEdge* _e2, bool _is_front2, 
     PSToolboxBaseEdge* _e3, bool _is_front3, 
-    double _demand, bool _DEBUG, vector<int> _edges_idx){
+    double _demand, bool _DEBUG, vector<int> &_edges_idx){
 
   e1=_e1;
   e2=_e2;
@@ -75,6 +75,10 @@ Connector::Connector(
   DEBUG=_DEBUG;
   edges_idx=_edges_idx;
 
+  /*cout << "Internal size: " << edges_idx.size() << endl;
+  cout << "External size: " << _edges_idx.size() << endl;*/
+
+
   type=3;
 }
 // ! 4 SCP pipes
@@ -84,7 +88,7 @@ Connector::Connector(
     PSToolboxBaseEdge* _e2, bool _is_front2, 
     PSToolboxBaseEdge* _e3, bool _is_front3, 
     PSToolboxBaseEdge* _e4, bool _is_front4, 
-    double _demand, bool _DEBUG, vector<int> _edges_idx){
+    double _demand, bool _DEBUG, vector<int> &_edges_idx){
 
   e1=_e1;
   e2=_e2;
@@ -817,7 +821,7 @@ void Connector::Connector_SCP_Pipe_Simple_BC(double t_target){
    }
    }
    */
-void Connector::Connector_SCP_2Pipes(double t_target, int update_idx)
+/*void Connector::Connector_SCP_2Pipes(double t_target, int update_idx)
 {
 
   // Solves:
@@ -853,15 +857,15 @@ void Connector::Connector_SCP_2Pipes(double t_target, int update_idx)
   else
     alpha2 = e2->GetAlphaAtEnd(t_target);
 
-  double p,v1,v2,B1,B2;
+  /*double p,v1,v2,B1,B2;
   B1=d1*rho1*a1/A1;
   B2=d2*rho2*a2/A2;
   p=(alpha2*B1-alpha1*B2)/(B1-B2);
   v1=(alpha1-alpha2)/(B1-B2)/A1;
-  v2=(alpha1-alpha2)/(B1-B2)/A2;
-  //p  = (A1 * alpha1 + A2 * alpha2 - demand * a) / (A1 + A2);
-  //v1 = (alpha1 - p) / (d1 * rho * a);
-  //v2 = (alpha2 - p) / (d2 * rho * a);
+  v2=(alpha1-alpha2)/(B1-B2)/A2; //????
+  p  = (A1 * alpha1 + A2 * alpha2 - demand * a) / (A1 + A2);
+  v1 = (alpha1 - p) / (d1 * rho * a);
+  v2 = (alpha2 - p) / (d2 * rho * a);
 
   if (update_idx==edges_idx.at(0)){ 
     if (is_front1)
@@ -884,7 +888,67 @@ void Connector::Connector_SCP_2Pipes(double t_target, int update_idx)
   cout<<endl<<"v2=    "<<v2;
   cout<<endl<<"p=     "<<p;
   cin.get();
+
+}
 */
+
+
+void Connector::Connector_SCP_2Pipes(double t_target,int update_idx)
+{
+  // Solves:
+  // p + d1*rho*a*v1 = alpha1
+  // p + d2*rho*a*v2 = alpha2
+  // p + d3*rho*a*v3 = alpha3
+  // d1*A1*v1 + d2*A2*v2 + d3*A3*v3 = mpout/rho
+  //
+  // Solution: p=(sum Ai*alphai-mpout*a)/(sum Ai)
+  //
+  // is_front = false -> d1=+1, alpha=pL+rho*a*vL
+  // is_front = true  -> d1=-1, alpha=pR-rho*a*vR
+
+  double alpha1, alpha2;
+  double A1  = e1->Get_dprop("A");
+  double A2  = e2->Get_dprop("A");
+  double rho1 = e1->Get_dprop("rho");
+  double rho2 = e2->Get_dprop("rho");
+  double a1   = e1->Get_dprop("a");
+  double a2   = e2->Get_dprop("a");
+  int d1 = 1, d2 = 1;
+  if (is_front1) {
+    alpha1 = e1->GetBetaAtFront(t_target);
+    d1 = -1;
+  }
+  else
+    alpha1 = e1->GetAlphaAtEnd(t_target);
+
+  if (is_front2) {
+    alpha2 = e2->GetBetaAtFront(t_target);
+    d2 = -1;
+  }
+  else
+    alpha2 = e2->GetAlphaAtEnd(t_target);
+
+  double p, v1,v2, rhoa1, rhoa2;
+  rhoa1=rho1*a1;
+  rhoa2=rho2*a2;
+  p  = (alpha1*A1/rhoa1 + alpha2*A2/rhoa2 - demand) / (A1/rhoa1 + A2/rhoa2);
+  //v1 = (alpha1 - p) / (d1 * rhoa1);
+  //v2 = (alpha2 - p) / (d2 * rhoa2);
+  //v3 = (alpha3 - p) / (d3 * rhoa3);
+
+  if (update_idx==edges_idx.at(0)){ 
+    if (is_front1)
+      e1->Set_BC_Left("Pressure",p);
+    else 
+      e1->Set_BC_Right("Pressure",p);
+  } 
+
+  if (update_idx==edges_idx.at(1)){ 
+    if (is_front2)
+      e2->Set_BC_Left("Pressure",p);
+    else 
+      e2->Set_BC_Right("Pressure",p);
+  }
 }
 
 void Connector::Connector_SCP_3Pipes(double t_target,int update_idx)

@@ -6,7 +6,7 @@ using namespace std;
 
 class PSToolboxBaseEdge
 {
-  protected:
+  public:
     string name; 
     unsigned int type;
     bool save_data();

@@ -38,10 +38,11 @@ SCP::SCP(const string _name, //!< [in] Name of the slightls compressible pipe
   lambda = _lambda;
   lambda_p_2D = lambda / 2 / D;
   ini_done = false;
-  fname = name + ".dat"; //name of the file for saving data about the pipe
+  fname = "data/" + name + ".dat"; //name of the file for saving data about the pipe
                          //do_plot_runtime = false;
                          //ylim_isset = false;
   g = 9.81;
+  lambda_model = "hw";
 
   // Dummy initialization
   Npts = 1;
@@ -142,7 +143,7 @@ void SCP::Ini(int Npts_mul) {
 
   for (int i = 0; i < Npts; i++) {
     x(i) = i * L / (Npts - 1);
-    p(i) = 1.e5;
+    p(i) = 5.e5;
     v(i) = 0.0;
   } //sets 1 bar pressure at 0 velocity in every location
 
@@ -167,6 +168,7 @@ void SCP::Ini(int Npts_mul) {
     data.reserve(100);
     data.push_back(tmpvec);
   }
+
 }
 /*! \brief Initialize the SCP pipe
   Initializes the SCP pipe with 20 grid points and initial uniform flow velocity and pressure. (The generated pressure drops with friction.)
@@ -407,7 +409,9 @@ void SCP::UpdateInternal(){
     b = (p(i + 1) - roa * v(i + 1)) - dt * roa * Source(i + 1);
     pnew(i) = (a + b) / 2.;
     vnew(i) = (a - b) / 2. / roa;
+    //cout << ": pnew = " << pnew(i) << "\t vnew = " << vnew(i);
   }
+  return;
 }
 
 void SCP::UpdateTime(double _dt){
@@ -443,6 +447,7 @@ void SCP::Step(
 }
 
 void SCP::Save_data(){
+
   tmpvec.at(0) = t;
   tmpvec.at(1) = p(0);
   tmpvec.at(2) = p(Npts - 1);

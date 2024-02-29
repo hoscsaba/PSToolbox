@@ -5,8 +5,8 @@
 PSToolboxRunner::PSToolboxRunner(
     vector<PSToolboxBaseEdge *> &_e, 
     vector<Connector *> &_c,
-    vector<int> _con_at_edge_start,
-    vector<int> _con_at_edge_end){
+    vector<int> &_con_at_edge_start,
+    vector<int> &_con_at_edge_end){
   edges = _e;
   cons = _c;
   con_at_edge_start = _con_at_edge_start;

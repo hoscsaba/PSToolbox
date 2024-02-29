@@ -23,6 +23,7 @@ class SCP: public PSToolboxBaseEdge, Units
     double L, D, A, lambda, he, hv, ro, a, roa, lambda_p_2D, S0, g;
     //string name, node_from, node_to;
     string node_from, node_to;
+    string lambda_model;
     double phi, alpha, gamma, mu;
     int Npts; //!< number of points the pipe is separated to during
     VectorXd x, v, p, vnew, pnew;
