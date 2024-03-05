@@ -542,6 +542,10 @@ void SCP::BCRight(string type, double val, double & pp, double & vv) {
   }
 }
 
+void SCP::GetAlphaAtEnd(double t_target, double& LHS, double& coeff_Q){
+  LHS = GetAlphaAtEnd(t_target);
+  coeff_Q=roa/A;
+}
 /* \brief
    \param t_target the time we would like to step to. Needs to be set correctly,
    as if there is an incorrect setting value it will not work properly
@@ -578,7 +582,7 @@ double SCP::GetAlphaAtEnd(double t_target) {
   double pp = p(Npts - 2) * delta_t / dt + p(Npts - 1) * (1. - delta_t / dt);
   double vv = v(Npts - 2) * delta_t / dt + v(Npts - 1) * (1. - delta_t / dt);
   double ss = Source(Npts - 2) * delta_t / dt + Source(Npts - 1) * (1. - delta_t / dt);
-  double a = (pp + roa * vv) + dt * roa * ss;
+  double a = (pp + roa * vv) + delta_t * roa * ss;
 
   return a;
 
@@ -586,6 +590,11 @@ double SCP::GetAlphaAtEnd(double t_target) {
 
 double SCP::GetAlphaPrimitiveAtEnd(double t_target){
   return GetAlphaAtEnd(t_target);
+}
+
+void SCP::GetBetaAtFront(double t_target, double& LHS, double& coeff_Q){
+  LHS = GetBetaAtFront(t_target);
+  coeff_Q=-roa/A;
 }
 
 double SCP::GetBetaAtFront(double t_target) {
@@ -618,7 +627,7 @@ double SCP::GetBetaAtFront(double t_target) {
   double pp = p(1) * delta_t / dt + p(0) * (1. - delta_t / dt);
   double vv = v(1) * delta_t / dt + v(0) * (1. - delta_t / dt);
   double ss = Source(1) * delta_t / dt + Source(0) * (1. - delta_t / dt);
-  double b = (pp - roa * vv) - dt * roa * ss;
+  double b = (pp - roa * vv) - delta_t * roa * ss;
 
   return b;
 

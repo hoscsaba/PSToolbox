@@ -12,8 +12,6 @@
 #include "Reservoir.h"
 #include "Connector.h"
 #include <Eigen/Dense>
-
-//#include <math.h>
 #include <cmath>
 
 // ! Default Constructor
@@ -23,6 +21,13 @@ Connector::Connector(bool _DEBUG) {
 
 // ! Empty Destructor
 Connector::~Connector() {}
+
+Connector::Connector(
+    string name,
+    vector<PSToolboxBaseEdge *> _e, 
+    vector<bool> is_front,
+    vector<int> edges_idx,
+    double _demand, bool _DEBUG); 
 
 // ! Edges junction for two edges
 Connector::Connector(
@@ -782,12 +787,12 @@ void Connector::Connector_SCP_Reservoir_and_Pipe_Front(double t_target,
 void Connector::Connector_SCP_Pipe_Simple_BC(double t_target){
   if (is_front1){
     e1->Set_BC_Left(BC_type,BC_value);
-//  cout<<endl<<"Simple_BC - updated front of pipe "<<e1->Get_name();
+    //  cout<<endl<<"Simple_BC - updated front of pipe "<<e1->Get_name();
   }
-    else{ 
+  else{ 
     e1->Set_BC_Right(BC_type,BC_value);
- // cout<<endl<<"Simple_BC - updated back of pipe "<<e1->Get_name();
-}
+    // cout<<endl<<"Simple_BC - updated back of pipe "<<e1->Get_name();
+  }
 }
 
 // ! This function maps the internally stored SCP pipe pointers
@@ -831,37 +836,37 @@ void Connector::Connector_SCP_2Pipes(double t_target, int update_idx)
   // is_front = true  -> d1=-1, alpha=pR-rho*a*vR
 
   double alpha1, alpha2;
-  double A1  = e1->Get_dprop("A");
-  double A2  = e2->Get_dprop("A");
-  double rho1 = e1->Get_dprop("rho");
-  double a1   = e1->Get_dprop("a");
-  double rho2 = e2->Get_dprop("rho");
-  double a2   = e2->Get_dprop("a");
+  // double A1  = e1->Get_dprop("A");
+  // double A2  = e2->Get_dprop("A");
+  // double rho1 = e1->Get_dprop("rho");
+  // double a1   = e1->Get_dprop("a");
+  // double rho2 = e2->Get_dprop("rho");
+  // double a2   = e2->Get_dprop("a");
 
-  int d1 = 1, d2 = 1;
+  // int d1 = 1, d2 = 1;
+
+  double coeff_Q1, coeff_Q2;
+
   if (is_front1) {
-    alpha1 = e1->GetBetaAtFront(t_target);
-    d1 = -1;
+    e1->GetBetaAtFront(t_target,alpha1,coeff_Q1);
+    //alpha1 = e1->GetBetaAtFront(t_target);
+    //d1 = -1;
   }
   else
-    alpha1 = e1->GetAlphaAtEnd(t_target);
+    e1->GetAlphaAtEnd(t_target,alpha1,coeff_Q1);
+  //alpha1 = e1->GetAlphaAtEnd(t_target);
 
   if (is_front2) {
-    alpha2 = e2->GetBetaAtFront(t_target);
-    d2 = -1;
+    e2->GetBetaAtFront(t_target,alpha2,coeff_Q2);
+    //alpha2 = e2->GetBetaAtFront(t_target);
+    //d2 = -1;
   }
   else
-    alpha2 = e2->GetAlphaAtEnd(t_target);
+    e2->GetAlphaAtEnd(t_target,alpha2,coeff_Q2);
+  //alpha2 = e2->GetAlphaAtEnd(t_target);
 
-  double p,v1,v2,B1,B2;
-  B1=d1*rho1*a1/A1;
-  B2=d2*rho2*a2/A2;
-  p=(alpha2*B1-alpha1*B2)/(B1-B2);
-  v1=(alpha1-alpha2)/(B1-B2)/A1;
-  v2=(alpha1-alpha2)/(B1-B2)/A2;
-  //p  = (A1 * alpha1 + A2 * alpha2 - demand * a) / (A1 + A2);
-  //v1 = (alpha1 - p) / (d1 * rho * a);
-  //v2 = (alpha2 - p) / (d2 * rho * a);
+  double p;
+  p=(alpha1/coeff_Q1+alpha2/coeff_Q2-demand)/(1./coeff_Q1+1./coeff_Q2);
 
   if (update_idx==edges_idx.at(0)){ 
     if (is_front1)
@@ -876,15 +881,15 @@ void Connector::Connector_SCP_2Pipes(double t_target, int update_idx)
     else 
       e2->Set_BC_Right("Pressure",p);
   }
- /* 
-  cout<<endl<<"t_target="<<t_target;
-    cout<<endl<<"pipe "<<edges_idx.at(0)<<" - is_front1: "<<is_front1<<", alpha1="<<alpha1;
-    cout<<endl<<"pipe "<<edges_idx.at(1)<<" - is_front2: "<<is_front2<<", alpha2="<<alpha2;
-  cout<<endl<<"v1=    "<<v1;
-  cout<<endl<<"v2=    "<<v2;
-  cout<<endl<<"p=     "<<p;
-  cin.get();
-*/
+  /* 
+     cout<<endl<<"t_target="<<t_target;
+     cout<<endl<<"pipe "<<edges_idx.at(0)<<" - is_front1: "<<is_front1<<", alpha1="<<alpha1;
+     cout<<endl<<"pipe "<<edges_idx.at(1)<<" - is_front2: "<<is_front2<<", alpha2="<<alpha2;
+     cout<<endl<<"v1=    "<<v1;
+     cout<<endl<<"v2=    "<<v2;
+     cout<<endl<<"p=     "<<p;
+     cin.get();
+     */
 }
 
 void Connector::Connector_SCP_3Pipes(double t_target,int update_idx)
@@ -901,45 +906,50 @@ void Connector::Connector_SCP_3Pipes(double t_target,int update_idx)
   // is_front = true  -> d1=-1, alpha=pR-rho*a*vR
 
   double alpha1, alpha2, alpha3;
-  double A1  = e1->Get_dprop("A");
-  double A2  = e2->Get_dprop("A");
-  double A3  = e3->Get_dprop("A");
-  double rho1 = e1->Get_dprop("rho");
-  double rho2 = e2->Get_dprop("rho");
-  double rho3 = e3->Get_dprop("rho");
-  double a1   = e1->Get_dprop("a");
-  double a2   = e2->Get_dprop("a");
-  double a3   = e3->Get_dprop("a");
-  int d1 = 1, d2 = 1, d3 = 1;
+  // double A1  = e1->Get_dprop("A");
+  // double A2  = e2->Get_dprop("A");
+  // double A3  = e3->Get_dprop("A");
+  // double rho1 = e1->Get_dprop("rho");
+  // double rho2 = e2->Get_dprop("rho");
+  // double rho3 = e3->Get_dprop("rho");
+  // double a1   = e1->Get_dprop("a");
+  // double a2   = e2->Get_dprop("a");
+  // double a3   = e3->Get_dprop("a");
+  // int d1 = 1, d2 = 1, d3 = 1;
+  double coeff_Q1, coeff_Q2, coeff_Q3;
   if (is_front1) {
-    alpha1 = e1->GetBetaAtFront(t_target);
-    d1 = -1;
+    e1->GetBetaAtFront(t_target,alpha1,coeff_Q1);
+    //alpha1 = e1->GetBetaAtFront(t_target);
+    //d1 = -1;
   }
   else
-    alpha1 = e1->GetAlphaAtEnd(t_target);
+    e1->GetAlphaAtEnd(t_target,alpha1,coeff_Q1);
+  //alpha1 = e1->GetAlphaAtEnd(t_target);
 
   if (is_front2) {
-    alpha2 = e2->GetBetaAtFront(t_target);
-    d2 = -1;
+    e2->GetBetaAtFront(t_target,alpha2,coeff_Q2);
+    //alpha2 = e2->GetBetaAtFront(t_target);
+    //d2 = -1;
   }
   else
-    alpha2 = e2->GetAlphaAtEnd(t_target);
+    e2->GetAlphaAtEnd(t_target,alpha2,coeff_Q2);
+  //alpha2 = e2->GetAlphaAtEnd(t_target);
 
   if (is_front3) {
-    alpha3 = e3->GetBetaAtFront(t_target);
-    d3 = -1;
+    e3->GetBetaAtFront(t_target,alpha3,coeff_Q3);
+    //alpha3 = e3->GetBetaAtFront(t_target);
+    //d3 = -1;
   }
   else
-    alpha3 = e3->GetAlphaAtEnd(t_target);
+    e3->GetAlphaAtEnd(t_target,alpha1,coeff_Q3);
+  //alpha3 = e3->GetAlphaAtEnd(t_target);
 
-  double p, v1,v2,v3, rhoa1, rhoa2,rhoa3;
-  rhoa1=rho1*a1;
-  rhoa2=rho2*a2;
-  rhoa3=rho3*a3;
-  p  = (alpha1*A1/rhoa1 + alpha2*A2/rhoa2 + alpha3*A3/rhoa3 - demand) / (A1/rhoa1 + A2/rhoa2 + A3/rhoa3);
-  //v1 = (alpha1 - p) / (d1 * rhoa1);
-  //v2 = (alpha2 - p) / (d2 * rhoa2);
-  //v3 = (alpha3 - p) / (d3 * rhoa3);
+  double p;//, v1,v2,v3, rhoa1, rhoa2,rhoa3;
+           //rhoa1=rho1*a1;
+           //rhoa2=rho2*a2;
+           //rhoa3=rho3*a3;
+           //p  = (alpha1*A1/rhoa1 + alpha2*A2/rhoa2 + alpha3*A3/rhoa3 - demand) / (A1/rhoa1 + A2/rhoa2 + A3/rhoa3);
+  p=(alpha1/coeff_Q1+alpha2/coeff_Q2+alpha3/coeff_Q3-demand)/(1./coeff_Q1+1./coeff_Q2+1./coeff_Q3);
 
   if (update_idx==edges_idx.at(0)){ 
     if (is_front1)
@@ -967,57 +977,68 @@ void Connector::Connector_SCP_4Pipes(double t_target,int update_idx)
 {
 
   double alpha1, alpha2, alpha3, alpha4;
-  double A1  = e1->Get_dprop("A");
-  double A2  = e2->Get_dprop("A");
-  double A3  = e3->Get_dprop("A");
-  double A4  = e4->Get_dprop("A");
-  double rho1 = e1->Get_dprop("rho");
-  double rho2 = e2->Get_dprop("rho");
-  double rho3 = e3->Get_dprop("rho");
-  double rho4 = e4->Get_dprop("rho");
-  double a1   = e1->Get_dprop("a");
-  double a2   = e2->Get_dprop("a");
-  double a3   = e3->Get_dprop("a");
-  double a4   = e4->Get_dprop("a");
-  int d1 = 1, d2 = 1, d3 = 1, d4 = 1;
+  //double A1  = e1->Get_dprop("A");
+  //double A2  = e2->Get_dprop("A");
+  //double A3  = e3->Get_dprop("A");
+  //double A4  = e4->Get_dprop("A");
+  //double rho1 = e1->Get_dprop("rho");
+  //double rho2 = e2->Get_dprop("rho");
+  //double rho3 = e3->Get_dprop("rho");
+  //double rho4 = e4->Get_dprop("rho");
+  //double a1   = e1->Get_dprop("a");
+  //double a2   = e2->Get_dprop("a");
+  //double a3   = e3->Get_dprop("a");
+  //double a4   = e4->Get_dprop("a");
+  //int d1 = 1, d2 = 1, d3 = 1, d4 = 1;
+  double coeff_Q1, coeff_Q2, coeff_Q3, coeff_Q4;
+
   if (is_front1) {
-    alpha1 = e1->GetBetaAtFront(t_target);
-    d1 = -1;
+    e1->GetBetaAtFront(t_target,alpha1,coeff_Q1);
+    //alpha1 = e1->GetBetaAtFront(t_target);
+    //d1 = -1;
   }
   else
-    alpha1 = e1->GetAlphaAtEnd(t_target);
+    e1->GetAlphaAtEnd(t_target,alpha1,coeff_Q1);
+  //alpha1 = e1->GetAlphaAtEnd(t_target);
 
   if (is_front2) {
-    alpha2 = e2->GetBetaAtFront(t_target);
-    d2 = -1;
+    e2->GetBetaAtFront(t_target,alpha2,coeff_Q2);
+    //alpha2 = e2->GetBetaAtFront(t_target);
+    //d2 = -1;
   }
   else
-    alpha2 = e2->GetAlphaAtEnd(t_target);
+    e2->GetAlphaAtEnd(t_target,alpha2,coeff_Q2);
+  //alpha2 = e2->GetAlphaAtEnd(t_target);
 
   if (is_front3) {
-    alpha3 = e3->GetBetaAtFront(t_target);
-    d3 = -1;
+    e3->GetBetaAtFront(t_target,alpha3,coeff_Q3);
+    //alpha3 = e3->GetBetaAtFront(t_target);
+    //d3 = -1;
   }
   else
-    alpha3 = e3->GetAlphaAtEnd(t_target);
+    e3->GetAlphaAtEnd(t_target,alpha3,coeff_Q3);
+  //alpha3 = e3->GetAlphaAtEnd(t_target);
 
   if (is_front4) {
-    alpha4 = e4->GetBetaAtFront(t_target);
-    d4 = -1;
+    e4->GetBetaAtFront(t_target,alpha4,coeff_Q4);
+    //alpha3 = e3->GetBetaAtFront(t_target);
+    //d3 = -1;
   }
   else
-    alpha4 = e4->GetAlphaAtEnd(t_target);
+    e4->GetAlphaAtEnd(t_target,alpha4,coeff_Q4);
+  //alpha3 = e3->GetAlphaAtEnd(t_target);
 
-  double p, v1,v2,v3,v4, rhoa1, rhoa2,rhoa3, rhoa4;
-  rhoa1=rho1*a1;
-  rhoa2=rho2*a2;
-  rhoa3=rho3*a3;
-  rhoa4=rho4*a4;
-  p  = (alpha1/rhoa1 + alpha2/rhoa2 + alpha3/rhoa3+alpha4/rhoa4 - demand) / (1./A1 + 1./A2 + 1./A3+1./A4);
-  v1 = (alpha1 - p) / (d1 * rhoa1);
-  v2 = (alpha2 - p) / (d2 * rhoa2);
-  v3 = (alpha3 - p) / (d3 * rhoa3);
-  v4 = (alpha4 - p) / (d4 * rhoa4);
+  double p;//, v1,v2,v3,v4, rhoa1, rhoa2,rhoa3, rhoa4;
+           // rhoa1=rho1*a1;
+           // rhoa2=rho2*a2;
+           // rhoa3=rho3*a3;
+           // rhoa4=rho4*a4;
+           // p  = (alpha1/rhoa1 + alpha2/rhoa2 + alpha3/rhoa3+alpha4/rhoa4 - demand) / (1./A1 + 1./A2 + 1./A3+1./A4);
+  p=(alpha1/coeff_Q1+alpha2/coeff_Q2+alpha3/coeff_Q3+alpha4/coeff_Q4-demand)/(1./coeff_Q1+1./coeff_Q2+1./coeff_Q3+1./coeff_Q4);
+  // v1 = (alpha1 - p) / (d1 * rhoa1);
+  // v2 = (alpha2 - p) / (d2 * rhoa2);
+  // v3 = (alpha3 - p) / (d3 * rhoa3);
+  // v4 = (alpha4 - p) / (d4 * rhoa4);
 
   if (update_idx==edges_idx.at(0)){ 
     if (is_front1)

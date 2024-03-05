@@ -82,6 +82,8 @@ void Set_BC_Left(string type, double val);
 
     double GetAlphaAtEnd(double t_target);
     double GetBetaAtFront(double t_target);
+    void GetAlphaAtEnd(double t_target, double& LHS, double& coeff_Q);
+    void GetBetaAtFront(double t_target, double& LHS, double& coeff_Q);
     double GetAlphaPrimitiveAtEnd(double t_target); // alias
     double GetBetaPrimitiveAtFront(double t_target); // alias
     void Save_data();
