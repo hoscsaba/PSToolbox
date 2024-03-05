@@ -165,7 +165,7 @@ void SCP::Ini(int Npts_mul) {
 
   for (int i = 0; i < Npts; i++) {
     x(i) = i * L / (Npts - 1);
-    p(i) = 5.0e5;
+    p(i) = 1.0e5;
     v(i) = 0.0;
   } //sets 1 bar pressure at 0 velocity in every location
 
@@ -665,7 +665,31 @@ double SCP::GetBetaPrimitiveAtFront(double t_target) {
   \return Base pressure in the given location.
   */
 double SCP::Source(int i) {
-  return (g * S0  - lambda_p_2D * v(i) * abs(v(i)));
+  double source_g = g*S0;
+
+  double source_l = 0.0;
+  if(lambda_model == "hs") //Hydraulicly Smooth
+  {
+      source_l = - lambda_p_2D * v(i) * abs(v(i));
+  }
+  if(lambda_model == "hw") //Hazen-Williams
+  {
+      double Q = abs(v(i))*A;
+      //double Dx = L/(Npts-1);
+      //cout << "lambda = " << lambda << "\t";
+
+      double hL =  10.67 * pow(Q/lambda,1.852) * pow(D,-4.8704);
+      
+      double sign;
+      if(v(i) > 0) sign = 1;
+      else sign = -1;
+
+
+      source_l = - sign * g * hL;
+      //cout << "Source = " << source_l << endl;
+  }
+
+  return source_g + source_l;
 }
 
 /*! \brief Exports savied data

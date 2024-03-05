@@ -33,7 +33,7 @@ void PSToolboxRunner::Run(double t_max){
     edges.at(i)->Ini(Node_mul);
 
   // Simulation
-  double t_global=0., dt_out=t_max/10., t_out=-1.e-10;
+  double t_global=0., dt_out=t_max/100., t_out=-1.e-10;
   double t_next;
   int update_idx;
   vector<bool> update_edges(edges.size());
@@ -110,7 +110,7 @@ void PSToolboxRunner::Run(double t_max){
 
         if (save_data)
         {
-          //if(edges.at(i)->Get_name() == "105" || edges.at(i)->Get_name() == "3" || edges.at(i)->Get_name() == "74" || edges.at(i)->Get_name() == "p1100" || edges.at(i)->Get_name() == "24" )
+          if(edges.at(i)->Get_name() == "105" || edges.at(i)->Get_name() == "3" || edges.at(i)->Get_name() == "74" || edges.at(i)->Get_name() == "p1100" || edges.at(i)->Get_name() == "24" )
             edges.at(i)->Save_data();
         }
           
@@ -129,7 +129,7 @@ void PSToolboxRunner::Run(double t_max){
   if (save_data)
     for (unsigned int i=0; i<edges.size(); i++)
     {
-      //if(edges.at(i)->Get_name() == "105" || edges.at(i)->Get_name() == "3" || edges.at(i)->Get_name() == "74" || edges.at(i)->Get_name() == "p1100" || edges.at(i)->Get_name() == "24" )
+      if(edges.at(i)->Get_name() == "105" || edges.at(i)->Get_name() == "3" || edges.at(i)->Get_name() == "74" || edges.at(i)->Get_name() == "p1100" || edges.at(i)->Get_name() == "24" )
         edges.at(i)->Write_data();
     }
       
