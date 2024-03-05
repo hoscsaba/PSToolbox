@@ -1077,7 +1077,8 @@ void Connector::Connector_SCP_4Pipes(double t_target,int update_idx)
   rhoa2=rho2*a2;
   rhoa3=rho3*a3;
   rhoa4=rho4*a4;
-  p  = (alpha1/rhoa1 + alpha2/rhoa2 + alpha3/rhoa3+alpha4/rhoa4 - demand) / (1./A1 + 1./A2 + 1./A3+1./A4);
+  //p  = (alpha1*A1/rhoa1 + alpha2*A2/rhoa2 + alpha3*A3/rhoa3 - demand) / (A1/rhoa1 + A2/rhoa2 + A3/rhoa3);
+  p  = (alpha1*A1/rhoa1 + alpha2*A2/rhoa2 + alpha3*A3/rhoa3+alpha4*A4/rhoa4 - demand) / (A1/rhoa1 + A2/rhoa2 + A3/rhoa3 + A4/rhoa4);
   v1 = (alpha1 - p) / (d1 * rhoa1);
   v2 = (alpha2 - p) / (d2 * rhoa2);
   v3 = (alpha3 - p) / (d3 * rhoa3);
@@ -1102,14 +1103,15 @@ void Connector::Connector_SCP_4Pipes(double t_target,int update_idx)
       e3->Set_BC_Left("Pressure",p);
     else 
       e3->Set_BC_Right("Pressure",p);
-
-    if (update_idx==edges_idx.at(3)){ 
-      if (is_front4)
-        e4->Set_BC_Left("Pressure",p);
-      else 
-        e4->Set_BC_Right("Pressure",p);
-    }
   }
+
+  if (update_idx==edges_idx.at(3)){ 
+    if (is_front4)
+      e4->Set_BC_Left("Pressure",p);
+    else 
+      e4->Set_BC_Right("Pressure",p);
+  }
+  
 }
 
 
