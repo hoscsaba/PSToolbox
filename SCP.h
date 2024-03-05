@@ -31,7 +31,7 @@ class SCP: public PSToolboxBaseEdge, Units
     void BCLeft(string type, double val, double &pstart, double &vstart);
     void BCRight(string type, double val, double &pend, double &vend);
     double Source(int i);
-
+    
     //Saving and plotting data
     vector< vector<double> > data;
     vector<double> tmpvec;
@@ -68,6 +68,7 @@ class SCP: public PSToolboxBaseEdge, Units
     void Ini(double vini, double _pstart, int Npts_mul);
     void Ini(double vini, double _pstart, double dt_target);
     void UpdateDimlessPars(double pref, double mp_nevl, double omega, double xref, double m);
+    void GetLargePressureValues(double, vector<double>&, vector<double>&, vector<double>&,vector<string>&);
     double Get_dprop(string prop_string);
     void Set_dprop(string prop_string, double val);
 

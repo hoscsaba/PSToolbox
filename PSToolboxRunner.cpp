@@ -14,10 +14,19 @@ PSToolboxRunner::PSToolboxRunner(
   save_data=false;
   DEBUG=false;
   Node_mul=1;
+  set_limit = false;
+  p_lim = 0.0;
 };
 
 
 void PSToolboxRunner::Run(double t_max){
+
+  //create vectors for critical values
+  vector<double> p_crit;
+  vector<double> x_crit;
+  vector<double> t_crit;
+  vector<string> ID_crit;
+
 
   // Initialization
   for (unsigned int i=0; i<edges.size(); i++)
@@ -30,11 +39,11 @@ void PSToolboxRunner::Run(double t_max){
   vector<bool> update_edges(edges.size());
   int STEP=0;
 
-  double T_TOL=1.e-3;
-  for (unsigned int i=0; i<edges.size(); i++)
+  double T_TOL=1.e-10;
+  /*for (unsigned int i=0; i<edges.size(); i++)
     if (edges.at(i)->Get_dt()<T_TOL)
       T_TOL=edges.at(i)->Get_dt();
-  T_TOL/=100.;
+  T_TOL/=100.;*/
 
 
   while (t_global<t_max){
@@ -68,7 +77,7 @@ void PSToolboxRunner::Run(double t_max){
     }
     update_edges.at(update_idx)=true;
 
-    // Now find all elements within T_GLOBAL_TOL
+    // Now find all elements within T_TOL
     for (unsigned int i=0; i<edges.size(); i++)
       if (fabs((edges.at(i)->Get_tnext())-t_next)<T_TOL)
         update_edges.at(i)=true;
@@ -79,8 +88,10 @@ void PSToolboxRunner::Run(double t_max){
           cout<<" "<<i;
     }
 
-    for (unsigned int i=0; i<edges.size(); i++){ 
-      if (update_edges.at(i)){
+    for (unsigned int i=0; i<edges.size(); i++)
+    { 
+      if (update_edges.at(i))
+      {
         if (DEBUG)
           cout<<endl<<"\t Updating edge "<<i<<" ... ";
         edges.at(i)->UpdateInternal();
@@ -89,11 +100,25 @@ void PSToolboxRunner::Run(double t_max){
 
         cons.at(con_at_edge_end.at(i))->Update(t_next,i);
 
-        edges.at(i)->UpdateTime(t_next);
         if (DEBUG)
+        {  
           cout<<"done.";
+          cout << edges.at(i)->Info();
+        }
+
+        edges.at(i)->UpdateTime(t_next);
+
         if (save_data)
-          edges.at(i)->Save_data();
+        {
+          //if(edges.at(i)->Get_name() == "105" || edges.at(i)->Get_name() == "3" || edges.at(i)->Get_name() == "74" || edges.at(i)->Get_name() == "p1100" || edges.at(i)->Get_name() == "24" )
+            edges.at(i)->Save_data();
+        }
+          
+
+        if(set_limit)
+        {
+          edges.at(i)->GetLargePressureValues(p_lim,x_crit,p_crit,t_crit,ID_crit);
+        }
       }
     }
     if (DEBUG)
@@ -103,6 +128,59 @@ void PSToolboxRunner::Run(double t_max){
   }
   if (save_data)
     for (unsigned int i=0; i<edges.size(); i++)
-      edges.at(i)->Write_data();
+    {
+      //if(edges.at(i)->Get_name() == "105" || edges.at(i)->Get_name() == "3" || edges.at(i)->Get_name() == "74" || edges.at(i)->Get_name() == "p1100" || edges.at(i)->Get_name() == "24" )
+        edges.at(i)->Write_data();
+    }
+      
+
+  if(set_limit)
+  {
+    ofstream ofs = ofstream(limits_fname);
+    if(limits_type == "All")
+    {
+      for (int i = 0; i < ID_crit.size(); i++)
+      {
+          ofs << "Pressure limit exceeded in pipe " << ID_crit.at(i);
+          ofs << "\t t = "<< t_crit.at(i) << " s";
+          ofs << "\t x = "<< x_crit.at(i) << " m";
+          ofs << "\t p = "<< 1e-5*p_crit.at(i) << " bar" << endl;
+      } 
+    }
+    if(limits_type == "Maximum")
+    {
+      for(int i = 0; i < edges.size(); i++) //go through all the pipes
+      {
+        int count = 0;
+        double p_max = p_lim;
+        int idx = -1;
+        for (int j = 0; j < ID_crit.size(); j++) //go through dataset
+        {
+          if(ID_crit.at(j) == edges.at(i)->Get_name() && p_crit.at(j) >= p_max)
+          {
+            p_max = p_crit.at(j);
+            idx = j;
+            count++;
+          }
+        }
+        if(idx >= 0)
+        {
+          ofs << "Pressure limit exceeded in pipe " << ID_crit.at(idx) << ", " << count << "\t times. Max: ";
+          ofs << "\t t = "<< t_crit.at(idx)<< " s";
+          ofs << "\t x = "<< x_crit.at(idx)<< " m";
+          ofs << "\t p = "<< 1e-5*p_crit.at(idx) << " bar"<< endl;
+        }
+        else
+        {
+          ofs << "Pressure limit in pipe " << edges.at(i)->Get_name()  << "\tis NOT exceeded!" << endl;
+        }
+        
+      }
+    }
+    
+    ofs.flush();
+    ofs.close();
+    
+  }
 
 }

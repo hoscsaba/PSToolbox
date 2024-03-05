@@ -28,6 +28,7 @@ class PSToolboxBaseEdge
 
     virtual void Set_BC_Left(string type, double val)=0;
     virtual void Set_BC_Right(string type, double val)=0;
+    virtual void GetLargePressureValues(double, vector<double>&, vector<double>&,vector<double>&, vector<string>&)=0;
 //    virtual void Step()=0;
     virtual void Save_data()=0;
     virtual void Write_data()=0;
