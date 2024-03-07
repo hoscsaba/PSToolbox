@@ -165,7 +165,7 @@ void SCP::Ini(int Npts_mul) {
 
   for (int i = 0; i < Npts; i++) {
     x(i) = i * L / (Npts - 1);
-    p(i) = 1.0e5;
+    p(i) = 5.0e5;
     v(i) = 0.0;
   } //sets 1 bar pressure at 0 velocity in every location
 

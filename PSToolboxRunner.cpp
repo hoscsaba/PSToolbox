@@ -25,16 +25,21 @@ void PSToolboxRunner::Run(double t_max){
   vector<double> p_crit;
   vector<double> x_crit;
   vector<double> t_crit;
+  vector<double> last_save;
   vector<string> ID_crit;
 
 
   // Initialization
   for (unsigned int i=0; i<edges.size(); i++)
+  {
     edges.at(i)->Ini(Node_mul);
+    last_save.push_back(0.0);
+  }
 
   // Simulation
-  double t_global=0., dt_out=t_max/100., t_out=-1.e-10;
+  double t_global=0., dt_out=t_max/1000., t_out=-1.e-10;
   double t_next;
+  double t_save = 500.0;
   int update_idx;
   vector<bool> update_edges(edges.size());
   int STEP=0;
@@ -46,7 +51,8 @@ void PSToolboxRunner::Run(double t_max){
   T_TOL/=100.;*/
 
 
-  while (t_global<t_max){
+  while (t_global<t_max)
+  {
     STEP++;
     if (DEBUG){
       cout<<endl<<"STEP     : "<<STEP;
@@ -110,8 +116,13 @@ void PSToolboxRunner::Run(double t_max){
 
         if (save_data)
         {
-          if(edges.at(i)->Get_name() == "105" || edges.at(i)->Get_name() == "3" || edges.at(i)->Get_name() == "74" || edges.at(i)->Get_name() == "p1100" || edges.at(i)->Get_name() == "24" )
-            edges.at(i)->Save_data();
+          //if(edges.at(i)->Get_name() == "105" || edges.at(i)->Get_name() == "3" || edges.at(i)->Get_name() == "74" || edges.at(i)->Get_name() == "p1100" || edges.at(i)->Get_name() == "24" )
+            if(last_save[i] + 25.0 < t_next)
+            {
+              edges.at(i)->Save_data();
+              last_save[i] = t_next;
+            }
+            
         }
           
 
@@ -125,11 +136,20 @@ void PSToolboxRunner::Run(double t_max){
       cin.get();
 
     t_global=t_next;
+
+    if (save_data && t_next > t_save)
+    {
+      t_save = t_next + 1000;
+      for (unsigned int i=0; i<edges.size(); i++)
+      {
+          edges.at(i)->Write_data();
+      }
+    }
   }
   if (save_data)
     for (unsigned int i=0; i<edges.size(); i++)
     {
-      if(edges.at(i)->Get_name() == "105" || edges.at(i)->Get_name() == "3" || edges.at(i)->Get_name() == "74" || edges.at(i)->Get_name() == "p1100" || edges.at(i)->Get_name() == "24" )
+      //if(edges.at(i)->Get_name() == "105" || edges.at(i)->Get_name() == "3" || edges.at(i)->Get_name() == "74" || edges.at(i)->Get_name() == "p1100" || edges.at(i)->Get_name() == "24" )
         edges.at(i)->Write_data();
     }
       
