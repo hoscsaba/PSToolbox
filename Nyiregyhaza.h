@@ -67,7 +67,7 @@ void calculatePropagationVelocity(EpanetReader & reader)
 
         if(r == 100) //KPE PN10 pipes
         {
-            Ec = 300.0e6; //El. mod. of pipe
+            Ec = 900.0e6; //El. mod. of pipe
             if(D == 150) Delta = 9.5e-3;
             if(D == 173) Delta = 10.7e-3;
         }
@@ -78,12 +78,12 @@ void calculatePropagationVelocity(EpanetReader & reader)
         }
         if(r == 150 && (reader.pipes[i].ID == "23" || reader.pipes[i].ID == "24")) //KPE PN16 pipes
         {
-            Ec = 300.0e6; //El. mod. of pipe
+            Ec = 900.0e6; //El. mod. of pipe
             Delta = 50.8e-3;
         }
         if(r == 150) //KPE PN16 pipes
         {
-            Ec = 1400.0e6; //El. mod. of pipe
+            Ec = 3200.0e6; //El. mod. of pipe
             Delta = getPN10D150Delta(D);
         }
 
@@ -109,6 +109,32 @@ void calculatePropagationVelocity(EpanetReader & reader)
     }
     
 }
+
+
+void modifyDemand(EpanetReader & reader)
+{
+    for (int i = 0; i < reader.junctions.size(); i++)
+    {
+        if(reader.junctions[i].Pattern == "11")
+        {
+            reader.junctions[i].Demand *= 0.06;
+        }
+        else if(reader.junctions[i].Pattern == "Fix")
+        {
+            reader.junctions[i].Demand *= 1.0;
+        }
+        else if(reader.junctions[i].Pattern == "ipar")
+        {
+            reader.junctions[i].Demand *= 0.0416;
+        }
+        else
+        {
+            cout << "Node " << reader.junctions[i].ID << " unknown demand pattern: " << reader.junctions[i].Pattern << endl;
+        }
+    }
+    
+}
+
 
 
 void calculateLambda(EpanetReader & reader)

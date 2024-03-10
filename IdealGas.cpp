@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <iostream>
 #include "IdealGas.h"
+#include "Gas.cpp"
 
 using namespace std;
 
@@ -57,6 +58,7 @@ double IdealGas::Get_Prandtl_from_Tp(double T, double p){
 	cout<<endl<<"Returning 0.0!"<<endl;
 	return 0.0;
 }
+
 double IdealGas::Get_ThermalConductivity_from_Tp(double T, double p){
 	cout<<endl<<" WARNING! Get_Prandtl_from_Tp() is not implemented for class IdealGas!";
 	cout<<endl<<"Returning 0.0!"<<endl;

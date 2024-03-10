@@ -177,7 +177,7 @@ void EpanetReader::convertToRunner2()
             // check type
             if (junctions[i].type == 0) //"free" end
             {
-                double demand = 0.06*junctions[i].Demand / 3600.0;
+                double demand = junctions[i].Demand / 3600.0;
                 double D = pipes[idx1].Diameter*0.001;
                 double A = 0.25*D*D*3.14159265;
                 double v = demand / A; //????
@@ -204,7 +204,7 @@ void EpanetReader::convertToRunner2()
             int idx2 = junctions[i].idxPipe[1];
             bool end1 = junctions[i].end[0];
             bool end2 = junctions[i].end[1];
-            double demand = 0.06*junctions[i].Demand / 3600.0;
+            double demand = junctions[i].Demand / 3600.0;
             string name = junctions[i].ID;
             vector<int> idx_edge;
             idx_edge.push_back(idx1);
@@ -221,7 +221,7 @@ void EpanetReader::convertToRunner2()
             bool end1 = junctions[i].end[0];
             bool end2 = junctions[i].end[1];
             bool end3 = junctions[i].end[2];
-            double demand = 0.06*junctions[i].Demand / 3600.0;
+            double demand = junctions[i].Demand / 3600.0;
             string name = junctions[i].ID;
             vector<int> idx_edge;
             idx_edge.push_back(idx1);
@@ -241,7 +241,7 @@ void EpanetReader::convertToRunner2()
             bool end2 = junctions[i].end[1];
             bool end3 = junctions[i].end[2];
             bool end4 = junctions[i].end[3];
-            double demand = 0.06*junctions[i].Demand / 3600.0;
+            double demand = junctions[i].Demand / 3600.0;
             string name = junctions[i].ID;
             vector<int> idx_edge;
             idx_edge.push_back(idx1);

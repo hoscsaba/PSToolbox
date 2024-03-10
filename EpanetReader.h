@@ -17,7 +17,7 @@ struct JunctionReader
     double Elev;
     double Head;
     double Demand;
-    int Pattern;
+    string Pattern;
     vector<int> idxPipe;
     vector<bool> end;
     int type; // 0:junction, 1:reservoir

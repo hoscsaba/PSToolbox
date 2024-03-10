@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vector>
 #include <iostream>
 #include "/Users/hoscsaba/program/matplotlib-cpp/matplotlibcpp.h"

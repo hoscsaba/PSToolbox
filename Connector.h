@@ -16,7 +16,15 @@ class Connector
   public:
     Connector(bool DEBUG);
 
-// type=1
+    //type=0
+    Connector(
+        string name,
+        vector<PSToolboxBaseEdge *> &_e, 
+        vector<bool> &_is_front,
+        vector<int> &_edges_idx,
+        double _demand, bool _DEBUG);
+
+    // type=1
     Connector(
         string name,
         PSToolboxBaseEdge *e1,bool is_front, 
@@ -91,12 +99,14 @@ class Connector
         PSToolboxBaseEdge* p2, bool is_front2,
         double mpout,
         double& p, double& v1, double& v2);
-    
+
     void Connector_SCP_2Pipes(double t_target, int update_idx);
 
     void Connector_SCP_3Pipes(double t_target, int update_idx);
-    
+
     void Connector_SCP_4Pipes(double t_target, int update_idx);
+    
+    void Connector_SCP_NPipes(double t_target, int update_idx);
 
     void Connector_LWP_Pipes(double t_target, LWP *p1, LWP *p2); 
 
@@ -106,7 +116,8 @@ class Connector
         LWP *p3, bool is_front3,
         const double mpout, const double T);
 
-  //private:
+    //private:
+    string name;
     bool DEBUG;
     PSToolboxBaseEdge *e1;
     PSToolboxBaseEdge *e2;
@@ -117,7 +128,10 @@ class Connector
     double BC_value;
     double demand; // kg/s
     int type;
-vector<int> edges_idx;
+
+    vector<PSToolboxBaseEdge*> edges;
+    vector<bool> is_front;
+    vector<int> edges_idx;
 
     void Set_LWP_BC(LWP* p1, const bool is_front, 
         const double p, const double T, const double v);
@@ -126,4 +140,6 @@ vector<int> edges_idx;
         Reservoir* r1, LWP* p1, bool inlet_pressure_drop);
 
     double signed_sqrt(double x);
+
+    double p_prev;
 };

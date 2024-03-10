@@ -69,6 +69,7 @@ class SCP: public PSToolboxBaseEdge, Units
     void Ini(double vini, double _pstart, double dt_target);
     void UpdateDimlessPars(double pref, double mp_nevl, double omega, double xref, double m);
     void GetLargePressureValues(double, vector<double>&, vector<double>&, vector<double>&,vector<string>&);
+    void GetSmallPressureValues(double, vector<double>&, vector<double>&, vector<double>&,vector<string>&);
     double Get_dprop(string prop_string);
     void Set_dprop(string prop_string, double val);
 
@@ -84,6 +85,8 @@ void Set_BC_Left(string type, double val);
 
     double GetAlphaAtEnd(double t_target);
     double GetBetaAtFront(double t_target);
+    void GetAlphaAtEnd(double t_target, double& LHS, double& coeff_Q);
+    void GetBetaAtFront(double t_target, double& LHS, double& coeff_Q);
     double GetAlphaPrimitiveAtEnd(double t_target); // alias
     double GetBetaPrimitiveAtFront(double t_target); // alias
     void Save_data();

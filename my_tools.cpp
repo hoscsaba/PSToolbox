@@ -85,6 +85,23 @@ double stdev = std::sqrt(fabs(sq_sum / v.size() - mean * mean));
 return stdev;
 }
 
+double max(vector<double> x){
+	return *max_element(x.begin(), x.end());
+}
+
+int max_idx(vector<double> x){
+return std::distance(x.begin(),std::max_element(x.begin(), x.end()));
+}
+
+double min(vector<double> x){
+	return *min_element(x.begin(), x.end());
+}
+
+int min_idx(vector<double> x){
+return std::distance(x.begin(),std::min_element(x.begin(), x.end()));
+}
+
+
 //=============================================================================
 
 //! An implementation of the multidimensional Newton-Raphson method.
