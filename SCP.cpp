@@ -21,7 +21,8 @@ SCP::SCP(const string _name, //!< [in] Name of the slightls compressible pipe
     const double _lambda, //!< [in] Friction loss factor
     const double _he, //!< [in] Height at the beginning [eleje] of the pipe
     const double _hv, //!< [in] Height at the end [v�ge] of the pipe
-    const bool _save_data /**< [in] whether to save data*/ ) : PSToolboxBaseEdge(_name), Units() {
+    const bool _save_data /**< [in] whether to save data*/
+     ) : PSToolboxBaseEdge(_name), Units() {
   save_data = _save_data;
   //name = _name;
   node_from = _cspe_name;
@@ -36,13 +37,14 @@ SCP::SCP(const string _name, //!< [in] Name of the slightls compressible pipe
   S0 = -(hv - he) / L; //slope
   A = D * D * M_PI / 4.; //Cross sectional area of the pipe
   lambda = _lambda;
-  lambda_p_2D = lambda / 2 / D;
+  lambda_p_2D = lambda / 2. / D;
   ini_done = false;
-  fname = name + ".dat"; //name of the file for saving data about the pipe
+  fname = "data/" + name + ".dat"; //name of the file for saving data about the pipe
                          //do_plot_runtime = false;
                          //ylim_isset = false;
   g = 9.81;
-
+  lambda_model = "hw";
+  
   // Dummy initialization
   Npts = 1;
   gamma = 0.;
@@ -52,6 +54,27 @@ SCP::SCP(const string _name, //!< [in] Name of the slightls compressible pipe
   t = 0.;
   dt = 0.;
 
+}
+
+void SCP::GetLargePressureValues(double p_lim, vector<double> & x_crit, vector<double> & p_crit, vector<double> & t_crit, vector<string> &ID_crit)
+{
+  double p_max = p_lim;
+  int idx = -1;
+  for (int i = 0; i < Npts; i++)
+  {
+    if(p(i) >= p_max)
+    {
+      p_max = p(i);
+      idx = i;
+    }
+  }
+  if(idx >= 0)
+  {
+    x_crit.push_back(x(idx));
+    p_crit.push_back(p(idx));
+    t_crit.push_back(t);
+    ID_crit.push_back(name);
+  }
 }
 
 //! Desctructor of the SCP class
@@ -142,7 +165,7 @@ void SCP::Ini(int Npts_mul) {
 
   for (int i = 0; i < Npts; i++) {
     x(i) = i * L / (Npts - 1);
-    p(i) = 1.e5;
+    p(i) = 5.0e5;
     v(i) = 0.0;
   } //sets 1 bar pressure at 0 velocity in every location
 
@@ -167,11 +190,12 @@ void SCP::Ini(int Npts_mul) {
     data.reserve(100);
     data.push_back(tmpvec);
   }
+
 }
 /*! \brief Initialize the SCP pipe
   Initializes the SCP pipe with 20 grid points and initial uniform flow velocity and pressure. (The generated pressure drops with friction.)
   \param vini Initial (uniform) velocity in the pipe
-  \param pstart Pressure at the inlet, set up lambda to decrease with friction
+  \param pstart Pressure at the nlet, set up lambda to decrease with friction
   */
 void SCP::Ini(double vini, double pstart) {
   t = 0.;
@@ -407,11 +431,16 @@ void SCP::UpdateInternal(){
     b = (p(i + 1) - roa * v(i + 1)) - dt * roa * Source(i + 1);
     pnew(i) = (a + b) / 2.;
     vnew(i) = (a - b) / 2. / roa;
+    //cout << "v=" << vnew(i) << "(" << a << "," << b <<")" << "\n";
+    //cout << ": pnew = " << pnew(i) << "\t vnew = " << vnew(i);
   }
+  return;
 }
 
 void SCP::UpdateTime(double _dt){
   // _dt is an external dummy variable, for compatibility reasons.
+  //cout << "t=" << t <<"\tp(0)=" << p(0) << "\tp(L)=" << p(Npts-1) <<"\tv(0)=" << v(0) << "\tv(L)="<< v(Npts-1) << endl;
+
   for (int i = 0; i < Npts; i++) {
     p(i) = pnew(i);
     v(i) = vnew(i);
@@ -443,6 +472,7 @@ void SCP::Step(
 }
 
 void SCP::Save_data(){
+
   tmpvec.at(0) = t;
   tmpvec.at(1) = p(0);
   tmpvec.at(2) = p(Npts - 1);
@@ -485,7 +515,9 @@ void SCP::BCLeft(string type, double val, double & pp, double & vv) {
 }
 
 void SCP::Set_BC_Left(string type, double val){
+  //cout << "Before: " << vnew(0) << endl;
   BCLeft(type,val,pnew(0),vnew(0));
+  //cout << "After:  " << vnew(0) << endl;
 }
 
 void SCP::Set_BC_Right(string type, double val){
@@ -642,7 +674,7 @@ double SCP::GetBetaPrimitiveAtFront(double t_target) {
   \return Base pressure in the given location.
   */
 double SCP::Source(int i) {
-  return (g * S0 - lambda_p_2D * v(i) * abs(v(i)));
+  return (g * S0  - lambda_p_2D * v(i) * abs(v(i)));
 }
 
 /*! \brief Exports savied data

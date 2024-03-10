@@ -1,0 +1,410 @@
+[TITLE]
+prueba	 
+
+[JUNCTIONS]
+;ID              	Elev        	Demand      	Pattern         
+ n1              	0           	10          	Fix             	;  
+ 2               	0           	20          	Fix             	;
+ 3               	0           	24          	                	;
+
+[RESERVOIRS]
+;ID              	Head        	Pattern         
+ 1               	100         	                	;
+
+[TANKS]
+;ID              	Elevation   	InitLevel   	MinLevel    	MaxLevel    	Diameter    	MinVol      	VolCurve        	Overflow
+
+[PIPES]
+;ID              	Node1           	Node2           	Length      	Diameter    	Roughness   	MinorLoss   	Status
+ 1               	1               	n1              	100         	100         	101         	0           	Open  	;
+ 2               	n1              	2               	100         	60          	100         	0           	Open  	;
+ 3               	n1              	3               	100        	100          	100         	0           	Open  	;
+
+[PUMPS]
+;ID              	Node1           	Node2           	Parameters
+
+[VALVES]
+;ID              	Node1           	Node2           	Diameter    	Type	Setting     	MinorLoss   
+
+[TAGS]
+
+[DEMANDS]
+;Junction        	Demand      	Pattern         	Category
+
+[STATUS]
+;ID              	Status/Setting
+
+[PATTERNS]
+;ID              	Multipliers
+;
+ 11              	0.0196      	0.0155      	0.014       	0.0138      	0.0143      	0.0222      
+ 11              	0.0376      	0.051       	0.0538      	0.0558      	0.0555      	0.0541      
+ 11              	0.0526      	0.0502      	0.048       	0.0459      	0.0461      	0.0475      
+ 11              	0.0516      	0.0562      	0.0611      	0.0587      	0.0456      	0.0292      
+;
+ 1               	0           	1           	0           
+;
+ 2               	0.0625      	0.0625      
+;
+ 3               	0.0416      	0.0416      	0.0416      	0.0416      	0.0416      	0.0416      
+ 3               	0.0432      	0.0416      	0.0416      	0.0416      	0.0416      	0.0416      
+ 3               	0.0416      	0.0416      	0.0416      	0.0416      	0.0416      	0.0416      
+ 3               	0.0416      	0.0416      	0.0416      	0.0416      	0.0416      	0.0416      
+;
+ ipar            	0.0416      	0.0416      	0.0416      	0.0416      	0.0416      	0.0416      
+ ipar            	0.0416      	0.0416      	0.0416      	0.0416      	0.0416      	0.0416      
+ ipar            	0.0416      	0.0416      	0.0416      	0.0416      	0.0416      	0.0416      
+ ipar            	0.0416      	0.0416      	0.0416      	0.0416      	0.0416      	0.0416      
+;
+ Nyiregy_DIP_Ipar_12_oras	0           	0           	0.          	0.          	0           	0.0833      
+ Nyiregy_DIP_Ipar_12_oras	0.0833      	0.0833      	0.0833      	0.0833      	0.0833      	0.0833      
+ Nyiregy_DIP_Ipar_12_oras	0.0833      	0.0833      	0.0834      	0.0833      	0.0833      	0.          
+ Nyiregy_DIP_Ipar_12_oras	0.0         	0.0         	0.0         	0.0         	0.0         
+;
+ Nyiregy_DIP_Ipar_16_oras	0           	0           	0           	0           	0.0625      	0.0625      
+ Nyiregy_DIP_Ipar_16_oras	0.0625      	0.0625      	0.0625      	0.0625      	0.0625      	0.0625      
+ Nyiregy_DIP_Ipar_16_oras	0.0625      	0.0625      	0.0625      	0.0625      	0.0625      	0.0625      
+ Nyiregy_DIP_Ipar_16_oras	0.0625      	0.0625      	0           	0           	0           
+;
+ Nyiregy_DIP_Ipar_18_oras	0           	0           	0           	0.055555    	0.055555    	0.055555    
+ Nyiregy_DIP_Ipar_18_oras	0.055555    	0.055555    	0.055555    	0.055555    	0.055555    	0.055555    
+ Nyiregy_DIP_Ipar_18_oras	0.055555    	0.055555    	0.055555    	0.055555    	0.055555    	0.055555    
+ Nyiregy_DIP_Ipar_18_oras	0.055555    	0.055555    	0.055555    	0           	0           
+;
+ Nyiregy_DIP_Ipar_20_oras	0           	0.05        	0.05        	0.05        	0.05        	0.05        
+ Nyiregy_DIP_Ipar_20_oras	0.05        	0.05        	0.05        	0.05        	0.05        	0.05        
+ Nyiregy_DIP_Ipar_20_oras	0.05        	0.05        	0.05        	0.05        	0.05        	0.05        
+ Nyiregy_DIP_Ipar_20_oras	0.05        	0.05        	0.05        	0           	0           
+;
+ Nyiregy_DIP_Ipar_22_oras	0           	0.0454545   	0.0454545   	0.0454545   	0.0454545   	0.0454545   
+ Nyiregy_DIP_Ipar_22_oras	0.0454545   	0.0454545   	0.0454545   	0.0454545   	0.0454545   	0.0454545   
+ Nyiregy_DIP_Ipar_22_oras	0.0454545   	0.0454545   	0.0454545   	0.0454545   	0.0454545   	0.0454545   
+ Nyiregy_DIP_Ipar_22_oras	0.0454545   	0.0454545   	0.0454545   	0.0454545   	0.0454545   
+;
+ T�ziv�z_nincs   	0           	0           	0           	0           	0           	0           
+ T�ziv�z_nincs   	0           	0           	0           	0           	0           	0           
+ T�ziv�z_nincs   	0           	0           	0           	0           	0           	0           
+ T�ziv�z_nincs   	0           	0           	0           	0           	0           	0           
+;T�zeset vizsg�lata 9 �rakor 1 �ra tart�ss�g
+ T�ziv�z_van     	0           	0           	0           	0           	0           	0           
+ T�ziv�z_van     	0           	0           	0           	0           	0           	0           
+ T�ziv�z_van     	0           	0           	0           	0           	0           	0           
+ T�ziv�z_van     	0           	1           	0           	0           	0           	0           
+;A nagyfoygaszt� 250 m3/h-�s v�zig�nye be�ll�tva
+ Nyiregy_DIP_Ipar_21_oras	0.047619    	0.047619    	0.047619    	0.047619    	0.047619    	0.047619    
+ Nyiregy_DIP_Ipar_21_oras	0.047619    	0.047619    	0.047619    	0.047619    	0.047619    	0.047619    
+ Nyiregy_DIP_Ipar_21_oras	0.047619    	0.047619    	0.047619    	0.047619    	0.047619    	0.047619    
+ Nyiregy_DIP_Ipar_21_oras	0.047619    	0.047619    	0.047619    
+;
+ Fix             	1           	1           	1           	1           	1           	1           
+ Fix             	1           	1           	1           	1           	1           	1           
+ Fix             	1           	1           	1           	1           	1           	1           
+ Fix             	1           	1           	1           	1           	1           	1           
+
+[CURVES]
+;ID              	X-Value     	Y-Value
+;PUMP: PUMP: PUMP: PUMP: PUMP:   
+ SP60_5          	0           	70.1        
+ SP60_5          	10          	69.8        
+ SP60_5          	16          	68.2        
+ SP60_5          	22          	65.5        
+ SP60_5          	28          	61.6        
+ SP60_5          	34          	56.6        
+ SP60_5          	40          	51.9        
+ SP60_5          	45          	47.8        
+ SP60_5          	54          	42.7        
+ SP60_5          	60          	38.4        
+ SP60_5          	66          	33.2        
+ SP60_5          	71          	28          
+ SP60_5          	76          	21.6        
+;PUMP: PUMP: PUMP: PUMP: PUMP:   
+ SP125_3         	0           	89          
+ SP125_3         	13          	88.3        
+ SP125_3         	30          	87          
+ SP125_3         	40          	85          
+ SP125_3         	50          	82.5        
+ SP125_3         	60          	79.7        
+ SP125_3         	70          	76.6        
+ SP125_3         	80          	73.8        
+ SP125_3         	90          	70.8        
+ SP125_3         	100         	68.2        
+ SP125_3         	110         	65.2        
+ SP125_3         	120         	61.7        
+ SP125_3         	130         	57.7        
+ SP125_3         	140         	52.6        
+ SP125_3         	150         	46.6        
+ SP125_3         	160         	39.9        
+;PUMP: PUMP: PUMP: PUMP: VOLUME:   
+ VT100           	30          	0           
+ VT100           	30.78       	5.9         
+ VT100           	31.55       	20.3        
+ VT100           	32.33       	39.4        
+ VT100           	32.8        	50          
+ VT100           	33.27       	60.6        
+ VT100           	34.05       	79.7        
+ VT100           	34.83       	93.7        
+ VT100           	35.6        	100         
+;PUMP: PUMP: PUMP: PUMP: PUMP:   
+ CR64_2          	0           	60.9        
+ CR64_2          	10          	59.7        
+ CR64_2          	20          	57.7        
+ CR64_2          	30          	55          
+ CR64_2          	40          	52.4        
+ CR64_2          	50          	49.5        
+ CR64_2          	60          	45.9        
+ CR64_2          	70          	41.6        
+ CR64_2          	80          	36          
+;PUMP: PUMP: PUMP: PUMP: PUMP:   
+ CR90_2          	0           	68.9        
+ CR90_2          	10          	67.7        
+ CR90_2          	20          	65          
+ CR90_2          	30          	61.8        
+ CR90_2          	40          	58.6        
+ CR90_2          	50          	55.4        
+ CR90_2          	60          	52.5        
+ CR90_2          	70          	49.5        
+ CR90_2          	80          	46.2        
+ CR90_2          	90          	42.5        
+ CR90_2          	100         	37.8        
+ CR90_2          	110         	32.6        
+ CR90_2          	119         	26.1        
+;PUMP: PUMP: PUMP: PUMP: VOLUME:   
+ M               	1           	100         
+ M               	2           	200         
+ M               	3           	300         
+ M               	4           	400         
+;PUMP: PUMP: PUMP: PUMP: VOLUME:   
+ VT2             	30          	150         
+ VT2             	31          	200         
+ VT2             	32          	300         
+ VT2             	33          	450         
+ VT2             	34          	600         
+ VT2             	35          	650         
+ VT2             	36          	700         
+;PUMP: PUMP: PUMP: PUMP: VOLUME:   
+ VT1             	30          	0           
+ VT1             	30.78       	5.9         
+ VT1             	31.55       	20.3        
+ VT1             	32.33       	39.4        
+ VT1             	32.8        	50          
+ VT1             	33.27       	60.6        
+ VT1             	34.05       	79.7        
+ VT1             	34.83       	93.7        
+ VT1             	35.6        	100         
+;PUMP: PUMP: PUMP: PUMP: PUMP:   
+ SP125_3_FR      	0           	55.3        
+ SP125_3_FR      	20          	55.2        
+ SP125_3_FR      	40          	55.1        
+ SP125_3_FR      	60          	55          
+ SP125_3_FR      	80          	54.9        
+ SP125_3_FR      	100         	54.8        
+ SP125_3_FR      	120         	54          
+ SP125_3_FR      	140         	52.6        
+ SP125_3_FR      	160         	40.2        
+;PUMP: PUMP: PUMP: PUMP: PUMP:   
+ CR90_3          	0           	103         
+ CR90_3          	10          	101         
+ CR90_3          	20          	97          
+ CR90_3          	30          	93          
+ CR90_3          	40          	90          
+ CR90_3          	50          	85          
+ CR90_3          	60          	80          
+ CR90_3          	70          	76          
+ CR90_3          	80          	71          
+ CR90_3          	90          	65          
+ CR90_3          	100         	58          
+ CR90_3          	110         	51          
+ CR90_3          	118         	42          
+;PUMP: PUMP: PUMP: PUMP:   
+ SP125_4         	0           	117.1       
+ SP125_4         	20          	117         
+ SP125_4         	40          	113         
+ SP125_4         	60          	106         
+ SP125_4         	80          	98          
+ SP125_4         	100         	91          
+ SP125_4         	120         	82          
+ SP125_4         	140         	70          
+ SP125_4         	160         	53          
+;PUMP: PUMP: PUMP: PUMP:   
+ SP77_4_frek     	0           	44.8        
+ SP77_4_frek     	10          	44.7        
+ SP77_4_frek     	20          	44.6        
+ SP77_4_frek     	30          	44.5        
+ SP77_4_frek     	40          	44.4        
+ SP77_4_frek     	50          	44.3        
+ SP77_4_frek     	60          	44.2        
+ SP77_4_frek     	70          	44.1        
+ SP77_4_frek     	80          	44          
+ SP77_4_frek     	90          	37          
+ SP77_4_frek     	100         	28.5        
+;PUMP: PUMP: PUMP: PUMP:   
+ NK100_200_203   	0           	60          
+ NK100_200_203   	50          	59.8        
+ NK100_200_203   	100         	59          
+ NK100_200_203   	150         	58          
+ NK100_200_203   	200         	56          
+ NK100_200_203   	250         	53          
+ NK100_200_203   	300         	48          
+ NK100_200_203   	350         	43          
+;PUMP: PUMP: PUMP: PUMP:   
+ NK_100_200_193  	0           	52          
+ NK_100_200_193  	50          	51.9        
+ NK_100_200_193  	100         	51.8        
+ NK_100_200_193  	150         	50.7        
+ NK_100_200_193  	200         	47.8        
+ NK_100_200_193  	250         	45          
+ NK_100_200_193  	300         	40          
+ NK_100_200_193  	350         	35          
+;PUMP: PUMP: PUMP: PUMP:   
+ NK_200_400_364  	0           	46.2        
+ NK_200_400_364  	50          	46.18       
+ NK_200_400_364  	100         	46.16       
+ NK_200_400_364  	150         	46.14       
+ NK_200_400_364  	200         	46.12       
+ NK_200_400_364  	250         	46.1        
+ NK_200_400_364  	300         	46.08       
+ NK_200_400_364  	350         	46          
+ NK_200_400_364  	400         	45.4        
+ NK_200_400_364  	450         	44.8        
+ NK_200_400_364  	500         	43.9        
+ NK_200_400_364  	550         	42.7        
+ NK_200_400_364  	600         	41.2        
+ NK_200_400_364  	650         	39.7        
+ NK_200_400_364  	700         	37.1        
+ NK_200_400_364  	750         	34.7        
+;PUMP: PUMP: PUMP: PUMP:   
+ saer_150_315    	0           	39          
+ saer_150_315    	200         	38.9        
+ saer_150_315    	250         	38.7        
+ saer_150_315    	300         	37.9        
+ saer_150_315    	350         	36.6        
+ saer_150_315    	400         	35.5        
+ saer_150_315    	450         	33          
+ saer_150_315    	500         	31.2        
+ saer_150_315    	550         	28.8        
+ saer_150_315    	600         	25.6        
+;PUMP: VOLUME:   
+ VT800           	0           	0           
+ VT800           	6.77        	800         
+;PUMP: 
+;PUMP: 
+ CR_155_1_90     	0           	31.25       
+ CR_155_1_90     	10          	31.15       
+ CR_155_1_90     	20          	31.13       
+ CR_155_1_90     	30          	31          
+ CR_155_1_90     	40          	30.35       
+ CR_155_1_90     	50          	30.15       
+ CR_155_1_90     	60          	30          
+ CR_155_1_90     	70          	29.4        
+ CR_155_1_90     	80          	28.42       
+ CR_155_1_90     	90          	28.3        
+ CR_155_1_90     	100         	27.32       
+ CR_155_1_90     	110         	26.2        
+ CR_155_1_90     	120         	25.1        
+ CR_155_1_90     	130         	23.8        
+ CR_155_1_90     	140         	21.7        
+ CR_155_1_90     	150         	20.45       
+ CR_155_1_90     	160         	18.5        
+ CR_155_1_90     	170         	16.3        
+ CR_155_1_90     	180         	13.42       
+ CR_155_1_90     	200         	0           
+
+[CONTROLS]
+ 
+ 
+ 
+ 
+
+
+[RULES]
+ 
+ 
+ 
+ 
+ 
+
+
+[ENERGY]
+ Global Efficiency  	75
+ Global Price       	0
+ Demand Charge      	0
+
+[EMITTERS]
+;Junction        	Coefficient
+
+[QUALITY]
+;Node            	InitQual
+
+[SOURCES]
+;Node            	Type        	Quality     	Pattern
+
+[REACTIONS]
+;Type     	Pipe/Tank       	Coefficient
+
+
+[REACTIONS]
+ Order Bulk            	1
+ Order Tank            	1
+ Order Wall            	1
+ Global Bulk           	0
+ Global Wall           	0
+ Limiting Potential    	0
+ Roughness Correlation 	0
+
+[MIXING]
+;Tank            	Model
+
+[TIMES]
+ Duration           	48:00 
+ Hydraulic Timestep 	0:10
+ Quality Timestep   	0:15
+ Pattern Timestep   	1:00 
+ Pattern Start      	0:00 
+ Report Timestep    	1
+ Report Start       	0:00 
+ Start ClockTime    	12 am
+ Statistic          	None
+
+[REPORT]
+ Status             	No
+ Summary            	No
+ Page               	0
+
+[OPTIONS]
+ Units              	CMH
+ Headloss           	H-W
+ Specific Gravity   	1
+ Viscosity          	1
+ Trials             	40
+ Accuracy           	0.001
+ CHECKFREQ          	2
+ MAXCHECK           	10
+ DAMPLIMIT          	0
+ Unbalanced         	Continue 10
+ Pattern            	11
+ Demand Multiplier  	1
+ Emitter Exponent   	0.5
+ Quality            	None mg/L
+ Diffusivity        	1
+ Tolerance          	0.01
+
+[COORDINATES]
+;Node            	X-Coord           	Y-Coord
+n1              	849379.472        	291069.075        
+2               	849382.836        	291073.337        
+3               	849382.799        	291065.011        
+1               	849372.443        	291069.089        
+
+[VERTICES]
+;Link            	X-Coord           	Y-Coord
+
+[LABELS]
+;X-Coord             Y-Coord             Label & Anchor Node
+
+[BACKDROP]
+  DIMENSIONS  	837752.280        	280963.400        	878489.300        	306420.180        
+ UNITS          	None
+ FILE           	
+ OFFSET         	0.00            	0.00            
+
+[END]
