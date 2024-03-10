@@ -18,6 +18,10 @@ PSToolboxRunner::PSToolboxRunner(
   set_limit = false;
   p_limMin = 0.0;
   p_limMax = 0.0;
+  write_interval = 1000.0;
+  save_interval = 1.0;
+  p_start_time = 0.0;
+  p_end_time = 1.0e10;
 };
 
 
@@ -39,9 +43,9 @@ void PSToolboxRunner::Run(double t_max){
   }
 
   // Simulation
-  double t_global=0., dt_out=t_max/10., t_out=-1.e-10;
+  double t_global=0., dt_out=t_max/100., t_out=-1.e-10;
   double t_next;
-  double t_save = 600.0;
+  double t_save = write_interval;
   int update_idx;
   vector<bool> update_edges(edges.size());
   int STEP=0;
@@ -55,12 +59,17 @@ void PSToolboxRunner::Run(double t_max){
 
   while (t_global<t_max)
   {
+    /*
+    ======================== TIMESTEP PREPARATIONS ===============================
+    */
     STEP++;
-    if (DEBUG){
+    if (DEBUG)
+    {
       cout<<endl<<"STEP     : "<<STEP;
       cout<<endl<<"t_global : "<<t_global;
     }
-    if (t_global>t_out){
+    if (t_global>t_out)
+    {
       cout<<endl<<round(t_global/t_max*100)<<"%";
       t_out+=dt_out;
     }
@@ -104,12 +113,19 @@ void PSToolboxRunner::Run(double t_max){
       }
     }
 
+
+    /*
+    ======================== UPDATE EDGES ===============================
+    */
     for (unsigned int i=0; i<edges.size(); i++)
     { 
       if (update_edges.at(i))
       {
         if (DEBUG)
+        {
           cout<<endl<<"\t Updating edge "<<i<<" ... ";
+        }
+
         edges.at(i)->UpdateInternal();
         cons.at(con_at_edge_start.at(i))->Update(t_next,i);
         cons.at(con_at_edge_end.at(i))->Update(t_next,i);
@@ -124,30 +140,31 @@ void PSToolboxRunner::Run(double t_max){
 
         if (save_data)
         {
-            if(last_save[i] + 0.1 < t_next)
-            {
-              edges.at(i)->Save_data();
-              last_save[i] = t_next;
-            }
-            
+          if(last_save[i] + save_interval < t_next)
+          {
+            edges.at(i)->Save_data();
+            last_save[i] = int(t_next/save_interval)*save_interval;
+          }
         }
           
-
-        if(set_limit)
+        if(set_limit && t_next > p_start_time && t_next < p_end_time)
         {
           edges.at(i)->GetLargePressureValues(p_limMax,x_crit,p_crit,t_crit,ID_crit);
           edges.at(i)->GetSmallPressureValues(p_limMin,x_crit,p_crit,t_crit,ID_crit);
         }
-      }
-    }
-    if (DEBUG)
-      cin.get();
+      }//end of if - update edges
+    }//end of for - update edges
 
+    if (DEBUG) cin.get();
     t_global=t_next;
+
+    /*
+    ======================== Save at end of timestep ===============================
+    */
 
     if (save_data && t_global > t_save)
     {
-      t_save = t_next + 600;
+      t_save = t_next + write_interval;
       for (unsigned int i=0; i<edges.size(); i++)
       {
           edges.at(i)->Write_data();
@@ -159,12 +176,20 @@ void PSToolboxRunner::Run(double t_max){
       //cons.at(172)->demand = 0.0808889;
       //cons.at(174)->demand = 0;
     }
-  }
+
+  }//end of while 
+
+
+  /*
+  ======================== Save at end of simulation ===============================
+  */
   if (save_data)
+  {
     for (unsigned int i=0; i<edges.size(); i++)
     {
         edges.at(i)->Write_data();
     }
+  }
       
 
   if(set_limit)
@@ -248,6 +273,6 @@ void PSToolboxRunner::Run(double t_max){
     ofsMin.flush();
     ofsMin.close();
     
-  }
+  }//end of pressure min-max writing
 
-}
+}//end of run function
