@@ -4,6 +4,7 @@
 #include <Eigen/Dense>
 #include <string>
 #include <fstream>
+#include <algorithm>
 
 using namespace Eigen;
 using namespace std;
@@ -26,6 +27,15 @@ MatrixXd num_jac(
     VectorXd & x, const VectorXd & pars);
 
 double signum(double x);
+
+double max(vector<double> x);
+
+double min(vector<double> x);
+
+int max_idx(vector<double> x);
+
+int min_idx(vector<double> x);
+
 
 double mean(vector<double> x);
 

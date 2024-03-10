@@ -1,7 +1,9 @@
 #ifndef PSToolboxBaseEdge_H
 #define PSToolboxBaseEdge_H
+
 #include <iostream>
 #include <vector>
+
 using namespace std;
 
 class PSToolboxBaseEdge
@@ -33,6 +35,10 @@ public:
     virtual void Set_BC_Left(string type, double val)=0;
     virtual void Set_BC_Right(string type, double val)=0;
     virtual void GetLargePressureValues(double, vector<double>&, vector<double>&,vector<double>&, vector<string>&)=0;
+//<<<<<<< HEAD
+//=======
+//    virtual void GetSmallPressureValues(double, vector<double>&, vector<double>&,vector<double>&, vector<string>&)=0;
+//>>>>>>> d971427eb223c4d6b1e9771c74598bc3624272c8
     virtual void Save_data()=0;
     virtual void Write_data()=0;
     virtual void GetBetaAtFront(double t_target, double & LHS, double & coeff_Q)=0;
@@ -41,9 +47,12 @@ public:
     virtual void UpdateInternal()=0;
     virtual void UpdateTime(double)=0;
 
+//<<<<<<< HEAD
 
 private:
 
 
+//=======
+//>>>>>>> d971427eb223c4d6b1e9771c74598bc3624272c8
 };
 #endif

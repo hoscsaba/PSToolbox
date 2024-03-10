@@ -175,12 +175,11 @@ prueba
  n3528           	114         	0.0183556433	11              	;  
  n3566           	113         	0.5363926874	11              	;  
  3               	117.5       	0           	ipar            	;
- DIP_Ipari_fogyasztó	119.5       	7000        	ipar            	;
+ n_DIP           	119.5       	0        	ipar            	;
  13              	113         	0           	                	;
  29              	113         	369         	Fix             	;
  30              	113         	0           	                	;
  14              	114         	0           	                	;
- Tûzcsap_D-i_végpont	117         	36          	Tûzivíz_nincs   	;
  10              	116.5       	0           	                	;
  28              	117         	0           	                	;
  34              	116         	0           	                	;
@@ -189,9 +188,9 @@ prueba
 
 [RESERVOIRS]
 ;ID              	Head        	Pattern         
- 2               	145.46      	                	;
- 1               	157.87      	                	;
- 4               	161         	                	;
+ r2              	145.46      	                	;
+ r1              	157.87      	                	;
+ r3              	161         	                	;
 
 [TANKS]
 ;ID              	Elevation   	InitLevel   	MinLevel    	MaxLevel    	Diameter    	MinVol      	VolCurve        	Overflow
@@ -387,7 +386,7 @@ prueba
  44              	n1976           	n1579           	436.11      	220         	150         	0           	Open  	;  
  45              	n1976           	n1578           	193.07      	220         	150         	0           	Open  	;  
  23              	n1596           	3               	2220        	555         	150         	0           	Open  	;
- 24              	3               	DIP_Ipari_fogyasztó	2400        	555         	150         	0           	Open  	;
+ 24              	3               	n_DIP           	2400        	555         	150         	0           	Open  	;
  74              	n3036           	13              	196         	600         	101         	0           	Open  	;
  75              	13              	n3039           	20          	600         	101         	0           	Open  	;
  76              	13              	29              	145         	397         	150         	0           	Open  	;
@@ -396,7 +395,6 @@ prueba
  83              	n1689           	14              	16.5        	150         	100         	0           	Open  	;
  84              	14              	n2906           	188.8       	150         	100         	0           	Open  	;
  87              	n1591           	n1590           	33.35       	278         	150         	0           	Open  	;
- 4               	n1206           	Tûzcsap_D-i_végpont	10          	15500       	200         	0           	Closed  	;
  98              	10              	n2202           	738         	150         	100         	0           	Open  	;
  2_valt          	28              	n2203           	102.99      	150         	100         	0           	Open  	;
  100             	n2203           	34              	166.6       	150         	100         	0           	Open  	;
@@ -408,10 +406,10 @@ prueba
  16              	28              	n1280           	1407        	80          	101         	0           	Open  	;
  17              	n1281           	24              	688         	80          	101         	0           	Open  	;
  19              	n2089           	24              	101         	173         	100         	0           	Open  	;
- 105             	24              	DIP_Ipari_fogyasztó	2000        	173         	100         	0           	Open  	;
- 1               	2               	n3036           	1           	600         	101         	0           	Open  	;
- 2               	1               	n1568           	1           	150         	101         	0           	Open  	;
- 3               	4               	30              	1           	397         	150         	0           	Open  	;
+ 105             	24              	n_DIP           	2000        	173         	100         	0           	Open  	;
+ 1               	r2              	n3036           	1           	600         	101         	0           	Open  	;
+ 2               	r1              	n1568           	1           	150         	101         	0           	Open  	;
+ 3               	r3              	30              	1           	397         	150         	0           	Open  	;
 
 [PUMPS]
 ;ID              	Node1           	Node2           	Parameters
@@ -474,16 +472,16 @@ prueba
  Nyiregy_DIP_Ipar_22_oras	0.0454545   	0.0454545   	0.0454545   	0.0454545   	0.0454545   	0.0454545   
  Nyiregy_DIP_Ipar_22_oras	0.0454545   	0.0454545   	0.0454545   	0.0454545   	0.0454545   
 ;
- Tûzivíz_nincs   	0           	0           	0           	0           	0           	0           
- Tûzivíz_nincs   	0           	0           	0           	0           	0           	0           
- Tûzivíz_nincs   	0           	0           	0           	0           	0           	0           
- Tûzivíz_nincs   	0           	0           	0           	0           	0           	0           
-;Tûzeset vizsgálata 9 órakor 1 óra tartósság
- Tûzivíz_van     	0           	0           	0           	0           	0           	0           
- Tûzivíz_van     	0           	0           	0           	0           	0           	0           
- Tûzivíz_van     	0           	0           	0           	0           	0           	0           
- Tûzivíz_van     	0           	1           	0           	0           	0           	0           
-;A nagyfoygasztó 250 m3/h-ás vízigénye beállítva
+ Tï¿½zivï¿½z_nincs   	0           	0           	0           	0           	0           	0           
+ Tï¿½zivï¿½z_nincs   	0           	0           	0           	0           	0           	0           
+ Tï¿½zivï¿½z_nincs   	0           	0           	0           	0           	0           	0           
+ Tï¿½zivï¿½z_nincs   	0           	0           	0           	0           	0           	0           
+;Tï¿½zeset vizsgï¿½lata 9 ï¿½rakor 1 ï¿½ra tartï¿½ssï¿½g
+ Tï¿½zivï¿½z_van     	0           	0           	0           	0           	0           	0           
+ Tï¿½zivï¿½z_van     	0           	0           	0           	0           	0           	0           
+ Tï¿½zivï¿½z_van     	0           	0           	0           	0           	0           	0           
+ Tï¿½zivï¿½z_van     	0           	1           	0           	0           	0           	0           
+;A nagyfoygasztï¿½ 250 m3/h-ï¿½s vï¿½zigï¿½nye beï¿½llï¿½tva
  Nyiregy_DIP_Ipar_21_oras	0.047619    	0.047619    	0.047619    	0.047619    	0.047619    	0.047619    
  Nyiregy_DIP_Ipar_21_oras	0.047619    	0.047619    	0.047619    	0.047619    	0.047619    	0.047619    
  Nyiregy_DIP_Ipar_21_oras	0.047619    	0.047619    	0.047619    	0.047619    	0.047619    	0.047619    
@@ -775,7 +773,7 @@ prueba
  DAMPLIMIT          	0
  Unbalanced         	Continue 10
  Pattern            	11
- Demand Multiplier  	1
+ Demand Multiplier  	0.0000000001
  Emitter Exponent   	0.5
  Quality            	None mg/L
  Diffusivity        	1
@@ -955,20 +953,19 @@ n3520           	850074.560        	287973.250
 n3528           	849519.460        	286105.210        
 n3566           	850339.110        	292181.540        
 3               	850810.242        	286746.985        
-DIP_Ipari_fogyasztó	850800.592        	284898.621        
+n_DIP           	850800.592        	284898.621        
 13              	849554.048        	291113.397        
 29              	849528.171        	291141.353        
 30              	849554.745        	291142.639        
 14              	849938.883        	289066.534        
-Tûzcsap_D-i_végpont	849690.000        	283100.000        
 10              	849670.364        	283823.479        
 28              	849718.592        	284324.578        
 34              	849635.334        	284105.117        
 35              	849879.699        	284140.532        
 24              	849824.662        	284784.982        
-2               	849372.443        	291069.089        
-1               	850909.519        	289839.701        
-4               	849549.830        	291142.600        
+r2              	849372.443        	291069.089        
+r1              	850909.519        	289839.701        
+r3              	849549.830        	291142.600        
 
 [VERTICES]
 ;Link            	X-Coord           	Y-Coord

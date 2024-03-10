@@ -22,11 +22,11 @@ SCP::SCP(const string _name, //!< [in] Name of the slightls compressible pipe
     const double _he, //!< [in] Height at the beginning [eleje] of the pipe
     const double _hv, //!< [in] Height at the end [v�ge] of the pipe
     const bool _save_data /**< [in] whether to save data*/
-     ) : PSToolboxBaseEdge(_name), Units() {
+     ) : PSToolboxBaseEdge("SCP",_name,_cspe_name,_cspv_name), Units() {
   save_data = _save_data;
   //name = _name;
-  node_from = _cspe_name;
-  node_to = _cspv_name;
+  //node_from = _cspe_name;
+  //node_to = _cspv_name;
   ro = _ro;
   a = _a; //Speed of sound;
   roa = ro * a;
@@ -51,8 +51,8 @@ SCP::SCP(const string _name, //!< [in] Name of the slightls compressible pipe
   alpha = 0.;
   phi = 0.;
   mu = 0.;
-  t = 0.;
-  dt = 0.;
+  //t = 0.;
+ // dt = 0.;
 
 }
 
@@ -76,6 +76,31 @@ void SCP::GetLargePressureValues(double p_lim, vector<double> & x_crit, vector<d
     ID_crit.push_back(name);
   }
 }
+
+void SCP::GetSmallPressureValues(double p_lim, vector<double> & x_crit, vector<double> & p_crit, vector<double> & t_crit, vector<string> &ID_crit)
+{
+  double p_min = p_lim;
+  int idx = -1;
+  for (int i = 0; i < Npts; i++)
+  {
+    if(p(i) <= p_min)
+    {
+      p_min = p(i);
+      idx = i;
+    }
+  }
+  if(idx >= 0)
+  {
+    x_crit.push_back(x(idx));
+    p_crit.push_back(p(idx));
+    t_crit.push_back(t);
+    ID_crit.push_back(name);
+  }
+}
+
+
+
+
 
 //! Desctructor of the SCP class
 SCP::~SCP() {}
@@ -437,7 +462,7 @@ void SCP::UpdateInternal(){
   return;
 }
 
-void SCP::UpdateTime(double _dt){
+void SCP::UpdateTime(double _t){
   // _dt is an external dummy variable, for compatibility reasons.
   //cout << "t=" << t <<"\tp(0)=" << p(0) << "\tp(L)=" << p(Npts-1) <<"\tv(0)=" << v(0) << "\tv(L)="<< v(Npts-1) << endl;
 
@@ -446,7 +471,7 @@ void SCP::UpdateTime(double _dt){
     v(i) = vnew(i);
   }
 
-  t=_dt;
+  t=_t;
 }
 
 /*! \brief Take a timestep.
@@ -512,6 +537,14 @@ void SCP::BCLeft(string type, double val, double & pp, double & vv) {
     cout << endl << "Name of pipe: " << name << endl;
     cin.get();
   }
+
+  if (DEBUG){
+	  cout<<endl<<"SCP::BCLeft():";
+	  cout<<endl<<"\t Edge "<<name<<" BC set up:";
+	  cout<<endl<<"\t p = "<<pp<<" Pa";
+	  cout<<endl<<"\t v = "<<vv<<" m/s";
+	  cout<<endl<<"\t Q = "<<vv*A<<" m3/s"<<endl;
+  }
 }
 
 void SCP::Set_BC_Left(string type, double val){
@@ -572,6 +605,15 @@ void SCP::BCRight(string type, double val, double & pp, double & vv) {
     cout << endl << "Name of pipe: " << name << endl;
     cin.get();
   }
+
+  if (DEBUG){
+  	  cout<<endl<<"SCP::BCRight():";
+  	  cout<<endl<<"\t Edge "<<name<<" BC set up:";
+  	  cout<<endl<<"\t p = "<<p<<" Pa";
+  	  cout<<endl<<"\t v = "<<vv<<" m/s";
+  	  cout<<endl<<"\t Q = "<<vv*A<<" m3/s"<<endl;
+    }
+
 }
 
 void SCP::GetAlphaAtEnd(double t_target, double& LHS, double& coeff_Q){
@@ -626,7 +668,11 @@ double SCP::GetAlphaPrimitiveAtEnd(double t_target){
 
 void SCP::GetBetaAtFront(double t_target, double& LHS, double& coeff_Q){
   LHS = GetBetaAtFront(t_target);
+//<<<<<<< HEAD
   coeff_Q=-roa/A;
+//=======
+//  coeff_Q=roa/A;
+//>>>>>>> d971427eb223c4d6b1e9771c74598bc3624272c8
 }
 
 double SCP::GetBetaAtFront(double t_target) {
@@ -674,7 +720,31 @@ double SCP::GetBetaPrimitiveAtFront(double t_target) {
   \return Base pressure in the given location.
   */
 double SCP::Source(int i) {
-  return (g * S0  - lambda_p_2D * v(i) * abs(v(i)));
+  double source_g = g*S0;
+
+  double source_l = 0.0;
+  if(lambda_model == "hs") //Hydraulicly Smooth
+  {
+      source_l = - lambda_p_2D * v(i) * abs(v(i));
+  }
+  if(lambda_model == "hw") //Hazen-Williams
+  {
+      double Q = abs(v(i))*A;
+      //double Dx = L/(Npts-1);
+      //cout << "lambda = " << lambda << "\t";
+
+      double hL =  10.67 * pow(Q/lambda,1.852) * pow(D,-4.8704);
+      
+      double sign;
+      if(v(i) > 0) sign = 1;
+      else sign = -1;
+
+
+      source_l = - sign * g * hL;
+      //cout << "Source = " << source_l << endl;
+  }
+
+  return source_g + source_l;
 }
 
 /*! \brief Exports savied data

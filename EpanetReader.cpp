@@ -118,7 +118,8 @@ void EpanetReader::convertToRunner2()
         double a = pipes[i].SpeedOfSound; //m/s
         double L = pipes[i].Length; //m
         double D = 0.001 * pipes[i].Diameter; //m
-        double lambda = pipes[i].Lambda; //
+        //double lambda = pipes[i].Lambda; //hs model
+        double lambda = pipes[i].Roughness; //hw model
         int idx_e = findNodeByID(pipes[i].Node1);
         int idx_v = findNodeByID(pipes[i].Node2);
         double he = junctions[idx_e].Elev; //m
@@ -146,9 +147,9 @@ void EpanetReader::convertToRunner2()
         int idx2 = findNodeByID(pipes[i].Node2); // idx is end (0)
 
         junctions[idx1].idxPipe.push_back(i);
-        junctions[idx1].end.push_back(true);
+        junctions[idx1].end.push_back(false);
         junctions[idx2].idxPipe.push_back(i);
-        junctions[idx2].end.push_back(false);
+        junctions[idx2].end.push_back(true);
 
         con_at_edge_start.push_back(idx1);
         con_at_edge_end.push_back(idx2);
@@ -180,7 +181,8 @@ void EpanetReader::convertToRunner2()
                 double D = pipes[idx1].Diameter*0.001;
                 double A = 0.25*D*D*3.14159265;
                 double v = demand / A; //????
-                cons.push_back(new Connector(name,edges[idx1], end1, "Velocity", v, demand, true));
+                if(!end1) v = -v;
+                cons.push_back(new Connector(name,edges[idx1], !end1, "Velocity", v, demand, true));
                 cout << "Node " << name << "\t call Connector(" << pipes[idx1].ID << "," << end1 << ",Velocity," << v <<"," << demand << ")\n";
             }
             if (junctions[i].type == 1) // reservoir
@@ -190,7 +192,7 @@ void EpanetReader::convertToRunner2()
                 double elev = junctions[idx_other].Elev;
                 double p = (head-elev)*1000.0*9.81; //????
                 double demand = 0;
-                cons.push_back(new Connector(name,edges[idx1], end1, "Pressure", p, demand, true));
+                cons.push_back(new Connector(name,edges[idx1], !end1, "Pressure", p, demand, true));
                 cout << "Node " << name << "\t call Connector(" << pipes[idx1].ID << "," << end1 << ",Pressure,"<< p << "," << demand << ")\n";
             }
         }
@@ -207,7 +209,7 @@ void EpanetReader::convertToRunner2()
             vector<int> idx_edge;
             idx_edge.push_back(idx1);
             idx_edge.push_back(idx2);
-            cons.push_back(new Connector(name, edges[idx1], end1, edges[idx2], end2, demand, true, idx_edge));
+            cons.push_back(new Connector(name, edges[idx1], !end1, edges[idx2], !end2, demand, true, idx_edge));
             cout << "Node " << name << "\t call Connector(" << pipes[idx1].ID << "," << end1 << "," << pipes[idx2].ID << "," << end2 << "," << demand << ")\n";
         }
         if (size == 3)
@@ -225,7 +227,7 @@ void EpanetReader::convertToRunner2()
             idx_edge.push_back(idx1);
             idx_edge.push_back(idx2);
             idx_edge.push_back(idx3);
-            cons.push_back(new Connector(name,edges[idx1],end1,edges[idx2],end2,edges[idx3],end3,demand,true,idx_edge));
+            cons.push_back(new Connector(name,edges[idx1],!end1,edges[idx2],!end2,edges[idx3],!end3,demand,true,idx_edge));
             cout << "Node " << junctions[i].ID << "\t call Connector(" << pipes[idx1].ID << "," << end1 << "," << pipes[idx2].ID << "," << end2 << "," << pipes[idx3].ID << "," << end3  << "," << demand << ")\n";
         }
         if (size == 4)
@@ -246,7 +248,7 @@ void EpanetReader::convertToRunner2()
             idx_edge.push_back(idx2);
             idx_edge.push_back(idx3);
             idx_edge.push_back(idx4);
-            cons.push_back(new Connector(name,edges[idx1],end1,edges[idx2],end2,edges[idx3],end3,edges[idx4],end4,demand,false,idx_edge));
+            cons.push_back(new Connector(name,edges[idx1],!end1,edges[idx2],!end2,edges[idx3],!end3,edges[idx4],!end4,demand,false,idx_edge));
             cout << "Node " << junctions[i].ID << "\t call Connector(" << pipes[idx1].ID << "," << end1 << "," << pipes[idx2].ID << "," << end2 << "," << pipes[idx3].ID << "," << end3  << "," << pipes[idx4].ID << "," << end4  << "," << demand << ")\n";
         }
     }

@@ -5,14 +5,16 @@
 #include <fstream> 
 #include <cstdlib>
 #include "SCP.h"
+#include "Connector.h"
+#include "EpanetReader.h"
 #include "PSToolboxBaseEdge.h"
 #include "PSToolboxRunner.h"
-#include "my_tools.h"
 #include "Nyiregyhaza.h"
 
 using namespace std;
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv) 
+{
 
   //remove data directory
   string path = "data/*";
@@ -20,37 +22,38 @@ int main(int argc, char **argv) {
   system(removecom.c_str());
 
   EpanetReader reader;
-  string location = "dummy_v02.inp";
+  string location = "verification.inp";
   reader.readFromFile(location);
-  //calculatePropagationVelocity(reader); 
-  //calculateLambda(reader); 
-  for (int i = 0; i < 4; i++)
+  for (int i = 0; i < reader.pipes.size(); i++)
     {
-    reader.pipes[i].Lambda = 0.03;
-    reader.pipes[i].SpeedOfSound = 100.0;
+    reader.pipes[i].SpeedOfSound = 103.0;
   }
-  reader.pipes[1].SpeedOfSound = 121.0;
-  reader.pipes[2].SpeedOfSound = 96.0;
   
-
-
   reader.convertToRunner2();
-  //reader.PrintData();
   
-  //adatok kinyerése a reader osztályból
+  //get data from reader class
   vector<PSToolboxBaseEdge *> edges = reader.edges;
   vector<Connector *> cons = reader.cons;
   vector<int> con_at_edge_start = reader.con_at_edge_start;
   vector<int> con_at_edge_end = reader.con_at_edge_end;
 
-
-
-
   PSToolboxRunner r(edges,cons,con_at_edge_start, con_at_edge_end);
   r.Set_Save_data(true);
   r.Set_DEBUG(false);
-  r.Set_Node_mul(1);
-  r.Run(100.);
+  r.Set_Node_mul(2);
 
+  //setup pressure limit warnings
+  string fname = "data/pressure_warning";
+  string type = "All";
+  double pmin = 5.0e5;
+  double pmax = 12.0e5;
+  r.Set_Pressure_limit(true,pmin,pmax,fname,type); //sets the min and max pressure for warning
+  r.Set_Pressure_limit_time(10.0,20.0); //sets the start and end time of warnings
+
+  //setup save and write frequency
+  r.Set_Save_interval(2.0); //save every 2.0s
+  r.Set_Write_interval(250); //write output files every 250s
+  
+  r.Run(500.);
 
 }
