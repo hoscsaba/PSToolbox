@@ -155,7 +155,8 @@ void PSToolboxRunner::Run(double t_max){
       }//end of if - update edges
     }//end of for - update edges
 
-    if (DEBUG) cin.get();
+    if (DEBUG)
+    	cin.get();
     t_global=t_next;
 
     /*

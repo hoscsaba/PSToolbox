@@ -52,7 +52,7 @@ SCP::SCP(const string _name, //!< [in] Name of the slightls compressible pipe
   phi = 0.;
   mu = 0.;
   //t = 0.;
- // dt = 0.;
+ dt = 0.;
 
 }
 
@@ -609,7 +609,7 @@ void SCP::BCRight(string type, double val, double & pp, double & vv) {
   if (DEBUG){
   	  cout<<endl<<"SCP::BCRight():";
   	  cout<<endl<<"\t Edge "<<name<<" BC set up:";
-  	  cout<<endl<<"\t p = "<<p<<" Pa";
+  	  cout<<endl<<"\t p = "<<pp<<" Pa";
   	  cout<<endl<<"\t v = "<<vv<<" m/s";
   	  cout<<endl<<"\t Q = "<<vv*A<<" m3/s"<<endl;
     }

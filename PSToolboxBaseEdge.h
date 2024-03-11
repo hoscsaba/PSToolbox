@@ -37,7 +37,7 @@ public:
     virtual void GetLargePressureValues(double, vector<double>&, vector<double>&,vector<double>&, vector<string>&)=0;
 //<<<<<<< HEAD
 //=======
-//    virtual void GetSmallPressureValues(double, vector<double>&, vector<double>&,vector<double>&, vector<string>&)=0;
+    virtual void GetSmallPressureValues(double, vector<double>&, vector<double>&,vector<double>&, vector<string>&)=0;
 //>>>>>>> d971427eb223c4d6b1e9771c74598bc3624272c8
     virtual void Save_data()=0;
     virtual void Write_data()=0;

@@ -30,6 +30,8 @@ Connector::Connector(bool _DEBUG) {
 	e2=NULL;
 	e3=NULL;
 	e4=NULL;
+
+	p_prev=0.;
 }
 
 // ! Empty Destructor
@@ -59,6 +61,8 @@ Connector::Connector(
 	e2=NULL;
 	e3=NULL;
 	e4=NULL;
+
+	p_prev=0.;
 }
 
 // ! Edges junction for two edges
@@ -82,6 +86,8 @@ Connector::Connector(
 	DEBUG=_DEBUG;
 	edges_idx=_edges_idx;
 	type = 2;
+
+	p_prev=0.;
 }
 
 // ! Edge-to simple BC
@@ -135,6 +141,8 @@ Connector::Connector(
 
 
 	type=3;
+
+	p_prev=0.;
 }
 // ! 4 SCP pipes
 Connector::Connector(
@@ -161,6 +169,7 @@ Connector::Connector(
 	BC_value=0;
 
 	type=4;
+	p_prev=0.;
 }
 
 
@@ -1049,7 +1058,7 @@ void Connector::Connector_SCP_NPipes(double t_target,int update_idx)
 	double err_max=0.01*1000*9.81, err=10*err_max;
 	int iter=0, iter_max=100;
 
-	while (err>err_max){
+	while ((err>err_max) || (iter<3)){
 		iter++;
 		if (iter==iter_max){
 			cout<<endl<<"!!!!!!!!!!! Connector::Connector_SCP_NPipes"<<endl;
@@ -1127,7 +1136,7 @@ void Connector::Connector_SCP_NPipes(double t_target,int update_idx)
 
 	if (DEBUG){
 		cout<<endl<<"==================================="<<endl;
-		//cin.get();
+		cin.get();
 	}
 }
 void Connector::Connector_LWP_Pipes(double t_target,

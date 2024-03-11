@@ -146,6 +146,7 @@ void Pump::Set_BC_Left(string type, double val){
 
 void Pump::Set_BC_Right(string type, double val){
 	p2=val;
+	DEBUG=true;
 	bool is_ok=false;
 
 	if (type.compare("Pressure")==0){
@@ -183,7 +184,7 @@ double Pump::Get_Q(double dh){
 		cout<<endl<<"PUMP "<<name<<" : entering DEBUG mode, Get_Q() iteration:";
 		printf("\n\t iter %2d: Q=%5.3f, H=%5.3f, dh=%5.3f",iter,QQ,H_fun(QQ,n_act),dh);
 	}
-	while ((err>TOL) && (iter<3)){
+	while ((err>TOL) || (iter<3)){
 		iter++;
 		H_fun_lin(QQ,n_act,a0,a1);
 		Qnew=(dh-a0)/a1;
