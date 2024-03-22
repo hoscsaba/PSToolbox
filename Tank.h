@@ -8,37 +8,27 @@
 
 using namespace std;
 
-class Pump: public PSToolboxBaseEdge, Units
+class Tank: public PSToolboxBaseEdge, Units
 {
 
 private:
-	vector<double> coeff_H;
-	vector<double> coeff_P;
-	double n_nom, n_act, n_act_new;
-	double theta;
-	double Q_nom, H_nom;
-	double H_fun(double Q, double n);
-	double P_fun(double Q, double n);
-	void H_fun_lin(double Q, double n, double& a0, double& a1);
+	double H_fun(double Q);
+	void H_fun_lin(double Q, double& a0, double& a1);
 	double rho;
-	double Tmax;
+	double p_total;
 	double Get_Q(double dh);
 	vector< vector<double> > data;
 	vector<double> tmpvec;
 	string fname;
-	bool use_true_H_curve; // false=linear approx., true=H curve
+	double Tmax;
 
 public:
-	Pump(const string _name,
+	Tank(const string _name,
 			const string _cspe_name,
 			const string _cspv_name,
 			double _rho,
-			double _Q_nom, double _H_nom,
-			vector<double> &coeff_H,
-			vector<double> &coeff_P,
-			double n_nom, double n_act,
-			double theta, bool save_data);
-	~Pump(){};
+			double p_total, bool save_data);
+	~Tank(){};
 	void Ini(int);
 	void Ini();
 
@@ -61,5 +51,5 @@ public:
 	void Set_string_prop(string,string){};
 	void Add_transient(string,double,double);
 
-
 };
+

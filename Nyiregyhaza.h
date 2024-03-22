@@ -16,8 +16,8 @@ using namespace std;
 double getPN10D150Delta(double D)
 {
     const int N = 9;
-    double Dn[N] = {90., 110., 140., 180., 200., 225., 280., 315., 400.};
-    double Delta[N] = {5.4e-3, 6.6e-3, 8.3e-3, 10.7e-3, 11.9e-3, 13.4e-3, 16.6e-3, 18.7e-3, 23.7e-3};
+    double Dn[N] = {79., 98., 141., 176., 200., 220., 278., 300., 450};
+    double Delta[N] = {5.4e-3, 6.6e-3, 8.3e-3, 12.0e-3, 13.4e-3, 14.8e-3, 18.7e-3, 21.1e-3, 26.5e-3};
 
     int idx = -1;
     for(int i = 0; i < N; i++)
@@ -38,7 +38,8 @@ double getPN10D101Delta(double D)
 {
     const int N = 6;
     double Dn[N] = {80., 100., 150., 300., 400., 600.};
-    double Delta[N] = {0.5e-3*(96.-80.), 0.5e-3*(122.-100.),0.5e-3*(177.3-150.),0.5e-3*(345.4-300.),0.5e-3*(453.1-400.),0.5e-3*(667.-600.)};
+    //double Delta[N] = {0.5e-3*(96.-80.), 0.5e-3*(122.-100.),0.5e-3*(177.3-150.),0.5e-3*(345.4-300.),0.5e-3*(453.1-400.),0.5e-3*(667.-600.)};
+    double Delta[N] = {9.5e-3, 11.0e-3, 13.5e-3, 24.e-3, 32.e-3, 46.e-3};
 
     int idx = -1;
     for(int i = 0; i < N; i++)
@@ -68,26 +69,25 @@ void calculatePropagationVelocity(EpanetReader & reader)
         if(r == 100) //KPE PN10 pipes
         {
             Ec = 900.0e6; //El. mod. of pipe
-            if(D == 150) Delta = 9.5e-3;
-            if(D == 173) Delta = 10.7e-3;
+            if(D == 150) Delta = 10.6e-3;
+            if(D == 173) Delta = 11.9e-3;
         }
-        if(r == 101) //ACPN10 pipes
+        else if(r == 101) //ACPN10 pipes
         {
             Ec = 19613.3e6;
             Delta = getPN10D101Delta(D);
         }
-        if(r == 150 && (reader.pipes[i].ID == "23" || reader.pipes[i].ID == "24")) //KPE PN16 pipes
+        else if(r == 150 && (reader.pipes[i].ID == "23" || reader.pipes[i].ID == "24")) //KPE PN16 pipes
         {
             Ec = 900.0e6; //El. mod. of pipe
-            Delta = 50.8e-3;
+            Delta = 63.1e-3;
         }
-        if(r == 150) //KPE PN16 pipes
+        else if(r == 150) //KPE PN16 pipes
         {
             Ec = 3200.0e6; //El. mod. of pipe
             Delta = getPN10D150Delta(D);
         }
-
-        if(Delta == -1)
+        else
         {
             cout << "Pipe data not found: " <<  reader.pipes[i].ID <<endl;
             while(true) 1;
@@ -111,13 +111,25 @@ void calculatePropagationVelocity(EpanetReader & reader)
 }
 
 
-void modifyDemand(EpanetReader & reader)
+void modifyDemand(EpanetReader & reader, string setting)
 {
     for (int i = 0; i < reader.junctions.size(); i++)
     {
         if(reader.junctions[i].Pattern == "11")
-        {
-            reader.junctions[i].Demand *= 0.06;
+        {   
+            if(setting == "Max")
+            {
+                reader.junctions[i].Demand *= 0.0611;
+            }
+            else if(setting == "Min")
+            {
+                reader.junctions[i].Demand *= 0.0138;
+            }
+            else
+            {
+                cout << "Setting does not exist"<< endl;
+                while(1) 1;
+            }
         }
         else if(reader.junctions[i].Pattern == "Fix")
         {

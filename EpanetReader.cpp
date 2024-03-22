@@ -6,6 +6,7 @@
 #include "PSToolboxBaseEdge.h"
 #include "EpanetReader.h"
 #include "Connector.h"
+#include "CheckValve.h"
 #include "SCP.h"
 
 using namespace std;
@@ -134,8 +135,19 @@ void EpanetReader::convertToRunner2()
             hv = he;
         }
 
-        edges.push_back(new SCP(pipes[i].ID, pipes[i].Node1, pipes[i].Node2, 1000, a, L, D, lambda, he, hv, true));
-        cout << "Pipe Call SCP (" <<  pipes[i].ID << ",\t" << pipes[i].Node1 << ",\t" << pipes[i].Node2 << ",\t1000," << a << ",\tL=" << L << ",\tD=" << D << ",\tlambda=" << lambda << ",\the=" << he << ",\thv=" << hv << ",false)" << endl; 
+        if(true)
+        {
+            edges.push_back(new SCP(pipes[i].ID, pipes[i].Node1, pipes[i].Node2, 1000, a, L, D, lambda, he, hv, true));
+            edges[i]->Set_string_prop("lambda_model","hw");
+            cout << "Pipe Call SCP (" <<  pipes[i].ID << ",\t" << pipes[i].Node1 << ",\t" << pipes[i].Node2 << ",\t1000," << a << ",\tL=" << L << ",\tD=" << D << ",\tlambda=" << lambda << ",\the=" << he << ",\thv=" << hv << ",false)" << endl; 
+        }
+        /*else if(pipes[i].type == "CV")
+        {
+            double zetaMin = 0.0;
+            double zetaMax = 100000.0;
+            edges.push_back(new CheckValve(pipes[i].ID, pipes[i].Node1, pipes[i].Node2, 1000, zetaMin, zetaMax, true));
+
+        } */
     }
     cout << "SCP pipes ready!\n";
 
@@ -197,7 +209,27 @@ void EpanetReader::convertToRunner2()
             }
         }
 
-        if (size == 2)
+        if (size > 1)
+        {
+            string name = junctions[i].ID;
+            vector<PSToolboxBaseEdge *> edges_act;
+            vector <bool> front_act;
+            vector <int> idx_act;
+            double demand = junctions[i].Demand / 3600.0;
+
+            for (int j = 0; j < size; j++)
+            {
+                int idx = junctions[i].idxPipe[j];
+                edges_act.push_back(edges[idx]);
+                front_act.push_back(!junctions[i].end[j]);
+                idx_act.push_back(idx);
+            }
+            
+            cons.push_back(new Connector(name,edges,front_act,idx_act,demand,false));
+            cout << "Node " << name << "\t call Connector \t size = " << size <<  " \t" << ")\n";
+        }
+
+        /*if (size == 2)
         {
             // Connect pipe-pipe
             int idx1 = junctions[i].idxPipe[0];
@@ -250,8 +282,10 @@ void EpanetReader::convertToRunner2()
             idx_edge.push_back(idx4);
             cons.push_back(new Connector(name,edges[idx1],!end1,edges[idx2],!end2,edges[idx3],!end3,edges[idx4],!end4,demand,false,idx_edge));
             cout << "Node " << junctions[i].ID << "\t call Connector(" << pipes[idx1].ID << "," << end1 << "," << pipes[idx2].ID << "," << end2 << "," << pipes[idx3].ID << "," << end3  << "," << pipes[idx4].ID << "," << end4  << "," << demand << ")\n";
-        }
+        }*/
     }
+
+    cout <<"Connections ready!\n";
 }
 
 void EpanetReader::PrintData()
@@ -339,8 +373,23 @@ int EpanetReader::findNodeByID(const std::string ID)
             return i;
         }
     }
+    cout << "Node not found!" << endl;
     return -1;
 }
+
+int EpanetReader::findPipeByID(const std::string ID)
+{
+    for (int i = 0; i < pipes.size(); i++)
+    {
+        if (pipes[i].ID == ID)
+        {
+            return i;
+        }
+    }
+    cout << "Node not found!" << endl;
+    return -1;
+}
+
 
 int EpanetReader::findReservoirByID(const std::string ID)
 {

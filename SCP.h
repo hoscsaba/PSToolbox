@@ -76,7 +76,7 @@ class SCP: public PSToolboxBaseEdge, Units
     void Step(
         string BC_start_type, double BC_start_val,
         string BC_end_type, double BC_end_val);
-    void UpdateInternal();
+    void UpdateInternal(double);
 ////void Update(double t_target);
 void UpdateTime(double);
 void Set_BC_Left(string type, double val);
@@ -85,15 +85,21 @@ void Set_BC_Left(string type, double val);
 
     double GetAlphaAtEnd(double t_target);
     double GetBetaAtFront(double t_target);
+
     void GetAlphaAtEnd(double t_target, double& LHS, double& coeff_Q);
     void GetBetaAtFront(double t_target, double& LHS, double& coeff_Q);
+    void GetEdgeEquationCoeffs(double, bool, double &, double &, double &, double &);
+
     double GetAlphaPrimitiveAtEnd(double t_target); // alias
     double GetBetaPrimitiveAtFront(double t_target); // alias
     void Save_data();
-    void Write_data();
+    void Write_data(string folder);
     void Save_status(bool newfile, bool atonce);
     float GetPenult(string what);
     vector<double> Get_dvprop(string prop_string);
     string fname;
     void list_pv();
+
+    void Set_string_prop(string,string);
+    void Add_transient(string,double,double){};
 };

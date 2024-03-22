@@ -1055,9 +1055,9 @@ void Connector::Connector_SCP_NPipes(double t_target,int update_idx)
 
 	double p=p_prev, p_new;
 	double b0=-demand, b1=0., b2=0.;
-	double err_max=0.01*1000*9.81, err=10*err_max;
-	int iter=0, iter_max=100;
-
+	double err_max=0.0001*1000*9.81, err=10*err_max;
+	int iter=0, iter_max=1000;
+	int idx;
 	while ((err>err_max) || (iter<3)){
 		iter++;
 		if (iter==iter_max){
@@ -1065,58 +1065,79 @@ void Connector::Connector_SCP_NPipes(double t_target,int update_idx)
 			exit(-1);
 		}
 
-		for (unsigned int i=0; i<edges.size(); i++){
-			if (is_front.at(i)){
-				edges.at(i)->GetBetaAtFront(t_target,alpha.at(i),coeff_Q.at(i));
+		for (unsigned int i=0; i<edges_idx.size(); i++)
+		{
+			idx=edges_idx.at(i);
+
+			if (is_front.at(i))
+			{
+				edges.at(idx)->GetBetaAtFront(t_target,alpha.at(i),coeff_Q.at(i));
 				delta.at(i)=-1.;
 			}
 			else{
-				edges.at(i)->GetAlphaAtEnd(t_target,alpha.at(i),coeff_Q.at(i));
+				edges.at(idx)->GetAlphaAtEnd(t_target,alpha.at(i),coeff_Q.at(i));
 				delta.at(i)=1.;
 			}
-			if (DEBUG){
-				cout<<endl<<"\t\t edge "<<edges.at(i)->name<<"\t: "<<alpha.at(i)<<" = p + "<< coeff_Q.at(i)<<" Q";
-				cout<<", is_front="<<is_front.at(i)<<"(delta="<<delta.at(i);
-				cout<<"), type: "<<edges.at(i)->edge_type;
+			if (DEBUG)
+			{
+				printf("\n\t\t edge %10s: %+5.3e =  p %+5.3e Q",edges.at(idx)->name.c_str(),alpha.at(i),coeff_Q.at(i));
+				//cout<<endl<<is_front.at(i);
+				//cout<<endl<<delta.at(i);
+				//cout<<endl<<edges.at(idx)->edge_type.c_str();
+				printf(", type=%s",edges.at(idx)->edge_type.c_str());
+				//cin.get();
 			}
 			alpha_coeff_Q.at(i)=1.;
 		}
 
+//cin.get();
 
 		b0=-demand;
-		for (unsigned int i=0; i<edges.size(); i++)
+		for (unsigned int i=0; i<edges_idx.size(); i++)
 			b0*=coeff_Q.at(i);
 
-		for (unsigned int i=0; i<edges.size(); i++)
-			for (unsigned int j=0; j<edges.size(); j++)
+		for (unsigned int i=0; i<edges_idx.size(); i++)
+			for (unsigned int j=0; j<edges_idx.size(); j++)
 				if (i!=j)
 					alpha_coeff_Q.at(i)*=coeff_Q.at(j);
 		b1=0., b2=0.;
-		for (unsigned int i=0; i<edges.size(); i++){
+		for (unsigned int i=0; i<edges_idx.size(); i++){
 			b1+=alpha_coeff_Q.at(i)*delta.at(i)*alpha.at(i);
 			b2+=alpha_coeff_Q.at(i)*delta.at(i);
 		}
 
 		p_new=(b0+b1)/b2;
-		double RELAX=0.;
-		p_new=RELAX*p+(1-RELAX)*p_new;
+		
+		double RELAX=0.0;
+		p_new=RELAX*p+(1.-RELAX)*p_new;
 
 		err=fabs(p-p_new);
 
+		if (DEBUG){
+			cout<<endl<<"\t iter:"<<iter<<", p="<<p<<" Pa = "<<p/1000/9.81<<" mwc";
+			cout<<", p_new="<<p_new<<", err="<<fabs(p-p_new);
+			double QQ;
+			for (unsigned int i=0; i<edges_idx.size(); i++){
+				QQ=(alpha.at(i)-p)/coeff_Q.at(i);
+				cout<<endl<<"\t\t Q("<<edges_idx.at(i)<<")="<<QQ<<" m3/s = "<<QQ*3600<<" m3/h";
+			}
+			cin.get();
+		}
+
 		p=p_new;
 
-		if (DEBUG)
-			cout<<endl<<"\t iter:"<<iter<<", p="<<p<<"Pa = "<<p/1000/9.81<<"mwc";
-
-		for (unsigned int i=0; i<edges.size(); i++){
-			string s=edges.at(i)->edge_type;
-			if (s.compare("Pump")==0){
+		
+		for (unsigned int i=0; i<edges_idx.size(); i++){
+			idx=edges_idx.at(i);
+			if (edges.at(idx)->is_rigid_element){
+				//cout<<endl<<"updating rigid element: "<<edges.at(idx)->name<<", is_front: "<<is_front.at(i);
 				if (is_front.at(i))
-					edges.at(i)->Set_BC_Left("Pressure",p);
+					edges.at(idx)->Set_BC_Left("Pressure",p);
 				else
-					edges.at(i)->Set_BC_Right("Pressure",p);
+					edges.at(idx)->Set_BC_Right("Pressure",p);
 			}
 		}
+//cin.get();
 
 
 	}
@@ -1126,11 +1147,14 @@ void Connector::Connector_SCP_NPipes(double t_target,int update_idx)
 		cout<<endl<<"\t Iteration finished. Setting up boundary conditions...";
 
 	for (unsigned int i=0; i<edges_idx.size(); i++){
-		if (update_idx==edges_idx.at(i)){
+		idx=edges_idx.at(i);
+		if (update_idx==idx){
+			//cout<<endl<<"  "<<edges.at(update_idx)->name<<", is_front:"<<is_front.at(i);
 			if (is_front.at(i))
-				edges.at(i)->Set_BC_Left("Pressure",p);
+				edges.at(idx)->Set_BC_Left("Pressure",p);
 			else
-				edges.at(i)->Set_BC_Right("Pressure",p);
+				edges.at(idx)->Set_BC_Right("Pressure",p);
+//cin.get();
 		}
 	}
 

@@ -39,7 +39,7 @@ SCP::SCP(const string _name, //!< [in] Name of the slightls compressible pipe
   lambda = _lambda;
   lambda_p_2D = lambda / 2. / D;
   ini_done = false;
-  fname = "data/" + name + ".dat"; //name of the file for saving data about the pipe
+  fname = name + ".dat"; //name of the file for saving data about the pipe
                          //do_plot_runtime = false;
                          //ylim_isset = false;
   g = 9.81;
@@ -53,6 +53,9 @@ SCP::SCP(const string _name, //!< [in] Name of the slightls compressible pipe
   mu = 0.;
   //t = 0.;
  dt = 0.;
+
+is_rigid_element=false;
+
 
 }
 
@@ -135,6 +138,8 @@ string SCP::Info() {
   oss << "\n             S0 : " << S0 << " -";
   oss << "\n             ro : " << ro << " kg/m^3";
   oss << "\n              a : " << a << " m/s";
+  oss << "\n   lambda model : " << lambda_model;
+	oss << "\n lambda/C value : " << lambda;
   oss << "\n             dt : " << dt << " s";
   oss << "\n          f(2L) : " << a / (2. * L) << " Hz";
   oss << "\n         f(L/2) : " << a / (0.5 * L) << " Hz";
@@ -190,7 +195,7 @@ void SCP::Ini(int Npts_mul) {
 
   for (int i = 0; i < Npts; i++) {
     x(i) = i * L / (Npts - 1);
-    p(i) = 5.0e5;
+    p(i) = 0.0e5;
     v(i) = 0.0;
   } //sets 1 bar pressure at 0 velocity in every location
 
@@ -443,13 +448,23 @@ void SCP::Set_dprop(string prop_string, double val) {
     dt = L / (Npts - 1) / a;
   } else {
     cout << endl
-      << "HIBA! Cso::Set_dprop(prop_string), ismeretlen bemenet: prop_string=" << prop_string << endl
+      << "HIBA! SCP::Set_dprop(prop_string), ismeretlen bemenet: prop_string=" << prop_string << endl
       << endl;
   }
 }
 
+void SCP::Set_string_prop(string prop_string, string val) {
+	if (prop_string == "lambda_model") {
+		lambda_model = val;
+	} else {
+		cout << endl
+				<< "HIBA! SCP::Set_string_prop, ismeretlen bemenet: prop_string=" << prop_string << endl
+				<< endl;
+	}
+}
 
-void SCP::UpdateInternal(){
+
+void SCP::UpdateInternal(double dummy_t_target){
   double a, b;
   for (int i = 1; i < Npts - 1; i++) {
     a = (p(i - 1) + roa * v(i - 1)) + dt * roa * Source(i - 1); //
@@ -487,7 +502,9 @@ void SCP::Step(
     string BC_start_type, double BC_start_val,
     string BC_end_type, double BC_end_val) {
 
-  UpdateInternal();
+  double dummy_t_target=0.;
+
+	UpdateInternal(dummy_t_target);
 
   BCLeft(BC_start_type, BC_start_val, pnew(0), vnew(0));
 
@@ -503,8 +520,8 @@ void SCP::Save_data(){
   tmpvec.at(2) = p(Npts - 1);
   tmpvec.at(3) = v(0);
   tmpvec.at(4) = v(Npts - 1);
-  tmpvec.at(5) = v(0) * A * ro;
-  tmpvec.at(6) = v(Npts - 1) * A * ro;
+  tmpvec.at(5) = v(0) * A * 3600.;
+  tmpvec.at(6) = v(Npts - 1) * A * 3600.;
 
   data.push_back(tmpvec);
   //  cout<<endl<<name<<": tmpvec.size()="<<tmpvec.size();
@@ -530,6 +547,11 @@ void SCP::BCLeft(string type, double val, double & pp, double & vv) {
     vv = val;
     pp = beta + vv * roa;
   }
+else if (type == "NR") {
+		double alpha = val;
+		pp = (alpha+beta)/2;
+		vv = (alpha-beta)/2/roa;
+	}
   else {
     cout << endl
       << "ERROR! SCP::BCLeft(), unknown BC type: " << type << endl
@@ -543,7 +565,7 @@ void SCP::BCLeft(string type, double val, double & pp, double & vv) {
 	  cout<<endl<<"\t Edge "<<name<<" BC set up:";
 	  cout<<endl<<"\t p = "<<pp<<" Pa";
 	  cout<<endl<<"\t v = "<<vv<<" m/s";
-	  cout<<endl<<"\t Q = "<<vv*A<<" m3/s"<<endl;
+	  cout<<endl<<"\t Q = "<<vv*A<<" m3/s = "<<vv*A*3600<<"m3/h"<<endl;
   }
 }
 
@@ -580,6 +602,11 @@ void SCP::BCRight(string type, double val, double & pp, double & vv) {
     // double a = (p(Npts - 2) + roa * v(Npts - 2)) + dt * roa * Source(Npts - 2);
     pp = alpha - vv * roa;
   }
+else if (type == "NR") {
+		double beta = val;
+		pp = (alpha+beta)/2;
+		vv = (alpha-beta)/2/roa;
+	}
   else if (type == "Valve") {
     double mul = val;
     //		double pend = p(Npts - 1);
@@ -668,11 +695,26 @@ double SCP::GetAlphaPrimitiveAtEnd(double t_target){
 
 void SCP::GetBetaAtFront(double t_target, double& LHS, double& coeff_Q){
   LHS = GetBetaAtFront(t_target);
-//<<<<<<< HEAD
-  coeff_Q=-roa/A;
-//=======
-//  coeff_Q=roa/A;
-//>>>>>>> d971427eb223c4d6b1e9771c74598bc3624272c8
+coeff_Q=-roa/A;
+}
+
+void SCP::GetEdgeEquationCoeffs(double t_target, bool is_front, double & LHS, double & coeff_Q, double & coeff_p1, double & coeff_p2){
+	// Equation:            LHS   = coeff_p1*p1-coeff_p2*p2+coeff_Q*Q
+	// if is_front=true  -> beta  = p1-rho*a*Q/A
+	// if is_front=false -> alpha = p2+rho*a*Q/A
+
+	if (is_front){
+		LHS=GetBetaAtFront(t_target);
+		coeff_Q=-roa/A;
+		coeff_p1=1.;
+		coeff_p2=0.;
+	}
+	else{
+		LHS=GetAlphaAtEnd(t_target);
+  coeff_Q=roa/A;
+coeff_p1=0.;
+		coeff_p2=1.;
+	}
 }
 
 double SCP::GetBetaAtFront(double t_target) {
@@ -721,27 +763,38 @@ double SCP::GetBetaPrimitiveAtFront(double t_target) {
   */
 double SCP::Source(int i) {
   double source_g = g*S0;
+double source_l = 0.0;
 
-  double source_l = 0.0;
-  if(lambda_model == "hs") //Hydraulicly Smooth
+  bool is_lambda_model_set = false;
+
+	if(lambda_model == "darcy_lambda") // Darcy
   {
       source_l = - lambda_p_2D * v(i) * abs(v(i));
+is_lambda_model_set=true;
   }
   if(lambda_model == "hw") //Hazen-Williams
   {
-      double Q = abs(v(i))*A;
+      double Q = fabs(v(i))*A;
       //double Dx = L/(Npts-1);
       //cout << "lambda = " << lambda << "\t";
 
       double hL =  10.67 * pow(Q/lambda,1.852) * pow(D,-4.8704);
       
       double sign;
-      if(v(i) > 0) sign = 1;
-      else sign = -1;
+      if(v(i) > 0)
+			sign = 1.;
+      else
+			sign = -1.;
 
 
       source_l = - sign * g * hL;
-      //cout << "Source = " << source_l << endl;
+      is_lambda_model_set = true;
+	}
+
+	if (!is_lambda_model_set){
+		cout<<endl<<endl<<"ERROR! SCP pipe "<<name<<" - lambda_model is set to "<<lambda_model;
+		cout<<endl<<"   valid options: darcy_lambda | hw"<<endl;
+		exit(-1);
   }
 
   return source_g + source_l;
@@ -752,7 +805,7 @@ double SCP::Source(int i) {
   save_data flag was set to true, otherwise an error message is displayed. Data is saved to the previously determined
   savefile name. No inputs/outputs.
   */
-void SCP::Write_data() {
+void SCP::Write_data(string folder) {
   //char fname [50];
   //sprintf (fname, "%s.dat", name.c_str());
 
@@ -764,8 +817,8 @@ void SCP::Write_data() {
     cout << endl << "Saving to " << fname.c_str() << " ... ";
 
     FILE * pFile;
-    pFile = fopen (fname.c_str(), "w");
-    fprintf(pFile, "t (s); p(0) (bar); p(L) (bar); v(0) m/s; v(L) (m/s); mp(0) (kg/s), mp(L) (kg/s), L, D, lambda\n");
+    pFile = fopen ((folder + "/" + fname).c_str(), "w");
+    fprintf(pFile, "t (s); p(0) (bar); p(L) (bar); v(0) m/s; v(L) (m/s); Q(0) (m3/h), Q(L) (m3/h), L, D, lambda\n");
     for (int i = 0; i < data.size(); i++)
       fprintf(pFile, "%8.6e; %8.6e; %8.6e; %8.6e; %8.6e; %8.6e; %8.6e; %8.6e; %8.6e; %8.6e\n",
           data.at(i).at(0),

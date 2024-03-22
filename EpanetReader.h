@@ -99,6 +99,7 @@ public:
     void PrintData();
     void unifyJunctions();
     int findNodeByID(const std::string ID);
+    int findPipeByID(const std::string ID);
     int findReservoirByID(const std::string ID);
     bool checkIfIncludedInVector(vector<int> list, int elem);
     vector<int> findConnectingPipes(const std::string node);

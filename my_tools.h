@@ -9,6 +9,8 @@
 using namespace Eigen;
 using namespace std;
 
+int getIndexOf(std::vector<int> v, int num);
+
 double interpolate_val(vector<double> x, vector<double> y, double x0);
 
 vector<double> interp1(vector<double> x, vector<double> y, vector<double> xi);
