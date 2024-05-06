@@ -21,11 +21,12 @@ SCP::SCP(const string _name, //!< [in] Name of the slightls compressible pipe
     const double _lambda, //!< [in] Friction loss factor
     const double _he, //!< [in] Height at the beginning [eleje] of the pipe
     const double _hv, //!< [in] Height at the end [v�ge] of the pipe
-    const bool _save_data /**< [in] whether to save data*/ ) : PSToolboxBaseEdge(_name), Units() {
+    const bool _save_data /**< [in] whether to save data*/
+     ) : PSToolboxBaseEdge("SCP",_name,_cspe_name,_cspv_name), Units() {
   save_data = _save_data;
   //name = _name;
-  node_from = _cspe_name;
-  node_to = _cspv_name;
+  //node_from = _cspe_name;
+  //node_to = _cspv_name;
   ro = _ro;
   a = _a; //Speed of sound;
   roa = ro * a;
@@ -36,23 +37,73 @@ SCP::SCP(const string _name, //!< [in] Name of the slightls compressible pipe
   S0 = -(hv - he) / L; //slope
   A = D * D * M_PI / 4.; //Cross sectional area of the pipe
   lambda = _lambda;
-  lambda_p_2D = lambda / 2 / D;
+  lambda_p_2D = lambda / 2. / D;
   ini_done = false;
   fname = name + ".dat"; //name of the file for saving data about the pipe
                          //do_plot_runtime = false;
                          //ylim_isset = false;
   g = 9.81;
-
+  lambda_model = "hw";
+  
   // Dummy initialization
   Npts = 1;
   gamma = 0.;
   alpha = 0.;
   phi = 0.;
   mu = 0.;
-  t = 0.;
-  dt = 0.;
+  //t = 0.;
+ dt = 0.;
+
+is_rigid_element=false;
+
 
 }
+
+void SCP::GetLargePressureValues(double p_lim, vector<double> & x_crit, vector<double> & p_crit, vector<double> & t_crit, vector<string> &ID_crit)
+{
+  double p_max = p_lim;
+  int idx = -1;
+  for (int i = 0; i < Npts; i++)
+  {
+    if(p(i) >= p_max)
+    {
+      p_max = p(i);
+      idx = i;
+    }
+  }
+  if(idx >= 0)
+  {
+    x_crit.push_back(x(idx));
+    p_crit.push_back(p(idx));
+    t_crit.push_back(t);
+    ID_crit.push_back(name);
+  }
+}
+
+void SCP::GetSmallPressureValues(double p_lim, vector<double> & x_crit, vector<double> & p_crit, vector<double> & t_crit, vector<string> &ID_crit)
+{
+  double p_min = p_lim;
+  int idx = -1;
+  for (int i = 0; i < Npts; i++)
+  {
+    if(p(i) <= p_min)
+    {
+      p_min = p(i);
+      idx = i;
+    }
+  }
+  if(idx >= 0)
+  {
+    x_crit.push_back(x(idx));
+    p_crit.push_back(p(idx));
+    t_crit.push_back(t);
+    ID_crit.push_back(name);
+  }
+}
+
+
+
+
 
 //! Desctructor of the SCP class
 SCP::~SCP() {}
@@ -71,7 +122,7 @@ string SCP::GetName() {
   \return a string containing all the pipe data, in a printable form.
   */
 string SCP::Info() {
-  bool show_pts=false;
+  bool show_pts=true;
   if (!ini_done) //If not initialized, it will do it
     Ini(1);
 
@@ -87,16 +138,18 @@ string SCP::Info() {
   oss << "\n             S0 : " << S0 << " -";
   oss << "\n             ro : " << ro << " kg/m^3";
   oss << "\n              a : " << a << " m/s";
+  oss << "\n   lambda model : " << lambda_model;
+	oss << "\n lambda/C value : " << lambda;
   oss << "\n             dt : " << dt << " s";
   oss << "\n          f(2L) : " << a / (2. * L) << " Hz";
   oss << "\n         f(L/2) : " << a / (0.5 * L) << " Hz";
   oss << endl;
-  oss << "\n            phi : " << phi << " -";
-  oss << "\n          alpha : " << alpha << " -";
-  oss << "\n          gamma : " << gamma << " -";
-  oss << "\n             mu : " << mu << " -";
+  // oss << "\n            phi : " << phi << " -";
+  // oss << "\n          alpha : " << alpha << " -";
+  // oss << "\n          gamma : " << gamma << " -";
+  // oss << "\n             mu : " << mu << " -";
   //oss << "\n f_pipe/f_valve : " << 2.*L/a/(omega/(2.*M_PI)) << " -";
-  oss << "\n f_pipe/f_valve : " << M_PI / gamma << " -";
+  // oss << "\n f_pipe/f_valve : " << M_PI / gamma << " -";
 
   if (show_pts) { //In case of data needed from the data points, a
     oss << "\n\n # of grid pts.: " << Npts;
@@ -108,10 +161,16 @@ string SCP::Info() {
     oss << "\n       p (bar) : ";
     for (int i = 0; i < Npts; i++)
       oss << setw(6) << setprecision(3) << p(i) / 1.e5 << " ";
+    oss << "\n       pnew    : ";
+    for (int i = 0; i < Npts; i++)
+      oss << setw(6) << setprecision(3) << pnew(i) / 1.e5 << " ";
 
     oss << "\n       v (m/s) : ";
     for (int i = 0; i < Npts; i++)
       oss << setw(6) << setprecision(3) << v(i) << " ";
+    oss << "\n       vnew    : ";
+    for (int i = 0; i < Npts; i++)
+      oss << setw(6) << setprecision(3) << vnew(i) << " ";
   }
   oss << endl;
   return oss.str();
@@ -128,7 +187,7 @@ void SCP::Ini(){
 void SCP::Ini(int Npts_mul) {
   t = 0.;
 
-  Npts = 20 * Npts_mul; //20 times as many points created
+  Npts = 10 * Npts_mul; //20 times as many points created
   x = VectorXd::Zero(Npts);
   p = VectorXd::Zero(Npts);
   v = VectorXd::Zero(Npts);
@@ -136,27 +195,37 @@ void SCP::Ini(int Npts_mul) {
 
   for (int i = 0; i < Npts; i++) {
     x(i) = i * L / (Npts - 1);
-    p(i) = 1.e5;
+    p(i) = 3.0e5;
     v(i) = 0.0;
   } //sets 1 bar pressure at 0 velocity in every location
+
   ini_done = true; //Save that initialization happened.
 
-  tmpvec.push_back(t);
-  tmpvec.push_back(p(0));
-  tmpvec.push_back(p(Npts - 1));
-  tmpvec.push_back(v(0));
-  tmpvec.push_back(v(Npts - 1));
-  tmpvec.push_back(v(0)*A * ro);
-  tmpvec.push_back(v(Npts - 1)*A * ro);
-  data.clear();
-  data.reserve(100);
-  data.push_back(tmpvec);
-}
+  pnew = VectorXd::Zero(Npts);
+  vnew = VectorXd::Zero(Npts);
+  for (int i = 0; i < Npts; i++) {
+    pnew(i) = p(i);
+    vnew(i) = v(i);
+  }
 
+  if (save_data){
+    tmpvec.push_back(t);
+    tmpvec.push_back(p(0));
+    tmpvec.push_back(p(Npts - 1));
+    tmpvec.push_back(v(0));
+    tmpvec.push_back(v(Npts - 1));
+    tmpvec.push_back(v(0)*A * ro);
+    tmpvec.push_back(v(Npts - 1)*A * ro);
+    data.clear();
+    data.reserve(100);
+    data.push_back(tmpvec);
+  }
+
+}
 /*! \brief Initialize the SCP pipe
   Initializes the SCP pipe with 20 grid points and initial uniform flow velocity and pressure. (The generated pressure drops with friction.)
   \param vini Initial (uniform) velocity in the pipe
-  \param pstart Pressure at the inlet, set up lambda to decrease with friction
+  \param pstart Pressure at the nlet, set up lambda to decrease with friction
   */
 void SCP::Ini(double vini, double pstart) {
   t = 0.;
@@ -174,19 +243,27 @@ void SCP::Ini(double vini, double pstart) {
     v(i) = vini; //The velocity is the same as density is constant
   }
   ini_done = true;
+  pnew = VectorXd::Zero(Npts);
+  vnew = VectorXd::Zero(Npts);
+  for (int i = 0; i < Npts; i++) {
+    pnew(i) = p(i);
+    vnew(i) = v(i);
+  }
 
-  tmpvec.push_back(t);
-  tmpvec.push_back(p(0));
-  tmpvec.push_back(p(Npts - 1));
-  tmpvec.push_back(v(0));
-  tmpvec.push_back(v(Npts - 1));
-  tmpvec.push_back(v(0)*A * ro);
-  tmpvec.push_back(v(Npts - 1)*A * ro);
-  data.clear();
-  data.reserve(100);
-  data.push_back(tmpvec);
+  if (save_data){
+    tmpvec.push_back(t);
+    tmpvec.push_back(p(0));
+    tmpvec.push_back(p(Npts - 1));
+    tmpvec.push_back(v(0));
+    tmpvec.push_back(v(Npts - 1));
+    tmpvec.push_back(v(0)*A * ro);
+    tmpvec.push_back(v(Npts - 1)*A * ro);
+    data.clear();
+    data.reserve(100);
+    data.push_back(tmpvec);
+  }
+
 }
-
 /*! \brief Initialize the SCP pipe
   Initializes the SCP pipe with 20*Npts_mul grid points, initial uniform velocity and 
   pressure at the inlet. (The generated pressure drops with friction.)
@@ -210,19 +287,27 @@ void SCP::Ini(double vini, double pstart, int Npts_mul) {
     v(i) = vini; //The velocity is the same as density is constant
   }
   ini_done = true;
+  pnew = VectorXd::Zero(Npts);
+  vnew = VectorXd::Zero(Npts);
+  for (int i = 0; i < Npts; i++) {
+    pnew(i) = p(i);
+    vnew(i) = v(i);
+  }
 
-  tmpvec.push_back(t);
-  tmpvec.push_back(p(0));
-  tmpvec.push_back(p(Npts - 1));
-  tmpvec.push_back(v(0));
-  tmpvec.push_back(v(Npts - 1));
-  tmpvec.push_back(v(0)*A * ro);
-  tmpvec.push_back(v(Npts - 1)*A * ro);
-  data.clear();
-  data.reserve(100);
-  data.push_back(tmpvec);
+  if (save_data){
+    tmpvec.push_back(t);
+    tmpvec.push_back(p(0));
+    tmpvec.push_back(p(Npts - 1));
+    tmpvec.push_back(v(0));
+    tmpvec.push_back(v(Npts - 1));
+    tmpvec.push_back(v(0)*A * ro);
+    tmpvec.push_back(v(Npts - 1)*A * ro);
+    data.clear();
+    data.reserve(100);
+    data.push_back(tmpvec);
+  }
+
 }
-
 /*! \brief Initialize the SCP pipe
   Initializes the SCP pipe with number of grid points that satisfy the given timestep
   Initial uniform velocity distribution and a
@@ -253,19 +338,27 @@ void SCP::Ini(double vini, double pstart, double dt_target) {
     v(i) = vini;
   }
   ini_done = true;
+  pnew = VectorXd::Zero(Npts);
+  vnew = VectorXd::Zero(Npts);
+  for (int i = 0; i < Npts; i++) {
+    pnew(i) = p(i);
+    vnew(i) = v(i);
+  }
 
-  tmpvec.push_back(t);
-  tmpvec.push_back(p(0));
-  tmpvec.push_back(p(Npts - 1));
-  tmpvec.push_back(v(0));
-  tmpvec.push_back(v(Npts - 1));
-  tmpvec.push_back(v(0)*A * ro);
-  tmpvec.push_back(v(Npts - 1)*A * ro);
-  data.clear();
-  data.reserve(100);
-  data.push_back(tmpvec);
+  if (save_data){
+    tmpvec.push_back(t);
+    tmpvec.push_back(p(0));
+    tmpvec.push_back(p(Npts - 1));
+    tmpvec.push_back(v(0));
+    tmpvec.push_back(v(Npts - 1));
+    tmpvec.push_back(v(0)*A * ro);
+    tmpvec.push_back(v(Npts - 1)*A * ro);
+    data.clear();
+    data.reserve(100);
+    data.push_back(tmpvec);
+  }
+
 }
-
 /*! \brief Calculates the dimensionless parameters
   Calculates the dimensionless parametwers of the pipe using the input parameters as a base.
   While these parametersa have a usual definitions, here values need to be passed, and as such any can be used
@@ -355,30 +448,54 @@ void SCP::Set_dprop(string prop_string, double val) {
     dt = L / (Npts - 1) / a;
   } else {
     cout << endl
-      << "HIBA! Cso::Set_dprop(prop_string), ismeretlen bemenet: prop_string=" << prop_string << endl
+      << "HIBA! SCP::Set_dprop(prop_string), ismeretlen bemenet: prop_string=" << prop_string << endl
       << endl;
   }
 }
 
-void SCP::Step(){
+void SCP::Set_string_prop(string prop_string, string val) {
+	if (prop_string == "lambda_model") {
+		lambda_model = val;
+	} else {
+		cout << endl
+				<< "HIBA! SCP::Set_string_prop, ismeretlen bemenet: prop_string=" << prop_string << endl
+				<< endl;
+	}
+}
 
+
+void SCP::UpdateInternal(double dummy_t_target){
   double a, b;
-  VectorXd pnew = VectorXd::Zero(Npts); //new pressure vector
-  VectorXd vnew = VectorXd::Zero(Npts); //new velocity vector
   for (int i = 1; i < Npts - 1; i++) {
     a = (p(i - 1) + roa * v(i - 1)) + dt * roa * Source(i - 1); //
     b = (p(i + 1) - roa * v(i + 1)) - dt * roa * Source(i + 1);
     pnew(i) = (a + b) / 2.;
     vnew(i) = (a - b) / 2. / roa;
+    //cout << "v=" << vnew(i) << "(" << a << "," << b <<")" << "\n";
+    //cout << ": pnew = " << pnew(i) << "\t vnew = " << vnew(i);
   }
+  return;
+}
 
-  for (int i = 1; i < Npts-1; i++) {
+void SCP::UpdateTime(double _t){
+  // _dt is an external dummy variable, for compatibility reasons.
+  //cout << "t=" << t <<"\tp(0)=" << p(0) << "\tp(L)=" << p(Npts-1) <<"\tv(0)=" << v(0) << "\tv(L)="<< v(Npts-1) << endl;
+
+  for (int i = 0; i < Npts; i++) {
     p(i) = pnew(i);
     v(i) = vnew(i);
   }
 
-  t+=dt;
+  /*if(name == "77")
+  {
+    cout << "p(0) = " << p(0) << "\t";
+    cout << "p(1) = " << p(1) << "\t";
+    cout << "p(N/2) = " << p(Npts/2) << "\t";
+    cout << "p(N-2) = " << p(Npts-2) << "\t";
+    cout << "p(N-1) = " << p(Npts-1) << "\n";
+  }*/
 
+  t=_t;
 }
 
 /*! \brief Take a timestep.
@@ -394,25 +511,29 @@ void SCP::Step(
     string BC_start_type, double BC_start_val,
     string BC_end_type, double BC_end_val) {
 
-  Step();
+  double dummy_t_target=0.;
 
-  BCLeft(BC_start_type, BC_start_val, p(0), v(0));
+	UpdateInternal(dummy_t_target);
 
-  BCRight(BC_end_type, BC_end_val, p(Npts - 1), v(Npts - 1));
+  BCLeft(BC_start_type, BC_start_val, pnew(0), vnew(0));
+
+  BCRight(BC_end_type, BC_end_val, pnew(Npts - 1), vnew(Npts - 1));
 
   //	t += dt;
+}
 
-  if (save_data) {
-    tmpvec.at(0) = t;
-    tmpvec.at(1) = p(0);
-    tmpvec.at(2) = p(Npts - 1);
-    tmpvec.at(3) = v(0);
-    tmpvec.at(4) = v(Npts - 1);
-    tmpvec.at(5) = v(0) * A * ro;
-    tmpvec.at(6) = v(Npts - 1) * A * ro;
+void SCP::Save_data(){
 
-    data.push_back(tmpvec);
-  }
+  tmpvec.at(0) = t;
+  tmpvec.at(1) = p(0);
+  tmpvec.at(2) = p(Npts - 1);
+  tmpvec.at(3) = v(0);
+  tmpvec.at(4) = v(Npts - 1);
+  tmpvec.at(5) = v(0) * A * 3600.;
+  tmpvec.at(6) = v(Npts - 1) * A * 3600.;
+
+  data.push_back(tmpvec);
+  //  cout<<endl<<name<<": tmpvec.size()="<<tmpvec.size();
 }
 /*! \brief Left side bounbdary condition.
   The left side boundary condition, with multiple possible formations. Allows for a possibility of set
@@ -435,6 +556,11 @@ void SCP::BCLeft(string type, double val, double & pp, double & vv) {
     vv = val;
     pp = beta + vv * roa;
   }
+else if (type == "NR") {
+		double alpha = val;
+		pp = (alpha+beta)/2;
+		vv = (alpha-beta)/2/roa;
+	}
   else {
     cout << endl
       << "ERROR! SCP::BCLeft(), unknown BC type: " << type << endl
@@ -442,14 +568,23 @@ void SCP::BCLeft(string type, double val, double & pp, double & vv) {
     cout << endl << "Name of pipe: " << name << endl;
     cin.get();
   }
+
+  if (DEBUG){
+	  cout<<endl<<"SCP::BCLeft():";
+	  cout<<endl<<"\t Edge "<<name<<" BC set up:";
+	  cout<<endl<<"\t p = "<<pp<<" Pa";
+	  cout<<endl<<"\t v = "<<vv<<" m/s";
+	  cout<<endl<<"\t Q = "<<vv*A<<" m3/s = "<<vv*A*3600<<"m3/h"<<endl;
+  }
 }
 
-void SCP::Set_BC_Left(string type, double val){
-  BCLeft(type,val,p(0),v(0));
+void SCP::Set_BC_Left(string type, double val)
+{
+  BCLeft(type,val,pnew(0),vnew(0));
 }
 
 void SCP::Set_BC_Right(string type, double val){
-  BCRight(type,val, p(Npts - 1), v(Npts - 1));
+  BCRight(type,val,pnew(Npts - 1),vnew(Npts - 1));
 }
 
 /*! \brief Right side boundary condition.
@@ -468,12 +603,18 @@ void SCP::BCRight(string type, double val, double & pp, double & vv) {
   if (type == "Pressure") {
     pp = val;
     vv = (alpha - pp) / roa;
+    //cout<<endl<<"name:"<<name<<", alpha="<<alpha<<", pp="<<pp<<", vv="<<vv<<", v(end-2)="<<v(Npts-2)<<", p(end-2)"<<p(Npts-2);
   }
   else if (type == "Velocity") {
     vv = val;
     // double a = (p(Npts - 2) + roa * v(Npts - 2)) + dt * roa * Source(Npts - 2);
     pp = alpha - vv * roa;
   }
+else if (type == "NR") {
+		double beta = val;
+		pp = (alpha+beta)/2;
+		vv = (alpha-beta)/2/roa;
+	}
   else if (type == "Valve") {
     double mul = val;
     //		double pend = p(Npts - 1);
@@ -499,8 +640,21 @@ void SCP::BCRight(string type, double val, double & pp, double & vv) {
     cout << endl << "Name of pipe: " << name << endl;
     cin.get();
   }
+
+  if (DEBUG){
+  	  cout<<endl<<"SCP::BCRight():";
+  	  cout<<endl<<"\t Edge "<<name<<" BC set up:";
+  	  cout<<endl<<"\t p = "<<pp<<" Pa";
+  	  cout<<endl<<"\t v = "<<vv<<" m/s";
+  	  cout<<endl<<"\t Q = "<<vv*A<<" m3/s"<<endl;
+    }
+
 }
 
+void SCP::GetAlphaAtEnd(double t_target, double& LHS, double& coeff_Q){
+  LHS = GetAlphaAtEnd(t_target);
+  coeff_Q=roa/A;
+}
 /* \brief
    \param t_target the time we would like to step to. Needs to be set correctly,
    as if there is an incorrect setting value it will not work properly
@@ -509,6 +663,8 @@ double SCP::GetAlphaAtEnd(double t_target) {
   double delta_t = t_target - t;
   double TOL = dt / 1000.;
 
+  //cout<<endl<<"    GetAlphaAtEnd() delta_t="<<delta_t<<", delta_t/dt="<<delta_t/dt<<", t_target="<<t_target;
+
   if (delta_t < 0) {
     if (fabs(delta_t) < TOL)
       delta_t = 0.;
@@ -516,6 +672,8 @@ double SCP::GetAlphaAtEnd(double t_target) {
       cout << endl
         << "ERROR! SCP::GetAlphaAtEnd(), delta_t = " << delta_t << " < 0 ! (TOL=" << TOL << ")" << endl;
       cout << endl << "Name of pipe: " << name << endl;
+      cout << endl << "t_target = " << t_target;
+      cout << endl << "t (pipe) = " << t;
       cin.get();
     }
   }
@@ -533,7 +691,7 @@ double SCP::GetAlphaAtEnd(double t_target) {
   double pp = p(Npts - 2) * delta_t / dt + p(Npts - 1) * (1. - delta_t / dt);
   double vv = v(Npts - 2) * delta_t / dt + v(Npts - 1) * (1. - delta_t / dt);
   double ss = Source(Npts - 2) * delta_t / dt + Source(Npts - 1) * (1. - delta_t / dt);
-  double a = (pp + roa * vv) + dt * roa * ss;
+  double a = (pp + roa * vv) + delta_t * roa * ss;
 
   return a;
 
@@ -543,9 +701,34 @@ double SCP::GetAlphaPrimitiveAtEnd(double t_target){
   return GetAlphaAtEnd(t_target);
 }
 
+void SCP::GetBetaAtFront(double t_target, double& LHS, double& coeff_Q){
+  LHS = GetBetaAtFront(t_target);
+coeff_Q=-roa/A;
+}
+
+void SCP::GetEdgeEquationCoeffs(double t_target, bool is_front, double & LHS, double & coeff_Q, double & coeff_p1, double & coeff_p2){
+	// Equation:            LHS   = coeff_p1*p1-coeff_p2*p2+coeff_Q*Q
+	// if is_front=true  -> beta  = p1-rho*a*Q/A
+	// if is_front=false -> alpha = p2+rho*a*Q/A
+
+	if (is_front){
+		LHS=GetBetaAtFront(t_target);
+		coeff_Q=-roa/A;
+		coeff_p1=1.;
+		coeff_p2=0.;
+	}
+	else{
+		LHS=GetAlphaAtEnd(t_target);
+  coeff_Q=roa/A;
+coeff_p1=0.;
+		coeff_p2=1.;
+	}
+}
+
 double SCP::GetBetaAtFront(double t_target) {
   double delta_t = t_target - t;
   double TOL = dt / 1000.;
+  //cout<<endl<<"    GetBetaAtFront() delta_t="<<delta_t<<", delta_t/dt="<<delta_t/dt<<", t_target="<<t_target;
 
   if (delta_t < 0) {
     if (fabs(delta_t) < TOL)
@@ -572,7 +755,7 @@ double SCP::GetBetaAtFront(double t_target) {
   double pp = p(1) * delta_t / dt + p(0) * (1. - delta_t / dt);
   double vv = v(1) * delta_t / dt + v(0) * (1. - delta_t / dt);
   double ss = Source(1) * delta_t / dt + Source(0) * (1. - delta_t / dt);
-  double b = (pp - roa * vv) - dt * roa * ss;
+  double b = (pp - roa * vv) - delta_t * roa * ss;
 
   return b;
 
@@ -587,7 +770,42 @@ double SCP::GetBetaPrimitiveAtFront(double t_target) {
   \return Base pressure in the given location.
   */
 double SCP::Source(int i) {
-  return (g * S0 - lambda_p_2D * v(i) * abs(v(i)));
+  double source_g = g*S0;
+double source_l = 0.0;
+
+  bool is_lambda_model_set = false;
+
+	if(lambda_model == "darcy_lambda") // Darcy
+  {
+      source_l = - lambda_p_2D * v(i) * abs(v(i));
+is_lambda_model_set=true;
+  }
+  if(lambda_model == "hw") //Hazen-Williams
+  {
+      double Q = fabs(v(i))*A;
+      //double Dx = L/(Npts-1);
+      //cout << "lambda = " << lambda << "\t";
+
+      double hL =  10.67 * pow(Q/lambda,1.852) * pow(D,-4.8704);
+      
+      double sign;
+      if(v(i) > 0)
+			sign = 1.;
+      else
+			sign = -1.;
+
+
+      source_l = - sign * g * hL;
+      is_lambda_model_set = true;
+	}
+
+	if (!is_lambda_model_set){
+		cout<<endl<<endl<<"ERROR! SCP pipe "<<name<<" - lambda_model is set to "<<lambda_model;
+		cout<<endl<<"   valid options: darcy_lambda | hw"<<endl;
+		exit(-1);
+  }
+
+  return source_g + source_l;
 }
 
 /*! \brief Exports savied data
@@ -595,7 +813,7 @@ double SCP::Source(int i) {
   save_data flag was set to true, otherwise an error message is displayed. Data is saved to the previously determined
   savefile name. No inputs/outputs.
   */
-void SCP::Save_data() {
+void SCP::Write_data(string folder) {
   //char fname [50];
   //sprintf (fname, "%s.dat", name.c_str());
 
@@ -607,8 +825,8 @@ void SCP::Save_data() {
     cout << endl << "Saving to " << fname.c_str() << " ... ";
 
     FILE * pFile;
-    pFile = fopen (fname.c_str(), "w");
-    fprintf(pFile, "t (s); p(0) (bar); p(L) (bar); v(0) m/s; v(L) (m/s); mp(0) (kg/s), mp(L) (kg/s), L, D, lambda\n");
+    pFile = fopen ((folder + "/" + fname).c_str(), "w");
+    fprintf(pFile, "t (s); p(0) (bar); p(L) (bar); v(0) m/s; v(L) (m/s); Q(0) (m3/h), Q(L) (m3/h), L, D, lambda\n");
     for (int i = 0; i < data.size(); i++)
       fprintf(pFile, "%8.6e; %8.6e; %8.6e; %8.6e; %8.6e; %8.6e; %8.6e; %8.6e; %8.6e; %8.6e\n",
           data.at(i).at(0),

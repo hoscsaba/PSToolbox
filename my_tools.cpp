@@ -16,6 +16,18 @@
 using namespace std;
 using namespace Eigen;
 
+int getIndexOf(std::vector<int> v, int num)
+{
+    for(std::vector<int>::size_type i = 0; i != v.size(); i++)
+    {
+        if(v[i] == num)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
 double interpolate_val(vector<double> x, vector<double> y, double x0){
 	bool is_OK=false;
 	if (x0<x.at(0)){
@@ -84,6 +96,23 @@ double sq_sum = std::inner_product(v.begin(), v.end(), v.begin(), 0.0);
 double stdev = std::sqrt(fabs(sq_sum / v.size() - mean * mean));
 return stdev;
 }
+
+double max(vector<double> x){
+	return *max_element(x.begin(), x.end());
+}
+
+int max_idx(vector<double> x){
+return std::distance(x.begin(),std::max_element(x.begin(), x.end()));
+}
+
+double min(vector<double> x){
+	return *min_element(x.begin(), x.end());
+}
+
+int min_idx(vector<double> x){
+return std::distance(x.begin(),std::min_element(x.begin(), x.end()));
+}
+
 
 //=============================================================================
 
