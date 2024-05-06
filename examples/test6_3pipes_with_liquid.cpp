@@ -1,3 +1,17 @@
+/*
+	-----------------------------------
+	PSToolbox Example 6: 3 pipes with liquid
+
+	Description: 
+
+
+	Last updated: 2024. 05. 06.
+
+	Status: Broken, SCP pipes connectors were updates
+
+	-----------------------------------
+*/
+
 // g++ -I/usr/local/include/eigen3 -L/Users/hoscsaba/program/PSToolbox -lPSToolbox -lmy_tools -pedantic -O3 -Wall -Wno-c++11-long-long 3pipes_with_liquid.cpp
 
 #include <stdio.h>

@@ -1,8 +1,22 @@
+/*
+	-----------------------------------
+	PSToolbox Example 5: 2 pipes with liquid
+
+	Description: 
+
+
+	Last updated: 2024. 05. 06.
+
+	Status: Broken, SCP pipes connectors were updates
+
+	-----------------------------------
+*/
+
 // g++ -I/usr/local/include/eigen3 -L/Users/hoscsaba/program/PSToolbox -lPSToolbox -lmy_tools -pedantic -O3 -Wall -Wno-c++11-long-long 2pipes_with_liquid.cpp
 
 #include <stdio.h>
-#include "/Users/hoscsaba/program/PSToolbox/SCP.h"
-#include "/Users/hoscsaba/program/PSToolbox/Connector.h"
+#include "SCP.h"
+#include "Connector.h"
 
 using namespace std;
 

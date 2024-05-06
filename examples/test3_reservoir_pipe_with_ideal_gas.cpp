@@ -1,17 +1,30 @@
 #define _USE_MATH_DEFINES
 
+/*
+	-----------------------------------
+	PSToolbox Example 3: Reservoir with pipe
+
+	Description: 
+
+
+	Last updated: 2024. 05. 06.
+
+	-----------------------------------
+*/
+
 // MAC:
 // g++ -I/usr/local/include/eigen3 -L/Users/hoscsaba/program/PSToolbox -lpython2.7  -lPSToolbox -lmy_tools -pedantic -O3 -Wall -Wno-c++11-long-long reservoir_pipe_with_ideal_gas.cpp
 
 #include <stdio.h>
 #include <iostream>
-#include "/Users/hoscsaba/program/PSToolbox/my_tools.h"
-#include "/Users/hoscsaba/program/PSToolbox/LWP.h"
-#include "/Users/hoscsaba/program/PSToolbox/Reservoir.h"
-#include "/Users/hoscsaba/program/PSToolbox/Valve.h"
-#include "/Users/hoscsaba/program/PSToolbox/Connector.h"
+#include "my_tools.h"
+#include "LWP.h"
+#include "Reservoir.h"
+#include "Valve.h"
+#include "Connector.h"
 
 #include "/Users/hoscsaba/program/matplotlib-cpp/matplotlibcpp.h"
+
 void Plot(Reservoir* r, LWP* p);
 
 using namespace std;
@@ -70,7 +83,8 @@ void Plot(Reservoir* r, LWP* p){
 		fname<<"air_L_"<<(p->Get_dprop("L"))<<".png";
 		cout<<endl<<"title: "<<title.str();
 		cout<<endl<<"fname: "<<fname.str();
-		*/	
+	*/
+		
 	plt::subplot(2,1,1);
 	plt::plot(tr, pr,"b");
 	//plt::plot(tr,pset,"r--");

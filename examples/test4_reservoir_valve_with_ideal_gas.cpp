@@ -1,5 +1,17 @@
 #define _USE_MATH_DEFINES
 
+/*
+	-----------------------------------
+	PSToolbox Example 4: Reservoir with valve and ideal gas
+
+	Description: 
+
+
+	Last updated: 2024. 05. 06.
+
+	-----------------------------------
+*/
+
 // MAC:
 // g++ -I/usr/local/include/eigen3 -L/Users/hoscsaba/program/PSToolbox -lpython2.7  -lmy_tools -lPSToolbox -pedantic -O3 -Wall  -Wno-c++11-long-long reservoir_valve_with_ideal_gas.cpp
 
