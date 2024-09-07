@@ -89,7 +89,7 @@ void EpanetReader::readFromFile(const std::string &filename)
                     pipes.push_back(pipe);
                 }
             }
-            else if (section == "PUMPS")
+            /*else if (section == "PUMPS")
             {
                 PumpReader pump = parsePump(line);
                 cout << "Pump ID = " << pump.ID << "\tNode1 = " << pump.Node1 << "\t Node2: " << pump.Node2 << "\tPars: " << pump.Parameters << "\n";
@@ -103,7 +103,7 @@ void EpanetReader::readFromFile(const std::string &filename)
                 cout << "Valve ID = " << valve.ID << "\tNode1 = " << valve.Node1 << "\t Node2: " << valve.Node2 << "\n";
 
                 valves.push_back(valve);
-            }
+            }*/
         }
     }
 }
