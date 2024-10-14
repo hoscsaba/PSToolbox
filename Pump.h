@@ -43,6 +43,7 @@ public:
 	~Pump(){};
 	void Ini(int);
 	void Ini();
+	void Ini(double);
 
 	string Info();
 

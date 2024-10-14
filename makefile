@@ -2,77 +2,98 @@
 CXX := g++
 
 # Compiler flags
-CFLAGS = -g -Wall -std=c++11 -pedantic
-INC = -I/usr/local/include/eigen3
+CFLAGS = -g -Wall -std=c++11 -pedantic -O3
+#INC = -I/usr/local/include/eigen3
+INC = -I/opt/homebrew/Cellar/eigen/3.4.0_1/include/eigen3
 LINK = -lmy_tools
 
 INC_CP = -I/Users/hoscsaba/program/CoolProp/include -I/Users/hoscsaba/program/CoolProp/externals/fmtlib
 LINK_CP = -L/Users/hoscsaba/program/CoolProp/build1 -lCoolProp
 
+# =============== END OF NAGY DANI SECTION ==============
 # Source files
-SRCS := $(wildcard *.cpp)
+# SRCS := $(wildcard *.cpp)
 
 # Object files
-OBJS := $(SRCS:.cpp=.o)
+#OBJS := $(SRCS:.cpp=.o)
 
 # Executable
-EXEC := output
+#EXEC := output
 
 # Build rule
-$(EXEC): $(OBJS)
-	libtool -static -o libmy_tools.a my_tools.o
-	libtool -static -o libPSToolbox.a PSToolBoxRunner.o PSToolboxBaseEdge.o Gas.o IdealGas.o FrozenMixtureLiquidGas.o Units.o LWP.o SCP.o Reservoir.o Valve.o Connector.o CoolPropGas.o CoolPropHA.o Valve_with_Absorber.o
+#$(EXEC): $(OBJS)
+#	libtool -static -o libmy_tools.a my_tools.o
+#	libtool -static -o libPSToolbox.a PSToolBoxRunner.o PSToolboxBaseEdge.o Gas.o IdealGas.o FrozenMixtureLiquidGas.o Units.o LWP.o SCP.o Reservoir.o Valve.o Connector.o CoolPropGas.o CoolPropHA.o Valve_with_Absorber.o EpanetReader.o
 #$(CXX) $(CXXFLAGS) $^ -o $@
+# =============== END OF NAGY DANI SECTION ==============
+
+TARGETS = my_tools SurgeChamber Gas IdealGas FrozenMixtureLiquidGas Units LWP SCP Reservoir PSToolboxRunner PSToolboxBaseEdge Valve Connector Valve_with_Absorber EpanetReader CheckValve Pump
+
+all: $(TARGETS)
+	libtool -static -o libmy_tools.a my_tools.o
+	libtool -static -o libPSToolbox.a PSToolBoxRunner.o PSToolboxBaseEdge.o Gas.o IdealGas.o FrozenMixtureLiquidGas.o Units.o LWP.o SCP.o Reservoir.o Valve.o Connector.o Valve_with_Absorber.o CheckValve.o Pump.o EpanetReader.o SurgeChamber.o
 
 # Compile rule for each source file
-my_tools.o: my_tools.cpp 
+my_tools: my_tools.cpp 
 	$(CXX) $(INC) $(CFLAGS) my_tools.cpp -c -o my_tools.o
 
-PSToolboxRunner.o: PSToolboxRunner.cpp 
+SurgeChamber: SurgeChamber.cpp 
+	$(CXX) $(INC) $(CFLAGS) SurgeChamber.cpp -c -o SurgeChamber.o
+
+PSToolboxRunner: PSToolboxRunner.cpp 
 	$(CXX) $(INC) $(CFLAGS) PSToolboxRunner.cpp -c -o PSToolboxRunner.o
 
-PSToolboxBaseEdge.o: PSToolboxBaseEdge.cpp 
+PSToolboxBaseEdge: PSToolboxBaseEdge.cpp 
 	$(CXX) $(INC) $(CFLAGS) PSToolboxBaseEdge.cpp -c -o PSToolboxBaseEdge.o
 
-Gas.o: Gas.cpp 
+Gas: Gas.cpp 
 	$(CXX) $(CFLAGS) Gas.cpp -c -o Gas.o
 
-IdealGas.o: IdealGas.cpp 
+IdealGas: IdealGas.cpp 
 	$(CXX) $(CFLAGS) IdealGas.cpp -c -o IdealGas.o
 
-FrozenMixtureLiquidGas.o: FrozenMixtureLiquidGas.cpp 
+FrozenMixtureLiquidGas: FrozenMixtureLiquidGas.cpp 
 	$(CXX) $(CFLAGS) FrozenMixtureLiquidGas.cpp -c -o FrozenMixtureLiquidGas.o
 
-Units.o: Units.cpp
+Units: Units.cpp
 	$(CXX) $(CFLAGS) Units.cpp -c -o Units.o
 
-LWP.o: LWP.cpp
+LWP: LWP.cpp
 	$(CXX) $(INC) $(CFLAGS) LWP.cpp -c -o LWP.o
 
-SCP.o: SCP.cpp
+SCP: SCP.cpp
 	$(CXX) $(INC) $(CFLAGS) SCP.cpp -c -o SCP.o
 
-Reservoir.o: Reservoir.cpp
+Reservoir: Reservoir.cpp
 	$(CXX) $(INC) $(CFLAGS) Reservoir.cpp -c -o Reservoir.o
 # 	$(CXX) $(INC) $(LINK) $(CFLAGS) Reservoir.cpp -c -o Reservoir.o
 
-Valve.o: Valve.cpp
+Valve: Valve.cpp
 	$(CXX) $(INC) $(CFLAGS) Valve.cpp -c -o Valve.o
 # 	$(CXX) $(INC) $(LINK) $(CFLAGS) Valve.cpp -c -o Valve.o
 
-Valve_with_Absorber.o: Valve_with_absorber.cpp
+Pump: Pump.cpp
+	$(CXX) $(INC) $(CFLAGS) Pump.cpp -c -o Pump.o
+
+EpanetReader: EpanetReader.cpp
+	$(CXX) $(INC) $(CFLAGS) EpanetReader.cpp -c -o EpanetReader.o
+
+CheckValve: CheckValve.cpp
+	$(CXX) $(INC) $(CFLAGS) CheckValve.cpp -c -o CheckValve.o
+
+Valve_with_Absorber: Valve_with_absorber.cpp
 	$(CXX) $(INC) $(CFLAGS) Valve_with_Absorber.cpp -c -o Valve_with_Absorber.o
 
-Connector.o: Connector.cpp
+Connector: Connector.cpp
 	$(CXX) $(INC) $(CFLAGS) Connector.cpp -c -o Connector.o
 
-CoolPropGas.o: CoolPropGas.cpp
+CoolPropGas: CoolPropGas.cpp
 	$(CXX) $(INC_CP) $(LINK_CP) $(CFLAGS) CoolPropGas.cpp -c -o CoolPropGas.o
 
-CoolPropMixture.o: CoolPropMixture.cpp
+CoolPropMixture: CoolPropMixture.cpp
 	$(CXX) $(INC_CP) $(LINK_CP) $(CFLAGS) CoolPropMixture.cpp -c -o CoolPropMixture.o
 
-CoolPropHA.o: CoolPropHA.cpp
+CoolPropHA: CoolPropHA.cpp
 	$(CXX) $(INC_CP) $(LINK_CP) $(CFLAGS) CoolPropHA.cpp -c -o CoolPropHA.o
 
 # Phony target to clean the project

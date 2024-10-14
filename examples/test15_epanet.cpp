@@ -10,10 +10,11 @@
 #include "SCP.h"
 #include "Connector.h"
 #include "PSToolboxBaseEdge.h"
-#include "PSToolboxPlotter.h"
+//#include "PSToolboxPlotter.h"
 #include "PSToolboxRunner.h"
 #include "CheckValve.h"
 #include "Pump.h"
+#include "EpanetReader.h"
 
 using namespace std;
 

@@ -23,9 +23,9 @@
 #include "Valve.h"
 #include "Connector.h"
 
-#include "/Users/hoscsaba/program/matplotlib-cpp/matplotlibcpp.h"
+//#include "/Users/hoscsaba/Documents/GitHub/matplotlib-cpp/matplotlibcpp.h"
 
-void Plot(Reservoir* r, LWP* p);
+//void Plot(Reservoir* r, LWP* p);
 
 using namespace std;
 
@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
 
 	IdealGas* gas = new IdealGas(1.4, 287.);
 	Reservoir* r1 = new Reservoir("tank", 1, gas, /*n_poly*/ 1.0, true);
-	LWP* p1 = new LWP("pipe", "csp1", "csp2", 10., 0.05, 0.02, 0, 0, true, false, gas);
+	LWP* p1 = new LWP("pipe", "csp1", "csp2", 1., 0.05, 0.02, 0, 0, true, false, gas);
 	Connector c(false);
 
 	r1->Ini(pt, T0);
@@ -59,45 +59,45 @@ int main(int argc, char **argv) {
 				t, r1->Get_dprop("p") / 1.e5, p1->Get_dprop("p_front_bar"), p1->Get_dprop("p_back_bar"),
 				p1->Get_dprop("v_front"), p1->Get_dprop("v_back"));
 	}
-	Plot(r1,p1);
+	//Plot(r1,p1);
 }
 
 
-void Plot(Reservoir* r, LWP* p){
-	namespace plt = matplotlibcpp;
-	vector<double> tr = r->Get_dvprop("t");
-	vector<double> pr = r->Get_dvprop("p_bar");
+// void Plot(Reservoir* r, LWP* p){
+// 	namespace plt = matplotlibcpp;
+// 	vector<double> tr = r->Get_dvprop("t");
+// 	vector<double> pr = r->Get_dvprop("p_bar");
 
-	vector<double> tp = p->Get_dvprop("t");
-	vector<double> pf = p->Get_dvprop("p_front_bar");
-	vector<double> pb = p->Get_dvprop("p_back_bar");
-	vector<double> vf = p->Get_dvprop("v_front");
-	vector<double> vb = p->Get_dvprop("v_back");
+// 	vector<double> tp = p->Get_dvprop("t");
+// 	vector<double> pf = p->Get_dvprop("p_front_bar");
+// 	vector<double> pb = p->Get_dvprop("p_back_bar");
+// 	vector<double> vf = p->Get_dvprop("v_front");
+// 	vector<double> vb = p->Get_dvprop("v_back");
 
-	for (int i=0; i<tp.size(); i++)
-		printf("\n \t t=%6.4fs, p=%5.3f -> %5.3f -> %5.3f, v=%+5.2f -> %+5.2f",
-				tp.at(i),pr.at(i),pf.at(i),pb.at(i),vf.at(i),vb.at(i));
+// 	for (int i=0; i<tp.size(); i++)
+// 		printf("\n \t t=%6.4fs, p=%5.3f -> %5.3f -> %5.3f, v=%+5.2f -> %+5.2f",
+// 				tp.at(i),pr.at(i),pf.at(i),pb.at(i),vf.at(i),vb.at(i));
 
-	/*	stringstream fname(""), title("");
-		title<<"air, L="<<(p->Get_dprop("L"))<<"m, (Izuchi:"<<Lcrit1<<", Hos: "<<Lcrit2<<")";
-		fname<<"air_L_"<<(p->Get_dprop("L"))<<".png";
-		cout<<endl<<"title: "<<title.str();
-		cout<<endl<<"fname: "<<fname.str();
-	*/
+// 	/*	stringstream fname(""), title("");
+// 		title<<"air, L="<<(p->Get_dprop("L"))<<"m, (Izuchi:"<<Lcrit1<<", Hos: "<<Lcrit2<<")";
+// 		fname<<"air_L_"<<(p->Get_dprop("L"))<<".png";
+// 		cout<<endl<<"title: "<<title.str();
+// 		cout<<endl<<"fname: "<<fname.str();
+// 	*/
 		
-	plt::subplot(2,1,1);
-	plt::plot(tr, pr,"b");
-	//plt::plot(tr,pset,"r--");
-	plt::plot(tp,pf,"k");
-	plt::plot(tp,pb,"k--");
-	plt::ylabel("p (abs), bar");
-	//plt::title(title.str());
+// 	plt::subplot(2,1,1);
+// 	plt::plot(tr, pr,"b");
+// 	//plt::plot(tr,pset,"r--");
+// 	plt::plot(tp,pf,"k");
+// 	plt::plot(tp,pb,"k--");
+// 	plt::ylabel("p (abs), bar");
+// 	//plt::title(title.str());
 
-	plt::subplot(2,1,2);
-	plt::plot(tp,vf,"k");
-	plt::plot(tp,vb,"k--");
-	plt::ylabel("v m/s");
+// 	plt::subplot(2,1,2);
+// 	plt::plot(tp,vf,"k");
+// 	plt::plot(tp,vb,"k--");
+// 	plt::ylabel("v m/s");
 
-	plt::show();
-	//plt::save(fname.str());
-}
+// 	plt::show();
+// 	//plt::save(fname.str());
+// }

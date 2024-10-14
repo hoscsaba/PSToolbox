@@ -46,7 +46,7 @@ Pump::Pump(const string _name,
 	Tmax = omega0/Mmax/theta;
 	t=0.;
 	Q=Q_nom;
-	dt=0.01;//Tmax/100.;
+	dt=0.1;//Tmax/100.;
 	fname = name + ".dat";
 
 	is_rigid_element=true;
@@ -339,6 +339,11 @@ void Pump::Ini(int){
 void Pump::Ini(){
 	Ini(1);
 };
+
+void Pump::Ini(double){
+	Ini(1);
+};
+
 
 string Pump::Info(){
 

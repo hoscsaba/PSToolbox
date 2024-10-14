@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <iostream>
-#include "/Users/hoscsaba/program/matplotlib-cpp/matplotlibcpp.h"
+#include "/Users/hoscsaba/Documents/GitHub/matplotlib-cpp/matplotlibcpp.h"
 using namespace std;
 
 class PSToolboxPlotter

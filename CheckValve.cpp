@@ -28,7 +28,7 @@ CheckValve::CheckValve(const string _name,
 	Tmax = 1.;
 	t=0.;
 	Q= 1.0 / 3600;
-	dt=0.01;
+	dt=0.1;
 	fname = name + ".dat";
 
 	is_rigid_element=true;
@@ -160,7 +160,7 @@ void CheckValve::Set_BC_Right(string type, double val){
 		is_ok=true;
 	}
 	if (!is_ok){
-		cout<<endl<<endl<<"!!!!!!!!!!!!!! Pump::Set_BC_Right !!!!!!!!!!!!!!";
+		cout<<endl<<endl<<"!!!!!!!!!!!!!! CheckValve::Set_BC_Right !!!!!!!!!!!!!!";
 		cin.get();
 	}
 
@@ -222,9 +222,16 @@ void CheckValve::Ini(int){
 	}
 	//cout<<" done"<<endl;
 };
+
 void CheckValve::Ini(){
 	Ini(1);
 };
+
+
+void CheckValve::Ini(double){
+	Ini(1);
+};
+
 
 string CheckValve::Info(){
 

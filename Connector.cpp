@@ -1058,9 +1058,10 @@ void Connector::Connector_SCP_NPipes(double t_target,int update_idx)
 {
 
 	if (DEBUG){
-		cout<<endl<<"Connector_SCP_NPipes() - "<<name;
+		cout<<endl<<"Connector_SCP_NPipes() - name of connector : "<<name;
 		cout<<endl<<"\t t_target = "<<t_target;
 	}
+	
 	vector<double> alpha(edges.size());
 	vector<double> coeff_Q(edges.size());
 	vector<double> alpha_coeff_Q(edges.size());
@@ -1069,7 +1070,7 @@ void Connector::Connector_SCP_NPipes(double t_target,int update_idx)
 	double p=p_prev, p_new;
 	double b0=-demand, b1=0., b2=0.;
 	double err_max=0.0001*1000*9.81, err=10*err_max;
-	int iter=0, iter_max=10000;
+	int iter=0, iter_max=1000000;
 	int idx;
 
 
@@ -1088,13 +1089,6 @@ void Connector::Connector_SCP_NPipes(double t_target,int update_idx)
 
 			if (is_front.at(i))
 			{
-				//TODO
-				/*if(idx == 192) 
-				{
-					edges.at(idx)->Set_BC_Left("Pressure",48*1000*9.81);
-					//cout << "BC Set" << endl;
-				}*/
-
 				edges.at(idx)->GetBetaAtFront(t_target,alpha.at(i),coeff_Q.at(i));
 				delta.at(i)=-1.;
 			}
@@ -1105,11 +1099,7 @@ void Connector::Connector_SCP_NPipes(double t_target,int update_idx)
 			if (DEBUG)
 			{
 				printf("\n\t\t edge %10s: %+5.3e =  p %+5.3e Q",edges.at(idx)->name.c_str(),alpha.at(i),coeff_Q.at(i));
-				//cout<<endl<<is_front.at(i);
-				//cout<<endl<<delta.at(i);
-				//cout<<endl<<edges.at(idx)->edge_type.c_str();
 				printf(", type=%s",edges.at(idx)->edge_type.c_str());
-				//cin.get();
 			}
 			alpha_coeff_Q.at(i)=1.;
 		}
@@ -1132,7 +1122,7 @@ void Connector::Connector_SCP_NPipes(double t_target,int update_idx)
 
 			if(delta_p < 0) 
 			{
-				cout << "Pressure dependent demad off!" << endl;
+				cout << "Pressure dependent demand off!" << endl;
 				pressure_dependent_demand = false;
 				demand = 0;
 			}
@@ -1162,7 +1152,7 @@ void Connector::Connector_SCP_NPipes(double t_target,int update_idx)
 
 		err=fabs(p-p_new);
 
-		if (false){
+		if (DEBUG){
 			cout<<endl<<"\t iter:"<<iter<<", p="<<p<<" Pa = "<<p/1000/9.81<<" mwc";
 			cout<<", p_new="<<p_new<<", err="<<fabs(p-p_new);
 			double QQ;
@@ -1189,7 +1179,8 @@ void Connector::Connector_SCP_NPipes(double t_target,int update_idx)
 //cin.get();
 
 
-	}//while vége
+	}//while = iteracio vege
+	
 	p_prev=p;
 
 	if (DEBUG)
@@ -1198,12 +1189,11 @@ void Connector::Connector_SCP_NPipes(double t_target,int update_idx)
 	for (unsigned int i=0; i<edges_idx.size(); i++){
 		idx=edges_idx.at(i);
 		if (update_idx==idx){
-			//cout<<endl<<"  "<<edges.at(update_idx)->name<<", is_front:"<<is_front.at(i);
+			//cout<<endl<<"  "<<edges.at(update_idx)->name<<", is_front:"<<is_front.at(i)<<" setting pressure to "<<p;
 			if (is_front.at(i))
 				edges.at(idx)->Set_BC_Left("Pressure",p);
 			else
 				edges.at(idx)->Set_BC_Right("Pressure",p);
-//cin.get();
 		}
 	}
 

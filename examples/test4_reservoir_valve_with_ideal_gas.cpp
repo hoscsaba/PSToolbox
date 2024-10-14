@@ -17,14 +17,14 @@
 
 #include <stdio.h>
 
-#include "/Users/hoscsaba/program/PSToolbox/my_tools.h"
-#include "/Users/hoscsaba/program/PSToolbox/LWP.h"
-#include "/Users/hoscsaba/program/PSToolbox/Reservoir.h"
-#include "/Users/hoscsaba/program/PSToolbox/Valve.h"
-#include "/Users/hoscsaba/program/PSToolbox/Connector.h"
+#include "/Users/hoscsaba/Documents/GitHub/PSToolbox/my_tools.h"
+#include "/Users/hoscsaba/Documents/GitHub/PSToolbox/LWP.h"
+#include "/Users/hoscsaba/Documents/GitHub/PSToolbox/Reservoir.h"
+#include "/Users/hoscsaba/Documents/GitHub/PSToolbox/Valve.h"
+#include "/Users/hoscsaba/Documents/GitHub/PSToolbox/Connector.h"
 
-#include "/Users/hoscsaba/program/matplotlib-cpp/matplotlibcpp.h"
-void Plot(Reservoir* r, Valve* v);
+//#include "/Users/hoscsaba/program/matplotlib-cpp/matplotlibcpp.h"
+//void Plot(Reservoir* r, Valve* v);
 
 using namespace std;
 
@@ -58,29 +58,29 @@ int main(int argc, char **argv) {
 		r1->Update(dt, mpin, mp);
 		v1->Update(dt, r1->Get_dprop("p"), 1.e5, false);
 	}
-	Plot(r1, v1);
+	//Plot(r1, v1);
 }
 
-void Plot(Reservoir* r, Valve* v) {
-	namespace plt = matplotlibcpp;
-	vector<double> tr = r->Get_dvprop("t");
-	vector<double> pr = r->Get_dvprop("p_bar");
+// void Plot(Reservoir* r, Valve* v) {
+// 	namespace plt = matplotlibcpp;
+// 	vector<double> tr = r->Get_dvprop("t");
+// 	vector<double> pr = r->Get_dvprop("p_bar");
 
-	vector<double> tv = v->Get_dvprop("t");
-	vector<double> xv = v->Get_dvprop("x_mm");
-	vector<double> psetvec;
-	for (unsigned int i = 0; i < tv.size(); i++)
-		psetvec.push_back((v->Get_dprop("p_set_bar")) + 1.);
+// 	vector<double> tv = v->Get_dvprop("t");
+// 	vector<double> xv = v->Get_dvprop("x_mm");
+// 	vector<double> psetvec;
+// 	for (unsigned int i = 0; i < tv.size(); i++)
+// 		psetvec.push_back((v->Get_dprop("p_set_bar")) + 1.);
 
-	plt::subplot(2, 1, 1);
-	plt::plot(tr, pr, "b");
-	plt::plot(tv, psetvec, "r--");
-	plt::ylabel("p (abs), bar");
+// 	plt::subplot(2, 1, 1);
+// 	plt::plot(tr, pr, "b");
+// 	plt::plot(tv, psetvec, "r--");
+// 	plt::ylabel("p (abs), bar");
 
-	plt::subplot(2, 1, 2);
-	plt::plot(tv, xv, "m");
-	plt::ylabel("lift, m");
+// 	plt::subplot(2, 1, 2);
+// 	plt::plot(tv, xv, "m");
+// 	plt::ylabel("lift, m");
 
-	plt::show();
-	//plt::save(fname.str());
-}
+// 	plt::show();
+// 	//plt::save(fname.str());
+// }

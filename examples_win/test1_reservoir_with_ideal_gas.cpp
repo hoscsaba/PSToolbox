@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
 
 	IdealGas* gas = new IdealGas(1.4, 287.);
 	Reservoir r1("tank", 1, gas, /*n_poly*/ 1.4, true);
-	Reservoir r2("tank", 1, 1000., true);
+	Reservoir r2("tank2", 1, 1400., 1000., true);
 
 	r1.Ini(1.e5, 283.);
 	r2.Ini(1.e5);

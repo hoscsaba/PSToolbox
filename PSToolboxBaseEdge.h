@@ -19,7 +19,7 @@ public:
     double n_act, n_act_new;
     bool DEBUG;
 bool is_rigid_element;
-
+double dt_out;
 	vector<string> transient_type;
 	vector<double> transient_time;
 	vector<double> transient_val;
@@ -56,6 +56,7 @@ bool is_rigid_element;
 
     virtual void Ini(int)=0;
     virtual void Ini()=0;
+     virtual void Ini(double)=0;
     virtual string Info()=0;
     virtual void Set_BC_Left(string type, double val)=0;
     virtual void Set_BC_Right(string type, double val)=0;
@@ -72,6 +73,8 @@ bool is_rigid_element;
     virtual void UpdateTime(double)=0;
     virtual void Set_string_prop(string,string)=0;
 	virtual void Add_transient(string,double,double)=0;
+
+   void Set_dt_out(double val){dt_out=val;};
 
 private:
 

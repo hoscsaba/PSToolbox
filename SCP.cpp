@@ -181,6 +181,54 @@ void SCP::Ini(){
 }
 
 /*! \brief Initialize the SCP pipe
+  Initializes the SCP pipe with ....
+  */
+void SCP::Ini(double dt_target) {
+   t = 0.;
+  Npts = round(L / a / dt_target); // CFL condition reorganized
+ printf("\n SCP %5s:  L=%6.1f m, a=%6.1f m/s, dt_target=%5.3e s, Npts=%3d ", name.c_str(),L, a, dt_target, Npts);                    
+  if (Npts < 20) {
+    Npts = 20; // a minimum of 20 points is set
+               printf(" -> %d", Npts);
+  }
+
+ 
+double pstart=1e5;
+double vini=0.;
+  x = VectorXd::Zero(Npts);
+  p = VectorXd::Zero(Npts);
+  v = VectorXd::Zero(Npts);
+  dt = L / (Npts - 1) / a;
+
+  for (int i = 0; i < Npts; i++) {
+    x(i) = i * L / (Npts - 1);
+    p(i) = pstart - lambda * x(i) / D * ro / 2.* vini * abs(vini);
+    v(i) = vini;
+  }
+  ini_done = true;
+  pnew = VectorXd::Zero(Npts);
+  vnew = VectorXd::Zero(Npts);
+  for (int i = 0; i < Npts; i++) {
+    pnew(i) = p(i);
+    vnew(i) = v(i);
+  }
+
+  if (save_data){
+    tmpvec.push_back(t);
+    tmpvec.push_back(p(0));
+    tmpvec.push_back(p(Npts - 1));
+    tmpvec.push_back(v(0));
+    tmpvec.push_back(v(Npts - 1));
+    tmpvec.push_back(v(0)*A * ro);
+    tmpvec.push_back(v(Npts - 1)*A * ro);
+    data.clear();
+    data.reserve(100);
+    data.push_back(tmpvec);
+  }
+
+}
+
+/*! \brief Initialize the SCP pipe
   Initializes the SCP pipe with a given number of points at 1 bar pressure and 0 velocity.
   \param Npts_mul Base number of points to create, actually 20 as many created
   */
@@ -684,6 +732,7 @@ double SCP::GetAlphaAtEnd(double t_target) {
       cout << endl
         << "ERROR! SCP::GetAlphaAtEnd(), delta_t = " << delta_t << " > dt= " << dt << endl;
       cout << endl << "Name of pipe: " << name << endl;
+      cout<<Info();
       cin.get();
     }
   }
@@ -804,7 +853,9 @@ is_lambda_model_set=true;
 		cout<<endl<<"   valid options: darcy_lambda | hw"<<endl;
 		exit(-1);
   }
-
+  //cout<<endl<<"source_l="<<source_l<<", other:"<<- lambda_p_2D * v(i) * abs(v(i));
+  lambda_p_2D = 0.02 / 2. / D;
+source_l = - lambda_p_2D * v(i) * abs(v(i));
   return source_g + source_l;
 }
 

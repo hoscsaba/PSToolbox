@@ -163,6 +163,11 @@ void EpanetReader::convertToRunner2()
         junctions[idx2].idxPipe.push_back(i);
         junctions[idx2].end.push_back(true);
 
+//cout<<endl<<pipes[i].ID<<" nodes: "<<pipes[i].Node1<<" -> "<<pipes[i].Node2;
+//bool is_one_node = (pipes[i].type==1);
+//if (pipes[i].type==1){
+ //   cin.get();
+//}
         con_at_edge_start.push_back(idx1);
         con_at_edge_end.push_back(idx2);
     }
@@ -174,10 +179,15 @@ void EpanetReader::convertToRunner2()
         int size = junctions[i].idxPipe.size();
             cout << "i = " << i << "\tsize =" << size <<"\t";
 
-        if(size == 0 || size > 4)
+        // Hos Csaba 2024.09.16.
+        //if(size == 0 || size > 4)
+            // END
+            if (size==0)
         {
-            cout << "Undefined number of connections! Stopping code" << endl;
-            while(true) 1;
+            cout<<endl<<endl<<" Warning! juntion["<<i<<"].ID = "<<junctions[i].ID;
+            cout << endl<< "Lonely node: no pipe connected." << endl;
+            cin.get();
+            //while(true) 1;
         }
         if (size == 1)
         {
@@ -202,10 +212,15 @@ void EpanetReader::convertToRunner2()
                 double head = junctions[i].Head;
                 int idx_other = findNodeByID(getOtherNodeOfPipe(idx1,junctions[i].ID));
                 double elev = junctions[idx_other].Elev;
+                // Reservoirs
                 double p = (head-elev)*1000.0*9.81; //????
+                // Head
+                //double p = head*1000.0*9.81; //????
                 double demand = 0;
                 cons.push_back(new Connector(name,edges[idx1], !end1, "Pressure", p, demand, true));
                 cout << "Node " << name << "\t call Connector(" << pipes[idx1].ID << "," << end1 << ",Pressure,"<< p << "," << demand << ")\n";
+                cout<< "\t head="<<head<<", elevation="<<elev<<", head-elevation="<<head-elev<<"\n";
+                //cin.get();
             }
         }
 
@@ -353,13 +368,27 @@ void EpanetReader::unifyJunctions()
 
     for (int i = 0; i < reservoirs.size(); i++)
     {
-        cout << "Reservoir " << reservoirs[i].ID << "\n";
+        //cout << "Reservoir " << reservoirs[i].ID << "\n";
         JunctionReader J;
         J.type = 1;
         J.Head = reservoirs[i].Head;
         J.ID = reservoirs[i].ID;
         junctions.push_back(J);
+         cout<<" Reservoir "<< J.ID<< " converted to node with constant (total) head "<<J.Head<<"m."<<endl<<endl;
     }
+
+    // Hos Csaba 2024.09.19
+      for (int i = 0; i < tanks.size(); i++)
+    {
+        
+        JunctionReader J;
+        J.type = 1;
+        J.Head = tanks[i].Elevation+tanks[i].InitLevel;
+        J.ID = tanks[i].ID;
+        junctions.push_back(J);
+        cout<<" Tank "<< J.ID<< " converted to node with constant (total) head "<<J.Head<<"m."<<endl<<endl;
+    }
+    // End
 
     cout << "Njunctions = " << junctions.size() << "\n";
 }
@@ -373,7 +402,7 @@ int EpanetReader::findNodeByID(const std::string ID)
             return i;
         }
     }
-    cout << "Node not found!" << endl;
+    cout << "Node "<<ID<<" not found!" << endl;
     return -1;
 }
 
@@ -386,7 +415,7 @@ int EpanetReader::findPipeByID(const std::string ID)
             return i;
         }
     }
-    cout << "Node not found!" << endl;
+    cout << "Pipe "<<ID <<" not found!" << endl;
     return -1;
 }
 

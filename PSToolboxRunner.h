@@ -45,6 +45,13 @@ class PSToolboxRunner
     void Set_Save_interval(double interval) {save_interval = interval;};
     void Set_Write_interval(double interval) {write_interval = interval;};
     void Add_Runtime_modifier(RuntimeModifier &rmod) {modifiers.push_back(rmod);};
+    void ListEdgeInfo(){
+    for (int i=0; i<edges.size(); i++){
+      cout<<edges.at(i)->Info();
+      cin.get();
+  }
+    }
+void Ini(double dt_target);
 
   private:
     vector<PSToolboxBaseEdge *> edges;
@@ -53,6 +60,7 @@ class PSToolboxRunner
     vector<int> con_at_edge_end;
     bool DEBUG;
     int Node_mul;
+    bool ini_done;
 
     //min-max pressure
     double p_limMin;

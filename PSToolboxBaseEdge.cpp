@@ -19,5 +19,5 @@ PSToolboxBaseEdge::PSToolboxBaseEdge(const string _edge_type, const string _name
 	p1=0.;
 	p2=0.;
 	is_rigid_element=false;
-
+dt_out=1.;
 };

@@ -17,7 +17,7 @@ Tank::Tank(const string _name,
 		const string _n2,
 		double _rho,
 		double _p_total,
-		bool _save_data): PSToolboxBaseEdge("Tank",_name,_n1,_n2), Units() {
+		bool _save_data): PSToolboxBaseEdge("Tank",_name,"not used",_n2), Units() {
 
 	rho = _rho;
 	p_total=_p_total;
@@ -67,17 +67,17 @@ void Tank::GetEdgeEquationCoeffs(double t_target, bool is_front, double & LHS, d
 }
 
 void Tank::Set_BC_Left(string type, double val){
-	cout<<endl<<"ERROR!!! Tank::GetBetaAtFront() - This function should not be called..."<<endl;
+	cout<<endl<<"ERROR!!! Tank::Set_BC_Left - This function should not be called..."<<endl;
 		exit(-1);
 }
 
 void Tank::Set_BC_Right(string type, double val){
-	cout<<endl<<"ERROR!!! Tank::GetBetaAtFront() - This function should not be called..."<<endl;
+	cout<<endl<<"ERROR!!! Tank::Set_BC_Right - This function should not be called..."<<endl;
 		exit(-1);
 }
 
 double Tank::Get_Q(double dh){
-	cout<<endl<<"ERROR!!! Tank::GetBetaAtFront() - This function should not be called..."<<endl;
+	cout<<endl<<"ERROR!!! Tank::Get_Q(double dh) - This function should not be called..."<<endl;
 		exit(-1);
 
 	return 0.;

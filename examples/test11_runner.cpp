@@ -1,10 +1,10 @@
 // g++ -I/usr/local/include/eigen3 -L/Users/hoscsaba/program/PSToolbox -lPSToolbox -lmy_tools -pedantic -O3 -Wall -Wno-c++11-long-long test11_runner.cpp
 
 #include <stdio.h>
-#include "/Users/hoscsaba/program/PSToolbox/SCP.h"
-#include "/Users/hoscsaba/program/PSToolbox/Connector.h"
-#include "/Users/hoscsaba/program/PSToolbox/PSToolboxBaseEdge.h"
-#include "/Users/hoscsaba/program/PSToolbox/PSToolboxRunner.h"
+#include "/Users/hoscsaba/Documents/GitHub/PSToolbox/SCP.h"
+#include "/Users/hoscsaba/Documents/GitHub/PSToolbox/Connector.h"
+#include "/Users/hoscsaba/Documents/GitHub/PSToolbox/PSToolboxBaseEdge.h"
+#include "/Users/hoscsaba/Documents/GitHub/PSToolbox/PSToolboxRunner.h"
 
 using namespace std;
 
