@@ -1,0 +1,61 @@
+\doxysection{Check\+Valve.\+h}
+\hypertarget{_check_valve_8h_source}{}\label{_check_valve_8h_source}\mbox{\hyperlink{_check_valve_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_p_s_toolbox_base_edge_8h}{PSToolboxBaseEdge.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_units_8h}{Units.h}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_check_valve}{CheckValve}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolboxBaseEdge}},\ \mbox{\hyperlink{class_units}{Units}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{double}\ H\_fun(\textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}});}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{void}\ H\_fun\_lin(\textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}},\ \textcolor{keywordtype}{double}\&\ a0,\ \textcolor{keywordtype}{double}\&\ a1);}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{double}\ rho;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{double}\ zeta\_open,\ zeta\_closed;}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_afae9361aedc8ca0ed48ca0d39f2be49c}{Get\_Q}}(\textcolor{keywordtype}{double}\ dh);}
+\DoxyCodeLine{00020\ \ \ \ \ vector<\ vector<double>\ >\ data;}
+\DoxyCodeLine{00021\ \ \ \ \ vector<double>\ tmpvec;}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{string}\ fname;}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{double}\ Tmax;}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{class_check_valve_a80c862342de673712b989f68e7e95847}{CheckValve}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \_name,}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \_cspe\_name,}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \_cspv\_name,}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_rho,}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ zeta\_open,\ \textcolor{keywordtype}{double}\ zeta\_closed,\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a24d0bdb54e1ef80a07b1d0a53f512e15}{save\_data}});}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{class_check_valve_aff4e46bae47e34130e176e8107dc367d}{\string~CheckValve}}()\{\};}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_check_valve_a6d0a56da25a3def50a25f5ffa658c2d0}{Ini}}(\textcolor{keywordtype}{int});}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_check_valve_a6d0a56da25a3def50a25f5ffa658c2d0}{Ini}}();}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_check_valve_a6d0a56da25a3def50a25f5ffa658c2d0}{Ini}}(\textcolor{keywordtype}{double});}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_check_valve_adc0e278d85793a73cb60d6f0d81c9847}{Info}}();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_check_valve_a59ef1725e3e220366153a4224dc73998}{GetBetaAtFront}}(\textcolor{keywordtype}{double},\ \textcolor{keywordtype}{double}\ \&,\ \textcolor{keywordtype}{double}\ \&);}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_check_valve_a035485aceec732598c5ac73cf9668aef}{GetAlphaAtEnd}}(\textcolor{keywordtype}{double},\ \textcolor{keywordtype}{double}\ \&,\ \textcolor{keywordtype}{double}\ \&);}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_check_valve_aae6fb289e50565fd7f241e5d3e739d7a}{GetEdgeEquationCoeffs}}(\textcolor{keywordtype}{double},\ \textcolor{keywordtype}{bool},\ \textcolor{keywordtype}{double}\ \&,\ \textcolor{keywordtype}{double}\ \&,\ \textcolor{keywordtype}{double}\ \&,\ \textcolor{keywordtype}{double}\ \&);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_check_valve_a3a0e25bfdc34f886901fe06899252b43}{Set\_BC\_Left}}(\textcolor{keywordtype}{string}\ type,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_check_valve_ac162e08df25605cd00d0ef3adb88119d}{Set\_BC\_Right}}(\textcolor{keywordtype}{string}\ type,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_check_valve_ad920a8342f54ce402b3483729fb99aa8}{GetLargePressureValues}}(\textcolor{keywordtype}{double},\ vector<double>\&,\ vector<double>\&,vector<double>\&,\ vector<string>\&);}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_check_valve_a8362187ef22a37472885e98ffa6eeca6}{GetSmallPressureValues}}(\textcolor{keywordtype}{double},\ vector<double>\&,\ vector<double>\&,vector<double>\&,\ vector<string>\&);}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_check_valve_a100b998c087e523944f445dbdc9dc4a1}{Save\_data}}();}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_check_valve_a856aa8600cc1741894417265578bdbc8}{Write\_data}}(\textcolor{keywordtype}{string});}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_check_valve_a7628f5a7a7e333d47db2d036dcc05df3}{Get\_dprop}}(\textcolor{keywordtype}{string});}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_check_valve_a9c88980f4242cfa29ba25b03a5646d63}{UpdateInternal}}(\textcolor{keywordtype}{double});}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_check_valve_a4fe9207d9652e2bc7cc537849e18a72f}{UpdateTime}}(\textcolor{keywordtype}{double});}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_check_valve_ad6f90924666b87311cbb55b6120d5b50}{Set\_string\_prop}}(\textcolor{keywordtype}{string},\textcolor{keywordtype}{string})\{\};}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_check_valve_abee634624d9dc81410112099af12157a}{Add\_transient}}(\textcolor{keywordtype}{string},\textcolor{keywordtype}{double},\textcolor{keywordtype}{double});}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \};}
+\DoxyCodeLine{00056\ }
+
+\end{DoxyCode}

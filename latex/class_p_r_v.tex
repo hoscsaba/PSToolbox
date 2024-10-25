@@ -1,0 +1,336 @@
+\doxysection{PRV Class Reference}
+\hypertarget{class_p_r_v}{}\label{class_p_r_v}\index{PRV@{PRV}}
+
+
+{\ttfamily \#include $<$PRV.\+h$>$}
+
+Inheritance diagram for PRV\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_p_r_v}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_p_r_v_af538718085ff2cbd742739fa6b37d06b}{PRV}} (const string \+\_\+name, const string \+\_\+cspe\+\_\+name, const string \+\_\+cspv\+\_\+name, double \+\_\+rho, double \+\_\+pset, bool \mbox{\hyperlink{class_p_s_toolbox_base_edge_a24d0bdb54e1ef80a07b1d0a53f512e15}{save\+\_\+data}})
+\item 
+\mbox{\hyperlink{class_p_r_v_a0280c64c4a76755a14c338c1f9f5bd99}{\texorpdfstring{$\sim$}{\string~}\+PRV}} ()
+\item 
+void \mbox{\hyperlink{class_p_r_v_a51cc692cce9830ef7929f4046a5496a9}{Ini}} (int)
+\item 
+void \mbox{\hyperlink{class_p_r_v_a66caec54b47db22ca5f1164368cecfb8}{Ini}} ()
+\item 
+string \mbox{\hyperlink{class_p_r_v_a67c8bdd9de552cbfba91f1bf71262708}{Info}} ()
+\item 
+void \mbox{\hyperlink{class_p_r_v_ae4bbf7700fc4bb1e36564531856a0d28}{calculate\+Zeta}} (double)
+\item 
+void \mbox{\hyperlink{class_p_r_v_a06e3899ded9195113a7accaedd406677}{Get\+Beta\+At\+Front}} (double, double \&, double \&)
+\item 
+void \mbox{\hyperlink{class_p_r_v_a3c775566e1068ed617f6759628b40b84}{Get\+Alpha\+At\+End}} (double, double \&, double \&)
+\item 
+void \mbox{\hyperlink{class_p_r_v_a5656e2c6fad9b3428fd86a5a8aecb605}{Get\+Edge\+Equation\+Coeffs}} (double, bool, double \&, double \&, double \&, double \&)
+\item 
+void \mbox{\hyperlink{class_p_r_v_af50f788246182dc20ea37882112d0de9}{Set\+\_\+\+BC\+\_\+\+Left}} (string type, double val)
+\item 
+void \mbox{\hyperlink{class_p_r_v_a7d15eb2688821867976e133669581c68}{Set\+\_\+\+BC\+\_\+\+Right}} (string type, double val)
+\item 
+void \mbox{\hyperlink{class_p_r_v_afb36809159f87c6526e69ee67e7abf60}{Get\+Large\+Pressure\+Values}} (double, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ string $>$ \&)
+\item 
+void \mbox{\hyperlink{class_p_r_v_aa3e2a68f068af731913404bbf2871db8}{Get\+Small\+Pressure\+Values}} (double, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ string $>$ \&)
+\item 
+void \mbox{\hyperlink{class_p_r_v_a23b3e821c3664c2494b9d055402b57a3}{Save\+\_\+data}} ()
+\item 
+void \mbox{\hyperlink{class_p_r_v_af7147bf143e32846f5492674220fc624}{Write\+\_\+data}} (string)
+\item 
+double \mbox{\hyperlink{class_p_r_v_a9b7ba19ec7e5b81ecac58ed90c1c9422}{Get\+\_\+dprop}} (string)
+\item 
+void \mbox{\hyperlink{class_p_r_v_a2aad6ded7b0eab04a1616aa4cc0af040}{Update\+Internal}} (double)
+\item 
+void \mbox{\hyperlink{class_p_r_v_a4c59856b5d70b1437fa40ece2d0fa72d}{Update\+Time}} (double)
+\item 
+void \mbox{\hyperlink{class_p_r_v_a16498f96b7f0a65dfbbfa75d5a0bd1a9}{Set\+\_\+string\+\_\+prop}} (string, string)
+\item 
+void \mbox{\hyperlink{class_p_r_v_a18c44fff919f92ed9d46b8f8e68af71f}{Add\+\_\+transient}} (string, double, double)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_p_s_toolbox_base_edge_ae5dcabbe9cf289d0ad419a6b1a903fd9}{PSToolbox\+Base\+Edge}} (const string \mbox{\hyperlink{class_p_s_toolbox_base_edge_aae9cb0874655893e409b145fe256570a}{edge\+\_\+type}}, const string \mbox{\hyperlink{class_p_s_toolbox_base_edge_a3b4da68ffb04db1c11898f3d53f46345}{name}}, const string n1, const string n2)
+\item 
+virtual \mbox{\hyperlink{class_p_s_toolbox_base_edge_a2292b6b435b696cc29493d09f43fbf65}{\texorpdfstring{$\sim$}{\string~}\+PSToolbox\+Base\+Edge}} ()
+\item 
+string \mbox{\hyperlink{class_p_s_toolbox_base_edge_aac5d028f66e59fa00ea43ed11c4174ca}{Get\+\_\+name}} ()
+\item 
+string \mbox{\hyperlink{class_p_s_toolbox_base_edge_a15e7c020c3160301c487b45f23ad4453}{Get\+\_\+type}} ()
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a7c65f75c7ab39eb4d4771d70e2a2f479}{Set\+\_\+t}} (double tnew)
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a6a9467311884e28db1b4664c599a3a30}{Get\+\_\+t}} ()
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a99daaac3714e8cfafca1def01fbc8efc}{Get\+\_\+dt}} ()
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae0ba8e08d2304a6f7b9cdc61619e772c}{Get\+\_\+tnext}} ()
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_base_edge_aa6856b33f6ed4d341e8a95532ecf0ed6}{Set\+\_\+\+DEBUG}} (bool newval)
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a903801bf8174255041aea9547283b8d2}{Set\+\_\+Q}} (double newval)
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a640bca714eb3eec11b73f907a32ec264}{Set\+\_\+p1}} (double newval)
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0940a1bda2f70926904472aae2a5bb5e}{Set\+\_\+p2}} (double newval)
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_afae9361aedc8ca0ed48ca0d39f2be49c}{Get\+\_\+Q}} ()
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_abd8d054059e5c588ad9b802f55ad8c43}{Get\+\_\+p1}} ()
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a606f24ed9cef6fb267e619cf6cfe4c56}{Get\+\_\+p2}} ()
+\item 
+virtual void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a434a2968d633e65cafb2787bc4981c8d}{Ini}} (double)=0
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a989266da88c5dea78b56f6fada2ff97c}{Set\+\_\+dt\+\_\+out}} (double val)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}}}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_p_s_toolbox_base_edge_a3b4da68ffb04db1c11898f3d53f46345}{name}}
+\item 
+string \mbox{\hyperlink{class_p_s_toolbox_base_edge_aae9cb0874655893e409b145fe256570a}{edge\+\_\+type}}
+\item 
+string \mbox{\hyperlink{class_p_s_toolbox_base_edge_a2d9ddbc23532f9d8a66b188e8a27e43c}{node\+\_\+from}}
+\item 
+string \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0d9bd961c5522a605baeb22b0f99af8d}{node\+\_\+to}}
+\item 
+bool \mbox{\hyperlink{class_p_s_toolbox_base_edge_a24d0bdb54e1ef80a07b1d0a53f512e15}{save\+\_\+data}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae8cd470bcb891f1e9b283dacde4e9dd5}{t}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_ab0ec7fe898994519d478a13ef2011383}{dt}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a6e6d0ff908fe7190b311c1772277307e}{p1}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a09a1c644b0df32b372ce63d71d597eb4}{p2}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a856e2819a845ad99c591445ddc0f4f53}{g}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a48dd5476af926578963de98aa86703c3}{n\+\_\+act}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a7738ae266f40802465d161156de1c41e}{n\+\_\+act\+\_\+new}}
+\item 
+bool \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae4135ab42424ba358454286171dda4b2}{DEBUG}}
+\item 
+bool \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4936aec9108a7e3f2535b55642efabf1}{is\+\_\+rigid\+\_\+element}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a1623eacb50e05e8764a4eaef553d19f0}{dt\+\_\+out}}
+\item 
+vector$<$ string $>$ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a8448bfdfafbbd7bcee5bdbed719e3587}{transient\+\_\+type}}
+\item 
+vector$<$ double $>$ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ad61d3abbcb72972c9358dac1b992e978}{transient\+\_\+time}}
+\item 
+vector$<$ double $>$ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ab1244c7f37527f27e0d941650084cc9c}{transient\+\_\+val}}
+\item 
+vector$<$ bool $>$ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ad9cbd59340f5531b215d8b536880e302}{transient\+\_\+triggered}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_p_r_v_af538718085ff2cbd742739fa6b37d06b}\index{PRV@{PRV}!PRV@{PRV}}
+\index{PRV@{PRV}!PRV@{PRV}}
+\doxysubsubsection{\texorpdfstring{PRV()}{PRV()}}
+{\footnotesize\ttfamily \label{class_p_r_v_af538718085ff2cbd742739fa6b37d06b} 
+PRV\+::\+PRV (\begin{DoxyParamCaption}\item[{const string}]{\+\_\+name}{, }\item[{const string}]{\+\_\+cspe\+\_\+name}{, }\item[{const string}]{\+\_\+cspv\+\_\+name}{, }\item[{double}]{\+\_\+rho}{, }\item[{double}]{\+\_\+pset}{, }\item[{bool}]{save\+\_\+data}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_p_r_v_a0280c64c4a76755a14c338c1f9f5bd99}\index{PRV@{PRV}!````~PRV@{\texorpdfstring{$\sim$}{\string~}PRV}}
+\index{````~PRV@{\texorpdfstring{$\sim$}{\string~}PRV}!PRV@{PRV}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}PRV()}{\string~PRV()}}
+{\footnotesize\ttfamily \label{class_p_r_v_a0280c64c4a76755a14c338c1f9f5bd99} 
+PRV\+::\texorpdfstring{$\sim$}{\string~}\+PRV (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_p_r_v_a18c44fff919f92ed9d46b8f8e68af71f}\index{PRV@{PRV}!Add\_transient@{Add\_transient}}
+\index{Add\_transient@{Add\_transient}!PRV@{PRV}}
+\doxysubsubsection{\texorpdfstring{Add\_transient()}{Add\_transient()}}
+{\footnotesize\ttfamily \label{class_p_r_v_a18c44fff919f92ed9d46b8f8e68af71f} 
+void PRV\+::\+Add\+\_\+transient (\begin{DoxyParamCaption}\item[{string}]{\+\_\+type}{, }\item[{double}]{\+\_\+when}{, }\item[{double}]{\+\_\+val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4bfd4f3f231f041db9d47725f96e7f04}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_p_r_v_ae4bbf7700fc4bb1e36564531856a0d28}\index{PRV@{PRV}!calculateZeta@{calculateZeta}}
+\index{calculateZeta@{calculateZeta}!PRV@{PRV}}
+\doxysubsubsection{\texorpdfstring{calculateZeta()}{calculateZeta()}}
+{\footnotesize\ttfamily \label{class_p_r_v_ae4bbf7700fc4bb1e36564531856a0d28} 
+void PRV\+::calculate\+Zeta (\begin{DoxyParamCaption}\item[{double}]{Q}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_p_r_v_a9b7ba19ec7e5b81ecac58ed90c1c9422}\index{PRV@{PRV}!Get\_dprop@{Get\_dprop}}
+\index{Get\_dprop@{Get\_dprop}!PRV@{PRV}}
+\doxysubsubsection{\texorpdfstring{Get\_dprop()}{Get\_dprop()}}
+{\footnotesize\ttfamily \label{class_p_r_v_a9b7ba19ec7e5b81ecac58ed90c1c9422} 
+double PRV\+::\+Get\+\_\+dprop (\begin{DoxyParamCaption}\item[{string}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a9e72bd3b5bf2b0b5869a42615780fcd5}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_p_r_v_a3c775566e1068ed617f6759628b40b84}\index{PRV@{PRV}!GetAlphaAtEnd@{GetAlphaAtEnd}}
+\index{GetAlphaAtEnd@{GetAlphaAtEnd}!PRV@{PRV}}
+\doxysubsubsection{\texorpdfstring{GetAlphaAtEnd()}{GetAlphaAtEnd()}}
+{\footnotesize\ttfamily \label{class_p_r_v_a3c775566e1068ed617f6759628b40b84} 
+void PRV\+::\+Get\+Alpha\+At\+End (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{double \&}]{LHS}{, }\item[{double \&}]{coeff\+\_\+Q}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_aea2c7b8c320f8c38f80bcef33004e203}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_p_r_v_a06e3899ded9195113a7accaedd406677}\index{PRV@{PRV}!GetBetaAtFront@{GetBetaAtFront}}
+\index{GetBetaAtFront@{GetBetaAtFront}!PRV@{PRV}}
+\doxysubsubsection{\texorpdfstring{GetBetaAtFront()}{GetBetaAtFront()}}
+{\footnotesize\ttfamily \label{class_p_r_v_a06e3899ded9195113a7accaedd406677} 
+void PRV\+::\+Get\+Beta\+At\+Front (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{double \&}]{LHS}{, }\item[{double \&}]{coeff\+\_\+Q}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a5de874c4d21ca6317cb4cfd43ece97aa}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_p_r_v_a5656e2c6fad9b3428fd86a5a8aecb605}\index{PRV@{PRV}!GetEdgeEquationCoeffs@{GetEdgeEquationCoeffs}}
+\index{GetEdgeEquationCoeffs@{GetEdgeEquationCoeffs}!PRV@{PRV}}
+\doxysubsubsection{\texorpdfstring{GetEdgeEquationCoeffs()}{GetEdgeEquationCoeffs()}}
+{\footnotesize\ttfamily \label{class_p_r_v_a5656e2c6fad9b3428fd86a5a8aecb605} 
+void PRV\+::\+Get\+Edge\+Equation\+Coeffs (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{bool}]{is\+\_\+front}{, }\item[{double \&}]{LHS}{, }\item[{double \&}]{coeff\+\_\+Q}{, }\item[{double \&}]{coeff\+\_\+p1}{, }\item[{double \&}]{coeff\+\_\+p2}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_af6bebd7c3776cea69a35c22e6a52e44e}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_p_r_v_afb36809159f87c6526e69ee67e7abf60}\index{PRV@{PRV}!GetLargePressureValues@{GetLargePressureValues}}
+\index{GetLargePressureValues@{GetLargePressureValues}!PRV@{PRV}}
+\doxysubsubsection{\texorpdfstring{GetLargePressureValues()}{GetLargePressureValues()}}
+{\footnotesize\ttfamily \label{class_p_r_v_afb36809159f87c6526e69ee67e7abf60} 
+void PRV\+::\+Get\+Large\+Pressure\+Values (\begin{DoxyParamCaption}\item[{double}]{}{, }\item[{vector$<$ double $>$ \&}]{}{, }\item[{vector$<$ double $>$ \&}]{}{, }\item[{vector$<$ double $>$ \&}]{}{, }\item[{vector$<$ string $>$ \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a2ad94e8cf513d6443cecf7f13b449988}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_p_r_v_aa3e2a68f068af731913404bbf2871db8}\index{PRV@{PRV}!GetSmallPressureValues@{GetSmallPressureValues}}
+\index{GetSmallPressureValues@{GetSmallPressureValues}!PRV@{PRV}}
+\doxysubsubsection{\texorpdfstring{GetSmallPressureValues()}{GetSmallPressureValues()}}
+{\footnotesize\ttfamily \label{class_p_r_v_aa3e2a68f068af731913404bbf2871db8} 
+void PRV\+::\+Get\+Small\+Pressure\+Values (\begin{DoxyParamCaption}\item[{double}]{}{, }\item[{vector$<$ double $>$ \&}]{}{, }\item[{vector$<$ double $>$ \&}]{}{, }\item[{vector$<$ double $>$ \&}]{}{, }\item[{vector$<$ string $>$ \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae83f418cc047ab86aa92b89bfc3b4ce8}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_p_r_v_a67c8bdd9de552cbfba91f1bf71262708}\index{PRV@{PRV}!Info@{Info}}
+\index{Info@{Info}!PRV@{PRV}}
+\doxysubsubsection{\texorpdfstring{Info()}{Info()}}
+{\footnotesize\ttfamily \label{class_p_r_v_a67c8bdd9de552cbfba91f1bf71262708} 
+string PRV\+::\+Info (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4cfb66702f57eb57a4acd23c6d361d2f}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_p_r_v_a66caec54b47db22ca5f1164368cecfb8}\index{PRV@{PRV}!Ini@{Ini}}
+\index{Ini@{Ini}!PRV@{PRV}}
+\doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_p_r_v_a66caec54b47db22ca5f1164368cecfb8} 
+void PRV\+::\+Ini (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae2c6ff4b9e22ad8a3692f82b53625eb0}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_p_r_v_a51cc692cce9830ef7929f4046a5496a9}\index{PRV@{PRV}!Ini@{Ini}}
+\index{Ini@{Ini}!PRV@{PRV}}
+\doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_p_r_v_a51cc692cce9830ef7929f4046a5496a9} 
+void PRV\+::\+Ini (\begin{DoxyParamCaption}\item[{int}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a1a152f3ff28fa36b5b6da17bceb2659e}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_p_r_v_a23b3e821c3664c2494b9d055402b57a3}\index{PRV@{PRV}!Save\_data@{Save\_data}}
+\index{Save\_data@{Save\_data}!PRV@{PRV}}
+\doxysubsubsection{\texorpdfstring{Save\_data()}{Save\_data()}}
+{\footnotesize\ttfamily \label{class_p_r_v_a23b3e821c3664c2494b9d055402b57a3} 
+void PRV\+::\+Save\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a471c2238911ad58eb45e8afabcf7420d}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_p_r_v_af50f788246182dc20ea37882112d0de9}\index{PRV@{PRV}!Set\_BC\_Left@{Set\_BC\_Left}}
+\index{Set\_BC\_Left@{Set\_BC\_Left}!PRV@{PRV}}
+\doxysubsubsection{\texorpdfstring{Set\_BC\_Left()}{Set\_BC\_Left()}}
+{\footnotesize\ttfamily \label{class_p_r_v_af50f788246182dc20ea37882112d0de9} 
+void PRV\+::\+Set\+\_\+\+BC\+\_\+\+Left (\begin{DoxyParamCaption}\item[{string}]{type}{, }\item[{double}]{val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4a8e4feaa0adcb81485fe7ea79b953e3}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_p_r_v_a7d15eb2688821867976e133669581c68}\index{PRV@{PRV}!Set\_BC\_Right@{Set\_BC\_Right}}
+\index{Set\_BC\_Right@{Set\_BC\_Right}!PRV@{PRV}}
+\doxysubsubsection{\texorpdfstring{Set\_BC\_Right()}{Set\_BC\_Right()}}
+{\footnotesize\ttfamily \label{class_p_r_v_a7d15eb2688821867976e133669581c68} 
+void PRV\+::\+Set\+\_\+\+BC\+\_\+\+Right (\begin{DoxyParamCaption}\item[{string}]{type}{, }\item[{double}]{val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a3f4024efd82f0dc3b46ba987f3594ae7}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_p_r_v_a16498f96b7f0a65dfbbfa75d5a0bd1a9}\index{PRV@{PRV}!Set\_string\_prop@{Set\_string\_prop}}
+\index{Set\_string\_prop@{Set\_string\_prop}!PRV@{PRV}}
+\doxysubsubsection{\texorpdfstring{Set\_string\_prop()}{Set\_string\_prop()}}
+{\footnotesize\ttfamily \label{class_p_r_v_a16498f96b7f0a65dfbbfa75d5a0bd1a9} 
+void PRV\+::\+Set\+\_\+string\+\_\+prop (\begin{DoxyParamCaption}\item[{string}]{}{, }\item[{string}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a68bf3dade1793a9d247e28b648a1947d}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_p_r_v_a2aad6ded7b0eab04a1616aa4cc0af040}\index{PRV@{PRV}!UpdateInternal@{UpdateInternal}}
+\index{UpdateInternal@{UpdateInternal}!PRV@{PRV}}
+\doxysubsubsection{\texorpdfstring{UpdateInternal()}{UpdateInternal()}}
+{\footnotesize\ttfamily \label{class_p_r_v_a2aad6ded7b0eab04a1616aa4cc0af040} 
+void PRV\+::\+Update\+Internal (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a9f3cbf5b741dcd4e923e5ae0aa91a46f}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_p_r_v_a4c59856b5d70b1437fa40ece2d0fa72d}\index{PRV@{PRV}!UpdateTime@{UpdateTime}}
+\index{UpdateTime@{UpdateTime}!PRV@{PRV}}
+\doxysubsubsection{\texorpdfstring{UpdateTime()}{UpdateTime()}}
+{\footnotesize\ttfamily \label{class_p_r_v_a4c59856b5d70b1437fa40ece2d0fa72d} 
+void PRV\+::\+Update\+Time (\begin{DoxyParamCaption}\item[{double}]{\+\_\+t}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_ad767d5a177bb91562a880b57c6ba5fe0}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_p_r_v_af7147bf143e32846f5492674220fc624}\index{PRV@{PRV}!Write\_data@{Write\_data}}
+\index{Write\_data@{Write\_data}!PRV@{PRV}}
+\doxysubsubsection{\texorpdfstring{Write\_data()}{Write\_data()}}
+{\footnotesize\ttfamily \label{class_p_r_v_af7147bf143e32846f5492674220fc624} 
+void PRV\+::\+Write\+\_\+data (\begin{DoxyParamCaption}\item[{string}]{folder}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a80ed1e641d737c138cc1ae74826ce128}{PSToolbox\+Base\+Edge}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_p_r_v_8h}{PRV.\+h}}\item 
+\mbox{\hyperlink{_p_r_v_8cpp}{PRV.\+cpp}}\end{DoxyCompactItemize}

@@ -6,7 +6,7 @@
 \DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
 \DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cmath>}}
-\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <Eigen/Dense>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <Eigen/Core>}}
 \DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_units_8h}{Units.h}}"{}}}
 \DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_ideal_gas_8h}{IdealGas.h}}"{}}}
 \DoxyCodeLine{00009\ \textcolor{comment}{//\#include\ "{}/Users/hoscsaba/program/matplotlib-\/cpp/matplotlibcpp.h"{}}}
@@ -38,40 +38,46 @@
 \DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{bool}\ DEBUG;}
 \DoxyCodeLine{00039\ \ \ \textcolor{keyword}{public}:}
 \DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_reservoir_aa205bfa0a21280929d65f5676aeaeb92}{is\_Gas}};}
-\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{class_reservoir}{Reservoir}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \_nev,}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{class_reservoir_abc057bd7a56e38184eedf2d2a727f5b2}{Reservoir}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \_nev,}
 \DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \_vol,}
 \DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \_a,}
 \DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \_rho,}
 \DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ save\_data);}
-\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{class_reservoir}{Reservoir}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \_name,}
+\DoxyCodeLine{00046\ \ \ \ \ \ \mbox{\hyperlink{class_reservoir_abc057bd7a56e38184eedf2d2a727f5b2}{Reservoir}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \_name,}
 \DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \_vol,}
 \DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_ideal_gas}{IdealGas}}*\ \mbox{\hyperlink{class_reservoir_a00cb83324b4fa4d62be3ad55e2cab962}{gas}},}
 \DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ n\_poly,}
 \DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \_save\_data);}
-\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{class_reservoir}{Reservoir}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \_name,}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{class_reservoir_abc057bd7a56e38184eedf2d2a727f5b2}{Reservoir}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \_name,}
 \DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \_vol,}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gas}{Gas}}*\ \mbox{\hyperlink{class_reservoir_a00cb83324b4fa4d62be3ad55e2cab962}{gas}},}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_ideal_gas}{IdealGas}}*\ \mbox{\hyperlink{class_reservoir_a00cb83324b4fa4d62be3ad55e2cab962}{gas}},}
 \DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ n\_poly,}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \_save\_data);}
-\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{class_reservoir_a2aeb630cdd589baaa670ce3861c93f53}{\string~Reservoir}}();}
-\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reservoir_acd9a99c6c2fd40c06f443e128851b301}{SetDebug}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ DEBUG);}
-\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_reservoir_a8f2bec99c8d8cf32873675f79d66d4c9}{GetName}}();}
-\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_reservoir_a093db21486b33b07564c0f2a555ef94a}{Info}}();}
-\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reservoir_acbf42969273a347c5b32fbf40248f38e}{Update}}(\textcolor{keywordtype}{double}\ delta\_t,\ \textcolor{keywordtype}{double}\ mp\_in,\ \textcolor{keywordtype}{double}\ mp\_out);}
-\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reservoir_a914e7387e18311fe2e46bcad3ac96d96}{UpdateDimlessPars}}(\textcolor{keywordtype}{double}\ pref,\ \textcolor{keywordtype}{double}\ mp\_nevl,\ \textcolor{keywordtype}{double}\ omega);}
-\DoxyCodeLine{00062\ \ \ \ \ \textcolor{comment}{//void\ Ini();}}
-\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reservoir_a61a6925be17180de646b0c4151c59454}{Ini}}(\textcolor{keywordtype}{double}\ \_pstart);}
-\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reservoir_a61a6925be17180de646b0c4151c59454}{Ini}}(\textcolor{keywordtype}{double}\ \_pstart,\ \textcolor{keywordtype}{double}\ \_Tstart);}
-\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_reservoir_a0c08e2bf607ca1d30718100e78850291}{Get\_dprop}}(\textcolor{keywordtype}{string}\ prop\_string);}
-\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reservoir_a846b7cea080db6afa41725f27652b555}{Set\_dprop}}(\textcolor{keywordtype}{string}\ prop\_string,\ \textcolor{keywordtype}{double}\ val);}
-\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_reservoir_a929cdd0a58c364b23576c225f3289594}{GetP}}()\ \{\textcolor{keywordflow}{return}\ p;\}}
-\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reservoir_a954e6b343e246da064894b167b858712}{List\_data}}();}
-\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reservoir_a25e857bf07d44c4e441116cef97002cc}{Save\_data}}();}
-\DoxyCodeLine{00070\ \ \ \ \ vector<double>\ \mbox{\hyperlink{class_reservoir_aa779b9aee18c7d3a066003c0a488e94c}{Get\_dvprop}}(\textcolor{keywordtype}{string}\ prop\_string);}
-\DoxyCodeLine{00071\ \ \ \ \ \textcolor{comment}{//void\ Plot();}}
-\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_reservoir_ab7bc173165dec1b596ec7a9c15ab88d2}{fname}};}
-\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{class_gas}{Gas}}*\ \mbox{\hyperlink{class_reservoir_a00cb83324b4fa4d62be3ad55e2cab962}{gas}};}
-\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reservoir_adc22cbe39c5900ad45dafda317a07afc}{Plot}}(\textcolor{keywordtype}{bool}\ show,\ \textcolor{keywordtype}{bool}\ save);}
-\DoxyCodeLine{00075\ \};}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \_save\_data,}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ Tt);}
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{class_reservoir_abc057bd7a56e38184eedf2d2a727f5b2}{Reservoir}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \_name,}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \_vol,}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gas}{Gas}}*\ \mbox{\hyperlink{class_reservoir_a00cb83324b4fa4d62be3ad55e2cab962}{gas}},}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ n\_poly,}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \_save\_data);}
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{class_reservoir_a2aeb630cdd589baaa670ce3861c93f53}{\string~Reservoir}}();}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reservoir_acd9a99c6c2fd40c06f443e128851b301}{SetDebug}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ DEBUG);}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_reservoir_a8f2bec99c8d8cf32873675f79d66d4c9}{GetName}}();}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_reservoir_a093db21486b33b07564c0f2a555ef94a}{Info}}();}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reservoir_acbf42969273a347c5b32fbf40248f38e}{Update}}(\textcolor{keywordtype}{double}\ delta\_t,\ \textcolor{keywordtype}{double}\ mp\_in,\ \textcolor{keywordtype}{double}\ mp\_out);}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reservoir_a914e7387e18311fe2e46bcad3ac96d96}{UpdateDimlessPars}}(\textcolor{keywordtype}{double}\ pref,\ \textcolor{keywordtype}{double}\ mp\_nevl,\ \textcolor{keywordtype}{double}\ omega);}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{comment}{//void\ Ini();}}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reservoir_a61a6925be17180de646b0c4151c59454}{Ini}}(\textcolor{keywordtype}{double}\ \_pstart);}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reservoir_a61a6925be17180de646b0c4151c59454}{Ini}}(\textcolor{keywordtype}{double}\ \_pstart,\ \textcolor{keywordtype}{double}\ \_Tstart);}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_reservoir_a0c08e2bf607ca1d30718100e78850291}{Get\_dprop}}(\textcolor{keywordtype}{string}\ prop\_string);}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reservoir_a846b7cea080db6afa41725f27652b555}{Set\_dprop}}(\textcolor{keywordtype}{string}\ prop\_string,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_reservoir_a929cdd0a58c364b23576c225f3289594}{GetP}}()\ \{\textcolor{keywordflow}{return}\ p;\}}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reservoir_a954e6b343e246da064894b167b858712}{List\_data}}();}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reservoir_a25e857bf07d44c4e441116cef97002cc}{Save\_data}}();}
+\DoxyCodeLine{00076\ \ \ \ \ vector<double>\ \mbox{\hyperlink{class_reservoir_aa779b9aee18c7d3a066003c0a488e94c}{Get\_dvprop}}(\textcolor{keywordtype}{string}\ prop\_string);}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{comment}{//void\ Plot();}}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_reservoir_ab7bc173165dec1b596ec7a9c15ab88d2}{fname}};}
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{class_gas}{Gas}}*\ \mbox{\hyperlink{class_reservoir_a00cb83324b4fa4d62be3ad55e2cab962}{gas}};}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_reservoir_adc22cbe39c5900ad45dafda317a07afc}{Plot}}(\textcolor{keywordtype}{bool}\ show,\ \textcolor{keywordtype}{bool}\ save);}
+\DoxyCodeLine{00081\ \};}
 
 \end{DoxyCode}

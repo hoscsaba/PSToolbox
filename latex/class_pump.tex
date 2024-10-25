@@ -1,0 +1,487 @@
+\doxysection{Pump Class Reference}
+\hypertarget{class_pump}{}\label{class_pump}\index{Pump@{Pump}}
+
+
+{\ttfamily \#include $<$Pump.\+h$>$}
+
+Inheritance diagram for Pump\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_pump}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_pump_a9c6b57c3ade0e08809973e605c16af79}{H\+\_\+fun}} (double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}}, double n)
+\item 
+double \mbox{\hyperlink{class_pump_aa993d7f97c438572f85fa565b968b531}{P\+\_\+fun}} (double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}}, double n)
+\item 
+void \mbox{\hyperlink{class_pump_a54d74fe35ea7ec3c7542bc11ce15c97e}{H\+\_\+fun\+\_\+lin}} (double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}}, double n, double \&a0, double \&a1)
+\item 
+double \mbox{\hyperlink{class_pump_ab9f8304876cbe4aec4554bdd69c9bd63}{Get\+\_\+Q}} (double dh)
+\item 
+\mbox{\hyperlink{class_pump_ab2344d540685c951c3166e56bdc47b90}{Pump}} (const string \+\_\+name, const string \+\_\+cspe\+\_\+name, const string \+\_\+cspv\+\_\+name, double \+\_\+rho, double \+\_\+\+Q\+\_\+nom, double \+\_\+\+H\+\_\+nom, vector$<$ double $>$ \&\mbox{\hyperlink{class_pump_acb5cb0e6831fec5301f6522a32e6c336}{coeff\+\_\+H}}, vector$<$ double $>$ \&\mbox{\hyperlink{class_pump_adb0e06927835f295b7ceaab07b522457}{coeff\+\_\+P}}, double \mbox{\hyperlink{class_pump_ab793c907348605fb2e42f0ae7c5f0617}{n\+\_\+nom}}, double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a48dd5476af926578963de98aa86703c3}{n\+\_\+act}}, double \mbox{\hyperlink{class_pump_a4faeb826b0a81ccb9bab25a903640f75}{theta}}, bool \mbox{\hyperlink{class_p_s_toolbox_base_edge_a24d0bdb54e1ef80a07b1d0a53f512e15}{save\+\_\+data}})
+\item 
+\mbox{\hyperlink{class_pump_a267110970a4eb99ef63014945e372762}{\texorpdfstring{$\sim$}{\string~}\+Pump}} ()
+\item 
+void \mbox{\hyperlink{class_pump_a991812970f91dc6e9f993285cae1098f}{Ini}} (int)
+\item 
+void \mbox{\hyperlink{class_pump_a84bc7e3aeed2e4eec02f782673336985}{Ini}} ()
+\item 
+void \mbox{\hyperlink{class_pump_a5b9fa08f14f8cf85b7c4b671b66e8e6b}{Ini}} (double)
+\item 
+string \mbox{\hyperlink{class_pump_abd254eee229246ff5bf8db4729f5d162}{Info}} ()
+\item 
+void \mbox{\hyperlink{class_pump_aa93e335985c0fd254ac5f3675e61f753}{Get\+Beta\+At\+Front}} (double, double \&, double \&)
+\item 
+void \mbox{\hyperlink{class_pump_a771c88d98c3f39e9be3aea9cb0781e3f}{Get\+Alpha\+At\+End}} (double, double \&, double \&)
+\item 
+void \mbox{\hyperlink{class_pump_af4a2894b52c17d80ea2d7c4d25620457}{Get\+Edge\+Equation\+Coeffs}} (double, bool, double \&, double \&, double \&, double \&)
+\item 
+void \mbox{\hyperlink{class_pump_af7902801dd488cdc95e0f5f5d7ec072d}{Set\+\_\+\+BC\+\_\+\+Left}} (string type, double val)
+\item 
+void \mbox{\hyperlink{class_pump_a363c0296603acf1db90bbac1f1a98ae1}{Set\+\_\+\+BC\+\_\+\+Right}} (string type, double val)
+\item 
+void \mbox{\hyperlink{class_pump_a161da2fda7dde2170116e7b23a5311c4}{Get\+Large\+Pressure\+Values}} (double, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ string $>$ \&)
+\item 
+void \mbox{\hyperlink{class_pump_a92658b67828d24d9987a16de53a962e0}{Get\+Small\+Pressure\+Values}} (double, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ string $>$ \&)
+\item 
+void \mbox{\hyperlink{class_pump_a121d41b26c7b6dc15e844bb720ffa187}{Save\+\_\+data}} ()
+\item 
+void \mbox{\hyperlink{class_pump_ab6b61561fa0d30a95c87606266d7a0b4}{Write\+\_\+data}} (string)
+\item 
+double \mbox{\hyperlink{class_pump_a8227f365638a800320961e5589fcaf31}{Get\+\_\+dprop}} (string)
+\item 
+void \mbox{\hyperlink{class_pump_a1e47f691555bed9a8afa98076e1c11c5}{Update\+Internal}} (double)
+\item 
+void \mbox{\hyperlink{class_pump_a8ba51aa76625073d2fc8aeafac27d60b}{Update\+Time}} (double)
+\item 
+void \mbox{\hyperlink{class_pump_aaafa03cf56117e629c1289deaba34513}{Set\+\_\+string\+\_\+prop}} (string, string)
+\item 
+void \mbox{\hyperlink{class_pump_a85fdbbdb301a2ffa5b11beeb8f804431}{Add\+\_\+transient}} (string, double, double)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_p_s_toolbox_base_edge_ae5dcabbe9cf289d0ad419a6b1a903fd9}{PSToolbox\+Base\+Edge}} (const string \mbox{\hyperlink{class_p_s_toolbox_base_edge_aae9cb0874655893e409b145fe256570a}{edge\+\_\+type}}, const string \mbox{\hyperlink{class_p_s_toolbox_base_edge_a3b4da68ffb04db1c11898f3d53f46345}{name}}, const string n1, const string n2)
+\item 
+virtual \mbox{\hyperlink{class_p_s_toolbox_base_edge_a2292b6b435b696cc29493d09f43fbf65}{\texorpdfstring{$\sim$}{\string~}\+PSToolbox\+Base\+Edge}} ()
+\item 
+string \mbox{\hyperlink{class_p_s_toolbox_base_edge_aac5d028f66e59fa00ea43ed11c4174ca}{Get\+\_\+name}} ()
+\item 
+string \mbox{\hyperlink{class_p_s_toolbox_base_edge_a15e7c020c3160301c487b45f23ad4453}{Get\+\_\+type}} ()
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a7c65f75c7ab39eb4d4771d70e2a2f479}{Set\+\_\+t}} (double tnew)
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a6a9467311884e28db1b4664c599a3a30}{Get\+\_\+t}} ()
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a99daaac3714e8cfafca1def01fbc8efc}{Get\+\_\+dt}} ()
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae0ba8e08d2304a6f7b9cdc61619e772c}{Get\+\_\+tnext}} ()
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_base_edge_aa6856b33f6ed4d341e8a95532ecf0ed6}{Set\+\_\+\+DEBUG}} (bool newval)
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a903801bf8174255041aea9547283b8d2}{Set\+\_\+Q}} (double newval)
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a640bca714eb3eec11b73f907a32ec264}{Set\+\_\+p1}} (double newval)
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0940a1bda2f70926904472aae2a5bb5e}{Set\+\_\+p2}} (double newval)
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_afae9361aedc8ca0ed48ca0d39f2be49c}{Get\+\_\+Q}} ()
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_abd8d054059e5c588ad9b802f55ad8c43}{Get\+\_\+p1}} ()
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a606f24ed9cef6fb267e619cf6cfe4c56}{Get\+\_\+p2}} ()
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a989266da88c5dea78b56f6fada2ff97c}{Set\+\_\+dt\+\_\+out}} (double val)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ double $>$ \mbox{\hyperlink{class_pump_acb5cb0e6831fec5301f6522a32e6c336}{coeff\+\_\+H}}
+\item 
+vector$<$ double $>$ \mbox{\hyperlink{class_pump_adb0e06927835f295b7ceaab07b522457}{coeff\+\_\+P}}
+\item 
+double \mbox{\hyperlink{class_pump_ab793c907348605fb2e42f0ae7c5f0617}{n\+\_\+nom}}
+\item 
+double \mbox{\hyperlink{class_pump_a4faeb826b0a81ccb9bab25a903640f75}{theta}}
+\item 
+double \mbox{\hyperlink{class_pump_a25d5fc08bf1158f04ed8f4f6204188af}{Q\+\_\+nom}}
+\item 
+double \mbox{\hyperlink{class_pump_ac4ce644472fe2202c8f06d7ab7224d37}{H\+\_\+nom}}
+\item 
+double \mbox{\hyperlink{class_pump_a6dcb961f22e34904c9ab8a8cd26b9d1a}{rho}}
+\item 
+double \mbox{\hyperlink{class_pump_a05c5504f8cf21c8c180e406fa6724f4b}{Tmax}}
+\item 
+vector$<$ vector$<$ double $>$ $>$ \mbox{\hyperlink{class_pump_a68eacd4c88d414ed8ba362aa17a9609e}{data}}
+\item 
+vector$<$ double $>$ \mbox{\hyperlink{class_pump_a234f37f1254b0da0d6051b357572f282}{tmpvec}}
+\item 
+string \mbox{\hyperlink{class_pump_a55f52d36647a5d7e68206dba8951bf1d}{fname}}
+\item 
+bool \mbox{\hyperlink{class_pump_a7e66979fa123d021ec34665cce781051}{use\+\_\+true\+\_\+\+H\+\_\+curve}}
+\item 
+int \mbox{\hyperlink{class_pump_abca027e8ffc4c3084c3dae68a5d276a9}{state}}
+\item 
+double \mbox{\hyperlink{class_pump_ac9f99fab9bcbd7d054377d3868107a77}{last\+\_\+statechange}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}}}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_p_s_toolbox_base_edge_a3b4da68ffb04db1c11898f3d53f46345}{name}}
+\item 
+string \mbox{\hyperlink{class_p_s_toolbox_base_edge_aae9cb0874655893e409b145fe256570a}{edge\+\_\+type}}
+\item 
+string \mbox{\hyperlink{class_p_s_toolbox_base_edge_a2d9ddbc23532f9d8a66b188e8a27e43c}{node\+\_\+from}}
+\item 
+string \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0d9bd961c5522a605baeb22b0f99af8d}{node\+\_\+to}}
+\item 
+bool \mbox{\hyperlink{class_p_s_toolbox_base_edge_a24d0bdb54e1ef80a07b1d0a53f512e15}{save\+\_\+data}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae8cd470bcb891f1e9b283dacde4e9dd5}{t}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_ab0ec7fe898994519d478a13ef2011383}{dt}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a6e6d0ff908fe7190b311c1772277307e}{p1}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a09a1c644b0df32b372ce63d71d597eb4}{p2}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a856e2819a845ad99c591445ddc0f4f53}{g}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a48dd5476af926578963de98aa86703c3}{n\+\_\+act}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a7738ae266f40802465d161156de1c41e}{n\+\_\+act\+\_\+new}}
+\item 
+bool \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae4135ab42424ba358454286171dda4b2}{DEBUG}}
+\item 
+bool \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4936aec9108a7e3f2535b55642efabf1}{is\+\_\+rigid\+\_\+element}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a1623eacb50e05e8764a4eaef553d19f0}{dt\+\_\+out}}
+\item 
+vector$<$ string $>$ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a8448bfdfafbbd7bcee5bdbed719e3587}{transient\+\_\+type}}
+\item 
+vector$<$ double $>$ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ad61d3abbcb72972c9358dac1b992e978}{transient\+\_\+time}}
+\item 
+vector$<$ double $>$ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ab1244c7f37527f27e0d941650084cc9c}{transient\+\_\+val}}
+\item 
+vector$<$ bool $>$ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ad9cbd59340f5531b215d8b536880e302}{transient\+\_\+triggered}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_pump_ab2344d540685c951c3166e56bdc47b90}\index{Pump@{Pump}!Pump@{Pump}}
+\index{Pump@{Pump}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{Pump()}{Pump()}}
+{\footnotesize\ttfamily \label{class_pump_ab2344d540685c951c3166e56bdc47b90} 
+Pump\+::\+Pump (\begin{DoxyParamCaption}\item[{const string}]{\+\_\+name}{, }\item[{const string}]{\+\_\+cspe\+\_\+name}{, }\item[{const string}]{\+\_\+cspv\+\_\+name}{, }\item[{double}]{\+\_\+rho}{, }\item[{double}]{\+\_\+\+Q\+\_\+nom}{, }\item[{double}]{\+\_\+\+H\+\_\+nom}{, }\item[{vector$<$ double $>$ \&}]{coeff\+\_\+H}{, }\item[{vector$<$ double $>$ \&}]{coeff\+\_\+P}{, }\item[{double}]{n\+\_\+nom}{, }\item[{double}]{n\+\_\+act}{, }\item[{double}]{theta}{, }\item[{bool}]{save\+\_\+data}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_pump_a267110970a4eb99ef63014945e372762}\index{Pump@{Pump}!````~Pump@{\texorpdfstring{$\sim$}{\string~}Pump}}
+\index{````~Pump@{\texorpdfstring{$\sim$}{\string~}Pump}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Pump()}{\string~Pump()}}
+{\footnotesize\ttfamily \label{class_pump_a267110970a4eb99ef63014945e372762} 
+Pump\+::\texorpdfstring{$\sim$}{\string~}\+Pump (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_pump_a85fdbbdb301a2ffa5b11beeb8f804431}\index{Pump@{Pump}!Add\_transient@{Add\_transient}}
+\index{Add\_transient@{Add\_transient}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{Add\_transient()}{Add\_transient()}}
+{\footnotesize\ttfamily \label{class_pump_a85fdbbdb301a2ffa5b11beeb8f804431} 
+void Pump\+::\+Add\+\_\+transient (\begin{DoxyParamCaption}\item[{string}]{\+\_\+type}{, }\item[{double}]{\+\_\+when}{, }\item[{double}]{\+\_\+val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4bfd4f3f231f041db9d47725f96e7f04}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_pump_a8227f365638a800320961e5589fcaf31}\index{Pump@{Pump}!Get\_dprop@{Get\_dprop}}
+\index{Get\_dprop@{Get\_dprop}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{Get\_dprop()}{Get\_dprop()}}
+{\footnotesize\ttfamily \label{class_pump_a8227f365638a800320961e5589fcaf31} 
+double Pump\+::\+Get\+\_\+dprop (\begin{DoxyParamCaption}\item[{string}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a9e72bd3b5bf2b0b5869a42615780fcd5}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_pump_ab9f8304876cbe4aec4554bdd69c9bd63}\index{Pump@{Pump}!Get\_Q@{Get\_Q}}
+\index{Get\_Q@{Get\_Q}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{Get\_Q()}{Get\_Q()}}
+{\footnotesize\ttfamily \label{class_pump_ab9f8304876cbe4aec4554bdd69c9bd63} 
+double Pump\+::\+Get\+\_\+Q (\begin{DoxyParamCaption}\item[{double}]{dh}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_pump_a771c88d98c3f39e9be3aea9cb0781e3f}\index{Pump@{Pump}!GetAlphaAtEnd@{GetAlphaAtEnd}}
+\index{GetAlphaAtEnd@{GetAlphaAtEnd}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{GetAlphaAtEnd()}{GetAlphaAtEnd()}}
+{\footnotesize\ttfamily \label{class_pump_a771c88d98c3f39e9be3aea9cb0781e3f} 
+void Pump\+::\+Get\+Alpha\+At\+End (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{double \&}]{LHS}{, }\item[{double \&}]{coeff\+\_\+Q}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_aea2c7b8c320f8c38f80bcef33004e203}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_pump_aa93e335985c0fd254ac5f3675e61f753}\index{Pump@{Pump}!GetBetaAtFront@{GetBetaAtFront}}
+\index{GetBetaAtFront@{GetBetaAtFront}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{GetBetaAtFront()}{GetBetaAtFront()}}
+{\footnotesize\ttfamily \label{class_pump_aa93e335985c0fd254ac5f3675e61f753} 
+void Pump\+::\+Get\+Beta\+At\+Front (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{double \&}]{LHS}{, }\item[{double \&}]{coeff\+\_\+Q}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a5de874c4d21ca6317cb4cfd43ece97aa}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_pump_af4a2894b52c17d80ea2d7c4d25620457}\index{Pump@{Pump}!GetEdgeEquationCoeffs@{GetEdgeEquationCoeffs}}
+\index{GetEdgeEquationCoeffs@{GetEdgeEquationCoeffs}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{GetEdgeEquationCoeffs()}{GetEdgeEquationCoeffs()}}
+{\footnotesize\ttfamily \label{class_pump_af4a2894b52c17d80ea2d7c4d25620457} 
+void Pump\+::\+Get\+Edge\+Equation\+Coeffs (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{bool}]{is\+\_\+front}{, }\item[{double \&}]{LHS}{, }\item[{double \&}]{coeff\+\_\+Q}{, }\item[{double \&}]{coeff\+\_\+p1}{, }\item[{double \&}]{coeff\+\_\+p2}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_af6bebd7c3776cea69a35c22e6a52e44e}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_pump_a161da2fda7dde2170116e7b23a5311c4}\index{Pump@{Pump}!GetLargePressureValues@{GetLargePressureValues}}
+\index{GetLargePressureValues@{GetLargePressureValues}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{GetLargePressureValues()}{GetLargePressureValues()}}
+{\footnotesize\ttfamily \label{class_pump_a161da2fda7dde2170116e7b23a5311c4} 
+void Pump\+::\+Get\+Large\+Pressure\+Values (\begin{DoxyParamCaption}\item[{double}]{}{, }\item[{vector$<$ double $>$ \&}]{}{, }\item[{vector$<$ double $>$ \&}]{}{, }\item[{vector$<$ double $>$ \&}]{}{, }\item[{vector$<$ string $>$ \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a2ad94e8cf513d6443cecf7f13b449988}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_pump_a92658b67828d24d9987a16de53a962e0}\index{Pump@{Pump}!GetSmallPressureValues@{GetSmallPressureValues}}
+\index{GetSmallPressureValues@{GetSmallPressureValues}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{GetSmallPressureValues()}{GetSmallPressureValues()}}
+{\footnotesize\ttfamily \label{class_pump_a92658b67828d24d9987a16de53a962e0} 
+void Pump\+::\+Get\+Small\+Pressure\+Values (\begin{DoxyParamCaption}\item[{double}]{}{, }\item[{vector$<$ double $>$ \&}]{}{, }\item[{vector$<$ double $>$ \&}]{}{, }\item[{vector$<$ double $>$ \&}]{}{, }\item[{vector$<$ string $>$ \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae83f418cc047ab86aa92b89bfc3b4ce8}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_pump_a9c6b57c3ade0e08809973e605c16af79}\index{Pump@{Pump}!H\_fun@{H\_fun}}
+\index{H\_fun@{H\_fun}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{H\_fun()}{H\_fun()}}
+{\footnotesize\ttfamily \label{class_pump_a9c6b57c3ade0e08809973e605c16af79} 
+double Pump\+::\+H\+\_\+fun (\begin{DoxyParamCaption}\item[{double}]{Q}{, }\item[{double}]{n}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_pump_a54d74fe35ea7ec3c7542bc11ce15c97e}\index{Pump@{Pump}!H\_fun\_lin@{H\_fun\_lin}}
+\index{H\_fun\_lin@{H\_fun\_lin}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{H\_fun\_lin()}{H\_fun\_lin()}}
+{\footnotesize\ttfamily \label{class_pump_a54d74fe35ea7ec3c7542bc11ce15c97e} 
+void Pump\+::\+H\+\_\+fun\+\_\+lin (\begin{DoxyParamCaption}\item[{double}]{Q}{, }\item[{double}]{n}{, }\item[{double \&}]{a0}{, }\item[{double \&}]{a1}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_pump_abd254eee229246ff5bf8db4729f5d162}\index{Pump@{Pump}!Info@{Info}}
+\index{Info@{Info}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{Info()}{Info()}}
+{\footnotesize\ttfamily \label{class_pump_abd254eee229246ff5bf8db4729f5d162} 
+string Pump\+::\+Info (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4cfb66702f57eb57a4acd23c6d361d2f}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_pump_a84bc7e3aeed2e4eec02f782673336985}\index{Pump@{Pump}!Ini@{Ini}}
+\index{Ini@{Ini}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_pump_a84bc7e3aeed2e4eec02f782673336985} 
+void Pump\+::\+Ini (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae2c6ff4b9e22ad8a3692f82b53625eb0}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_pump_a5b9fa08f14f8cf85b7c4b671b66e8e6b}\index{Pump@{Pump}!Ini@{Ini}}
+\index{Ini@{Ini}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_pump_a5b9fa08f14f8cf85b7c4b671b66e8e6b} 
+void Pump\+::\+Ini (\begin{DoxyParamCaption}\item[{double}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a434a2968d633e65cafb2787bc4981c8d}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_pump_a991812970f91dc6e9f993285cae1098f}\index{Pump@{Pump}!Ini@{Ini}}
+\index{Ini@{Ini}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{class_pump_a991812970f91dc6e9f993285cae1098f} 
+void Pump\+::\+Ini (\begin{DoxyParamCaption}\item[{int}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a1a152f3ff28fa36b5b6da17bceb2659e}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_pump_aa993d7f97c438572f85fa565b968b531}\index{Pump@{Pump}!P\_fun@{P\_fun}}
+\index{P\_fun@{P\_fun}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{P\_fun()}{P\_fun()}}
+{\footnotesize\ttfamily \label{class_pump_aa993d7f97c438572f85fa565b968b531} 
+double Pump\+::\+P\+\_\+fun (\begin{DoxyParamCaption}\item[{double}]{Q}{, }\item[{double}]{n}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_pump_a121d41b26c7b6dc15e844bb720ffa187}\index{Pump@{Pump}!Save\_data@{Save\_data}}
+\index{Save\_data@{Save\_data}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{Save\_data()}{Save\_data()}}
+{\footnotesize\ttfamily \label{class_pump_a121d41b26c7b6dc15e844bb720ffa187} 
+void Pump\+::\+Save\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a471c2238911ad58eb45e8afabcf7420d}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_pump_af7902801dd488cdc95e0f5f5d7ec072d}\index{Pump@{Pump}!Set\_BC\_Left@{Set\_BC\_Left}}
+\index{Set\_BC\_Left@{Set\_BC\_Left}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{Set\_BC\_Left()}{Set\_BC\_Left()}}
+{\footnotesize\ttfamily \label{class_pump_af7902801dd488cdc95e0f5f5d7ec072d} 
+void Pump\+::\+Set\+\_\+\+BC\+\_\+\+Left (\begin{DoxyParamCaption}\item[{string}]{type}{, }\item[{double}]{val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4a8e4feaa0adcb81485fe7ea79b953e3}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_pump_a363c0296603acf1db90bbac1f1a98ae1}\index{Pump@{Pump}!Set\_BC\_Right@{Set\_BC\_Right}}
+\index{Set\_BC\_Right@{Set\_BC\_Right}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{Set\_BC\_Right()}{Set\_BC\_Right()}}
+{\footnotesize\ttfamily \label{class_pump_a363c0296603acf1db90bbac1f1a98ae1} 
+void Pump\+::\+Set\+\_\+\+BC\+\_\+\+Right (\begin{DoxyParamCaption}\item[{string}]{type}{, }\item[{double}]{val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a3f4024efd82f0dc3b46ba987f3594ae7}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_pump_aaafa03cf56117e629c1289deaba34513}\index{Pump@{Pump}!Set\_string\_prop@{Set\_string\_prop}}
+\index{Set\_string\_prop@{Set\_string\_prop}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{Set\_string\_prop()}{Set\_string\_prop()}}
+{\footnotesize\ttfamily \label{class_pump_aaafa03cf56117e629c1289deaba34513} 
+void Pump\+::\+Set\+\_\+string\+\_\+prop (\begin{DoxyParamCaption}\item[{string}]{}{, }\item[{string}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a68bf3dade1793a9d247e28b648a1947d}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_pump_a1e47f691555bed9a8afa98076e1c11c5}\index{Pump@{Pump}!UpdateInternal@{UpdateInternal}}
+\index{UpdateInternal@{UpdateInternal}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{UpdateInternal()}{UpdateInternal()}}
+{\footnotesize\ttfamily \label{class_pump_a1e47f691555bed9a8afa98076e1c11c5} 
+void Pump\+::\+Update\+Internal (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a9f3cbf5b741dcd4e923e5ae0aa91a46f}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_pump_a8ba51aa76625073d2fc8aeafac27d60b}\index{Pump@{Pump}!UpdateTime@{UpdateTime}}
+\index{UpdateTime@{UpdateTime}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{UpdateTime()}{UpdateTime()}}
+{\footnotesize\ttfamily \label{class_pump_a8ba51aa76625073d2fc8aeafac27d60b} 
+void Pump\+::\+Update\+Time (\begin{DoxyParamCaption}\item[{double}]{\+\_\+t}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_ad767d5a177bb91562a880b57c6ba5fe0}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_pump_ab6b61561fa0d30a95c87606266d7a0b4}\index{Pump@{Pump}!Write\_data@{Write\_data}}
+\index{Write\_data@{Write\_data}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{Write\_data()}{Write\_data()}}
+{\footnotesize\ttfamily \label{class_pump_ab6b61561fa0d30a95c87606266d7a0b4} 
+void Pump\+::\+Write\+\_\+data (\begin{DoxyParamCaption}\item[{string}]{folder}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a80ed1e641d737c138cc1ae74826ce128}{PSToolbox\+Base\+Edge}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_pump_acb5cb0e6831fec5301f6522a32e6c336}\index{Pump@{Pump}!coeff\_H@{coeff\_H}}
+\index{coeff\_H@{coeff\_H}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{coeff\_H}{coeff\_H}}
+{\footnotesize\ttfamily \label{class_pump_acb5cb0e6831fec5301f6522a32e6c336} 
+vector$<$double$>$ Pump\+::coeff\+\_\+H}
+
+\Hypertarget{class_pump_adb0e06927835f295b7ceaab07b522457}\index{Pump@{Pump}!coeff\_P@{coeff\_P}}
+\index{coeff\_P@{coeff\_P}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{coeff\_P}{coeff\_P}}
+{\footnotesize\ttfamily \label{class_pump_adb0e06927835f295b7ceaab07b522457} 
+vector$<$double$>$ Pump\+::coeff\+\_\+P}
+
+\Hypertarget{class_pump_a68eacd4c88d414ed8ba362aa17a9609e}\index{Pump@{Pump}!data@{data}}
+\index{data@{data}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily \label{class_pump_a68eacd4c88d414ed8ba362aa17a9609e} 
+vector$<$ vector$<$double$>$ $>$ Pump\+::data}
+
+\Hypertarget{class_pump_a55f52d36647a5d7e68206dba8951bf1d}\index{Pump@{Pump}!fname@{fname}}
+\index{fname@{fname}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{fname}{fname}}
+{\footnotesize\ttfamily \label{class_pump_a55f52d36647a5d7e68206dba8951bf1d} 
+string Pump\+::fname}
+
+\Hypertarget{class_pump_ac4ce644472fe2202c8f06d7ab7224d37}\index{Pump@{Pump}!H\_nom@{H\_nom}}
+\index{H\_nom@{H\_nom}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{H\_nom}{H\_nom}}
+{\footnotesize\ttfamily \label{class_pump_ac4ce644472fe2202c8f06d7ab7224d37} 
+double Pump\+::\+H\+\_\+nom}
+
+\Hypertarget{class_pump_ac9f99fab9bcbd7d054377d3868107a77}\index{Pump@{Pump}!last\_statechange@{last\_statechange}}
+\index{last\_statechange@{last\_statechange}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{last\_statechange}{last\_statechange}}
+{\footnotesize\ttfamily \label{class_pump_ac9f99fab9bcbd7d054377d3868107a77} 
+double Pump\+::last\+\_\+statechange}
+
+\Hypertarget{class_pump_ab793c907348605fb2e42f0ae7c5f0617}\index{Pump@{Pump}!n\_nom@{n\_nom}}
+\index{n\_nom@{n\_nom}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{n\_nom}{n\_nom}}
+{\footnotesize\ttfamily \label{class_pump_ab793c907348605fb2e42f0ae7c5f0617} 
+double Pump\+::n\+\_\+nom}
+
+\Hypertarget{class_pump_a25d5fc08bf1158f04ed8f4f6204188af}\index{Pump@{Pump}!Q\_nom@{Q\_nom}}
+\index{Q\_nom@{Q\_nom}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{Q\_nom}{Q\_nom}}
+{\footnotesize\ttfamily \label{class_pump_a25d5fc08bf1158f04ed8f4f6204188af} 
+double Pump\+::\+Q\+\_\+nom}
+
+\Hypertarget{class_pump_a6dcb961f22e34904c9ab8a8cd26b9d1a}\index{Pump@{Pump}!rho@{rho}}
+\index{rho@{rho}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{rho}{rho}}
+{\footnotesize\ttfamily \label{class_pump_a6dcb961f22e34904c9ab8a8cd26b9d1a} 
+double Pump\+::rho}
+
+\Hypertarget{class_pump_abca027e8ffc4c3084c3dae68a5d276a9}\index{Pump@{Pump}!state@{state}}
+\index{state@{state}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily \label{class_pump_abca027e8ffc4c3084c3dae68a5d276a9} 
+int Pump\+::state}
+
+\Hypertarget{class_pump_a4faeb826b0a81ccb9bab25a903640f75}\index{Pump@{Pump}!theta@{theta}}
+\index{theta@{theta}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{theta}{theta}}
+{\footnotesize\ttfamily \label{class_pump_a4faeb826b0a81ccb9bab25a903640f75} 
+double Pump\+::theta}
+
+\Hypertarget{class_pump_a05c5504f8cf21c8c180e406fa6724f4b}\index{Pump@{Pump}!Tmax@{Tmax}}
+\index{Tmax@{Tmax}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{Tmax}{Tmax}}
+{\footnotesize\ttfamily \label{class_pump_a05c5504f8cf21c8c180e406fa6724f4b} 
+double Pump\+::\+Tmax}
+
+\Hypertarget{class_pump_a234f37f1254b0da0d6051b357572f282}\index{Pump@{Pump}!tmpvec@{tmpvec}}
+\index{tmpvec@{tmpvec}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{tmpvec}{tmpvec}}
+{\footnotesize\ttfamily \label{class_pump_a234f37f1254b0da0d6051b357572f282} 
+vector$<$double$>$ Pump\+::tmpvec}
+
+\Hypertarget{class_pump_a7e66979fa123d021ec34665cce781051}\index{Pump@{Pump}!use\_true\_H\_curve@{use\_true\_H\_curve}}
+\index{use\_true\_H\_curve@{use\_true\_H\_curve}!Pump@{Pump}}
+\doxysubsubsection{\texorpdfstring{use\_true\_H\_curve}{use\_true\_H\_curve}}
+{\footnotesize\ttfamily \label{class_pump_a7e66979fa123d021ec34665cce781051} 
+bool Pump\+::use\+\_\+true\+\_\+\+H\+\_\+curve}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_pump_8h}{Pump.\+h}}\item 
+\mbox{\hyperlink{_pump_8cpp}{Pump.\+cpp}}\end{DoxyCompactItemize}

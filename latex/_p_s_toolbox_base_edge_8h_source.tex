@@ -3,29 +3,85 @@
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PSToolboxBaseEdge\_H}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PSToolboxBaseEdge\_H}}
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <iostream>}}
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
-\DoxyCodeLine{00005\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
 \DoxyCodeLine{00006\ }
-\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolboxBaseEdge}}}
-\DoxyCodeLine{00008\ \{}
-\DoxyCodeLine{00009\ \ \ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a3b4da68ffb04db1c11898f3d53f46345}{name}};\ }
-\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_aa5eee494325f2d253bcbd52c5b9456e9}{type}};}
-\DoxyCodeLine{00012\ }
-\DoxyCodeLine{00013\ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolboxBaseEdge}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a3b4da68ffb04db1c11898f3d53f46345}{name}});}
-\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a3664abfc29dc1cbdf71ac85e45fd2302}{\string~PSToolboxBaseEdge}}()\{\};}
-\DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_aac5d028f66e59fa00ea43ed11c4174ca}{Get\_name}}()\{\textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a3b4da68ffb04db1c11898f3d53f46345}{name}};\};}
-\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a66e6f5d1e28dd1c0c635e127a9b41e71}{Get\_type}}()\{\textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_aa5eee494325f2d253bcbd52c5b9456e9}{type}};\};}
-\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_aa7743b74530c578ce3ca0592938899b0}{Get\_t}}()=0;}
-\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a7e410f4db9a48f4082ff155fc53b8787}{Get\_dt}}()=0;}
-\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_afefed4315cd20e5a5cfea459da6e4977}{Get\_tnext}}()=0;}
-\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a1a152f3ff28fa36b5b6da17bceb2659e}{Ini}}(\textcolor{keywordtype}{int})=0;}
-\DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4cfb66702f57eb57a4acd23c6d361d2f}{Info}}()=0;}
-\DoxyCodeLine{00025\ \};}
-\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00007\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolboxBaseEdge}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a3b4da68ffb04db1c11898f3d53f46345}{name}};\ }
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_aae9cb0874655893e409b145fe256570a}{edge\_type}};}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a2d9ddbc23532f9d8a66b188e8a27e43c}{node\_from}},\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0d9bd961c5522a605baeb22b0f99af8d}{node\_to}};}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a24d0bdb54e1ef80a07b1d0a53f512e15}{save\_data}};}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae8cd470bcb891f1e9b283dacde4e9dd5}{t}},\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ab0ec7fe898994519d478a13ef2011383}{dt}};}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}},\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a6e6d0ff908fe7190b311c1772277307e}{p1}},\mbox{\hyperlink{class_p_s_toolbox_base_edge_a09a1c644b0df32b372ce63d71d597eb4}{p2}};}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a856e2819a845ad99c591445ddc0f4f53}{g}};}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a48dd5476af926578963de98aa86703c3}{n\_act}},\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a7738ae266f40802465d161156de1c41e}{n\_act\_new}};}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae4135ab42424ba358454286171dda4b2}{DEBUG}};}
+\DoxyCodeLine{00021\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4936aec9108a7e3f2535b55642efabf1}{is\_rigid\_element}};}
+\DoxyCodeLine{00022\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a1623eacb50e05e8764a4eaef553d19f0}{dt\_out}};}
+\DoxyCodeLine{00023\ \ \ \ \ vector<string>\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a8448bfdfafbbd7bcee5bdbed719e3587}{transient\_type}};}
+\DoxyCodeLine{00024\ \ \ \ \ vector<double>\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ad61d3abbcb72972c9358dac1b992e978}{transient\_time}};}
+\DoxyCodeLine{00025\ \ \ \ \ vector<double>\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ab1244c7f37527f27e0d941650084cc9c}{transient\_val}};}
+\DoxyCodeLine{00026\ \ \ \ \ vector<bool>\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ad9cbd59340f5531b215d8b536880e302}{transient\_triggered}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae5dcabbe9cf289d0ad419a6b1a903fd9}{PSToolboxBaseEdge}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_aae9cb0874655893e409b145fe256570a}{edge\_type}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a3b4da68ffb04db1c11898f3d53f46345}{name}},\ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ n1,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ n2);}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a2292b6b435b696cc29493d09f43fbf65}{\string~PSToolboxBaseEdge}}()\{\};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_aac5d028f66e59fa00ea43ed11c4174ca}{Get\_name}}()\{\textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a3b4da68ffb04db1c11898f3d53f46345}{name}};\};}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a15e7c020c3160301c487b45f23ad4453}{Get\_type}}()\{\textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_aae9cb0874655893e409b145fe256570a}{edge\_type}};\};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a7c65f75c7ab39eb4d4771d70e2a2f479}{Set\_t}}(\textcolor{keywordtype}{double}\ tnew)\{\mbox{\hyperlink{class_p_s_toolbox_base_edge_ae8cd470bcb891f1e9b283dacde4e9dd5}{t}}=tnew;\};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a6a9467311884e28db1b4664c599a3a30}{Get\_t}}()\{\textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae8cd470bcb891f1e9b283dacde4e9dd5}{t}};\};}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a99daaac3714e8cfafca1def01fbc8efc}{Get\_dt}}()\{\textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ab0ec7fe898994519d478a13ef2011383}{dt}};\};}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae0ba8e08d2304a6f7b9cdc61619e772c}{Get\_tnext}}()\{\textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae8cd470bcb891f1e9b283dacde4e9dd5}{t}}+\mbox{\hyperlink{class_p_s_toolbox_base_edge_ab0ec7fe898994519d478a13ef2011383}{dt}};\};}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_aa6856b33f6ed4d341e8a95532ecf0ed6}{Set\_DEBUG}}(\textcolor{keywordtype}{bool}\ newval)\{\mbox{\hyperlink{class_p_s_toolbox_base_edge_ae4135ab42424ba358454286171dda4b2}{DEBUG}}=newval;\};}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a903801bf8174255041aea9547283b8d2}{Set\_Q}}(\textcolor{keywordtype}{double}\ newval)\{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}}=newval;}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{comment}{//cout<<endl<<"{}\(\backslash\)t\ edge\ "{}<<name<<"{}:\ PSToolboxBaseEdge::Set\_Q\ -\/>\ Q\ set\ to\ "{}<<Q*3600<<"{}\ m3/h"{};}}
+\DoxyCodeLine{00043\ \ \ \ \ \};}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a640bca714eb3eec11b73f907a32ec264}{Set\_p1}}(\textcolor{keywordtype}{double}\ newval)\{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a6e6d0ff908fe7190b311c1772277307e}{p1}}=newval;}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{comment}{//cout<<endl<<"{}\(\backslash\)t\ edge\ "{}<<name<<"{}:\ PSToolboxBaseEdge::Set\_p1\ -\/>\ p1\ set\ to\ "{}<<p1/1000/9.81<<"{}\ mwc"{};}}
+\DoxyCodeLine{00047\ \ \ \ \ \};}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0940a1bda2f70926904472aae2a5bb5e}{Set\_p2}}(\textcolor{keywordtype}{double}\ newval)\{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a09a1c644b0df32b372ce63d71d597eb4}{p2}}=newval;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{comment}{//cout<<endl<<"{}\(\backslash\)t\ edge\ "{}<<name<<"{}:\ PSToolboxBaseEdge::Set\_p2\ -\/>\ p2\ set\ to\ "{}<<p2/1000/9.81<<"{}\ mwc"{};}}
+\DoxyCodeLine{00051\ \ \ \ \ \};}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_afae9361aedc8ca0ed48ca0d39f2be49c}{Get\_Q}}()\{\textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}};\};}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_abd8d054059e5c588ad9b802f55ad8c43}{Get\_p1}}()\{\textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a6e6d0ff908fe7190b311c1772277307e}{p1}};\};}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a606f24ed9cef6fb267e619cf6cfe4c56}{Get\_p2}}()\{\textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a09a1c644b0df32b372ce63d71d597eb4}{p2}};\};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a1a152f3ff28fa36b5b6da17bceb2659e}{Ini}}(\textcolor{keywordtype}{int})=0;}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae2c6ff4b9e22ad8a3692f82b53625eb0}{Ini}}()=0;}
+\DoxyCodeLine{00059\ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a434a2968d633e65cafb2787bc4981c8d}{Ini}}(\textcolor{keywordtype}{double})=0;}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4cfb66702f57eb57a4acd23c6d361d2f}{Info}}()=0;}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4a8e4feaa0adcb81485fe7ea79b953e3}{Set\_BC\_Left}}(\textcolor{keywordtype}{string}\ type,\ \textcolor{keywordtype}{double}\ val)=0;}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a3f4024efd82f0dc3b46ba987f3594ae7}{Set\_BC\_Right}}(\textcolor{keywordtype}{string}\ type,\ \textcolor{keywordtype}{double}\ val)=0;}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a2ad94e8cf513d6443cecf7f13b449988}{GetLargePressureValues}}(\textcolor{keywordtype}{double},\ vector<double>\&,\ vector<double>\&,vector<double>\&,\ vector<string>\&)=0;}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae83f418cc047ab86aa92b89bfc3b4ce8}{GetSmallPressureValues}}(\textcolor{keywordtype}{double},\ vector<double>\&,\ vector<double>\&,vector<double>\&,\ vector<string>\&)=0;}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a471c2238911ad58eb45e8afabcf7420d}{Save\_data}}()=0;}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a80ed1e641d737c138cc1ae74826ce128}{Write\_data}}(\textcolor{keywordtype}{string}\ folder)=0;}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a5de874c4d21ca6317cb4cfd43ece97aa}{GetBetaAtFront}}(\textcolor{keywordtype}{double}\ t\_target,\ \textcolor{keywordtype}{double}\ \&\ LHS,\ \textcolor{keywordtype}{double}\ \&\ coeff\_Q)=0;}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_aea2c7b8c320f8c38f80bcef33004e203}{GetAlphaAtEnd}}(\textcolor{keywordtype}{double}\ t\_target,\ \textcolor{keywordtype}{double}\ \&\ LHS,\ \textcolor{keywordtype}{double}\ \&coeff\_Q)=0;}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_af6bebd7c3776cea69a35c22e6a52e44e}{GetEdgeEquationCoeffs}}(\textcolor{keywordtype}{double}\ t\_target,\ \textcolor{keywordtype}{bool}\ is\_front,\ \textcolor{keywordtype}{double}\ \&\ LHS,\ \textcolor{keywordtype}{double}\ \&\ coeff\_Q,\textcolor{keywordtype}{double}\ \&\ coeff\_p1,\textcolor{keywordtype}{double}\ \&\ coeff\_p2)=0;}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a9e72bd3b5bf2b0b5869a42615780fcd5}{Get\_dprop}}(\textcolor{keywordtype}{string})=0;}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a9f3cbf5b741dcd4e923e5ae0aa91a46f}{UpdateInternal}}(\textcolor{keywordtype}{double}\ t\_target)=0;}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ad767d5a177bb91562a880b57c6ba5fe0}{UpdateTime}}(\textcolor{keywordtype}{double})=0;}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a68bf3dade1793a9d247e28b648a1947d}{Set\_string\_prop}}(\textcolor{keywordtype}{string},\textcolor{keywordtype}{string})=0;}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4bfd4f3f231f041db9d47725f96e7f04}{Add\_transient}}(\textcolor{keywordtype}{string},\textcolor{keywordtype}{double},\textcolor{keywordtype}{double})=0;}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a989266da88c5dea78b56f6fada2ff97c}{Set\_dt\_out}}(\textcolor{keywordtype}{double}\ val)\{\mbox{\hyperlink{class_p_s_toolbox_base_edge_a1623eacb50e05e8764a4eaef553d19f0}{dt\_out}}=val;\};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \};}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

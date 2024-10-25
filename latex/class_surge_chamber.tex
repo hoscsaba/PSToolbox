@@ -1,0 +1,503 @@
+\doxysection{Surge\+Chamber Class Reference}
+\hypertarget{class_surge_chamber}{}\label{class_surge_chamber}\index{SurgeChamber@{SurgeChamber}}
+
+
+{\ttfamily \#include $<$Surge\+Chamber.\+h$>$}
+
+Inheritance diagram for Surge\+Chamber\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_surge_chamber}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_surge_chamber_a855f22a7a80ac06fadddb862e0e473c7}{Get\+\_\+Q}} (double dh)
+\item 
+double \mbox{\hyperlink{class_surge_chamber_a5deb1006afc0cf9443cefc1cd3dfa7af}{H\+\_\+fun}} (double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}})
+\item 
+void \mbox{\hyperlink{class_surge_chamber_a2a2a2f5fdbf0aca990ef57d81aaf495e}{H\+\_\+fun\+\_\+lin}} (double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}}, double \&a0, double \&a1)
+\item 
+\mbox{\hyperlink{class_surge_chamber_a3b68ce2da0ebcb2935d3de218f347947}{Surge\+Chamber}} (const string \+\_\+name, const string \+\_\+cspv\+\_\+name, double \+\_\+rho, double \mbox{\hyperlink{class_surge_chamber_a779d1160f581948e4b5dfbed6d0ccdfb}{Vmax}}, double Vgas\+\_\+ini, double pgas\+\_\+ini, bool \mbox{\hyperlink{class_p_s_toolbox_base_edge_a24d0bdb54e1ef80a07b1d0a53f512e15}{save\+\_\+data}})
+\item 
+\mbox{\hyperlink{class_surge_chamber_ab41801b6206f8b90a488406dd7755a24}{\texorpdfstring{$\sim$}{\string~}\+Surge\+Chamber}} ()
+\item 
+void \mbox{\hyperlink{class_surge_chamber_a08fa473a453347fbc3e7be066525fbf7}{Ini}} (int)
+\item 
+void \mbox{\hyperlink{class_surge_chamber_a9d347335d11cb624c8dab697192c63c0}{Ini}} ()
+\item 
+void \mbox{\hyperlink{class_surge_chamber_aca37d9481994c7f80730843c135d8788}{Ini}} (double)
+\item 
+string \mbox{\hyperlink{class_surge_chamber_a1838ace18ffe9b0219c4846652ae0f4d}{Info}} ()
+\item 
+void \mbox{\hyperlink{class_surge_chamber_a7631dfeed2943a859aa4980d87c4a5db}{Get\+Beta\+At\+Front}} (double, double \&, double \&)
+\item 
+void \mbox{\hyperlink{class_surge_chamber_a8f98f24e049ce58e772d5197cc79c2be}{Get\+Alpha\+At\+End}} (double, double \&, double \&)
+\item 
+void \mbox{\hyperlink{class_surge_chamber_a54178db33e2edf57e0722c8e98d27e9a}{Get\+Edge\+Equation\+Coeffs}} (double, bool, double \&, double \&, double \&, double \&)
+\item 
+void \mbox{\hyperlink{class_surge_chamber_a9636c4f393a17c8756f0a53e5da27e71}{Set\+\_\+\+BC\+\_\+\+Left}} (string type, double val)
+\item 
+void \mbox{\hyperlink{class_surge_chamber_abd054fbd55f90aad956f7f43522b6901}{Set\+\_\+\+BC\+\_\+\+Right}} (string type, double val)
+\item 
+void \mbox{\hyperlink{class_surge_chamber_ab45495704a67404b9bf8e5be1d195e98}{Get\+Large\+Pressure\+Values}} (double, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ string $>$ \&)
+\item 
+void \mbox{\hyperlink{class_surge_chamber_a920df349aa31ff18bc8530de8a609a7a}{Get\+Small\+Pressure\+Values}} (double, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ string $>$ \&)
+\item 
+void \mbox{\hyperlink{class_surge_chamber_affef4f9dea350bce82df0be30352ea16}{Save\+\_\+data}} ()
+\item 
+void \mbox{\hyperlink{class_surge_chamber_a72bc74def955bcc65d9eb0079f88253b}{Write\+\_\+data}} (string)
+\item 
+double \mbox{\hyperlink{class_surge_chamber_a28ca3cced84166716119131a5b9e7193}{Get\+\_\+dprop}} (string)
+\item 
+void \mbox{\hyperlink{class_surge_chamber_a6b97aaf1041e1efb01de757dcb87cfec}{Update\+Internal}} (double)
+\item 
+void \mbox{\hyperlink{class_surge_chamber_a32adc494132deeb670757fad493d669a}{Update\+Time}} (double)
+\item 
+void \mbox{\hyperlink{class_surge_chamber_a719d3b5dc2b4c8c0beea04533e07c878}{Set\+\_\+string\+\_\+prop}} (string, string)
+\item 
+void \mbox{\hyperlink{class_surge_chamber_a6005ddcafec89cbc2b8d05c143e834f9}{Add\+\_\+transient}} (string, double, double)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_p_s_toolbox_base_edge_ae5dcabbe9cf289d0ad419a6b1a903fd9}{PSToolbox\+Base\+Edge}} (const string \mbox{\hyperlink{class_p_s_toolbox_base_edge_aae9cb0874655893e409b145fe256570a}{edge\+\_\+type}}, const string \mbox{\hyperlink{class_p_s_toolbox_base_edge_a3b4da68ffb04db1c11898f3d53f46345}{name}}, const string n1, const string n2)
+\item 
+virtual \mbox{\hyperlink{class_p_s_toolbox_base_edge_a2292b6b435b696cc29493d09f43fbf65}{\texorpdfstring{$\sim$}{\string~}\+PSToolbox\+Base\+Edge}} ()
+\item 
+string \mbox{\hyperlink{class_p_s_toolbox_base_edge_aac5d028f66e59fa00ea43ed11c4174ca}{Get\+\_\+name}} ()
+\item 
+string \mbox{\hyperlink{class_p_s_toolbox_base_edge_a15e7c020c3160301c487b45f23ad4453}{Get\+\_\+type}} ()
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a7c65f75c7ab39eb4d4771d70e2a2f479}{Set\+\_\+t}} (double tnew)
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a6a9467311884e28db1b4664c599a3a30}{Get\+\_\+t}} ()
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a99daaac3714e8cfafca1def01fbc8efc}{Get\+\_\+dt}} ()
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae0ba8e08d2304a6f7b9cdc61619e772c}{Get\+\_\+tnext}} ()
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_base_edge_aa6856b33f6ed4d341e8a95532ecf0ed6}{Set\+\_\+\+DEBUG}} (bool newval)
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a903801bf8174255041aea9547283b8d2}{Set\+\_\+Q}} (double newval)
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a640bca714eb3eec11b73f907a32ec264}{Set\+\_\+p1}} (double newval)
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0940a1bda2f70926904472aae2a5bb5e}{Set\+\_\+p2}} (double newval)
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_afae9361aedc8ca0ed48ca0d39f2be49c}{Get\+\_\+Q}} ()
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_abd8d054059e5c588ad9b802f55ad8c43}{Get\+\_\+p1}} ()
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a606f24ed9cef6fb267e619cf6cfe4c56}{Get\+\_\+p2}} ()
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a989266da88c5dea78b56f6fada2ff97c}{Set\+\_\+dt\+\_\+out}} (double val)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_surge_chamber_a69811aace86466af54310bf50e6c9e5f}{rho}}
+\item 
+double \mbox{\hyperlink{class_surge_chamber_ab897e935afe8c6598d6e6d8fd1e2b954}{Vgas}}
+\item 
+double \mbox{\hyperlink{class_surge_chamber_a1f8cb0be049bdf94ee67edb840e98862}{Vgas\+\_\+old}}
+\item 
+double \mbox{\hyperlink{class_surge_chamber_a61c2ed0542afec1f5b9633ccec6e778f}{pgas\+\_\+old}}
+\item 
+double \mbox{\hyperlink{class_surge_chamber_a779d1160f581948e4b5dfbed6d0ccdfb}{Vmax}}
+\item 
+double \mbox{\hyperlink{class_surge_chamber_a7ec5e9fc581c6472cce6d82a2f52bf26}{t\+\_\+old}}
+\item 
+double \mbox{\hyperlink{class_surge_chamber_abed66372920c2337ce79dd51fac86d7e}{zeta\+\_\+open}}
+\item 
+double \mbox{\hyperlink{class_surge_chamber_a9cf9fee4b224dcf38721c1fb05ff9d50}{zeta\+\_\+closed}}
+\item 
+double \mbox{\hyperlink{class_surge_chamber_a7e946f190f0e9b9b9f739add6fb08adf}{Tmax}}
+\item 
+vector$<$ vector$<$ double $>$ $>$ \mbox{\hyperlink{class_surge_chamber_a7e80bafb7193465a3599b901bb9d2c33}{data}}
+\item 
+vector$<$ double $>$ \mbox{\hyperlink{class_surge_chamber_a9eb7fe2598dffccc9ca256d8ba6f9070}{tmpvec}}
+\item 
+string \mbox{\hyperlink{class_surge_chamber_ac32e5dd4e9b0db8d6be85dc7c55f344a}{fname}}
+\item 
+int \mbox{\hyperlink{class_surge_chamber_a7c9a6fc2f6a19be3c3cb6be5a8f4d73d}{state}}
+\item 
+double \mbox{\hyperlink{class_surge_chamber_a6335a3be77a1d8d904dcc3826b8df5a2}{last\+\_\+statechange}}
+\item 
+bool \mbox{\hyperlink{class_surge_chamber_ae176d55d9aec150913d0d4f9edd39167}{is\+\_\+closed}}
+\item 
+double \mbox{\hyperlink{class_surge_chamber_a7b08195fe580a494b34475814230953c}{t\+\_\+out}}
+\item 
+double \mbox{\hyperlink{class_surge_chamber_ac20c22cd5bbebb31d303905f3b348075}{dt\+\_\+out}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}}}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_p_s_toolbox_base_edge_a3b4da68ffb04db1c11898f3d53f46345}{name}}
+\item 
+string \mbox{\hyperlink{class_p_s_toolbox_base_edge_aae9cb0874655893e409b145fe256570a}{edge\+\_\+type}}
+\item 
+string \mbox{\hyperlink{class_p_s_toolbox_base_edge_a2d9ddbc23532f9d8a66b188e8a27e43c}{node\+\_\+from}}
+\item 
+string \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0d9bd961c5522a605baeb22b0f99af8d}{node\+\_\+to}}
+\item 
+bool \mbox{\hyperlink{class_p_s_toolbox_base_edge_a24d0bdb54e1ef80a07b1d0a53f512e15}{save\+\_\+data}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae8cd470bcb891f1e9b283dacde4e9dd5}{t}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_ab0ec7fe898994519d478a13ef2011383}{dt}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a6e6d0ff908fe7190b311c1772277307e}{p1}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a09a1c644b0df32b372ce63d71d597eb4}{p2}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a856e2819a845ad99c591445ddc0f4f53}{g}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a48dd5476af926578963de98aa86703c3}{n\+\_\+act}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a7738ae266f40802465d161156de1c41e}{n\+\_\+act\+\_\+new}}
+\item 
+bool \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae4135ab42424ba358454286171dda4b2}{DEBUG}}
+\item 
+bool \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4936aec9108a7e3f2535b55642efabf1}{is\+\_\+rigid\+\_\+element}}
+\item 
+double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a1623eacb50e05e8764a4eaef553d19f0}{dt\+\_\+out}}
+\item 
+vector$<$ string $>$ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a8448bfdfafbbd7bcee5bdbed719e3587}{transient\+\_\+type}}
+\item 
+vector$<$ double $>$ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ad61d3abbcb72972c9358dac1b992e978}{transient\+\_\+time}}
+\item 
+vector$<$ double $>$ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ab1244c7f37527f27e0d941650084cc9c}{transient\+\_\+val}}
+\item 
+vector$<$ bool $>$ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ad9cbd59340f5531b215d8b536880e302}{transient\+\_\+triggered}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_surge_chamber_a3b68ce2da0ebcb2935d3de218f347947}\index{SurgeChamber@{SurgeChamber}!SurgeChamber@{SurgeChamber}}
+\index{SurgeChamber@{SurgeChamber}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{SurgeChamber()}{SurgeChamber()}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a3b68ce2da0ebcb2935d3de218f347947} 
+Surge\+Chamber\+::\+Surge\+Chamber (\begin{DoxyParamCaption}\item[{const string}]{\+\_\+name}{, }\item[{const string}]{\+\_\+cspv\+\_\+name}{, }\item[{double}]{\+\_\+rho}{, }\item[{double}]{Vmax}{, }\item[{double}]{Vgas\+\_\+ini}{, }\item[{double}]{pgas\+\_\+ini}{, }\item[{bool}]{save\+\_\+data}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_surge_chamber_ab41801b6206f8b90a488406dd7755a24}\index{SurgeChamber@{SurgeChamber}!````~SurgeChamber@{\texorpdfstring{$\sim$}{\string~}SurgeChamber}}
+\index{````~SurgeChamber@{\texorpdfstring{$\sim$}{\string~}SurgeChamber}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}SurgeChamber()}{\string~SurgeChamber()}}
+{\footnotesize\ttfamily \label{class_surge_chamber_ab41801b6206f8b90a488406dd7755a24} 
+Surge\+Chamber\+::\texorpdfstring{$\sim$}{\string~}\+Surge\+Chamber (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_surge_chamber_a6005ddcafec89cbc2b8d05c143e834f9}\index{SurgeChamber@{SurgeChamber}!Add\_transient@{Add\_transient}}
+\index{Add\_transient@{Add\_transient}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{Add\_transient()}{Add\_transient()}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a6005ddcafec89cbc2b8d05c143e834f9} 
+void Surge\+Chamber\+::\+Add\+\_\+transient (\begin{DoxyParamCaption}\item[{string}]{\+\_\+type}{, }\item[{double}]{\+\_\+when}{, }\item[{double}]{\+\_\+val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4bfd4f3f231f041db9d47725f96e7f04}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_surge_chamber_a28ca3cced84166716119131a5b9e7193}\index{SurgeChamber@{SurgeChamber}!Get\_dprop@{Get\_dprop}}
+\index{Get\_dprop@{Get\_dprop}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{Get\_dprop()}{Get\_dprop()}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a28ca3cced84166716119131a5b9e7193} 
+double Surge\+Chamber\+::\+Get\+\_\+dprop (\begin{DoxyParamCaption}\item[{string}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a9e72bd3b5bf2b0b5869a42615780fcd5}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_surge_chamber_a855f22a7a80ac06fadddb862e0e473c7}\index{SurgeChamber@{SurgeChamber}!Get\_Q@{Get\_Q}}
+\index{Get\_Q@{Get\_Q}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{Get\_Q()}{Get\_Q()}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a855f22a7a80ac06fadddb862e0e473c7} 
+double Surge\+Chamber\+::\+Get\+\_\+Q (\begin{DoxyParamCaption}\item[{double}]{dh}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_surge_chamber_a8f98f24e049ce58e772d5197cc79c2be}\index{SurgeChamber@{SurgeChamber}!GetAlphaAtEnd@{GetAlphaAtEnd}}
+\index{GetAlphaAtEnd@{GetAlphaAtEnd}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{GetAlphaAtEnd()}{GetAlphaAtEnd()}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a8f98f24e049ce58e772d5197cc79c2be} 
+void Surge\+Chamber\+::\+Get\+Alpha\+At\+End (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{double \&}]{LHS}{, }\item[{double \&}]{coeff\+\_\+Q}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_aea2c7b8c320f8c38f80bcef33004e203}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_surge_chamber_a7631dfeed2943a859aa4980d87c4a5db}\index{SurgeChamber@{SurgeChamber}!GetBetaAtFront@{GetBetaAtFront}}
+\index{GetBetaAtFront@{GetBetaAtFront}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{GetBetaAtFront()}{GetBetaAtFront()}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a7631dfeed2943a859aa4980d87c4a5db} 
+void Surge\+Chamber\+::\+Get\+Beta\+At\+Front (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{double \&}]{LHS}{, }\item[{double \&}]{coeff\+\_\+Q}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a5de874c4d21ca6317cb4cfd43ece97aa}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_surge_chamber_a54178db33e2edf57e0722c8e98d27e9a}\index{SurgeChamber@{SurgeChamber}!GetEdgeEquationCoeffs@{GetEdgeEquationCoeffs}}
+\index{GetEdgeEquationCoeffs@{GetEdgeEquationCoeffs}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{GetEdgeEquationCoeffs()}{GetEdgeEquationCoeffs()}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a54178db33e2edf57e0722c8e98d27e9a} 
+void Surge\+Chamber\+::\+Get\+Edge\+Equation\+Coeffs (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{bool}]{is\+\_\+front}{, }\item[{double \&}]{LHS}{, }\item[{double \&}]{coeff\+\_\+Q}{, }\item[{double \&}]{coeff\+\_\+p1}{, }\item[{double \&}]{coeff\+\_\+p2}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_af6bebd7c3776cea69a35c22e6a52e44e}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_surge_chamber_ab45495704a67404b9bf8e5be1d195e98}\index{SurgeChamber@{SurgeChamber}!GetLargePressureValues@{GetLargePressureValues}}
+\index{GetLargePressureValues@{GetLargePressureValues}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{GetLargePressureValues()}{GetLargePressureValues()}}
+{\footnotesize\ttfamily \label{class_surge_chamber_ab45495704a67404b9bf8e5be1d195e98} 
+void Surge\+Chamber\+::\+Get\+Large\+Pressure\+Values (\begin{DoxyParamCaption}\item[{double}]{}{, }\item[{vector$<$ double $>$ \&}]{}{, }\item[{vector$<$ double $>$ \&}]{}{, }\item[{vector$<$ double $>$ \&}]{}{, }\item[{vector$<$ string $>$ \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a2ad94e8cf513d6443cecf7f13b449988}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_surge_chamber_a920df349aa31ff18bc8530de8a609a7a}\index{SurgeChamber@{SurgeChamber}!GetSmallPressureValues@{GetSmallPressureValues}}
+\index{GetSmallPressureValues@{GetSmallPressureValues}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{GetSmallPressureValues()}{GetSmallPressureValues()}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a920df349aa31ff18bc8530de8a609a7a} 
+void Surge\+Chamber\+::\+Get\+Small\+Pressure\+Values (\begin{DoxyParamCaption}\item[{double}]{}{, }\item[{vector$<$ double $>$ \&}]{}{, }\item[{vector$<$ double $>$ \&}]{}{, }\item[{vector$<$ double $>$ \&}]{}{, }\item[{vector$<$ string $>$ \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae83f418cc047ab86aa92b89bfc3b4ce8}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_surge_chamber_a5deb1006afc0cf9443cefc1cd3dfa7af}\index{SurgeChamber@{SurgeChamber}!H\_fun@{H\_fun}}
+\index{H\_fun@{H\_fun}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{H\_fun()}{H\_fun()}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a5deb1006afc0cf9443cefc1cd3dfa7af} 
+double Surge\+Chamber\+::\+H\+\_\+fun (\begin{DoxyParamCaption}\item[{double}]{Q}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_surge_chamber_a2a2a2f5fdbf0aca990ef57d81aaf495e}\index{SurgeChamber@{SurgeChamber}!H\_fun\_lin@{H\_fun\_lin}}
+\index{H\_fun\_lin@{H\_fun\_lin}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{H\_fun\_lin()}{H\_fun\_lin()}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a2a2a2f5fdbf0aca990ef57d81aaf495e} 
+void Surge\+Chamber\+::\+H\+\_\+fun\+\_\+lin (\begin{DoxyParamCaption}\item[{double}]{Q}{, }\item[{double \&}]{a0}{, }\item[{double \&}]{a1}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_surge_chamber_a1838ace18ffe9b0219c4846652ae0f4d}\index{SurgeChamber@{SurgeChamber}!Info@{Info}}
+\index{Info@{Info}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{Info()}{Info()}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a1838ace18ffe9b0219c4846652ae0f4d} 
+string Surge\+Chamber\+::\+Info (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4cfb66702f57eb57a4acd23c6d361d2f}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_surge_chamber_a9d347335d11cb624c8dab697192c63c0}\index{SurgeChamber@{SurgeChamber}!Ini@{Ini}}
+\index{Ini@{Ini}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a9d347335d11cb624c8dab697192c63c0} 
+void Surge\+Chamber\+::\+Ini (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae2c6ff4b9e22ad8a3692f82b53625eb0}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_surge_chamber_aca37d9481994c7f80730843c135d8788}\index{SurgeChamber@{SurgeChamber}!Ini@{Ini}}
+\index{Ini@{Ini}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_surge_chamber_aca37d9481994c7f80730843c135d8788} 
+void Surge\+Chamber\+::\+Ini (\begin{DoxyParamCaption}\item[{double}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a434a2968d633e65cafb2787bc4981c8d}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_surge_chamber_a08fa473a453347fbc3e7be066525fbf7}\index{SurgeChamber@{SurgeChamber}!Ini@{Ini}}
+\index{Ini@{Ini}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a08fa473a453347fbc3e7be066525fbf7} 
+void Surge\+Chamber\+::\+Ini (\begin{DoxyParamCaption}\item[{int}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a1a152f3ff28fa36b5b6da17bceb2659e}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_surge_chamber_affef4f9dea350bce82df0be30352ea16}\index{SurgeChamber@{SurgeChamber}!Save\_data@{Save\_data}}
+\index{Save\_data@{Save\_data}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{Save\_data()}{Save\_data()}}
+{\footnotesize\ttfamily \label{class_surge_chamber_affef4f9dea350bce82df0be30352ea16} 
+void Surge\+Chamber\+::\+Save\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a471c2238911ad58eb45e8afabcf7420d}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_surge_chamber_a9636c4f393a17c8756f0a53e5da27e71}\index{SurgeChamber@{SurgeChamber}!Set\_BC\_Left@{Set\_BC\_Left}}
+\index{Set\_BC\_Left@{Set\_BC\_Left}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{Set\_BC\_Left()}{Set\_BC\_Left()}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a9636c4f393a17c8756f0a53e5da27e71} 
+void Surge\+Chamber\+::\+Set\+\_\+\+BC\+\_\+\+Left (\begin{DoxyParamCaption}\item[{string}]{type}{, }\item[{double}]{val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4a8e4feaa0adcb81485fe7ea79b953e3}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_surge_chamber_abd054fbd55f90aad956f7f43522b6901}\index{SurgeChamber@{SurgeChamber}!Set\_BC\_Right@{Set\_BC\_Right}}
+\index{Set\_BC\_Right@{Set\_BC\_Right}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{Set\_BC\_Right()}{Set\_BC\_Right()}}
+{\footnotesize\ttfamily \label{class_surge_chamber_abd054fbd55f90aad956f7f43522b6901} 
+void Surge\+Chamber\+::\+Set\+\_\+\+BC\+\_\+\+Right (\begin{DoxyParamCaption}\item[{string}]{type}{, }\item[{double}]{val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a3f4024efd82f0dc3b46ba987f3594ae7}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_surge_chamber_a719d3b5dc2b4c8c0beea04533e07c878}\index{SurgeChamber@{SurgeChamber}!Set\_string\_prop@{Set\_string\_prop}}
+\index{Set\_string\_prop@{Set\_string\_prop}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{Set\_string\_prop()}{Set\_string\_prop()}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a719d3b5dc2b4c8c0beea04533e07c878} 
+void Surge\+Chamber\+::\+Set\+\_\+string\+\_\+prop (\begin{DoxyParamCaption}\item[{string}]{}{, }\item[{string}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a68bf3dade1793a9d247e28b648a1947d}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_surge_chamber_a6b97aaf1041e1efb01de757dcb87cfec}\index{SurgeChamber@{SurgeChamber}!UpdateInternal@{UpdateInternal}}
+\index{UpdateInternal@{UpdateInternal}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{UpdateInternal()}{UpdateInternal()}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a6b97aaf1041e1efb01de757dcb87cfec} 
+void Surge\+Chamber\+::\+Update\+Internal (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a9f3cbf5b741dcd4e923e5ae0aa91a46f}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_surge_chamber_a32adc494132deeb670757fad493d669a}\index{SurgeChamber@{SurgeChamber}!UpdateTime@{UpdateTime}}
+\index{UpdateTime@{UpdateTime}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{UpdateTime()}{UpdateTime()}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a32adc494132deeb670757fad493d669a} 
+void Surge\+Chamber\+::\+Update\+Time (\begin{DoxyParamCaption}\item[{double}]{\+\_\+t}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_ad767d5a177bb91562a880b57c6ba5fe0}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_surge_chamber_a72bc74def955bcc65d9eb0079f88253b}\index{SurgeChamber@{SurgeChamber}!Write\_data@{Write\_data}}
+\index{Write\_data@{Write\_data}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{Write\_data()}{Write\_data()}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a72bc74def955bcc65d9eb0079f88253b} 
+void Surge\+Chamber\+::\+Write\+\_\+data (\begin{DoxyParamCaption}\item[{string}]{folder}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a80ed1e641d737c138cc1ae74826ce128}{PSToolbox\+Base\+Edge}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_surge_chamber_a7e80bafb7193465a3599b901bb9d2c33}\index{SurgeChamber@{SurgeChamber}!data@{data}}
+\index{data@{data}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a7e80bafb7193465a3599b901bb9d2c33} 
+vector$<$ vector$<$double$>$ $>$ Surge\+Chamber\+::data}
+
+\Hypertarget{class_surge_chamber_ac20c22cd5bbebb31d303905f3b348075}\index{SurgeChamber@{SurgeChamber}!dt\_out@{dt\_out}}
+\index{dt\_out@{dt\_out}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{dt\_out}{dt\_out}}
+{\footnotesize\ttfamily \label{class_surge_chamber_ac20c22cd5bbebb31d303905f3b348075} 
+double Surge\+Chamber\+::dt\+\_\+out}
+
+\Hypertarget{class_surge_chamber_ac32e5dd4e9b0db8d6be85dc7c55f344a}\index{SurgeChamber@{SurgeChamber}!fname@{fname}}
+\index{fname@{fname}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{fname}{fname}}
+{\footnotesize\ttfamily \label{class_surge_chamber_ac32e5dd4e9b0db8d6be85dc7c55f344a} 
+string Surge\+Chamber\+::fname}
+
+\Hypertarget{class_surge_chamber_ae176d55d9aec150913d0d4f9edd39167}\index{SurgeChamber@{SurgeChamber}!is\_closed@{is\_closed}}
+\index{is\_closed@{is\_closed}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{is\_closed}{is\_closed}}
+{\footnotesize\ttfamily \label{class_surge_chamber_ae176d55d9aec150913d0d4f9edd39167} 
+bool Surge\+Chamber\+::is\+\_\+closed}
+
+\Hypertarget{class_surge_chamber_a6335a3be77a1d8d904dcc3826b8df5a2}\index{SurgeChamber@{SurgeChamber}!last\_statechange@{last\_statechange}}
+\index{last\_statechange@{last\_statechange}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{last\_statechange}{last\_statechange}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a6335a3be77a1d8d904dcc3826b8df5a2} 
+double Surge\+Chamber\+::last\+\_\+statechange}
+
+\Hypertarget{class_surge_chamber_a61c2ed0542afec1f5b9633ccec6e778f}\index{SurgeChamber@{SurgeChamber}!pgas\_old@{pgas\_old}}
+\index{pgas\_old@{pgas\_old}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{pgas\_old}{pgas\_old}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a61c2ed0542afec1f5b9633ccec6e778f} 
+double Surge\+Chamber\+::pgas\+\_\+old}
+
+\Hypertarget{class_surge_chamber_a69811aace86466af54310bf50e6c9e5f}\index{SurgeChamber@{SurgeChamber}!rho@{rho}}
+\index{rho@{rho}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{rho}{rho}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a69811aace86466af54310bf50e6c9e5f} 
+double Surge\+Chamber\+::rho}
+
+\Hypertarget{class_surge_chamber_a7c9a6fc2f6a19be3c3cb6be5a8f4d73d}\index{SurgeChamber@{SurgeChamber}!state@{state}}
+\index{state@{state}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a7c9a6fc2f6a19be3c3cb6be5a8f4d73d} 
+int Surge\+Chamber\+::state}
+
+\Hypertarget{class_surge_chamber_a7ec5e9fc581c6472cce6d82a2f52bf26}\index{SurgeChamber@{SurgeChamber}!t\_old@{t\_old}}
+\index{t\_old@{t\_old}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{t\_old}{t\_old}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a7ec5e9fc581c6472cce6d82a2f52bf26} 
+double Surge\+Chamber\+::t\+\_\+old}
+
+\Hypertarget{class_surge_chamber_a7b08195fe580a494b34475814230953c}\index{SurgeChamber@{SurgeChamber}!t\_out@{t\_out}}
+\index{t\_out@{t\_out}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{t\_out}{t\_out}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a7b08195fe580a494b34475814230953c} 
+double Surge\+Chamber\+::t\+\_\+out}
+
+\Hypertarget{class_surge_chamber_a7e946f190f0e9b9b9f739add6fb08adf}\index{SurgeChamber@{SurgeChamber}!Tmax@{Tmax}}
+\index{Tmax@{Tmax}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{Tmax}{Tmax}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a7e946f190f0e9b9b9f739add6fb08adf} 
+double Surge\+Chamber\+::\+Tmax}
+
+\Hypertarget{class_surge_chamber_a9eb7fe2598dffccc9ca256d8ba6f9070}\index{SurgeChamber@{SurgeChamber}!tmpvec@{tmpvec}}
+\index{tmpvec@{tmpvec}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{tmpvec}{tmpvec}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a9eb7fe2598dffccc9ca256d8ba6f9070} 
+vector$<$double$>$ Surge\+Chamber\+::tmpvec}
+
+\Hypertarget{class_surge_chamber_ab897e935afe8c6598d6e6d8fd1e2b954}\index{SurgeChamber@{SurgeChamber}!Vgas@{Vgas}}
+\index{Vgas@{Vgas}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{Vgas}{Vgas}}
+{\footnotesize\ttfamily \label{class_surge_chamber_ab897e935afe8c6598d6e6d8fd1e2b954} 
+double Surge\+Chamber\+::\+Vgas}
+
+\Hypertarget{class_surge_chamber_a1f8cb0be049bdf94ee67edb840e98862}\index{SurgeChamber@{SurgeChamber}!Vgas\_old@{Vgas\_old}}
+\index{Vgas\_old@{Vgas\_old}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{Vgas\_old}{Vgas\_old}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a1f8cb0be049bdf94ee67edb840e98862} 
+double Surge\+Chamber\+::\+Vgas\+\_\+old}
+
+\Hypertarget{class_surge_chamber_a779d1160f581948e4b5dfbed6d0ccdfb}\index{SurgeChamber@{SurgeChamber}!Vmax@{Vmax}}
+\index{Vmax@{Vmax}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{Vmax}{Vmax}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a779d1160f581948e4b5dfbed6d0ccdfb} 
+double Surge\+Chamber\+::\+Vmax}
+
+\Hypertarget{class_surge_chamber_a9cf9fee4b224dcf38721c1fb05ff9d50}\index{SurgeChamber@{SurgeChamber}!zeta\_closed@{zeta\_closed}}
+\index{zeta\_closed@{zeta\_closed}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{zeta\_closed}{zeta\_closed}}
+{\footnotesize\ttfamily \label{class_surge_chamber_a9cf9fee4b224dcf38721c1fb05ff9d50} 
+double Surge\+Chamber\+::zeta\+\_\+closed}
+
+\Hypertarget{class_surge_chamber_abed66372920c2337ce79dd51fac86d7e}\index{SurgeChamber@{SurgeChamber}!zeta\_open@{zeta\_open}}
+\index{zeta\_open@{zeta\_open}!SurgeChamber@{SurgeChamber}}
+\doxysubsubsection{\texorpdfstring{zeta\_open}{zeta\_open}}
+{\footnotesize\ttfamily \label{class_surge_chamber_abed66372920c2337ce79dd51fac86d7e} 
+double Surge\+Chamber\+::zeta\+\_\+open}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_surge_chamber_8h}{Surge\+Chamber.\+h}}\item 
+\mbox{\hyperlink{_surge_chamber_8cpp}{Surge\+Chamber.\+cpp}}\end{DoxyCompactItemize}

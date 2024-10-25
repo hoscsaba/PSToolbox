@@ -1,0 +1,248 @@
+\doxysection{Epanet\+Reader Class Reference}
+\hypertarget{class_epanet_reader}{}\label{class_epanet_reader}\index{EpanetReader@{EpanetReader}}
+
+
+{\ttfamily \#include $<$Epanet\+Reader.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_epanet_reader_af8a47948f3e2b8f4406a393084c7f38c}{read\+From\+File}} (const std\+::string \&filename)
+\item 
+void \mbox{\hyperlink{class_epanet_reader_afcaf8cd4dabe694783ae9955898eb6ac}{convert\+To\+Runner2}} ()
+\item 
+int \mbox{\hyperlink{class_epanet_reader_a64d2169c03f975ae27ff5e95b0aa79b7}{next\+Pipe\+At\+Node}} (int idx)
+\item 
+string \mbox{\hyperlink{class_epanet_reader_a3cf8b37566dbb92f1ec0a2c1d3ba0f08}{get\+Other\+Node\+Of\+Pipe}} (int idx\+Pipe, string Node)
+\item 
+void \mbox{\hyperlink{class_epanet_reader_a9f84a28abf9d28f323e2e9448721eed5}{print\+Edges\+And\+Cons}} ()
+\item 
+void \mbox{\hyperlink{class_epanet_reader_a920fb6628c60f8ec48a70212626dace3}{Print\+Data}} ()
+\item 
+void \mbox{\hyperlink{class_epanet_reader_a035d6e38fee05a6d3e6b394962228b88}{unify\+Junctions}} ()
+\item 
+int \mbox{\hyperlink{class_epanet_reader_a8a29637247879859a7132629299a3bbd}{find\+Node\+By\+ID}} (const std\+::string ID)
+\item 
+int \mbox{\hyperlink{class_epanet_reader_a49743155e35a34670e87998c79ef5c79}{find\+Pipe\+By\+ID}} (const std\+::string ID)
+\item 
+int \mbox{\hyperlink{class_epanet_reader_ab88f5ca06359432ed7f0757689e6cc82}{find\+Reservoir\+By\+ID}} (const std\+::string ID)
+\item 
+bool \mbox{\hyperlink{class_epanet_reader_a9f2dda8c59216c3a6a8cf38a7234df94}{check\+If\+Included\+In\+Vector}} (vector$<$ int $>$ list, int elem)
+\item 
+vector$<$ int $>$ \mbox{\hyperlink{class_epanet_reader_af00ceb3dd8fbe71a6f0b8aef6af785ff}{find\+Connecting\+Pipes}} (const std\+::string node)
+\item 
+\mbox{\hyperlink{struct_junction_reader}{Junction\+Reader}} \mbox{\hyperlink{class_epanet_reader_aadf391eb3638f57c721b4b0b1b8202e4}{parse\+Junction}} (const std\+::string \&line)
+\item 
+\mbox{\hyperlink{struct_reservoir_reader}{Reservoir\+Reader}} \mbox{\hyperlink{class_epanet_reader_ad65ecb4249c2365050d936c472254c00}{parse\+Reservoir}} (const std\+::string \&line)
+\item 
+\mbox{\hyperlink{struct_tank_reader}{Tank\+Reader}} \mbox{\hyperlink{class_epanet_reader_a7cc33f34b72c0b16425466583ed23173}{parse\+Tank}} (const std\+::string \&line)
+\item 
+\mbox{\hyperlink{struct_pipe_reader}{Pipe\+Reader}} \mbox{\hyperlink{class_epanet_reader_afffced57bb458fa4749ab1846517b59d}{parse\+Pipe}} (const std\+::string \&line)
+\item 
+\mbox{\hyperlink{struct_pump_reader}{Pump\+Reader}} \mbox{\hyperlink{class_epanet_reader_a66bd4a7d89136267bd3ada5599658b42}{parse\+Pump}} (const std\+::string \&line)
+\item 
+\mbox{\hyperlink{struct_valve_reader}{Valve\+Reader}} \mbox{\hyperlink{class_epanet_reader_a226740c80fb99346ba19d6d239429740}{parse\+Valve}} (const std\+::string \&line)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ \mbox{\hyperlink{struct_junction_reader}{Junction\+Reader}} $>$ \mbox{\hyperlink{class_epanet_reader_a083dc1dc1a9549676b82ab9c7902137e}{junctions}}
+\item 
+vector$<$ \mbox{\hyperlink{struct_reservoir_reader}{Reservoir\+Reader}} $>$ \mbox{\hyperlink{class_epanet_reader_a07563919cd593dd377a2925530ae7c40}{reservoirs}}
+\item 
+vector$<$ \mbox{\hyperlink{struct_tank_reader}{Tank\+Reader}} $>$ \mbox{\hyperlink{class_epanet_reader_a20051c123a42fe79e990d31d0467b778}{tanks}}
+\item 
+vector$<$ \mbox{\hyperlink{struct_pipe_reader}{Pipe\+Reader}} $>$ \mbox{\hyperlink{class_epanet_reader_a136370628b5e118ef46f7bfd6ff0f395}{pipes}}
+\item 
+vector$<$ \mbox{\hyperlink{struct_pump_reader}{Pump\+Reader}} $>$ \mbox{\hyperlink{class_epanet_reader_a6ac0e11ceea7ecb3bede2ae37bf06fe2}{pumps}}
+\item 
+vector$<$ \mbox{\hyperlink{struct_valve_reader}{Valve\+Reader}} $>$ \mbox{\hyperlink{class_epanet_reader_a17a3d2f768fdd826c013041ad5d278bf}{valves}}
+\item 
+vector$<$ \mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_epanet_reader_adc34acfb51ea6588dc7e6644182243aa}{edges}}
+\item 
+vector$<$ \mbox{\hyperlink{class_connector}{Connector}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_epanet_reader_ae385a49238b447f0a6b39d44cc5eb288}{cons}}
+\item 
+vector$<$ int $>$ \mbox{\hyperlink{class_epanet_reader_a9c0657fb98e9cd2698213db3b07f7686}{con\+\_\+at\+\_\+edge\+\_\+start}}
+\item 
+vector$<$ int $>$ \mbox{\hyperlink{class_epanet_reader_af1337d828dc66cef823f0a32e9d27097}{con\+\_\+at\+\_\+edge\+\_\+end}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_epanet_reader_a9f2dda8c59216c3a6a8cf38a7234df94}\index{EpanetReader@{EpanetReader}!checkIfIncludedInVector@{checkIfIncludedInVector}}
+\index{checkIfIncludedInVector@{checkIfIncludedInVector}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{checkIfIncludedInVector()}{checkIfIncludedInVector()}}
+{\footnotesize\ttfamily \label{class_epanet_reader_a9f2dda8c59216c3a6a8cf38a7234df94} 
+bool Epanet\+Reader\+::check\+If\+Included\+In\+Vector (\begin{DoxyParamCaption}\item[{vector$<$ int $>$}]{list}{, }\item[{int}]{elem}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_epanet_reader_afcaf8cd4dabe694783ae9955898eb6ac}\index{EpanetReader@{EpanetReader}!convertToRunner2@{convertToRunner2}}
+\index{convertToRunner2@{convertToRunner2}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{convertToRunner2()}{convertToRunner2()}}
+{\footnotesize\ttfamily \label{class_epanet_reader_afcaf8cd4dabe694783ae9955898eb6ac} 
+void Epanet\+Reader\+::convert\+To\+Runner2 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_epanet_reader_af00ceb3dd8fbe71a6f0b8aef6af785ff}\index{EpanetReader@{EpanetReader}!findConnectingPipes@{findConnectingPipes}}
+\index{findConnectingPipes@{findConnectingPipes}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{findConnectingPipes()}{findConnectingPipes()}}
+{\footnotesize\ttfamily \label{class_epanet_reader_af00ceb3dd8fbe71a6f0b8aef6af785ff} 
+vector$<$ int $>$ Epanet\+Reader\+::find\+Connecting\+Pipes (\begin{DoxyParamCaption}\item[{const std\+::string}]{node}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_epanet_reader_a8a29637247879859a7132629299a3bbd}\index{EpanetReader@{EpanetReader}!findNodeByID@{findNodeByID}}
+\index{findNodeByID@{findNodeByID}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{findNodeByID()}{findNodeByID()}}
+{\footnotesize\ttfamily \label{class_epanet_reader_a8a29637247879859a7132629299a3bbd} 
+int Epanet\+Reader\+::find\+Node\+By\+ID (\begin{DoxyParamCaption}\item[{const std\+::string}]{ID}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_epanet_reader_a49743155e35a34670e87998c79ef5c79}\index{EpanetReader@{EpanetReader}!findPipeByID@{findPipeByID}}
+\index{findPipeByID@{findPipeByID}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{findPipeByID()}{findPipeByID()}}
+{\footnotesize\ttfamily \label{class_epanet_reader_a49743155e35a34670e87998c79ef5c79} 
+int Epanet\+Reader\+::find\+Pipe\+By\+ID (\begin{DoxyParamCaption}\item[{const std\+::string}]{ID}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_epanet_reader_ab88f5ca06359432ed7f0757689e6cc82}\index{EpanetReader@{EpanetReader}!findReservoirByID@{findReservoirByID}}
+\index{findReservoirByID@{findReservoirByID}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{findReservoirByID()}{findReservoirByID()}}
+{\footnotesize\ttfamily \label{class_epanet_reader_ab88f5ca06359432ed7f0757689e6cc82} 
+int Epanet\+Reader\+::find\+Reservoir\+By\+ID (\begin{DoxyParamCaption}\item[{const std\+::string}]{ID}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_epanet_reader_a3cf8b37566dbb92f1ec0a2c1d3ba0f08}\index{EpanetReader@{EpanetReader}!getOtherNodeOfPipe@{getOtherNodeOfPipe}}
+\index{getOtherNodeOfPipe@{getOtherNodeOfPipe}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{getOtherNodeOfPipe()}{getOtherNodeOfPipe()}}
+{\footnotesize\ttfamily \label{class_epanet_reader_a3cf8b37566dbb92f1ec0a2c1d3ba0f08} 
+string Epanet\+Reader\+::get\+Other\+Node\+Of\+Pipe (\begin{DoxyParamCaption}\item[{int}]{idx\+Pipe}{, }\item[{string}]{Node}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_epanet_reader_a64d2169c03f975ae27ff5e95b0aa79b7}\index{EpanetReader@{EpanetReader}!nextPipeAtNode@{nextPipeAtNode}}
+\index{nextPipeAtNode@{nextPipeAtNode}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{nextPipeAtNode()}{nextPipeAtNode()}}
+{\footnotesize\ttfamily \label{class_epanet_reader_a64d2169c03f975ae27ff5e95b0aa79b7} 
+int Epanet\+Reader\+::next\+Pipe\+At\+Node (\begin{DoxyParamCaption}\item[{int}]{idx}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_epanet_reader_aadf391eb3638f57c721b4b0b1b8202e4}\index{EpanetReader@{EpanetReader}!parseJunction@{parseJunction}}
+\index{parseJunction@{parseJunction}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{parseJunction()}{parseJunction()}}
+{\footnotesize\ttfamily \label{class_epanet_reader_aadf391eb3638f57c721b4b0b1b8202e4} 
+\mbox{\hyperlink{struct_junction_reader}{Junction\+Reader}} Epanet\+Reader\+::parse\+Junction (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{line}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_epanet_reader_afffced57bb458fa4749ab1846517b59d}\index{EpanetReader@{EpanetReader}!parsePipe@{parsePipe}}
+\index{parsePipe@{parsePipe}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{parsePipe()}{parsePipe()}}
+{\footnotesize\ttfamily \label{class_epanet_reader_afffced57bb458fa4749ab1846517b59d} 
+\mbox{\hyperlink{struct_pipe_reader}{Pipe\+Reader}} Epanet\+Reader\+::parse\+Pipe (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{line}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_epanet_reader_a66bd4a7d89136267bd3ada5599658b42}\index{EpanetReader@{EpanetReader}!parsePump@{parsePump}}
+\index{parsePump@{parsePump}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{parsePump()}{parsePump()}}
+{\footnotesize\ttfamily \label{class_epanet_reader_a66bd4a7d89136267bd3ada5599658b42} 
+\mbox{\hyperlink{struct_pump_reader}{Pump\+Reader}} Epanet\+Reader\+::parse\+Pump (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{line}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_epanet_reader_ad65ecb4249c2365050d936c472254c00}\index{EpanetReader@{EpanetReader}!parseReservoir@{parseReservoir}}
+\index{parseReservoir@{parseReservoir}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{parseReservoir()}{parseReservoir()}}
+{\footnotesize\ttfamily \label{class_epanet_reader_ad65ecb4249c2365050d936c472254c00} 
+\mbox{\hyperlink{struct_reservoir_reader}{Reservoir\+Reader}} Epanet\+Reader\+::parse\+Reservoir (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{line}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_epanet_reader_a7cc33f34b72c0b16425466583ed23173}\index{EpanetReader@{EpanetReader}!parseTank@{parseTank}}
+\index{parseTank@{parseTank}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{parseTank()}{parseTank()}}
+{\footnotesize\ttfamily \label{class_epanet_reader_a7cc33f34b72c0b16425466583ed23173} 
+\mbox{\hyperlink{struct_tank_reader}{Tank\+Reader}} Epanet\+Reader\+::parse\+Tank (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{line}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_epanet_reader_a226740c80fb99346ba19d6d239429740}\index{EpanetReader@{EpanetReader}!parseValve@{parseValve}}
+\index{parseValve@{parseValve}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{parseValve()}{parseValve()}}
+{\footnotesize\ttfamily \label{class_epanet_reader_a226740c80fb99346ba19d6d239429740} 
+\mbox{\hyperlink{struct_valve_reader}{Valve\+Reader}} Epanet\+Reader\+::parse\+Valve (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{line}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_epanet_reader_a920fb6628c60f8ec48a70212626dace3}\index{EpanetReader@{EpanetReader}!PrintData@{PrintData}}
+\index{PrintData@{PrintData}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{PrintData()}{PrintData()}}
+{\footnotesize\ttfamily \label{class_epanet_reader_a920fb6628c60f8ec48a70212626dace3} 
+void Epanet\+Reader\+::\+Print\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_epanet_reader_a9f84a28abf9d28f323e2e9448721eed5}\index{EpanetReader@{EpanetReader}!printEdgesAndCons@{printEdgesAndCons}}
+\index{printEdgesAndCons@{printEdgesAndCons}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{printEdgesAndCons()}{printEdgesAndCons()}}
+{\footnotesize\ttfamily \label{class_epanet_reader_a9f84a28abf9d28f323e2e9448721eed5} 
+void Epanet\+Reader\+::print\+Edges\+And\+Cons (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_epanet_reader_af8a47948f3e2b8f4406a393084c7f38c}\index{EpanetReader@{EpanetReader}!readFromFile@{readFromFile}}
+\index{readFromFile@{readFromFile}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{readFromFile()}{readFromFile()}}
+{\footnotesize\ttfamily \label{class_epanet_reader_af8a47948f3e2b8f4406a393084c7f38c} 
+void Epanet\+Reader\+::read\+From\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_epanet_reader_a035d6e38fee05a6d3e6b394962228b88}\index{EpanetReader@{EpanetReader}!unifyJunctions@{unifyJunctions}}
+\index{unifyJunctions@{unifyJunctions}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{unifyJunctions()}{unifyJunctions()}}
+{\footnotesize\ttfamily \label{class_epanet_reader_a035d6e38fee05a6d3e6b394962228b88} 
+void Epanet\+Reader\+::unify\+Junctions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_epanet_reader_af1337d828dc66cef823f0a32e9d27097}\index{EpanetReader@{EpanetReader}!con\_at\_edge\_end@{con\_at\_edge\_end}}
+\index{con\_at\_edge\_end@{con\_at\_edge\_end}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{con\_at\_edge\_end}{con\_at\_edge\_end}}
+{\footnotesize\ttfamily \label{class_epanet_reader_af1337d828dc66cef823f0a32e9d27097} 
+vector$<$int$>$ Epanet\+Reader\+::con\+\_\+at\+\_\+edge\+\_\+end}
+
+\Hypertarget{class_epanet_reader_a9c0657fb98e9cd2698213db3b07f7686}\index{EpanetReader@{EpanetReader}!con\_at\_edge\_start@{con\_at\_edge\_start}}
+\index{con\_at\_edge\_start@{con\_at\_edge\_start}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{con\_at\_edge\_start}{con\_at\_edge\_start}}
+{\footnotesize\ttfamily \label{class_epanet_reader_a9c0657fb98e9cd2698213db3b07f7686} 
+vector$<$int$>$ Epanet\+Reader\+::con\+\_\+at\+\_\+edge\+\_\+start}
+
+\Hypertarget{class_epanet_reader_ae385a49238b447f0a6b39d44cc5eb288}\index{EpanetReader@{EpanetReader}!cons@{cons}}
+\index{cons@{cons}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{cons}{cons}}
+{\footnotesize\ttfamily \label{class_epanet_reader_ae385a49238b447f0a6b39d44cc5eb288} 
+vector$<$\mbox{\hyperlink{class_connector}{Connector}} \texorpdfstring{$\ast$}{*}$>$ Epanet\+Reader\+::cons}
+
+\Hypertarget{class_epanet_reader_adc34acfb51ea6588dc7e6644182243aa}\index{EpanetReader@{EpanetReader}!edges@{edges}}
+\index{edges@{edges}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{edges}{edges}}
+{\footnotesize\ttfamily \label{class_epanet_reader_adc34acfb51ea6588dc7e6644182243aa} 
+vector$<$\mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}} \texorpdfstring{$\ast$}{*}$>$ Epanet\+Reader\+::edges}
+
+\Hypertarget{class_epanet_reader_a083dc1dc1a9549676b82ab9c7902137e}\index{EpanetReader@{EpanetReader}!junctions@{junctions}}
+\index{junctions@{junctions}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{junctions}{junctions}}
+{\footnotesize\ttfamily \label{class_epanet_reader_a083dc1dc1a9549676b82ab9c7902137e} 
+vector$<$\mbox{\hyperlink{struct_junction_reader}{Junction\+Reader}}$>$ Epanet\+Reader\+::junctions}
+
+\Hypertarget{class_epanet_reader_a136370628b5e118ef46f7bfd6ff0f395}\index{EpanetReader@{EpanetReader}!pipes@{pipes}}
+\index{pipes@{pipes}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{pipes}{pipes}}
+{\footnotesize\ttfamily \label{class_epanet_reader_a136370628b5e118ef46f7bfd6ff0f395} 
+vector$<$\mbox{\hyperlink{struct_pipe_reader}{Pipe\+Reader}}$>$ Epanet\+Reader\+::pipes}
+
+\Hypertarget{class_epanet_reader_a6ac0e11ceea7ecb3bede2ae37bf06fe2}\index{EpanetReader@{EpanetReader}!pumps@{pumps}}
+\index{pumps@{pumps}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{pumps}{pumps}}
+{\footnotesize\ttfamily \label{class_epanet_reader_a6ac0e11ceea7ecb3bede2ae37bf06fe2} 
+vector$<$\mbox{\hyperlink{struct_pump_reader}{Pump\+Reader}}$>$ Epanet\+Reader\+::pumps}
+
+\Hypertarget{class_epanet_reader_a07563919cd593dd377a2925530ae7c40}\index{EpanetReader@{EpanetReader}!reservoirs@{reservoirs}}
+\index{reservoirs@{reservoirs}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{reservoirs}{reservoirs}}
+{\footnotesize\ttfamily \label{class_epanet_reader_a07563919cd593dd377a2925530ae7c40} 
+vector$<$\mbox{\hyperlink{struct_reservoir_reader}{Reservoir\+Reader}}$>$ Epanet\+Reader\+::reservoirs}
+
+\Hypertarget{class_epanet_reader_a20051c123a42fe79e990d31d0467b778}\index{EpanetReader@{EpanetReader}!tanks@{tanks}}
+\index{tanks@{tanks}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{tanks}{tanks}}
+{\footnotesize\ttfamily \label{class_epanet_reader_a20051c123a42fe79e990d31d0467b778} 
+vector$<$\mbox{\hyperlink{struct_tank_reader}{Tank\+Reader}}$>$ Epanet\+Reader\+::tanks}
+
+\Hypertarget{class_epanet_reader_a17a3d2f768fdd826c013041ad5d278bf}\index{EpanetReader@{EpanetReader}!valves@{valves}}
+\index{valves@{valves}!EpanetReader@{EpanetReader}}
+\doxysubsubsection{\texorpdfstring{valves}{valves}}
+{\footnotesize\ttfamily \label{class_epanet_reader_a17a3d2f768fdd826c013041ad5d278bf} 
+vector$<$\mbox{\hyperlink{struct_valve_reader}{Valve\+Reader}}$>$ Epanet\+Reader\+::valves}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_epanet_reader_8h}{Epanet\+Reader.\+h}}\item 
+\mbox{\hyperlink{_epanet_reader_8cpp}{Epanet\+Reader.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,62 @@
+\doxysection{PRV.\+h}
+\hypertarget{_p_r_v_8h_source}{}\label{_p_r_v_8h_source}\mbox{\hyperlink{_p_r_v_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_p_s_toolbox_base_edge_8h}{PSToolboxBaseEdge.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_units_8h}{Units.h}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_p_r_v}{PRV}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolboxBaseEdge}},\ \mbox{\hyperlink{class_units}{Units}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{double}\ H\_fun(\textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}});}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{void}\ H\_fun\_lin(\textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}},\ \textcolor{keywordtype}{double}\&\ a0,\ \textcolor{keywordtype}{double}\&\ a1);}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{double}\ rho;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{double}\ zeta;}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{double}\ pset;}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_afae9361aedc8ca0ed48ca0d39f2be49c}{Get\_Q}}(\textcolor{keywordtype}{double}\ dh);}
+\DoxyCodeLine{00021\ \ \ \ \ vector<\ vector<double>\ >\ data;}
+\DoxyCodeLine{00022\ \ \ \ \ vector<double>\ tmpvec;}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{string}\ fname;}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{double}\ Tmax;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{class_p_r_v_af538718085ff2cbd742739fa6b37d06b}{PRV}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \_name,}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \_cspe\_name,}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \_cspv\_name,}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_rho,}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_pset,\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a24d0bdb54e1ef80a07b1d0a53f512e15}{save\_data}});}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{class_p_r_v_a0280c64c4a76755a14c338c1f9f5bd99}{\string~PRV}}()\{\};}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_r_v_a66caec54b47db22ca5f1164368cecfb8}{Ini}}(\textcolor{keywordtype}{int});}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_r_v_a66caec54b47db22ca5f1164368cecfb8}{Ini}}();}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_p_r_v_a67c8bdd9de552cbfba91f1bf71262708}{Info}}();}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_r_v_ae4bbf7700fc4bb1e36564531856a0d28}{calculateZeta}}(\textcolor{keywordtype}{double});}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_r_v_a06e3899ded9195113a7accaedd406677}{GetBetaAtFront}}(\textcolor{keywordtype}{double},\ \textcolor{keywordtype}{double}\ \&,\ \textcolor{keywordtype}{double}\ \&);}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_r_v_a3c775566e1068ed617f6759628b40b84}{GetAlphaAtEnd}}(\textcolor{keywordtype}{double},\ \textcolor{keywordtype}{double}\ \&,\ \textcolor{keywordtype}{double}\ \&);}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_r_v_a5656e2c6fad9b3428fd86a5a8aecb605}{GetEdgeEquationCoeffs}}(\textcolor{keywordtype}{double},\ \textcolor{keywordtype}{bool},\ \textcolor{keywordtype}{double}\ \&,\ \textcolor{keywordtype}{double}\ \&,\ \textcolor{keywordtype}{double}\ \&,\ \textcolor{keywordtype}{double}\ \&);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_r_v_af50f788246182dc20ea37882112d0de9}{Set\_BC\_Left}}(\textcolor{keywordtype}{string}\ type,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_r_v_a7d15eb2688821867976e133669581c68}{Set\_BC\_Right}}(\textcolor{keywordtype}{string}\ type,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_r_v_afb36809159f87c6526e69ee67e7abf60}{GetLargePressureValues}}(\textcolor{keywordtype}{double},\ vector<double>\&,\ vector<double>\&,vector<double>\&,\ vector<string>\&);}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_r_v_aa3e2a68f068af731913404bbf2871db8}{GetSmallPressureValues}}(\textcolor{keywordtype}{double},\ vector<double>\&,\ vector<double>\&,vector<double>\&,\ vector<string>\&);}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_r_v_a23b3e821c3664c2494b9d055402b57a3}{Save\_data}}();}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_r_v_af7147bf143e32846f5492674220fc624}{Write\_data}}(\textcolor{keywordtype}{string});}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_r_v_a9b7ba19ec7e5b81ecac58ed90c1c9422}{Get\_dprop}}(\textcolor{keywordtype}{string});}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_r_v_a2aad6ded7b0eab04a1616aa4cc0af040}{UpdateInternal}}(\textcolor{keywordtype}{double});}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_r_v_a4c59856b5d70b1437fa40ece2d0fa72d}{UpdateTime}}(\textcolor{keywordtype}{double});}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_r_v_a16498f96b7f0a65dfbbfa75d5a0bd1a9}{Set\_string\_prop}}(\textcolor{keywordtype}{string},\textcolor{keywordtype}{string})\{\};}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_r_v_a18c44fff919f92ed9d46b8f8e68af71f}{Add\_transient}}(\textcolor{keywordtype}{string},\textcolor{keywordtype}{double},\textcolor{keywordtype}{double});}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \};}
+\DoxyCodeLine{00057\ }
+
+\end{DoxyCode}

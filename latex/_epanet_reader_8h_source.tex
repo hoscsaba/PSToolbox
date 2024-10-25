@@ -1,0 +1,118 @@
+\doxysection{Epanet\+Reader.\+h}
+\hypertarget{_epanet_reader_8h_source}{}\label{_epanet_reader_8h_source}\mbox{\hyperlink{_epanet_reader_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_p_s_toolbox_base_edge_8h}{PSToolboxBaseEdge.h}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_connector_8h}{Connector.h}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_s_c_p_8h}{SCP.h}}"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_junction_reader}{JunctionReader}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{struct_junction_reader_af72240f304641d4f5d2ba38d0cf66400}{ID}};}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_junction_reader_ab5ebf338f35a91ae4100c7f3ecc9f686}{Elev}};}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_junction_reader_a6913f91db13d4358130bad7cc30f716f}{Head}};}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_junction_reader_a68bee9576d48ea0fefea6e4218ad39f1}{Demand}};}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{struct_junction_reader_a20b8348a277d707c55315322c96a8bba}{Pattern}};}
+\DoxyCodeLine{00021\ \ \ \ \ vector<int>\ \mbox{\hyperlink{struct_junction_reader_afd24e175861ebe152ac4316199f9ad17}{idxPipe}};}
+\DoxyCodeLine{00022\ \ \ \ \ vector<bool>\ \mbox{\hyperlink{struct_junction_reader_af8e5d817310e1d428a352c46515c01ed}{end}};}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_junction_reader_aec904b7f59ff0e30a76611a1c4ffd342}{type}};\ \textcolor{comment}{//\ 0:junction,\ 1:reservoir}}
+\DoxyCodeLine{00024\ \};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_reservoir_reader}{ReservoirReader}}}
+\DoxyCodeLine{00027\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{struct_reservoir_reader_afe2f80896c5bd9bf4f480364439116c4}{ID}};}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_reservoir_reader_ad5b9a778c29dcb9c61e0110fc3ea415c}{Head}};}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_reservoir_reader_ad1bc3cbaf4a215a92d6a48e81dc3b14e}{Pattern}};}
+\DoxyCodeLine{00031\ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_tank_reader}{TankReader}}}
+\DoxyCodeLine{00034\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{struct_tank_reader_a366fb5bcfd47289c655747fcd28a14c7}{ID}};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_tank_reader_aa4af044b75a44476a02621688dab088a}{Elevation}};}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_tank_reader_aa5ef00924964c5ef26c9bb7e6803385a}{InitLevel}};}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_tank_reader_aa234521d6edcebc079c35486b75cb3ea}{MinLevel}};}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_tank_reader_a93869c31cc3425ea054c11f03700144c}{MaxLevel}};}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_tank_reader_ab1a73f6d899ad2eee50c5891757aef90}{Diameter}};}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_tank_reader_a0630f0e411f29e8338453595dfdf519e}{MinVol}};}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{struct_tank_reader_ae67b8dd3b4ce72920307ff2871af0108}{VolCurve}};}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{struct_tank_reader_a680698a304a9d239f9ad2739362619c2}{Overflow}};}
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_pipe_reader}{PipeReader}}}
+\DoxyCodeLine{00047\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{struct_pipe_reader_a8461b15141da2c2746a30ff4b0345d24}{ID}};}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{struct_pipe_reader_a01a55b231f6a19911f1093f69036ba8a}{Node1}};}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{struct_pipe_reader_a10d7cbe829222cd30c3622e76b62fe4e}{Node2}};}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_pipe_reader_a16455a9a8677ff245b1724f4c6617000}{Length}};}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_pipe_reader_a9b0d2565ae5dae32cff70f2dc3ee19df}{Diameter}};}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_pipe_reader_afaecb615e54febeb718d67c2a7fd96c0}{Roughness}};}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_pipe_reader_a3bfec05219c6fc824792b3ebd576f9fa}{Lambda}};}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_pipe_reader_aaa2af5261f84a18063f2f8da7819bd3a}{Delta}};}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_pipe_reader_ae89a2fdde6a7e37c53e19d99a3523050}{SpeedOfSound}};}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_pipe_reader_ae3b1f32e68b00b4d2005669efd2f863a}{MinorLoss}};}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_pump_reader}{PumpReader}}}
+\DoxyCodeLine{00061\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{struct_pump_reader_af4d6e0d7c0bc40ba18f8f28b15764871}{ID}};}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{struct_pump_reader_ab8168230eee50801d3b8fd165e3e83ef}{Node1}};}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{struct_pump_reader_a12126cd04eac2502d144da051ca32a0b}{Node2}};}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{struct_pump_reader_ac9bc5b1e63f80c0124a66ddd5ee1af79}{Parameters}};}
+\DoxyCodeLine{00066\ \};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_valve_reader}{ValveReader}}}
+\DoxyCodeLine{00069\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{struct_valve_reader_a625c63d32cb96034c7bede7721274130}{ID}};}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{struct_valve_reader_a2a3c868cfde60d461bda7da2949a6517}{Node1}};}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{struct_valve_reader_ad7df163e0f2885ec7c25b96e3e3cc228}{Node2}};}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_valve_reader_a57213bb6d744889974b1a3d86f0c7f76}{Diameter}};}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{struct_valve_reader_afa5258645d41ccaac5b0dc9a6d50fbb1}{Type}};}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_valve_reader_a362d73d37eec501fec7c0aea2252153c}{Setting}};}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_valve_reader_ac877ab78cbd60f6171ccf1df861e4b26}{MinorLoss}};}
+\DoxyCodeLine{00077\ \};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_epanet_reader}{EpanetReader}}}
+\DoxyCodeLine{00080\ \{}
+\DoxyCodeLine{00081\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00082\ \ \ \ \ vector<JunctionReader>\ \mbox{\hyperlink{class_epanet_reader_a083dc1dc1a9549676b82ab9c7902137e}{junctions}};}
+\DoxyCodeLine{00083\ \ \ \ \ vector<ReservoirReader>\ \mbox{\hyperlink{class_epanet_reader_a07563919cd593dd377a2925530ae7c40}{reservoirs}};}
+\DoxyCodeLine{00084\ \ \ \ \ vector<TankReader>\ \mbox{\hyperlink{class_epanet_reader_a20051c123a42fe79e990d31d0467b778}{tanks}};}
+\DoxyCodeLine{00085\ \ \ \ \ vector<PipeReader>\ \mbox{\hyperlink{class_epanet_reader_a136370628b5e118ef46f7bfd6ff0f395}{pipes}};}
+\DoxyCodeLine{00086\ \ \ \ \ vector<PumpReader>\ \mbox{\hyperlink{class_epanet_reader_a6ac0e11ceea7ecb3bede2ae37bf06fe2}{pumps}};}
+\DoxyCodeLine{00087\ \ \ \ \ vector<ValveReader>\ \mbox{\hyperlink{class_epanet_reader_a17a3d2f768fdd826c013041ad5d278bf}{valves}};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ vector<PSToolboxBaseEdge\ *>\ \mbox{\hyperlink{class_epanet_reader_adc34acfb51ea6588dc7e6644182243aa}{edges}};}
+\DoxyCodeLine{00090\ \ \ \ \ vector<Connector\ *>\ \mbox{\hyperlink{class_epanet_reader_ae385a49238b447f0a6b39d44cc5eb288}{cons}};}
+\DoxyCodeLine{00091\ \ \ \ \ vector<int>\ \mbox{\hyperlink{class_epanet_reader_a9c0657fb98e9cd2698213db3b07f7686}{con\_at\_edge\_start}};}
+\DoxyCodeLine{00092\ \ \ \ \ vector<int>\ \mbox{\hyperlink{class_epanet_reader_af1337d828dc66cef823f0a32e9d27097}{con\_at\_edge\_end}};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_epanet_reader_af8a47948f3e2b8f4406a393084c7f38c}{readFromFile}}(\textcolor{keyword}{const}\ std::string\ \&filename);}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_epanet_reader_afcaf8cd4dabe694783ae9955898eb6ac}{convertToRunner2}}();}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_epanet_reader_a64d2169c03f975ae27ff5e95b0aa79b7}{nextPipeAtNode}}(\textcolor{keywordtype}{int}\ idx);}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_epanet_reader_a3cf8b37566dbb92f1ec0a2c1d3ba0f08}{getOtherNodeOfPipe}}(\textcolor{keywordtype}{int}\ idxPipe,\ \textcolor{keywordtype}{string}\ Node);}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_epanet_reader_a9f84a28abf9d28f323e2e9448721eed5}{printEdgesAndCons}}();}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_epanet_reader_a920fb6628c60f8ec48a70212626dace3}{PrintData}}();}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_epanet_reader_a035d6e38fee05a6d3e6b394962228b88}{unifyJunctions}}();}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_epanet_reader_a8a29637247879859a7132629299a3bbd}{findNodeByID}}(\textcolor{keyword}{const}\ std::string\ ID);}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_epanet_reader_a49743155e35a34670e87998c79ef5c79}{findPipeByID}}(\textcolor{keyword}{const}\ std::string\ ID);}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_epanet_reader_ab88f5ca06359432ed7f0757689e6cc82}{findReservoirByID}}(\textcolor{keyword}{const}\ std::string\ ID);}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_epanet_reader_a9f2dda8c59216c3a6a8cf38a7234df94}{checkIfIncludedInVector}}(vector<int>\ list,\ \textcolor{keywordtype}{int}\ elem);}
+\DoxyCodeLine{00105\ \ \ \ \ vector<int>\ \mbox{\hyperlink{class_epanet_reader_af00ceb3dd8fbe71a6f0b8aef6af785ff}{findConnectingPipes}}(\textcolor{keyword}{const}\ std::string\ node);}
+\DoxyCodeLine{00106\ \ \ \ \ \mbox{\hyperlink{struct_junction_reader}{JunctionReader}}\ \mbox{\hyperlink{class_epanet_reader_aadf391eb3638f57c721b4b0b1b8202e4}{parseJunction}}(\textcolor{keyword}{const}\ std::string\ \&line);}
+\DoxyCodeLine{00107\ \ \ \ \ \mbox{\hyperlink{struct_reservoir_reader}{ReservoirReader}}\ \mbox{\hyperlink{class_epanet_reader_ad65ecb4249c2365050d936c472254c00}{parseReservoir}}(\textcolor{keyword}{const}\ std::string\ \&line);}
+\DoxyCodeLine{00108\ \ \ \ \ \mbox{\hyperlink{struct_tank_reader}{TankReader}}\ \mbox{\hyperlink{class_epanet_reader_a7cc33f34b72c0b16425466583ed23173}{parseTank}}(\textcolor{keyword}{const}\ std::string\ \&line);}
+\DoxyCodeLine{00109\ \ \ \ \ \mbox{\hyperlink{struct_pipe_reader}{PipeReader}}\ \mbox{\hyperlink{class_epanet_reader_afffced57bb458fa4749ab1846517b59d}{parsePipe}}(\textcolor{keyword}{const}\ std::string\ \&line);}
+\DoxyCodeLine{00110\ \ \ \ \ \mbox{\hyperlink{struct_pump_reader}{PumpReader}}\ \mbox{\hyperlink{class_epanet_reader_a66bd4a7d89136267bd3ada5599658b42}{parsePump}}(\textcolor{keyword}{const}\ std::string\ \&line);}
+\DoxyCodeLine{00111\ \ \ \ \ \mbox{\hyperlink{struct_valve_reader}{ValveReader}}\ \mbox{\hyperlink{class_epanet_reader_a226740c80fb99346ba19d6d239429740}{parseValve}}(\textcolor{keyword}{const}\ std::string\ \&line);}
+\DoxyCodeLine{00112\ \};}
+\DoxyCodeLine{00113\ }
+
+\end{DoxyCode}

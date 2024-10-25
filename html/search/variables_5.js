@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['gas_0',['gas',['../class_frozen_mixture_liquid_gas.html#a148267a561e9d0fee01f1cc006615e68',1,'FrozenMixtureLiquidGas::gas'],['../class_l_w_p.html#a7ae6efcf2cb20a9aedf295ed534d87be',1,'LWP::gas'],['../class_reservoir.html#a00cb83324b4fa4d62be3ad55e2cab962',1,'Reservoir::gas']]]
+  ['fluid_5fname_0',['fluid_name',['../class_cool_prop_gas.html#a6b5732b8d5af277feee001e9cd1ac273',1,'CoolPropGas::fluid_name'],['../class_cool_prop_h_a.html#a399f318208cfd430cdf716333aff9162',1,'CoolPropHA::fluid_name']]],
+  ['fname_1',['fname',['../class_l_w_p.html#abef9f82d87b3ed9acb7cfd4a5362a8f4',1,'LWP::fname'],['../class_pump.html#a55f52d36647a5d7e68206dba8951bf1d',1,'Pump::fname'],['../class_reservoir.html#ab7bc173165dec1b596ec7a9c15ab88d2',1,'Reservoir::fname'],['../class_s_c_p.html#a77886d757791949bd29efe51e6c47703',1,'SCP::fname'],['../class_surge_chamber.html#ac32e5dd4e9b0db8d6be85dc7c55f344a',1,'SurgeChamber::fname'],['../class_valve.html#aee0a3a57d46e8dc45ef725ad7ac5b24f',1,'Valve::fname'],['../class_valve__with___absorber.html#aa330c4a46dcebcd8eb0109b5b7a5b7af',1,'Valve_with_Absorber::fname']]],
+  ['ft_5fto_5fm_2',['ft_to_m',['../class_units.html#aae98637c25e6a33b2521c48465f29691',1,'Units']]]
 ];

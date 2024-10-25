@@ -1,0 +1,73 @@
+\doxysection{Pump.\+h}
+\hypertarget{_pump_8h_source}{}\label{_pump_8h_source}\mbox{\hyperlink{_pump_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_p_s_toolbox_base_edge_8h}{PSToolboxBaseEdge.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_units_8h}{Units.h}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_pump}{Pump}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolboxBaseEdge}},\ \mbox{\hyperlink{class_units}{Units}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \ \ vector<double>\ \mbox{\hyperlink{class_pump_acb5cb0e6831fec5301f6522a32e6c336}{coeff\_H}};}
+\DoxyCodeLine{00016\ \ \ \ \ vector<double>\ \mbox{\hyperlink{class_pump_adb0e06927835f295b7ceaab07b522457}{coeff\_P}};}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_pump_ab793c907348605fb2e42f0ae7c5f0617}{n\_nom}};}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_pump_a4faeb826b0a81ccb9bab25a903640f75}{theta}};}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_pump_a25d5fc08bf1158f04ed8f4f6204188af}{Q\_nom}},\ \mbox{\hyperlink{class_pump_ac4ce644472fe2202c8f06d7ab7224d37}{H\_nom}};}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_pump_a9c6b57c3ade0e08809973e605c16af79}{H\_fun}}(\textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}},\ \textcolor{keywordtype}{double}\ n);}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_pump_aa993d7f97c438572f85fa565b968b531}{P\_fun}}(\textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}},\ \textcolor{keywordtype}{double}\ n);}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pump_a54d74fe35ea7ec3c7542bc11ce15c97e}{H\_fun\_lin}}(\textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}},\ \textcolor{keywordtype}{double}\ n,\ \textcolor{keywordtype}{double}\&\ a0,\ \textcolor{keywordtype}{double}\&\ a1);}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_pump_a6dcb961f22e34904c9ab8a8cd26b9d1a}{rho}};}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_pump_a05c5504f8cf21c8c180e406fa6724f4b}{Tmax}};}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_afae9361aedc8ca0ed48ca0d39f2be49c}{Get\_Q}}(\textcolor{keywordtype}{double}\ dh);}
+\DoxyCodeLine{00026\ \ \ \ \ vector<\ vector<double>\ >\ \mbox{\hyperlink{class_pump_a68eacd4c88d414ed8ba362aa17a9609e}{data}};}
+\DoxyCodeLine{00027\ \ \ \ \ vector<double>\ \mbox{\hyperlink{class_pump_a234f37f1254b0da0d6051b357572f282}{tmpvec}};}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_pump_a55f52d36647a5d7e68206dba8951bf1d}{fname}};}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_pump_a7e66979fa123d021ec34665cce781051}{use\_true\_H\_curve}};\ \textcolor{comment}{//\ false=linear\ approx.,\ true=H\ curve}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_pump_abca027e8ffc4c3084c3dae68a5d276a9}{state}};}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_pump_ac9f99fab9bcbd7d054377d3868107a77}{last\_statechange}};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{class_pump_ab2344d540685c951c3166e56bdc47b90}{Pump}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \_name,}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \_cspe\_name,}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \_cspv\_name,}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_rho,}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_Q\_nom,\ \textcolor{keywordtype}{double}\ \_H\_nom,}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ vector<double>\ \&\mbox{\hyperlink{class_pump_acb5cb0e6831fec5301f6522a32e6c336}{coeff\_H}},}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ vector<double>\ \&\mbox{\hyperlink{class_pump_adb0e06927835f295b7ceaab07b522457}{coeff\_P}},}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_pump_ab793c907348605fb2e42f0ae7c5f0617}{n\_nom}},\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a48dd5476af926578963de98aa86703c3}{n\_act}},}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_pump_a4faeb826b0a81ccb9bab25a903640f75}{theta}},\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a24d0bdb54e1ef80a07b1d0a53f512e15}{save\_data}});}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{class_pump_a267110970a4eb99ef63014945e372762}{\string~Pump}}()\{\};}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pump_a84bc7e3aeed2e4eec02f782673336985}{Ini}}(\textcolor{keywordtype}{int});}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pump_a84bc7e3aeed2e4eec02f782673336985}{Ini}}();}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pump_a84bc7e3aeed2e4eec02f782673336985}{Ini}}(\textcolor{keywordtype}{double});}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_pump_abd254eee229246ff5bf8db4729f5d162}{Info}}();}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pump_aa93e335985c0fd254ac5f3675e61f753}{GetBetaAtFront}}(\textcolor{keywordtype}{double},\ \textcolor{keywordtype}{double}\ \&,\ \textcolor{keywordtype}{double}\ \&);}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pump_a771c88d98c3f39e9be3aea9cb0781e3f}{GetAlphaAtEnd}}(\textcolor{keywordtype}{double},\ \textcolor{keywordtype}{double}\ \&,\ \textcolor{keywordtype}{double}\ \&);}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pump_af4a2894b52c17d80ea2d7c4d25620457}{GetEdgeEquationCoeffs}}(\textcolor{keywordtype}{double},\ \textcolor{keywordtype}{bool},\ \textcolor{keywordtype}{double}\ \&,\ \textcolor{keywordtype}{double}\ \&,\ \textcolor{keywordtype}{double}\ \&,\ \textcolor{keywordtype}{double}\ \&);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pump_af7902801dd488cdc95e0f5f5d7ec072d}{Set\_BC\_Left}}(\textcolor{keywordtype}{string}\ type,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pump_a363c0296603acf1db90bbac1f1a98ae1}{Set\_BC\_Right}}(\textcolor{keywordtype}{string}\ type,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pump_a161da2fda7dde2170116e7b23a5311c4}{GetLargePressureValues}}(\textcolor{keywordtype}{double},\ vector<double>\&,\ vector<double>\&,vector<double>\&,\ vector<string>\&);}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pump_a92658b67828d24d9987a16de53a962e0}{GetSmallPressureValues}}(\textcolor{keywordtype}{double},\ vector<double>\&,\ vector<double>\&,vector<double>\&,\ vector<string>\&);}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pump_a121d41b26c7b6dc15e844bb720ffa187}{Save\_data}}();}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pump_ab6b61561fa0d30a95c87606266d7a0b4}{Write\_data}}(\textcolor{keywordtype}{string});}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_pump_a8227f365638a800320961e5589fcaf31}{Get\_dprop}}(\textcolor{keywordtype}{string});}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pump_a1e47f691555bed9a8afa98076e1c11c5}{UpdateInternal}}(\textcolor{keywordtype}{double});}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pump_a8ba51aa76625073d2fc8aeafac27d60b}{UpdateTime}}(\textcolor{keywordtype}{double});}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pump_aaafa03cf56117e629c1289deaba34513}{Set\_string\_prop}}(\textcolor{keywordtype}{string},\textcolor{keywordtype}{string})\{\};}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pump_a85fdbbdb301a2ffa5b11beeb8f804431}{Add\_transient}}(\textcolor{keywordtype}{string},\textcolor{keywordtype}{double},\textcolor{keywordtype}{double});}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \};}
+
+\end{DoxyCode}

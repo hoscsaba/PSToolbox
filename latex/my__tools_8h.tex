@@ -4,6 +4,7 @@
 {\ttfamily \#include $<$Eigen/\+Dense$>$}\newline
 {\ttfamily \#include $<$string$>$}\newline
 {\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
@@ -13,6 +14,8 @@ class \mbox{\hyperlink{class_input}{Input}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{my__tools_8h_a1e8297ffbf7fac1b3ad8f9b169a4c29f}{get\+Index\+Of}} (std\+::vector$<$ int $>$ v, int num)
 \item 
 double \mbox{\hyperlink{my__tools_8h_afe6dca40d73c757482fa1b1c1bfe568e}{interpolate\+\_\+val}} (vector$<$ double $>$ \mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}}, vector$<$ double $>$ y, double x0)
 \item 
@@ -24,6 +27,14 @@ Matrix\+Xd \mbox{\hyperlink{my__tools_8h_ab6d40bb40ee1d5730e049b95194f088f}{num\
 \begin{DoxyCompactList}\small\item\em Calculation of the Jacobian of a multi dimensional parametric function. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{my__tools_8h_a7db1f720688e6b0d3cb8c4d3fa552586}{signum}} (double \mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}})
 \begin{DoxyCompactList}\small\item\em Determine the sign of the number. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{my__tools_8h_acebc24ceb3055b00ec90d286e8f7ea0e}{max}} (vector$<$ double $>$ \mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}})
+\item 
+double \mbox{\hyperlink{my__tools_8h_a6060f158060520cf3f6fd153f311866c}{min}} (vector$<$ double $>$ \mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}})
+\item 
+int \mbox{\hyperlink{my__tools_8h_a193d1cde89314e16e9bee03af0d57d3f}{max\+\_\+idx}} (vector$<$ double $>$ \mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}})
+\item 
+int \mbox{\hyperlink{my__tools_8h_a65f2f61ee49385156408df3f208277e9}{min\+\_\+idx}} (vector$<$ double $>$ \mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}})
+\item 
 double \mbox{\hyperlink{my__tools_8h_a3a2a1ce2695ea086316c42894da055c3}{mean}} (vector$<$ double $>$ \mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}})
 \item 
 double \mbox{\hyperlink{my__tools_8h_a5529af851583e2549fe5f968b47e340e}{stdev}} (vector$<$ double $>$ \mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}})
@@ -38,7 +49,7 @@ void \mbox{\hyperlink{my__tools_8h_a65db6748fee9f3c885a491152a681c29}{Nelder\+Me
 \item 
 void \mbox{\hyperlink{my__tools_8h_ac4dd1569d4ff1668de2b3fb57ef6c7e5}{swap}} (Vector\+Xd \mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}}, Vector\+Xd y)
 \item 
-double \mbox{\hyperlink{my__tools_8h_a17ff6a228ee9bc04b4e1e5e0770c2166}{gen\+\_\+random\+\_\+double}} (double min, double max)
+double \mbox{\hyperlink{my__tools_8h_a17ff6a228ee9bc04b4e1e5e0770c2166}{gen\+\_\+random\+\_\+double}} (double \mbox{\hyperlink{my__tools_8cpp_a6060f158060520cf3f6fd153f311866c}{min}}, double \mbox{\hyperlink{my__tools_8cpp_acebc24ceb3055b00ec90d286e8f7ea0e}{max}})
 \item 
 Vector\+Xd \mbox{\hyperlink{my__tools_8h_a972b54f2cf6a847c503282bf07fe902e}{linspace\+\_\+\+Vector\+Xd}} (double x\+\_\+min, double x\+\_\+max, int Nsteps, bool is\+\_\+linear)
 \begin{DoxyCompactList}\small\item\em Create a (lin)space. \end{DoxyCompactList}\item 
@@ -47,11 +58,11 @@ vector$<$ double $>$ \mbox{\hyperlink{my__tools_8h_ad168533bdd787ea2990607f7bde5
 
 
 \doxysubsection{Function Documentation}
-\Hypertarget{my__tools_8h_a17ff6a228ee9bc04b4e1e5e0770c2166}\label{my__tools_8h_a17ff6a228ee9bc04b4e1e5e0770c2166} 
-\index{my\_tools.h@{my\_tools.h}!gen\_random\_double@{gen\_random\_double}}
+\Hypertarget{my__tools_8h_a17ff6a228ee9bc04b4e1e5e0770c2166}\index{my\_tools.h@{my\_tools.h}!gen\_random\_double@{gen\_random\_double}}
 \index{gen\_random\_double@{gen\_random\_double}!my\_tools.h@{my\_tools.h}}
 \doxysubsubsection{\texorpdfstring{gen\_random\_double()}{gen\_random\_double()}}
-{\footnotesize\ttfamily double gen\+\_\+random\+\_\+double (\begin{DoxyParamCaption}\item[{double}]{MIN\+\_\+\+RAND,  }\item[{double}]{MAX\+\_\+\+RAND }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{my__tools_8h_a17ff6a228ee9bc04b4e1e5e0770c2166} 
+double gen\+\_\+random\+\_\+double (\begin{DoxyParamCaption}\item[{double}]{MIN\+\_\+\+RAND}{, }\item[{double}]{MAX\+\_\+\+RAND}{}\end{DoxyParamCaption})}
 
 Generates a random double precision in a range (inclusive of the edges) as an uniform distribution 
 \begin{DoxyParams}{Parameters}
@@ -63,29 +74,35 @@ Generates a random double precision in a range (inclusive of the edges) as an un
 \begin{DoxyReturn}{Returns}
 the random number 
 \end{DoxyReturn}
-\Hypertarget{my__tools_8h_a8dccf9fac8facd3c991b7319096e063d}\label{my__tools_8h_a8dccf9fac8facd3c991b7319096e063d} 
-\index{my\_tools.h@{my\_tools.h}!interp1@{interp1}}
+\Hypertarget{my__tools_8h_a1e8297ffbf7fac1b3ad8f9b169a4c29f}\index{my\_tools.h@{my\_tools.h}!getIndexOf@{getIndexOf}}
+\index{getIndexOf@{getIndexOf}!my\_tools.h@{my\_tools.h}}
+\doxysubsubsection{\texorpdfstring{getIndexOf()}{getIndexOf()}}
+{\footnotesize\ttfamily \label{my__tools_8h_a1e8297ffbf7fac1b3ad8f9b169a4c29f} 
+int get\+Index\+Of (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int $>$}]{v}{, }\item[{int}]{num}{}\end{DoxyParamCaption})}
+
+\Hypertarget{my__tools_8h_a8dccf9fac8facd3c991b7319096e063d}\index{my\_tools.h@{my\_tools.h}!interp1@{interp1}}
 \index{interp1@{interp1}!my\_tools.h@{my\_tools.h}}
 \doxysubsubsection{\texorpdfstring{interp1()}{interp1()}}
-{\footnotesize\ttfamily vector$<$ double $>$ interp1 (\begin{DoxyParamCaption}\item[{vector$<$ double $>$}]{x,  }\item[{vector$<$ double $>$}]{y,  }\item[{vector$<$ double $>$}]{xi }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{my__tools_8h_a8dccf9fac8facd3c991b7319096e063d} 
+vector$<$ double $>$ interp1 (\begin{DoxyParamCaption}\item[{vector$<$ double $>$}]{x}{, }\item[{vector$<$ double $>$}]{y}{, }\item[{vector$<$ double $>$}]{xi}{}\end{DoxyParamCaption})}
 
-\Hypertarget{my__tools_8h_afe6dca40d73c757482fa1b1c1bfe568e}\label{my__tools_8h_afe6dca40d73c757482fa1b1c1bfe568e} 
-\index{my\_tools.h@{my\_tools.h}!interpolate\_val@{interpolate\_val}}
+\Hypertarget{my__tools_8h_afe6dca40d73c757482fa1b1c1bfe568e}\index{my\_tools.h@{my\_tools.h}!interpolate\_val@{interpolate\_val}}
 \index{interpolate\_val@{interpolate\_val}!my\_tools.h@{my\_tools.h}}
 \doxysubsubsection{\texorpdfstring{interpolate\_val()}{interpolate\_val()}}
-{\footnotesize\ttfamily double interpolate\+\_\+val (\begin{DoxyParamCaption}\item[{vector$<$ double $>$}]{x,  }\item[{vector$<$ double $>$}]{y,  }\item[{double}]{x0 }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{my__tools_8h_afe6dca40d73c757482fa1b1c1bfe568e} 
+double interpolate\+\_\+val (\begin{DoxyParamCaption}\item[{vector$<$ double $>$}]{x}{, }\item[{vector$<$ double $>$}]{y}{, }\item[{double}]{x0}{}\end{DoxyParamCaption})}
 
-\Hypertarget{my__tools_8h_ad168533bdd787ea2990607f7bde5ae39}\label{my__tools_8h_ad168533bdd787ea2990607f7bde5ae39} 
-\index{my\_tools.h@{my\_tools.h}!linspace@{linspace}}
+\Hypertarget{my__tools_8h_ad168533bdd787ea2990607f7bde5ae39}\index{my\_tools.h@{my\_tools.h}!linspace@{linspace}}
 \index{linspace@{linspace}!my\_tools.h@{my\_tools.h}}
 \doxysubsubsection{\texorpdfstring{linspace()}{linspace()}}
-{\footnotesize\ttfamily vector$<$ double $>$ linspace (\begin{DoxyParamCaption}\item[{double}]{x\+\_\+min,  }\item[{double}]{x\+\_\+max,  }\item[{int}]{Nsteps,  }\item[{bool}]{is\+\_\+linear }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{my__tools_8h_ad168533bdd787ea2990607f7bde5ae39} 
+vector$<$ double $>$ linspace (\begin{DoxyParamCaption}\item[{double}]{x\+\_\+min}{, }\item[{double}]{x\+\_\+max}{, }\item[{int}]{Nsteps}{, }\item[{bool}]{is\+\_\+linear}{}\end{DoxyParamCaption})}
 
-\Hypertarget{my__tools_8h_a972b54f2cf6a847c503282bf07fe902e}\label{my__tools_8h_a972b54f2cf6a847c503282bf07fe902e} 
-\index{my\_tools.h@{my\_tools.h}!linspace\_VectorXd@{linspace\_VectorXd}}
+\Hypertarget{my__tools_8h_a972b54f2cf6a847c503282bf07fe902e}\index{my\_tools.h@{my\_tools.h}!linspace\_VectorXd@{linspace\_VectorXd}}
 \index{linspace\_VectorXd@{linspace\_VectorXd}!my\_tools.h@{my\_tools.h}}
 \doxysubsubsection{\texorpdfstring{linspace\_VectorXd()}{linspace\_VectorXd()}}
-{\footnotesize\ttfamily Vector\+Xd linspace\+\_\+\+Vector\+Xd (\begin{DoxyParamCaption}\item[{double}]{x\+\_\+min,  }\item[{double}]{x\+\_\+max,  }\item[{int}]{Nsteps,  }\item[{bool}]{is\+\_\+linear }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{my__tools_8h_a972b54f2cf6a847c503282bf07fe902e} 
+Vector\+Xd linspace\+\_\+\+Vector\+Xd (\begin{DoxyParamCaption}\item[{double}]{x\+\_\+min}{, }\item[{double}]{x\+\_\+max}{, }\item[{int}]{Nsteps}{, }\item[{bool}]{is\+\_\+linear}{}\end{DoxyParamCaption})}
 
 
 
@@ -105,32 +122,56 @@ Creates a distribution between a minimum and maximum value (both included). The 
 \begin{DoxyReturn}{Returns}
 A vector with the linspace 
 \end{DoxyReturn}
-\Hypertarget{my__tools_8h_a3a2a1ce2695ea086316c42894da055c3}\label{my__tools_8h_a3a2a1ce2695ea086316c42894da055c3} 
-\index{my\_tools.h@{my\_tools.h}!mean@{mean}}
+\Hypertarget{my__tools_8h_acebc24ceb3055b00ec90d286e8f7ea0e}\index{my\_tools.h@{my\_tools.h}!max@{max}}
+\index{max@{max}!my\_tools.h@{my\_tools.h}}
+\doxysubsubsection{\texorpdfstring{max()}{max()}}
+{\footnotesize\ttfamily \label{my__tools_8h_acebc24ceb3055b00ec90d286e8f7ea0e} 
+double max (\begin{DoxyParamCaption}\item[{vector$<$ double $>$}]{x}{}\end{DoxyParamCaption})}
+
+\Hypertarget{my__tools_8h_a193d1cde89314e16e9bee03af0d57d3f}\index{my\_tools.h@{my\_tools.h}!max\_idx@{max\_idx}}
+\index{max\_idx@{max\_idx}!my\_tools.h@{my\_tools.h}}
+\doxysubsubsection{\texorpdfstring{max\_idx()}{max\_idx()}}
+{\footnotesize\ttfamily \label{my__tools_8h_a193d1cde89314e16e9bee03af0d57d3f} 
+int max\+\_\+idx (\begin{DoxyParamCaption}\item[{vector$<$ double $>$}]{x}{}\end{DoxyParamCaption})}
+
+\Hypertarget{my__tools_8h_a3a2a1ce2695ea086316c42894da055c3}\index{my\_tools.h@{my\_tools.h}!mean@{mean}}
 \index{mean@{mean}!my\_tools.h@{my\_tools.h}}
 \doxysubsubsection{\texorpdfstring{mean()}{mean()}}
-{\footnotesize\ttfamily double mean (\begin{DoxyParamCaption}\item[{vector$<$ double $>$}]{x }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{my__tools_8h_a3a2a1ce2695ea086316c42894da055c3} 
+double mean (\begin{DoxyParamCaption}\item[{vector$<$ double $>$}]{x}{}\end{DoxyParamCaption})}
 
-\Hypertarget{my__tools_8h_a65db6748fee9f3c885a491152a681c29}\label{my__tools_8h_a65db6748fee9f3c885a491152a681c29} 
-\index{my\_tools.h@{my\_tools.h}!NelderMead@{NelderMead}}
+\Hypertarget{my__tools_8h_a6060f158060520cf3f6fd153f311866c}\index{my\_tools.h@{my\_tools.h}!min@{min}}
+\index{min@{min}!my\_tools.h@{my\_tools.h}}
+\doxysubsubsection{\texorpdfstring{min()}{min()}}
+{\footnotesize\ttfamily \label{my__tools_8h_a6060f158060520cf3f6fd153f311866c} 
+double min (\begin{DoxyParamCaption}\item[{vector$<$ double $>$}]{x}{}\end{DoxyParamCaption})}
+
+\Hypertarget{my__tools_8h_a65f2f61ee49385156408df3f208277e9}\index{my\_tools.h@{my\_tools.h}!min\_idx@{min\_idx}}
+\index{min\_idx@{min\_idx}!my\_tools.h@{my\_tools.h}}
+\doxysubsubsection{\texorpdfstring{min\_idx()}{min\_idx()}}
+{\footnotesize\ttfamily \label{my__tools_8h_a65f2f61ee49385156408df3f208277e9} 
+int min\+\_\+idx (\begin{DoxyParamCaption}\item[{vector$<$ double $>$}]{x}{}\end{DoxyParamCaption})}
+
+\Hypertarget{my__tools_8h_a65db6748fee9f3c885a491152a681c29}\index{my\_tools.h@{my\_tools.h}!NelderMead@{NelderMead}}
 \index{NelderMead@{NelderMead}!my\_tools.h@{my\_tools.h}}
 \doxysubsubsection{\texorpdfstring{NelderMead()}{NelderMead()}}
-{\footnotesize\ttfamily void Nelder\+Mead (\begin{DoxyParamCaption}\item[{double(\texorpdfstring{$\ast$}{*})(Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}}, const Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_abe25911381437fd4164e906339fe9cfc}{pars}})}]{fun,  }\item[{Vector\+Xd \&}]{x,  }\item[{double}]{radius,  }\item[{const Vector\+Xd \&}]{pars,  }\item[{const double}]{x\+\_\+\+TOL,  }\item[{const double}]{fun\+\_\+\+TOL,  }\item[{const bool}]{show\+\_\+iter }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{my__tools_8h_a65db6748fee9f3c885a491152a681c29} 
+void Nelder\+Mead (\begin{DoxyParamCaption}\item[{double(\texorpdfstring{$\ast$}{*}}]{fun~}{)(Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}}, const Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_abe25911381437fd4164e906339fe9cfc}{pars}}), }\item[{Vector\+Xd \&}]{x}{, }\item[{double}]{radius}{, }\item[{const Vector\+Xd \&}]{pars}{, }\item[{const double}]{x\+\_\+\+TOL}{, }\item[{const double}]{fun\+\_\+\+TOL}{, }\item[{const bool}]{show\+\_\+iter}{}\end{DoxyParamCaption})}
 
 
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\texttt{ in}}  & {\em fun} & The function to evaluate  \\
 \hline
-\mbox{\texttt{ in,out}}  & {\em x} & The starting vector  \\
+ & {\em x} & \mbox{[}in,out\mbox{]} The starting vector  \\
 \hline
  & {\em pars} & The parameters necessary for the evaluation of \\
 \hline
 \end{DoxyParams}
-\Hypertarget{my__tools_8h_a8d51787e99b3581557ff602ff310363e}\label{my__tools_8h_a8d51787e99b3581557ff602ff310363e} 
-\index{my\_tools.h@{my\_tools.h}!NelderMead2D@{NelderMead2D}}
+\Hypertarget{my__tools_8h_a8d51787e99b3581557ff602ff310363e}\index{my\_tools.h@{my\_tools.h}!NelderMead2D@{NelderMead2D}}
 \index{NelderMead2D@{NelderMead2D}!my\_tools.h@{my\_tools.h}}
 \doxysubsubsection{\texorpdfstring{NelderMead2D()}{NelderMead2D()}}
-{\footnotesize\ttfamily void Nelder\+Mead2D (\begin{DoxyParamCaption}\item[{double(\texorpdfstring{$\ast$}{*})(Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}}, const Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_abe25911381437fd4164e906339fe9cfc}{pars}})}]{fun,  }\item[{Vector\+Xd \&}]{x,  }\item[{double}]{radius,  }\item[{const Vector\+Xd \&}]{pars,  }\item[{const bool}]{show\+\_\+iter }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{my__tools_8h_a8d51787e99b3581557ff602ff310363e} 
+void Nelder\+Mead2D (\begin{DoxyParamCaption}\item[{double(\texorpdfstring{$\ast$}{*}}]{fun~}{)(Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}}, const Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_abe25911381437fd4164e906339fe9cfc}{pars}}), }\item[{Vector\+Xd \&}]{x}{, }\item[{double}]{radius}{, }\item[{const Vector\+Xd \&}]{pars}{, }\item[{const bool}]{show\+\_\+iter}{}\end{DoxyParamCaption})}
 
 
 
@@ -147,11 +188,11 @@ A 2D Nelder-\/\+Mead optimum searcher. Accepts an any dimensional (but will be t
 \mbox{\texttt{ in}}  & {\em show\+\_\+iter} & Show iterations? (not used, iterations always shown) \\
 \hline
 \end{DoxyParams}
-\Hypertarget{my__tools_8h_ae0c8e17ec9b4a80c282e872c2fbf83cc}\label{my__tools_8h_ae0c8e17ec9b4a80c282e872c2fbf83cc} 
-\index{my\_tools.h@{my\_tools.h}!NR@{NR}}
+\Hypertarget{my__tools_8h_ae0c8e17ec9b4a80c282e872c2fbf83cc}\index{my\_tools.h@{my\_tools.h}!NR@{NR}}
 \index{NR@{NR}!my\_tools.h@{my\_tools.h}}
 \doxysubsubsection{\texorpdfstring{NR()}{NR()}}
-{\footnotesize\ttfamily bool NR (\begin{DoxyParamCaption}\item[{Vector\+Xd(\texorpdfstring{$\ast$}{*})(Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}}, const Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_abe25911381437fd4164e906339fe9cfc}{pars}})}]{fun,  }\item[{Vector\+Xd \&}]{x,  }\item[{const Vector\+Xd \&}]{pars,  }\item[{const bool}]{show\+\_\+iter,  }\item[{const double}]{err\+\_\+max,  }\item[{const int}]{iter\+\_\+max,  }\item[{const bool}]{stop\+\_\+on\+\_\+failure }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{my__tools_8h_ae0c8e17ec9b4a80c282e872c2fbf83cc} 
+bool NR (\begin{DoxyParamCaption}\item[{Vector\+Xd(\texorpdfstring{$\ast$}{*}}]{fun~}{)(Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}}, const Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_abe25911381437fd4164e906339fe9cfc}{pars}}), }\item[{Vector\+Xd \&}]{x}{, }\item[{const Vector\+Xd \&}]{pars}{, }\item[{const bool}]{show\+\_\+iter}{, }\item[{const double}]{err\+\_\+max}{, }\item[{const int}]{iter\+\_\+max}{, }\item[{const bool}]{stop\+\_\+on\+\_\+failure}{}\end{DoxyParamCaption})}
 
 
 
@@ -164,7 +205,7 @@ Whether the search forthe solution was succesful
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\texttt{ in}}  & {\em fun} & pointer to the function that the solution is searched for  \\
 \hline
-\mbox{\texttt{ in,out}}  & {\em x} & The starting location and the solution  \\
+ & {\em x} & \mbox{[}in,out\mbox{]} The starting location and the solution  \\
 \hline
 \mbox{\texttt{ in}}  & {\em pars} & \doxylink{class_input}{Input} parameters for the function  \\
 \hline
@@ -177,11 +218,11 @@ Whether the search forthe solution was succesful
 \mbox{\texttt{ in}}  & {\em stop\+\_\+on\+\_\+failure} & Exit the program if iteration was succesful \\
 \hline
 \end{DoxyParams}
-\Hypertarget{my__tools_8h_a4a19cd1f9d55c6f39502ae4ade4462dc}\label{my__tools_8h_a4a19cd1f9d55c6f39502ae4ade4462dc} 
-\index{my\_tools.h@{my\_tools.h}!num\_grad@{num\_grad}}
+\Hypertarget{my__tools_8h_a4a19cd1f9d55c6f39502ae4ade4462dc}\index{my\_tools.h@{my\_tools.h}!num\_grad@{num\_grad}}
 \index{num\_grad@{num\_grad}!my\_tools.h@{my\_tools.h}}
 \doxysubsubsection{\texorpdfstring{num\_grad()}{num\_grad()}}
-{\footnotesize\ttfamily Vector\+Xd num\+\_\+grad (\begin{DoxyParamCaption}\item[{double(\texorpdfstring{$\ast$}{*})(Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}}, const Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_abe25911381437fd4164e906339fe9cfc}{pars}})}]{fun,  }\item[{Vector\+Xd \&}]{x,  }\item[{const Vector\+Xd \&}]{pars }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{my__tools_8h_a4a19cd1f9d55c6f39502ae4ade4462dc} 
+Vector\+Xd num\+\_\+grad (\begin{DoxyParamCaption}\item[{double(\texorpdfstring{$\ast$}{*}}]{fun~}{)(Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}}, const Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_abe25911381437fd4164e906339fe9cfc}{pars}}), }\item[{Vector\+Xd \&}]{x}{, }\item[{const Vector\+Xd \&}]{pars}{}\end{DoxyParamCaption})}
 
 
 
@@ -205,11 +246,11 @@ vector of the derivative in the base coordinates
 \mbox{\texttt{ in}}  & {\em pars} & paramters of the parametric function \\
 \hline
 \end{DoxyParams}
-\Hypertarget{my__tools_8h_ab6d40bb40ee1d5730e049b95194f088f}\label{my__tools_8h_ab6d40bb40ee1d5730e049b95194f088f} 
-\index{my\_tools.h@{my\_tools.h}!num\_jac@{num\_jac}}
+\Hypertarget{my__tools_8h_ab6d40bb40ee1d5730e049b95194f088f}\index{my\_tools.h@{my\_tools.h}!num\_jac@{num\_jac}}
 \index{num\_jac@{num\_jac}!my\_tools.h@{my\_tools.h}}
 \doxysubsubsection{\texorpdfstring{num\_jac()}{num\_jac()}}
-{\footnotesize\ttfamily Matrix\+Xd num\+\_\+jac (\begin{DoxyParamCaption}\item[{Vector\+Xd(\texorpdfstring{$\ast$}{*})(Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}}, const Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_abe25911381437fd4164e906339fe9cfc}{pars}})}]{fun,  }\item[{Vector\+Xd \&}]{x,  }\item[{const Vector\+Xd \&}]{pars }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{my__tools_8h_ab6d40bb40ee1d5730e049b95194f088f} 
+Matrix\+Xd num\+\_\+jac (\begin{DoxyParamCaption}\item[{Vector\+Xd(\texorpdfstring{$\ast$}{*}}]{fun~}{)(Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}}, const Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_abe25911381437fd4164e906339fe9cfc}{pars}}), }\item[{Vector\+Xd \&}]{x}{, }\item[{const Vector\+Xd \&}]{pars}{}\end{DoxyParamCaption})}
 
 
 
@@ -227,11 +268,11 @@ The Jacobian matrix
 \mbox{\texttt{ in}}  & {\em pars} & \doxylink{class_input}{Input} parameters for the function \\
 \hline
 \end{DoxyParams}
-\Hypertarget{my__tools_8h_a7db1f720688e6b0d3cb8c4d3fa552586}\label{my__tools_8h_a7db1f720688e6b0d3cb8c4d3fa552586} 
-\index{my\_tools.h@{my\_tools.h}!signum@{signum}}
+\Hypertarget{my__tools_8h_a7db1f720688e6b0d3cb8c4d3fa552586}\index{my\_tools.h@{my\_tools.h}!signum@{signum}}
 \index{signum@{signum}!my\_tools.h@{my\_tools.h}}
 \doxysubsubsection{\texorpdfstring{signum()}{signum()}}
-{\footnotesize\ttfamily double signum (\begin{DoxyParamCaption}\item[{double}]{x }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{my__tools_8h_a7db1f720688e6b0d3cb8c4d3fa552586} 
+double signum (\begin{DoxyParamCaption}\item[{double}]{x}{}\end{DoxyParamCaption})}
 
 
 
@@ -245,17 +286,17 @@ Determine the sign of a given double and return 1.\+0 if positive and -\/1.\+0 i
 \begin{DoxyReturn}{Returns}
 -\/1.\+0 if negative and 1.\+0 if positive 
 \end{DoxyReturn}
-\Hypertarget{my__tools_8h_a5529af851583e2549fe5f968b47e340e}\label{my__tools_8h_a5529af851583e2549fe5f968b47e340e} 
-\index{my\_tools.h@{my\_tools.h}!stdev@{stdev}}
+\Hypertarget{my__tools_8h_a5529af851583e2549fe5f968b47e340e}\index{my\_tools.h@{my\_tools.h}!stdev@{stdev}}
 \index{stdev@{stdev}!my\_tools.h@{my\_tools.h}}
 \doxysubsubsection{\texorpdfstring{stdev()}{stdev()}}
-{\footnotesize\ttfamily double stdev (\begin{DoxyParamCaption}\item[{vector$<$ double $>$}]{x }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{my__tools_8h_a5529af851583e2549fe5f968b47e340e} 
+double stdev (\begin{DoxyParamCaption}\item[{vector$<$ double $>$}]{x}{}\end{DoxyParamCaption})}
 
-\Hypertarget{my__tools_8h_a34be128d7b85e32c951e1b975ae4353b}\label{my__tools_8h_a34be128d7b85e32c951e1b975ae4353b} 
-\index{my\_tools.h@{my\_tools.h}!SteepestDescent@{SteepestDescent}}
+\Hypertarget{my__tools_8h_a34be128d7b85e32c951e1b975ae4353b}\index{my\_tools.h@{my\_tools.h}!SteepestDescent@{SteepestDescent}}
 \index{SteepestDescent@{SteepestDescent}!my\_tools.h@{my\_tools.h}}
 \doxysubsubsection{\texorpdfstring{SteepestDescent()}{SteepestDescent()}}
-{\footnotesize\ttfamily void Steepest\+Descent (\begin{DoxyParamCaption}\item[{double(\texorpdfstring{$\ast$}{*})(Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}}, const Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_abe25911381437fd4164e906339fe9cfc}{pars}})}]{fun,  }\item[{Vector\+Xd \&}]{x,  }\item[{const Vector\+Xd \&}]{pars,  }\item[{const bool}]{show\+\_\+iter }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{my__tools_8h_a34be128d7b85e32c951e1b975ae4353b} 
+void Steepest\+Descent (\begin{DoxyParamCaption}\item[{double(\texorpdfstring{$\ast$}{*}}]{fun~}{)(Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_a7fe6bc70e52971515c699da7a36c1d87}{x}}, const Vector\+Xd \&\mbox{\hyperlink{_l_w_p__2___valve___b_ccheck_8m_abe25911381437fd4164e906339fe9cfc}{pars}}), }\item[{Vector\+Xd \&}]{x}{, }\item[{const Vector\+Xd \&}]{pars}{, }\item[{const bool}]{show\+\_\+iter}{}\end{DoxyParamCaption})}
 
 
 
@@ -265,18 +306,18 @@ Determines the minimum location of a multi-\/dimensional parametric function, us
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\texttt{ in}}  & {\em fun} & The function to evaluate  \\
 \hline
-\mbox{\texttt{ in,out}}  & {\em x} & The start and end point  \\
+ & {\em x} & \mbox{[}in, out\mbox{]} The start and end point  \\
 \hline
 \mbox{\texttt{ in}}  & {\em pars} & The parameters of the evaluated function  \\
 \hline
  & {\em show\+\_\+iter} & Whether to print out the current iterations or not \\
 \hline
 \end{DoxyParams}
-\Hypertarget{my__tools_8h_ac4dd1569d4ff1668de2b3fb57ef6c7e5}\label{my__tools_8h_ac4dd1569d4ff1668de2b3fb57ef6c7e5} 
-\index{my\_tools.h@{my\_tools.h}!swap@{swap}}
+\Hypertarget{my__tools_8h_ac4dd1569d4ff1668de2b3fb57ef6c7e5}\index{my\_tools.h@{my\_tools.h}!swap@{swap}}
 \index{swap@{swap}!my\_tools.h@{my\_tools.h}}
 \doxysubsubsection{\texorpdfstring{swap()}{swap()}}
-{\footnotesize\ttfamily void swap (\begin{DoxyParamCaption}\item[{Vector\+Xd}]{x,  }\item[{Vector\+Xd}]{y }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{my__tools_8h_ac4dd1569d4ff1668de2b3fb57ef6c7e5} 
+void swap (\begin{DoxyParamCaption}\item[{Vector\+Xd}]{x}{, }\item[{Vector\+Xd}]{y}{}\end{DoxyParamCaption})}
 
 Swaps the values of two vectors 
 \begin{DoxyParams}{Parameters}

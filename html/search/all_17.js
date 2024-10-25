@@ -1,13 +1,6 @@
 var searchData=
 [
-  ['_7econnector_0',['~Connector',['../class_connector.html#a0f084edc18ed6e3a25314689d5bf9244',1,'Connector']]],
-  ['_7ecoolpropgas_1',['~CoolPropGas',['../class_cool_prop_gas.html#afc0b27b4930716c9ddf56009e7ddcf3e',1,'CoolPropGas']]],
-  ['_7efrozenmixtureliquidgas_2',['~FrozenMixtureLiquidGas',['../class_frozen_mixture_liquid_gas.html#ade32be4a13dae29aa3a3b41928b674c8',1,'FrozenMixtureLiquidGas']]],
-  ['_7egas_3',['~Gas',['../class_gas.html#a78b0365eb5310af7b1f2f1092be31926',1,'Gas']]],
-  ['_7eidealgas_4',['~IdealGas',['../class_ideal_gas.html#a78411fe6711c42a00210b3033a0befce',1,'IdealGas']]],
-  ['_7elwp_5',['~LWP',['../class_l_w_p.html#ae7a68b0cb90fb2661ff90dd6b35bd650',1,'LWP']]],
-  ['_7ereservoir_6',['~Reservoir',['../class_reservoir.html#a2aeb630cdd589baaa670ce3861c93f53',1,'Reservoir']]],
-  ['_7escp_7',['~SCP',['../class_s_c_p.html#aec0db6047f6437d1ff4de3e5c21a9671',1,'SCP']]],
-  ['_7eunits_8',['~Units',['../class_units.html#a64dc33d12edc3be94cfc72472cefecfe',1,'Units']]],
-  ['_7evalve_9',['~Valve',['../class_valve.html#ac59a5787dce2cf623fe3b6a42b7add15',1,'Valve']]]
+  ['windows_0',['Installing and using PSToolbox on Windows',['../md_install___p_s_toolbox__win.html',1,'']]],
+  ['with_20coolpprop_20support_1',['Installing with CoolpProp support',['../md_install___p_s_toolbox__win.html#autotoc_md3',1,'']]],
+  ['write_5fdata_2',['Write_data',['../class_check_valve.html#a856aa8600cc1741894417265578bdbc8',1,'CheckValve::Write_data()'],['../class_p_r_v.html#af7147bf143e32846f5492674220fc624',1,'PRV::Write_data()'],['../class_p_s_toolbox_base_edge.html#a80ed1e641d737c138cc1ae74826ce128',1,'PSToolboxBaseEdge::Write_data()'],['../class_pump.html#ab6b61561fa0d30a95c87606266d7a0b4',1,'Pump::Write_data()'],['../class_s_c_p.html#a02d0d267e51445438b62a45c1c8c3cd3',1,'SCP::Write_data()'],['../class_surge_chamber.html#a72bc74def955bcc65d9eb0079f88253b',1,'SurgeChamber::Write_data()'],['../class_tank.html#a7b9f87cc154fc22c97e82590c7f36b22',1,'Tank::Write_data()']]]
 ];

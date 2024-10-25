@@ -359,7 +359,7 @@ void Reservoir::Save_data() {
     pFile = fopen (fname.c_str(), "w");
     fprintf(pFile, "t (s); p (bar); mp_in (kg/s); mp_out (kg/s)\n");
     for (unsigned int i=0; i<data.size(); i++)
-      fprintf(pFile, "%8.6e; %8.6e, %8.6e, %8.6e\n", data.at(i).at(0), data.at(i).at(1),data.at(i).at(2), data.at(i).at(3));
+      fprintf(pFile, "%8.6e; %8.6e; %8.6e; %8.6e\n", data.at(i).at(0), data.at(i).at(1),data.at(i).at(2), data.at(i).at(3));
 
     fclose (pFile);
 

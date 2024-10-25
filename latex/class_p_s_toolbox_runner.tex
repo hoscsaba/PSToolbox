@@ -7,38 +7,115 @@
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_p_s_toolbox_runner_a47aa484a9db7c5cf452e6dc46cd922c9}{PSToolbox\+Runner}} (vector$<$ \mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}} \texorpdfstring{$\ast$}{*} $>$ \&, vector$<$ \mbox{\hyperlink{class_connector}{Connector}} \texorpdfstring{$\ast$}{*} $>$ \&)
-\end{DoxyCompactItemize}
-\doxysubsubsection*{Public Attributes}
-\begin{DoxyCompactItemize}
+\mbox{\hyperlink{class_p_s_toolbox_runner_a6a4885fab549d7db767ed999d70401c7}{PSToolbox\+Runner}} (vector$<$ \mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}} \texorpdfstring{$\ast$}{*} $>$ \&, vector$<$ \mbox{\hyperlink{class_connector}{Connector}} \texorpdfstring{$\ast$}{*} $>$ \&, vector$<$ int $>$ \&, vector$<$ int $>$ \&, vector$<$ vector$<$ int $>$ $>$ \&)
 \item 
-vector$<$ \mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_p_s_toolbox_runner_a810902ad9b7afc2d6b4ea8b49e66b2c3}{edges}}
+void \mbox{\hyperlink{class_p_s_toolbox_runner_a92b379920c83f0f9dac8b8fbcf464057}{Run}} (double)
 \item 
-vector$<$ \mbox{\hyperlink{class_connector}{Connector}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_p_s_toolbox_runner_a8c61cbf7af29bc9c48ca671426c93854}{connectors}}
+void \mbox{\hyperlink{class_p_s_toolbox_runner_a1e094d928d2dcc01125bf9eb0fc8d976}{Set\+\_\+\+Save\+\_\+data}} (bool newval)
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_runner_a9006a0f4da3cf5d83f62b7934126663e}{Set\+\_\+\+Folder}} (string newval)
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_runner_af83040561489ac0aa7ff7fb03f50d7b2}{Set\+\_\+\+DEBUG}} (bool newval)
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_runner_a03978b02c81bec66f1a90df4ce4bee7e}{Set\+\_\+\+Node\+\_\+mul}} (int newval)
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_runner_a6f225d782e1468670d31af71c0560976}{Set\+\_\+\+Pressure\+\_\+limit}} (bool set, double \+\_\+p\+\_\+lim\+Min, double \+\_\+p\+\_\+lim\+Max, string \+\_\+fname, string \+\_\+type)
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_runner_a294df888f21e721a6771c2108272a912}{Set\+\_\+\+Pressure\+\_\+limit\+\_\+time}} (double start, double end)
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_runner_af38ec32c907b535a08ae78b1c05f04d6}{Set\+\_\+\+Save\+\_\+interval}} (double interval)
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_runner_a1fcd8a55090bc012c824835fb03ccd27}{Set\+\_\+\+Write\+\_\+interval}} (double interval)
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_runner_acf55856b53ad2920360e6a972455cd8b}{Add\+\_\+\+Runtime\+\_\+modifier}} (\mbox{\hyperlink{struct_runtime_modifier}{Runtime\+Modifier}} \&rmod)
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_runner_a4c93ad035714fd6d647f5f276c12c992}{List\+Edge\+Info}} ()
+\item 
+void \mbox{\hyperlink{class_p_s_toolbox_runner_acc0bc359dc59d8f740d8c4526e8cf611}{Ini}} (double dt\+\_\+target)
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{class_p_s_toolbox_runner_a47aa484a9db7c5cf452e6dc46cd922c9}\label{class_p_s_toolbox_runner_a47aa484a9db7c5cf452e6dc46cd922c9} 
-\index{PSToolboxRunner@{PSToolboxRunner}!PSToolboxRunner@{PSToolboxRunner}}
+\Hypertarget{class_p_s_toolbox_runner_a6a4885fab549d7db767ed999d70401c7}\index{PSToolboxRunner@{PSToolboxRunner}!PSToolboxRunner@{PSToolboxRunner}}
 \index{PSToolboxRunner@{PSToolboxRunner}!PSToolboxRunner@{PSToolboxRunner}}
 \doxysubsubsection{\texorpdfstring{PSToolboxRunner()}{PSToolboxRunner()}}
-{\footnotesize\ttfamily PSToolbox\+Runner\+::\+PSToolbox\+Runner (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}} \texorpdfstring{$\ast$}{*} $>$ \&}]{\+\_\+e,  }\item[{vector$<$ \mbox{\hyperlink{class_connector}{Connector}} \texorpdfstring{$\ast$}{*} $>$ \&}]{\+\_\+c }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_runner_a6a4885fab549d7db767ed999d70401c7} 
+PSToolbox\+Runner\+::\+PSToolbox\+Runner (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}} \texorpdfstring{$\ast$}{*} $>$ \&}]{\+\_\+e}{, }\item[{vector$<$ \mbox{\hyperlink{class_connector}{Connector}} \texorpdfstring{$\ast$}{*} $>$ \&}]{\+\_\+c}{, }\item[{vector$<$ int $>$ \&}]{\+\_\+con\+\_\+at\+\_\+edge\+\_\+start}{, }\item[{vector$<$ int $>$ \&}]{\+\_\+con\+\_\+at\+\_\+edge\+\_\+end}{, }\item[{vector$<$ vector$<$ int $>$ $>$ \&}]{\+\_\+rigid\+\_\+subsystems}{ = {\ttfamily DEFAULT\+\_\+VECTOR}}\end{DoxyParamCaption})}
 
 
 
-\doxysubsection{Member Data Documentation}
-\Hypertarget{class_p_s_toolbox_runner_a8c61cbf7af29bc9c48ca671426c93854}\label{class_p_s_toolbox_runner_a8c61cbf7af29bc9c48ca671426c93854} 
-\index{PSToolboxRunner@{PSToolboxRunner}!connectors@{connectors}}
-\index{connectors@{connectors}!PSToolboxRunner@{PSToolboxRunner}}
-\doxysubsubsection{\texorpdfstring{connectors}{connectors}}
-{\footnotesize\ttfamily vector$<$\mbox{\hyperlink{class_connector}{Connector}} \texorpdfstring{$\ast$}{*}$>$ PSToolbox\+Runner\+::connectors}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_p_s_toolbox_runner_acf55856b53ad2920360e6a972455cd8b}\index{PSToolboxRunner@{PSToolboxRunner}!Add\_Runtime\_modifier@{Add\_Runtime\_modifier}}
+\index{Add\_Runtime\_modifier@{Add\_Runtime\_modifier}!PSToolboxRunner@{PSToolboxRunner}}
+\doxysubsubsection{\texorpdfstring{Add\_Runtime\_modifier()}{Add\_Runtime\_modifier()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_runner_acf55856b53ad2920360e6a972455cd8b} 
+void PSToolbox\+Runner\+::\+Add\+\_\+\+Runtime\+\_\+modifier (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_runtime_modifier}{Runtime\+Modifier}} \&}]{rmod}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-\Hypertarget{class_p_s_toolbox_runner_a810902ad9b7afc2d6b4ea8b49e66b2c3}\label{class_p_s_toolbox_runner_a810902ad9b7afc2d6b4ea8b49e66b2c3} 
-\index{PSToolboxRunner@{PSToolboxRunner}!edges@{edges}}
-\index{edges@{edges}!PSToolboxRunner@{PSToolboxRunner}}
-\doxysubsubsection{\texorpdfstring{edges}{edges}}
-{\footnotesize\ttfamily vector$<$\mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}} \texorpdfstring{$\ast$}{*}$>$ PSToolbox\+Runner\+::edges}
+\Hypertarget{class_p_s_toolbox_runner_acc0bc359dc59d8f740d8c4526e8cf611}\index{PSToolboxRunner@{PSToolboxRunner}!Ini@{Ini}}
+\index{Ini@{Ini}!PSToolboxRunner@{PSToolboxRunner}}
+\doxysubsubsection{\texorpdfstring{Ini()}{Ini()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_runner_acc0bc359dc59d8f740d8c4526e8cf611} 
+void PSToolbox\+Runner\+::\+Ini (\begin{DoxyParamCaption}\item[{double}]{dt\+\_\+target}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_p_s_toolbox_runner_a4c93ad035714fd6d647f5f276c12c992}\index{PSToolboxRunner@{PSToolboxRunner}!ListEdgeInfo@{ListEdgeInfo}}
+\index{ListEdgeInfo@{ListEdgeInfo}!PSToolboxRunner@{PSToolboxRunner}}
+\doxysubsubsection{\texorpdfstring{ListEdgeInfo()}{ListEdgeInfo()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_runner_a4c93ad035714fd6d647f5f276c12c992} 
+void PSToolbox\+Runner\+::\+List\+Edge\+Info (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_p_s_toolbox_runner_a92b379920c83f0f9dac8b8fbcf464057}\index{PSToolboxRunner@{PSToolboxRunner}!Run@{Run}}
+\index{Run@{Run}!PSToolboxRunner@{PSToolboxRunner}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_runner_a92b379920c83f0f9dac8b8fbcf464057} 
+void PSToolbox\+Runner\+::\+Run (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+max}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_p_s_toolbox_runner_af83040561489ac0aa7ff7fb03f50d7b2}\index{PSToolboxRunner@{PSToolboxRunner}!Set\_DEBUG@{Set\_DEBUG}}
+\index{Set\_DEBUG@{Set\_DEBUG}!PSToolboxRunner@{PSToolboxRunner}}
+\doxysubsubsection{\texorpdfstring{Set\_DEBUG()}{Set\_DEBUG()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_runner_af83040561489ac0aa7ff7fb03f50d7b2} 
+void PSToolbox\+Runner\+::\+Set\+\_\+\+DEBUG (\begin{DoxyParamCaption}\item[{bool}]{newval}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_p_s_toolbox_runner_a9006a0f4da3cf5d83f62b7934126663e}\index{PSToolboxRunner@{PSToolboxRunner}!Set\_Folder@{Set\_Folder}}
+\index{Set\_Folder@{Set\_Folder}!PSToolboxRunner@{PSToolboxRunner}}
+\doxysubsubsection{\texorpdfstring{Set\_Folder()}{Set\_Folder()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_runner_a9006a0f4da3cf5d83f62b7934126663e} 
+void PSToolbox\+Runner\+::\+Set\+\_\+\+Folder (\begin{DoxyParamCaption}\item[{string}]{newval}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_p_s_toolbox_runner_a03978b02c81bec66f1a90df4ce4bee7e}\index{PSToolboxRunner@{PSToolboxRunner}!Set\_Node\_mul@{Set\_Node\_mul}}
+\index{Set\_Node\_mul@{Set\_Node\_mul}!PSToolboxRunner@{PSToolboxRunner}}
+\doxysubsubsection{\texorpdfstring{Set\_Node\_mul()}{Set\_Node\_mul()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_runner_a03978b02c81bec66f1a90df4ce4bee7e} 
+void PSToolbox\+Runner\+::\+Set\+\_\+\+Node\+\_\+mul (\begin{DoxyParamCaption}\item[{int}]{newval}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_p_s_toolbox_runner_a6f225d782e1468670d31af71c0560976}\index{PSToolboxRunner@{PSToolboxRunner}!Set\_Pressure\_limit@{Set\_Pressure\_limit}}
+\index{Set\_Pressure\_limit@{Set\_Pressure\_limit}!PSToolboxRunner@{PSToolboxRunner}}
+\doxysubsubsection{\texorpdfstring{Set\_Pressure\_limit()}{Set\_Pressure\_limit()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_runner_a6f225d782e1468670d31af71c0560976} 
+void PSToolbox\+Runner\+::\+Set\+\_\+\+Pressure\+\_\+limit (\begin{DoxyParamCaption}\item[{bool}]{set}{, }\item[{double}]{\+\_\+p\+\_\+lim\+Min}{, }\item[{double}]{\+\_\+p\+\_\+lim\+Max}{, }\item[{string}]{\+\_\+fname}{, }\item[{string}]{\+\_\+type}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_p_s_toolbox_runner_a294df888f21e721a6771c2108272a912}\index{PSToolboxRunner@{PSToolboxRunner}!Set\_Pressure\_limit\_time@{Set\_Pressure\_limit\_time}}
+\index{Set\_Pressure\_limit\_time@{Set\_Pressure\_limit\_time}!PSToolboxRunner@{PSToolboxRunner}}
+\doxysubsubsection{\texorpdfstring{Set\_Pressure\_limit\_time()}{Set\_Pressure\_limit\_time()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_runner_a294df888f21e721a6771c2108272a912} 
+void PSToolbox\+Runner\+::\+Set\+\_\+\+Pressure\+\_\+limit\+\_\+time (\begin{DoxyParamCaption}\item[{double}]{start}{, }\item[{double}]{end}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_p_s_toolbox_runner_a1e094d928d2dcc01125bf9eb0fc8d976}\index{PSToolboxRunner@{PSToolboxRunner}!Set\_Save\_data@{Set\_Save\_data}}
+\index{Set\_Save\_data@{Set\_Save\_data}!PSToolboxRunner@{PSToolboxRunner}}
+\doxysubsubsection{\texorpdfstring{Set\_Save\_data()}{Set\_Save\_data()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_runner_a1e094d928d2dcc01125bf9eb0fc8d976} 
+void PSToolbox\+Runner\+::\+Set\+\_\+\+Save\+\_\+data (\begin{DoxyParamCaption}\item[{bool}]{newval}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_p_s_toolbox_runner_af38ec32c907b535a08ae78b1c05f04d6}\index{PSToolboxRunner@{PSToolboxRunner}!Set\_Save\_interval@{Set\_Save\_interval}}
+\index{Set\_Save\_interval@{Set\_Save\_interval}!PSToolboxRunner@{PSToolboxRunner}}
+\doxysubsubsection{\texorpdfstring{Set\_Save\_interval()}{Set\_Save\_interval()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_runner_af38ec32c907b535a08ae78b1c05f04d6} 
+void PSToolbox\+Runner\+::\+Set\+\_\+\+Save\+\_\+interval (\begin{DoxyParamCaption}\item[{double}]{interval}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_p_s_toolbox_runner_a1fcd8a55090bc012c824835fb03ccd27}\index{PSToolboxRunner@{PSToolboxRunner}!Set\_Write\_interval@{Set\_Write\_interval}}
+\index{Set\_Write\_interval@{Set\_Write\_interval}!PSToolboxRunner@{PSToolboxRunner}}
+\doxysubsubsection{\texorpdfstring{Set\_Write\_interval()}{Set\_Write\_interval()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_runner_a1fcd8a55090bc012c824835fb03ccd27} 
+void PSToolbox\+Runner\+::\+Set\+\_\+\+Write\+\_\+interval (\begin{DoxyParamCaption}\item[{double}]{interval}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
