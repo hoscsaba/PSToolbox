@@ -94,6 +94,7 @@ class Valve: public Units
     string GetName();
     string Info();
     void Update(double delta_t, double p_valve, double p_back, bool monitor_min_max);
+    void Update(double t_target, double pv, double pb);
     void Ini();
     void Ini(double _xstart, double _vstart, double _pstart);
     void Ini(double _xstart, double _vstart);

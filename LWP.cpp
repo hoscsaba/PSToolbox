@@ -379,7 +379,7 @@ void LWP::Step(double dt_req) {
 		dt = dt_req; // It is OK to take a smaller timestep
 
 	// Go ahead with the update
-	UpdateInternalPoints();
+	UpdateInternalPoints(t+dt_req,false /* do_update_internal_time */);
 
 	if (is_BCRight_Wall)
 		BCRight("Wall",0,0,true);
@@ -466,7 +466,7 @@ void LWP::Step(
 		dt = dt_req; // It is OK to take a smaller timestep
 
 	// Go ahead with the update
-	UpdateInternalPoints();
+	UpdateInternalPoints(t+dt_req,false /* do_update_internal_time */);
 
 	if(left_boundary_points_already_updated || right_boundary_points_already_updated){
 		cout<<endl<<endl<<"ERROR!!!";
@@ -566,7 +566,14 @@ void LWP::Add_data_row() {
 	fclose (pFile);
 }
 
-void LWP::UpdateInternalPoints() {
+void LWP::UpdateInternalPoints(double tnew, bool do_update_internal_time) {
+
+dt=tnew-t;
+if (dt<0){
+	printf("\n\n ERROR!!! LWP::UpdateInternalPoints(double, bool)");
+	printf("\n Negative dt: internal tiime (t)=%g, requested time (tnew)=%g, dt=%g\n\n",t,tnew,dt);
+	cin.get();
+}
 
 	Pack(/*is_half_step*/false);
 
@@ -597,6 +604,49 @@ void LWP::UpdateInternalPoints() {
 
 	// Unpack Unew
 	UnPackU(/*is_half_step*/false);
+	if (do_update_internal_time){
+//printf("\n\n Updating internal time from %g to %g (dt=%g)\n\n",t,t+dt,dt);
+	t += dt;
+	UpdateTimeStep();
+	}
+
+	// Close timestep
+		for (int i = 0; i < Npts; i++) {
+			if (pnew(i) < P_MIN)
+				pnew(i) = P_MIN;
+			if (Tnew(i) < T_MIN)
+				Tnew(i) = T_MIN;
+			p(i) = pnew(i);
+			v(i) = vnew(i);
+			T(i) = Tnew(i);
+			rho(i) = rhonew(i);
+		}
+
+
+
+		left_boundary_points_already_updated=false;
+		right_boundary_points_already_updated=false;
+
+		if (save_data) {
+			tmpvec.at(0) = t;
+			tmpvec.at(1) = p(0);
+			tmpvec.at(2) = p(Npts - 1);
+			tmpvec.at(3) = v(0);
+			tmpvec.at(4) = v(Npts - 1);
+			tmpvec.at(5) = T(0);
+			tmpvec.at(6) = T(Npts - 1);
+			tmpvec.at(7) = rho(0);
+			tmpvec.at(8) = rho(Npts - 1);
+			tmpvec.at(9) = v(0) * A * rho(0);
+			tmpvec.at(10) = v(Npts - 1) * A * rho(Npts - 1);
+
+			data.push_back(tmpvec);
+		}
+
+		if (save_all_data) {
+			Add_data_row();
+		}
+
 }
 
 void LWP::Pack(bool is_half_step) {

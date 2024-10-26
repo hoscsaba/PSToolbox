@@ -75,7 +75,7 @@ class Connector
     bool Connector_LWP_Pipe_Back_and_Valve(double t_target, 
         LWP *p, Valve *v, double p_downstream, double& pb, double& Tb);
 
-    bool Connector_LWP_Pipe_Back_and_Valve(double t_target, 
+    void Connector_LWP_Pipe_Back_and_Valve(double t_target,
         LWP *p, Valve *v, double p_downstream);
 
     bool Connector_LWP_Pipe_Back_and_Valve_with_Absorber(double t_target, 

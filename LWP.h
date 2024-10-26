@@ -19,7 +19,7 @@ class LWP: public Units
 		int Npts;
 		VectorXd x, v, p, T, rho, q;
 		bool ini_done;
-		void UpdateInternalPoints();
+		//void UpdateInternalPoints();
 		//VectorXd &p, VectorXd &v, VectorXd &T, VectorXd &rho);
 		//bool BCLeft(string type, double val1, double val2);
 		//void BCRight(string type, double val1, double val2);
@@ -82,6 +82,7 @@ class LWP: public Units
 		double Get_dprop(string prop_string);
 		void Set_dprop(string prop_string, double val);
 		void Step(double dt_req);
+		void UpdateInternalPoints(double tnew,bool do_update_internal_time);
 		void Step(
 				string BC_start_type, double BC_start_val1, double BC_start_val2,
 				string BC_end_type, double BC_end_val1, double BC_end_val2,

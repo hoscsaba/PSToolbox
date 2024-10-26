@@ -290,7 +290,7 @@ void Connector::Connector_Reservoir_and_Valve_Inlet(double t_target,
   \param &T temperature @ connection
  */
 
-bool Connector::Connector_LWP_Pipe_Back_and_Valve(double t_target,
+void Connector::Connector_LWP_Pipe_Back_and_Valve(double t_target,
 		LWP* p1, Valve* v1, double p_downstream) {
 	// Solve the following system for p,T,rho,v:
 	// (1) alpha=p+ro*a*v
@@ -335,6 +335,7 @@ bool Connector::Connector_LWP_Pipe_Back_and_Valve(double t_target,
 	}
 
 	p1->BCRight("StaticPres_Outlet",p,T,true);
+	//v1->Update(t_target,p,p_downstream);
 
 	return update_OK;
 }

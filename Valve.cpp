@@ -229,6 +229,10 @@ void Valve::Ini(double _xstart, double _vstart) {
 }
 
 
+void Valve::Update(double t_target, double pv, double pb) {
+Update(t_target-t, pv, pb, false);
+}
+
 void Valve::Update(double delta_t, double pv, double pb, bool monitor_min_max) {
   vector<double> xvec;
   vector<vector<double> > yvec;
