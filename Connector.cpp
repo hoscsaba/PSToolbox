@@ -337,7 +337,7 @@ void Connector::Connector_LWP_Pipe_Back_and_Valve(double t_target,
 	p1->BCRight("StaticPres_Outlet",p,T,true);
 	//v1->Update(t_target,p,p_downstream);
 
-	return update_OK;
+	//return update_OK;
 }
 
 bool Connector::Connector_LWP_Pipe_Back_and_Valve_with_Absorber(double t_target,
