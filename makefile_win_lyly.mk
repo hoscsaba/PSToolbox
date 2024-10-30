@@ -18,7 +18,7 @@ all:$(TARGETS)
 
 	ranlib libPSToolbox.a
 
- Compile rule for each source file
+#Compile rule for each source file
 my_tools: my_tools.cpp 
 	$(CXX) $(INC) $(CFLAGS) my_tools.cpp -c -o my_tools.o
 
