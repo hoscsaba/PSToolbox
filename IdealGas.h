@@ -6,7 +6,7 @@ class IdealGas : public Gas
 	public:
 		IdealGas(
 				const double _kappa, ///< [in] Adiabatic exponent*/
-				const double _R /**< [in] temperature, T*/
+				const double _R ///< [in] specific gas constant, J/kg/K */
 			);
 		IdealGas(IdealGas* g);
 		IdealGas();

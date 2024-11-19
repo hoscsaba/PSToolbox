@@ -306,9 +306,9 @@ void Connector::Connector_LWP_Pipe_Back_and_Valve(double t_target,
 	double rho, v, a, alpha, Apipe;
 
 	Apipe = p1->Get_dprop("A");
-	//p1->GetAllPrimitiveAtEnd(t_target, pL, v, T, rho);
+	//cout<<endl<<" -------> 1. Connector::Connector_LWP_Pipe_Back_and_Valve() t_target="<<t_target<<endl;
 	alpha = p1->GetAlphaPrimitiveAtEnd(t_target);
-
+	//cout<<endl<<" -------> 1. Connector::Connector_LWP_Pipe_Back_and_Valve() done."<<endl;
 	double err1=0., err2, err = 1.e5, mp, TOL = 1e-5;
 	int iter = 0, MAX_ITER = 10;
 	double p = p1->Get_dprop("p_back");
@@ -333,8 +333,9 @@ void Connector::Connector_LWP_Pipe_Back_and_Valve(double t_target,
 			update_OK=false;
 		}
 	}
-
-	p1->BCRight("StaticPres_Outlet",p,T,true);
+	//cout<<endl<<" -------> 2. Connector::Connector_LWP_Pipe_Back_and_Valve() t_target="<<t_target<<endl;
+	p1->BCRight(t_target,"StaticPres_Outlet",p,T,true);
+	//cout<<endl<<" -------> 2. Connector::Connector_LWP_Pipe_Back_and_Valve() done."<<endl;
 	//v1->Update(t_target,p,p_downstream);
 
 	//return update_OK;
@@ -396,7 +397,7 @@ void Connector::Connector_LWP_Reservoir_and_Pipe_Front(double t_target,
 	double pin,Tin;
 	bool is_inflow=false, is_outflow=false;
 	if (!inlet_pressure_drop){
-		is_inflow=p1->BCLeft("StaticPres_and_StaticTemp_Inlet",pt,Tt,false);
+		is_inflow=p1->BCLeft(t_target, "StaticPres_and_StaticTemp_Inlet",pt,Tt,false);
 		pin=pt; Tin=Tt;
 
 		if (DEBUG){
@@ -418,14 +419,14 @@ void Connector::Connector_LWP_Reservoir_and_Pipe_Front(double t_target,
 	}
 
 	if (is_inflow)
-		is_inflow=p1->BCLeft("StaticPres_and_StaticTemp_Inlet",pin,Tin,true);
+		is_inflow=p1->BCLeft(t_target,"StaticPres_and_StaticTemp_Inlet",pin,Tin,true);
 	else{
-		is_outflow=p1->BCLeft("StaticPres_Outlet",pt,0,false);
+		is_outflow=p1->BCLeft(t_target,"StaticPres_Outlet",pt,0,false);
 
 		if (is_outflow)
-			is_outflow=p1->BCLeft("StaticPres_Outlet",pt,0,true);
+			is_outflow=p1->BCLeft(t_target,"StaticPres_Outlet",pt,0,true);
 		else{
-			p1->BCLeft("Wall",0,0,true);
+			p1->BCLeft(t_target,"Wall",0,0,true);
 			cout<<endl<<"WARNING: Connector_LWP_Reservoir_and_Pipe_Front() -> Neither inflow, nor outflow! Applying wall BC.";
 			if (DEBUG)
 				cin.get();
@@ -1277,25 +1278,26 @@ void Connector::Connector_LWP_Pipes(double t_target,
 	v2 = (alpha2 - p) / (d2 * rho * a);
 	v3 = (alpha3 - p) / (d3 * rho * a);
 
-	Set_LWP_BC(p1,is_front1,p,T,v1);
-	Set_LWP_BC(p2,is_front2,p,T,v2);
-	Set_LWP_BC(p3,is_front3,p,T,v3);
+	Set_LWP_BC(p1,t_target,is_front1,p,T,v1);
+	Set_LWP_BC(p2,t_target,is_front2,p,T,v2);
+	Set_LWP_BC(p3,t_target,is_front3,p,T,v3);
 }
 
-void Connector::Set_LWP_BC(LWP* p1, const bool is_front, const double p, const double T, const double v){
+void Connector::Set_LWP_BC(LWP* p1, const double t_target, const bool is_front,
+		const double p, const double T, const double v){
 
 	double is_inflow,is_outflow;
 	if (is_front){
 		if (v>0)
-			is_inflow=p1->BCLeft("StaticPres_and_StaticTemp_Inlet",p,T,true);
+			is_inflow=p1->BCLeft(t_target,"StaticPres_and_StaticTemp_Inlet",p,T,true);
 		else
-			is_outflow=p1->BCLeft("StaticPres_Outlet",p,0,true);
+			is_outflow=p1->BCLeft(t_target,"StaticPres_Outlet",p,0,true);
 	}
 	else{
 		if (v<0)
-			is_inflow=p1->BCRight("StaticPres_and_StaticTemp_Inlet",p,T,true);
+			is_inflow=p1->BCRight(t_target,"StaticPres_and_StaticTemp_Inlet",p,T,true);
 		else
-			is_outflow=p1->BCRight("StaticPres_Outlet",p,0,true);
+			is_outflow=p1->BCRight(t_target,"StaticPres_Outlet",p,0,true);
 	}
 }
 
@@ -1467,11 +1469,11 @@ void Connector::Connector_LWP_Pipes(double t_target,
 		}
 	}
 	if (vR>0){
-		is_outflow=p1->BCRight("StaticPres_Outlet",pL,0,true);
-		is_inflow=p2->BCLeft("StaticPres_and_StaticTemp_Inlet",pR,TR,true);
+		is_outflow=p1->BCRight(t_target,"StaticPres_Outlet",pL,0,true);
+		is_inflow=p2->BCLeft(t_target,"StaticPres_and_StaticTemp_Inlet",pR,TR,true);
 	}
 	else{
-		is_outflow=p2->BCRight("StaticPres_Outlet",pR,0,true);
-		is_inflow=p1->BCLeft("StaticPres_and_StaticTemp_Inlet",pL,TL,true);
+		is_outflow=p2->BCRight(t_target,"StaticPres_Outlet",pR,0,true);
+		is_inflow=p1->BCLeft(t_target,"StaticPres_and_StaticTemp_Inlet",pL,TL,true);
 	}
 }

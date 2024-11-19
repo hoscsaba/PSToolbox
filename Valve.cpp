@@ -230,11 +230,13 @@ void Valve::Ini(double _xstart, double _vstart) {
 
 
 void Valve::Update(double t_target, double pv, double pb) {
-Update(t_target-t, pv, pb, false);
+	//double delta_t=t_target-t;
+Update(t_target, pv, pb, false);
 }
 
-void Valve::Update(double delta_t, double pv, double pb, bool monitor_min_max) {
-  vector<double> xvec;
+void Valve::Update(double t_target, double pv, double pb, bool monitor_min_max) {
+  double delta_t=t_target-t;
+	vector<double> xvec;
   vector<vector<double> > yvec;
   VectorXd pars = VectorXd::Zero(2);
   pars(0) = pv;

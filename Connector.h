@@ -133,7 +133,7 @@ class Connector
     vector<bool> is_front;
     vector<int> edges_idx;
 
-    void Set_LWP_BC(LWP* p1, const bool is_front, 
+    void Set_LWP_BC(LWP* p1, const double t_target, const bool is_front,
         const double p, const double T, const double v);
 
     double Connector_LWP_Reservoir_and_Pipe_Front_fun(double rho, double beta, 

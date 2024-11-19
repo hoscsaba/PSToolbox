@@ -169,7 +169,7 @@ void Reservoir::UpdateDimlessPars(double pref, double mp_nevl, double omega) {
   beta = a * a * mp_nevl / vol / omega / pref;
 }
 
-void Reservoir::Update(double delta_t, double mp_in, double mp_out) {
+void Reservoir::Update(double t_target, double mp_in, double mp_out) {
 
   if (!Ini_done) {
     cout << endl << endl << "ERROR! Reservoir::Update() was called without initializing first";
@@ -177,7 +177,7 @@ void Reservoir::Update(double delta_t, double mp_in, double mp_out) {
     cout << endl << "Name of pipe: " << name << endl;
     cin.get();
   }
-
+double delta_t=t_target-t;
   vector<double> xvec;
   vector<vector<double> > yvec;
   VectorXd pars = VectorXd::Zero(2);

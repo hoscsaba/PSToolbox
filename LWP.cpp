@@ -336,6 +336,7 @@ void LWP::UpdateTimeStep() {
 		if (dt_new < dt)
 			dt = dt_new;
 	}
+	//cout<<endl<<"LWP::UpdateTimeStep(): t="<<t<<", new dt="<<dt<<endl;
 }
 
 double LWP::Get_dt() {
@@ -375,14 +376,15 @@ void LWP::Step(double dt_req) {
 		cout << endl << "Exiting..." << endl;
 		exit(-1);
 	}
-	else
+	else{
 		dt = dt_req; // It is OK to take a smaller timestep
-
+	cout<<endl<<"LWP::Step(double dt_req): dt overwritten!!!"<<endl;
+	}
 	// Go ahead with the update
 	UpdateInternalPoints(t+dt_req,false /* do_update_internal_time */);
 
 	if (is_BCRight_Wall)
-		BCRight("Wall",0,0,true);
+		BCRight(t+dt_req,"Wall",0,0,true);
 
 	// We assume that the boundary points were already updated by the Connector class
 	if (!left_boundary_points_already_updated){
@@ -462,8 +464,10 @@ void LWP::Step(
 		cout << endl << "Exiting..." << endl;
 		exit(-1);
 	}
-	else
+else{
 		dt = dt_req; // It is OK to take a smaller timestep
+		cout<<endl<<"LWP::Step(string, double, double,....,double dt_req): dt overwritten!!!"<<endl;
+		}
 
 	// Go ahead with the update
 	UpdateInternalPoints(t+dt_req,false /* do_update_internal_time */);
@@ -477,9 +481,9 @@ void LWP::Step(
 		exit(-1);
 	}
 	else{
-		BCLeft(BC_start_type, BC_start_val1, BC_start_val2,true);
+		BCLeft(t+dt_req,BC_start_type, BC_start_val1, BC_start_val2,true);
 		left_boundary_points_already_updated=true;
-		BCRight(BC_end_type, BC_end_val1, BC_end_val2,true);
+		BCRight(t+dt_req,BC_end_type, BC_end_val1, BC_end_val2,true);
 		right_boundary_points_already_updated=true;
 	}
 
@@ -605,7 +609,7 @@ if (dt<0){
 	// Unpack Unew
 	UnPackU(/*is_half_step*/false);
 	if (do_update_internal_time){
-//printf("\n\n Updating internal time from %g to %g (dt=%g)\n\n",t,t+dt,dt);
+		//printf("\n\n LWP::UpdateInternalPoints: Updating internal time from %g to %g (dt=%g)\n\n",t,t+dt,dt);
 	t += dt;
 	UpdateTimeStep();
 	}
@@ -622,8 +626,7 @@ if (dt<0){
 			rho(i) = rhonew(i);
 		}
 
-
-
+		// Reset boundary conditions flag
 		left_boundary_points_already_updated=false;
 		right_boundary_points_already_updated=false;
 
@@ -738,9 +741,10 @@ void LWP::UnPackU(bool is_half_step) {
 	}
 }
 
-bool LWP::BCLeft(string type, double val1, double val2,bool write_to_node) {
+bool LWP::BCLeft(double t_target,string type,  double val1, double val2,bool write_to_node) {
 
-	double beta_primitive = GetBetaPrimitiveAtFront(t + dt);
+	//double beta_primitive = GetBetaPrimitiveAtFront(t + dt);
+	double beta_primitive = GetBetaPrimitiveAtFront(t_target);
 	double vBC, pBC, TBC,rhoBC;
 	bool BC_result_is_consistent=false;
 	bool ok = false;
@@ -855,10 +859,11 @@ bool LWP::BCLeft(string type, double val1, double val2,bool write_to_node) {
 	return BC_result_is_consistent;
 }
 
-bool LWP::BCRight(string type, double val1, double val2,bool write_to_node) {
+bool LWP::BCRight(double t_target, string type, double val1, double val2,bool write_to_node) {
 
 
-	double alpha_primitive = GetAlphaPrimitiveAtEnd(t + dt);
+	//double alpha_primitive = GetAlphaPrimitiveAtEnd(t + dt);
+	double alpha_primitive = GetAlphaPrimitiveAtEnd(t_target);
 	double vBC,pBC,rhoBC,TBC;
 	bool ok = false;
 	bool BC_result_is_consistent=true;
@@ -878,7 +883,8 @@ bool LWP::BCRight(string type, double val1, double val2,bool write_to_node) {
 		pBC   = val1;
 		TBC   = val2;
 		double a = gas->Get_SonicVel(TBC,pBC);
-		alpha = GetAlphaPrimitiveAtEnd(t + dt);
+		//alpha = GetAlphaPrimitiveAtEnd(t + dt);
+		alpha = GetAlphaPrimitiveAtEnd(t_target);
 		rhoBC = gas->Get_rho(pBC, TBC);
 		vBC   = (alpha - pBC) / rhoBC / a;
 		BC_result_is_consistent=true;
@@ -1311,6 +1317,8 @@ double LWP::GetC0AtEnd(double t_target) {
 }
 
 void LWP::GetAllPrimitiveAtEnd(double t_target, double& pP, double& vP, double& TP, double& rhoP) {
+	//cout<<endl<<"------------> LWP::GetAllPrimitiveAtEnd: t_target="<<t_target<<endl;
+
 	double delta_t = t_target - t;
 	double TOL = dt / 1000.;
 
@@ -1367,6 +1375,7 @@ void LWP::GetAllPrimitiveAtEnd(double t_target, double& pP, double& vP, double& 
 			cout << endl
 				<< "ERROR! LWP::GetAllPrimitiveAtEnd(), dxR/dx = " << dxR / dx << " > 1 !!!" << endl;
 			cout << endl << "Name of pipe: " << name << endl;
+			cout << endl << "\t t="<<t<<", dt="<<dt<<", t_target="<<t_target<<", delta_t="<<delta_t;
 			cin.get();
 		}
 		else
@@ -1543,8 +1552,8 @@ double LWP::Get_dprop(string prop_string) {
 		out = gas->Get_SonicVel(T.mean(),p.mean());
 	else {
 		cout << endl
-			<< "ERROR! LWP::Get_dprop(prop_string), unknown input: prop_string=" << prop_string << endl
-			<< endl;
+			<< "ERROR! LWP::Get_dprop(prop_string), unknown input: prop_string=" << prop_string << endl;
+
 		cout << endl << "Name of pipe: " << name << endl;
 		cin.get();
 	}

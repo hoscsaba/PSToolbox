@@ -88,8 +88,8 @@ class LWP: public Units
 				string BC_end_type, double BC_end_val1, double BC_end_val2,
 				double dt_req);
 
-		bool BCLeft(string type, double val1, double val2, bool write_to_node);
-		bool BCRight(string type, double val1, double val2, bool write_to_node);
+		bool BCLeft(double t_target, string type, double val1, double val2, bool write_to_node);
+		bool BCRight(double t_target, string type, double val1, double val2, bool write_to_node);
 		void Set_BCRight_Wall(){is_BCRight_Wall=true;};
 
 		double GetC0AtFront(double t_target);
