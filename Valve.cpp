@@ -420,7 +420,8 @@ void Valve::SetAeffCoeffs(const double _a1, const double _a2, const double _a3, 
   */
 
 double Valve::Aeff(const double x) {
-  double Aeff = (1. + a1 * (x / xmax) + a2 * pow(x / xmax, 2.) + a3 * pow(x/xmax,3));
+	double y=x/xmax_unrestricted;
+  double Aeff = (1. + a1 * y + a2 * pow(y, 2.) + a3 * pow(y,3));
   if (Aeff > Aeffmax)
     Aeff = Aeffmax;
   return Aeff;
@@ -450,11 +451,11 @@ void Valve::SetCdCoeffs(const double _b0, const double _b1, const double _b2, co
   */
 
 double Valve::Cdfun(const double x) {
-  double out, y=x/xmax;
+  double out, y=x/xmax_unrestricted;
   if (y>1.)
     out=b0+b1+b2+b3;
   else
-    out = b0 + b1 * (x / xmax) + b2 * pow(x / xmax, 2.) + b3 * pow(x/xmax,3);
+    out = b0 + b1 * y + b2 * pow(y, 2.) + b3 * pow(y,3);
   return out;
 }
 
@@ -764,7 +765,7 @@ vector<double> Valve::Get_dvprop(string prop_string) {
       out.at(i) = data.at(i).at(1) * 1000.;
   else if (prop_string == "x_rel_percent")
     for (unsigned int i = 0; i < Ntime; i++)
-      out.at(i) = data.at(i).at(1) / xmax * 100.;
+      out.at(i) = data.at(i).at(1) / xmax_unrestricted * 100.;
   else if (prop_string == "v")
     for (unsigned int i = 0; i < Ntime; i++)
       out.at(i) = data.at(i).at(2);
@@ -793,7 +794,7 @@ double Valve::Get_dprop(string prop_string) {
   else if (prop_string == "x_mm")
     out = x * 1000.;
   else if (prop_string == "x_rel_percent")
-    out = x / xmax * 100.;
+    out = x / xmax_unrestricted * 100.;
   else if (prop_string == "xmax")
     out = xmax;
   else if (prop_string == "RT")
