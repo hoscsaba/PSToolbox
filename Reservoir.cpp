@@ -195,6 +195,8 @@ double delta_t=t_target-t;
     // Save only endpoint
     tmpvec.at(0) = t;
     tmpvec.at(1) = p;
+    tmpvec.at(2) = mp_in;
+    tmpvec.at(3) = mp_out;
   data.push_back(tmpvec);
   }
 }
