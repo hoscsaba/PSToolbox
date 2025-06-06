@@ -1,0 +1,125 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      3592,        115]
+NotebookOptionsPosition[      3115,         98]
+NotebookOutlinePosition[      3506,        114]
+CellTagsIndexPosition[      3463,        111]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Solve", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"\[Alpha]", "==", 
+       RowBox[{"p1", "+", 
+        RowBox[{
+         FractionBox["mp", "Apipe1"], "a1"}]}]}], ",", 
+      RowBox[{"\[Beta]", "==", 
+       RowBox[{"p2", "-", 
+        RowBox[{
+         FractionBox["mp", "Apipe2"], "a2"}]}]}], ",", 
+      RowBox[{
+       RowBox[{"\[Rho]1", " ", "v1", " ", "A1"}], "==", "mp"}], ",", 
+      RowBox[{
+       RowBox[{"\[Rho]2", " ", "v2", " ", "A2"}], "==", "mp"}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"cp", " ", "T1"}], "+", 
+        FractionBox[
+         SuperscriptBox["v1", "2"], "2"]}], "==", 
+       RowBox[{
+        RowBox[{"cp", " ", "T2"}], "+", 
+        FractionBox[
+         SuperscriptBox["v2", "2"], "2"]}]}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"v1", ",", "v2", ",", "p1", ",", "p2", ",", "T1"}], "}"}]}], 
+   "]"}], "//", "Simplify"}]], "Input",
+ CellChangeTimes->{{3.953797942726211*^9, 3.9537980673786983`*^9}, {
+  3.9537981132462673`*^9, 3.953798156046624*^9}, {3.953798207718011*^9, 
+  3.953798210040845*^9}},
+ CellLabel->"In[9]:=",ExpressionUUID->"607f83a5-a17e-4bbd-b5e3-1b747cdfe702"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"v1", "\[Rule]", 
+     FractionBox["mp", 
+      RowBox[{"A1", " ", "\[Rho]1"}]]}], ",", 
+    RowBox[{"v2", "\[Rule]", 
+     FractionBox["mp", 
+      RowBox[{"A2", " ", "\[Rho]2"}]]}], ",", 
+    RowBox[{"p1", "\[Rule]", 
+     RowBox[{
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"a1", " ", "mp"}], "Apipe1"]}], "+", "\[Alpha]"}]}], ",", 
+    RowBox[{"p2", "\[Rule]", 
+     RowBox[{
+      FractionBox[
+       RowBox[{"a2", " ", "mp"}], "Apipe2"], "+", "\[Beta]"}]}], ",", 
+    RowBox[{"T1", "\[Rule]", 
+     RowBox[{"T2", "+", 
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["mp", "2"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", 
+           FractionBox["1", 
+            RowBox[{
+             SuperscriptBox["A1", "2"], " ", 
+             SuperscriptBox["\[Rho]1", "2"]}]]}], "+", 
+          FractionBox["1", 
+           RowBox[{
+            SuperscriptBox["A2", "2"], " ", 
+            SuperscriptBox["\[Rho]2", "2"]}]]}], ")"}]}], 
+       RowBox[{"2", " ", "cp"}]]}]}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{{3.953798052246663*^9, 3.953798067831949*^9}, {
+   3.953798115508478*^9, 3.953798156725629*^9}, 3.953798210542338*^9},
+ CellLabel->"Out[9]=",ExpressionUUID->"2ec71533-7a1a-4d5f-b341-795e5a94fa31"]
+}, Open  ]]
+},
+WindowSize->{544, 742},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+FrontEndVersion->"14.1 for Mac OS X ARM (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"c40b2093-8c8f-4b45-afe5-4a1d5c9fa7dd"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 1189, 33, 112, "Input",ExpressionUUID->"607f83a5-a17e-4bbd-b5e3-1b747cdfe702"],
+Cell[1768, 57, 1331, 38, 144, "Output",ExpressionUUID->"2ec71533-7a1a-4d5f-b341-795e5a94fa31"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

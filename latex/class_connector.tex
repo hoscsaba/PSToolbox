@@ -40,6 +40,8 @@ bool \mbox{\hyperlink{class_connector_a0c26734a5ca79673f137182ee081a298}{Connect
 \item 
 void \mbox{\hyperlink{class_connector_a41bb96f78cecdf937bdf3f9b7273deae}{Connector\+\_\+\+LWP\+\_\+\+Pipe\+\_\+\+Back\+\_\+and\+\_\+\+Valve}} (double t\+\_\+target, \mbox{\hyperlink{class_l_w_p}{LWP}} \texorpdfstring{$\ast$}{*}p, \mbox{\hyperlink{class_valve}{Valve}} \texorpdfstring{$\ast$}{*}v, double p\+\_\+downstream)
 \begin{DoxyCompactList}\small\item\em Connect \doxylink{class_l_w_p}{LWP} end to \doxylink{class_valve}{Valve}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_connector_a321a21bed95a6abfc78c66dfc789fd6e}{Connector\+\_\+\+LWP\+\_\+\+Pipe\+\_\+\+Front\+\_\+and\+\_\+\+Valve}} (double t\+\_\+target, \mbox{\hyperlink{class_l_w_p}{LWP}} \texorpdfstring{$\ast$}{*}p, \mbox{\hyperlink{class_valve}{Valve}} \texorpdfstring{$\ast$}{*}v, double p\+\_\+upstream, double T\+\_\+upstream)
+\item 
 bool \mbox{\hyperlink{class_connector_a53876523db2a68af24eb3501b02324b4}{Connector\+\_\+\+LWP\+\_\+\+Pipe\+\_\+\+Back\+\_\+and\+\_\+\+Valve\+\_\+with\+\_\+\+Absorber}} (double t\+\_\+target, \mbox{\hyperlink{class_l_w_p}{LWP}} \texorpdfstring{$\ast$}{*}p, \mbox{\hyperlink{class_valve__with___absorber}{Valve\+\_\+with\+\_\+\+Absorber}} \texorpdfstring{$\ast$}{*}v, double p\+\_\+downstream, double \&pb, double \&Tb)
 \item 
 void \mbox{\hyperlink{class_connector_a07a60f145b6cb4fafdf13b221b186249}{Connector\+\_\+\+SCP\+\_\+\+Reservoir\+\_\+and\+\_\+\+Pipe\+\_\+\+Front}} (double t\+\_\+target, \mbox{\hyperlink{class_reservoir}{Reservoir}} \texorpdfstring{$\ast$}{*}r, \mbox{\hyperlink{class_s_c_p}{SCP}} \texorpdfstring{$\ast$}{*}p, double rho, double a, bool inlet\+\_\+pressure\+\_\+drop, double \&pf)
@@ -66,7 +68,7 @@ void \mbox{\hyperlink{class_connector_ad26586fd0386a1e2aa1dd70dd7d40495}{Connect
 \item 
 void \mbox{\hyperlink{class_connector_ac11f3211c2fbf494dc88beb7aab1f7b7}{Connector\+\_\+\+LWP\+\_\+\+Pipes}} (double t\+\_\+target, \mbox{\hyperlink{class_l_w_p}{LWP}} \texorpdfstring{$\ast$}{*}p1, bool \mbox{\hyperlink{class_connector_acda807cd54a5fc5af641d45648846a75}{is\+\_\+front1}}, \mbox{\hyperlink{class_l_w_p}{LWP}} \texorpdfstring{$\ast$}{*}p2, bool \mbox{\hyperlink{class_connector_a4bd9c5467bb456f947960749b0a3f5a8}{is\+\_\+front2}}, \mbox{\hyperlink{class_l_w_p}{LWP}} \texorpdfstring{$\ast$}{*}p3, bool \mbox{\hyperlink{class_connector_af7d643bac884c6b232ecfd333186fa0c}{is\+\_\+front3}}, const double mpout, const double T)
 \item 
-void \mbox{\hyperlink{class_connector_a98128b3719378e6245085a3bbaf0e2bc}{Set\+\_\+\+LWP\+\_\+\+BC}} (\mbox{\hyperlink{class_l_w_p}{LWP}} \texorpdfstring{$\ast$}{*}p1, const bool \mbox{\hyperlink{class_connector_ae7110ee6e3b200874cc348328fa26b41}{is\+\_\+front}}, const double p, const double T, const double v)
+void \mbox{\hyperlink{class_connector_aa2eac88e0c9e86a5acc9f8794909b037}{Set\+\_\+\+LWP\+\_\+\+BC}} (\mbox{\hyperlink{class_l_w_p}{LWP}} \texorpdfstring{$\ast$}{*}p1, const double t\+\_\+target, const bool \mbox{\hyperlink{class_connector_ae7110ee6e3b200874cc348328fa26b41}{is\+\_\+front}}, const double p, const double T, const double v)
 \item 
 double \mbox{\hyperlink{class_connector_a79dfff0929287dfc508a4bc86d924f9e}{Connector\+\_\+\+LWP\+\_\+\+Reservoir\+\_\+and\+\_\+\+Pipe\+\_\+\+Front\+\_\+fun}} (double rho, double beta, \mbox{\hyperlink{class_reservoir}{Reservoir}} \texorpdfstring{$\ast$}{*}r1, \mbox{\hyperlink{class_l_w_p}{LWP}} \texorpdfstring{$\ast$}{*}p1, bool inlet\+\_\+pressure\+\_\+drop)
 \item 
@@ -219,6 +221,12 @@ bool Connector\+::\+Connector\+\_\+\+LWP\+\_\+\+Pipe\+\_\+\+Back\+\_\+and\+\_\+\
 {\footnotesize\ttfamily \label{class_connector_a53876523db2a68af24eb3501b02324b4} 
 bool Connector\+::\+Connector\+\_\+\+LWP\+\_\+\+Pipe\+\_\+\+Back\+\_\+and\+\_\+\+Valve\+\_\+with\+\_\+\+Absorber (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{\mbox{\hyperlink{class_l_w_p}{LWP}} \texorpdfstring{$\ast$}{*}}]{p}{, }\item[{\mbox{\hyperlink{class_valve__with___absorber}{Valve\+\_\+with\+\_\+\+Absorber}} \texorpdfstring{$\ast$}{*}}]{v}{, }\item[{double}]{p\+\_\+downstream}{, }\item[{double \&}]{pb}{, }\item[{double \&}]{Tb}{}\end{DoxyParamCaption})}
 
+\Hypertarget{class_connector_a321a21bed95a6abfc78c66dfc789fd6e}\index{Connector@{Connector}!Connector\_LWP\_Pipe\_Front\_and\_Valve@{Connector\_LWP\_Pipe\_Front\_and\_Valve}}
+\index{Connector\_LWP\_Pipe\_Front\_and\_Valve@{Connector\_LWP\_Pipe\_Front\_and\_Valve}!Connector@{Connector}}
+\doxysubsubsection{\texorpdfstring{Connector\_LWP\_Pipe\_Front\_and\_Valve()}{Connector\_LWP\_Pipe\_Front\_and\_Valve()}}
+{\footnotesize\ttfamily \label{class_connector_a321a21bed95a6abfc78c66dfc789fd6e} 
+void Connector\+::\+Connector\+\_\+\+LWP\+\_\+\+Pipe\+\_\+\+Front\+\_\+and\+\_\+\+Valve (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{\mbox{\hyperlink{class_l_w_p}{LWP}} \texorpdfstring{$\ast$}{*}}]{p}{, }\item[{\mbox{\hyperlink{class_valve}{Valve}} \texorpdfstring{$\ast$}{*}}]{v}{, }\item[{double}]{p\+\_\+upstream}{, }\item[{double}]{T\+\_\+upstream}{}\end{DoxyParamCaption})}
+
 \Hypertarget{class_connector_ac11f3211c2fbf494dc88beb7aab1f7b7}\index{Connector@{Connector}!Connector\_LWP\_Pipes@{Connector\_LWP\_Pipes}}
 \index{Connector\_LWP\_Pipes@{Connector\_LWP\_Pipes}!Connector@{Connector}}
 \doxysubsubsection{\texorpdfstring{Connector\_LWP\_Pipes()}{Connector\_LWP\_Pipes()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
@@ -357,11 +365,11 @@ Connects \doxylink{class_s_c_p}{SCP} front to reservoir
 {\em p} & \mbox{[}out\mbox{]} pressure at the first node of the pipe, result of computations \\
 \hline
 \end{DoxyParams}
-\Hypertarget{class_connector_a98128b3719378e6245085a3bbaf0e2bc}\index{Connector@{Connector}!Set\_LWP\_BC@{Set\_LWP\_BC}}
+\Hypertarget{class_connector_aa2eac88e0c9e86a5acc9f8794909b037}\index{Connector@{Connector}!Set\_LWP\_BC@{Set\_LWP\_BC}}
 \index{Set\_LWP\_BC@{Set\_LWP\_BC}!Connector@{Connector}}
 \doxysubsubsection{\texorpdfstring{Set\_LWP\_BC()}{Set\_LWP\_BC()}}
-{\footnotesize\ttfamily \label{class_connector_a98128b3719378e6245085a3bbaf0e2bc} 
-void Connector\+::\+Set\+\_\+\+LWP\+\_\+\+BC (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_l_w_p}{LWP}} \texorpdfstring{$\ast$}{*}}]{p1}{, }\item[{const bool}]{is\+\_\+front}{, }\item[{const double}]{p}{, }\item[{const double}]{T}{, }\item[{const double}]{v}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{class_connector_aa2eac88e0c9e86a5acc9f8794909b037} 
+void Connector\+::\+Set\+\_\+\+LWP\+\_\+\+BC (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_l_w_p}{LWP}} \texorpdfstring{$\ast$}{*}}]{p1}{, }\item[{const double}]{t\+\_\+target}{, }\item[{const bool}]{is\+\_\+front}{, }\item[{const double}]{p}{, }\item[{const double}]{T}{, }\item[{const double}]{v}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_connector_a7105bce081e3a7401671c9662a0cc72d}\index{Connector@{Connector}!setPressureDependentDemand@{setPressureDependentDemand}}
 \index{setPressureDependentDemand@{setPressureDependentDemand}!Connector@{Connector}}

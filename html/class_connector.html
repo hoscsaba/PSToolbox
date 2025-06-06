@@ -136,6 +136,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a41bb96f78cecdf937bdf3f9b7273deae" id="r_a41bb96f78cecdf937bdf3f9b7273deae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a41bb96f78cecdf937bdf3f9b7273deae">Connector_LWP_Pipe_Back_and_Valve</a> (double t_target, <a class="el" href="class_l_w_p.html">LWP</a> *p, <a class="el" href="class_valve.html">Valve</a> *v, double p_downstream)</td></tr>
 <tr class="memdesc:a41bb96f78cecdf937bdf3f9b7273deae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect <a class="el" href="class_l_w_p.html">LWP</a> end to <a class="el" href="class_valve.html" title="A class for handling both liquid and fluid valves A class for storing data regarding a valve and allo...">Valve</a>.  <br /></td></tr>
 <tr class="separator:a41bb96f78cecdf937bdf3f9b7273deae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a321a21bed95a6abfc78c66dfc789fd6e" id="r_a321a21bed95a6abfc78c66dfc789fd6e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a321a21bed95a6abfc78c66dfc789fd6e">Connector_LWP_Pipe_Front_and_Valve</a> (double t_target, <a class="el" href="class_l_w_p.html">LWP</a> *p, <a class="el" href="class_valve.html">Valve</a> *v, double p_upstream, double T_upstream)</td></tr>
+<tr class="separator:a321a21bed95a6abfc78c66dfc789fd6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53876523db2a68af24eb3501b02324b4" id="r_a53876523db2a68af24eb3501b02324b4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a53876523db2a68af24eb3501b02324b4">Connector_LWP_Pipe_Back_and_Valve_with_Absorber</a> (double t_target, <a class="el" href="class_l_w_p.html">LWP</a> *p, <a class="el" href="class_valve__with___absorber.html">Valve_with_Absorber</a> *v, double p_downstream, double &amp;pb, double &amp;Tb)</td></tr>
 <tr class="separator:a53876523db2a68af24eb3501b02324b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07a60f145b6cb4fafdf13b221b186249" id="r_a07a60f145b6cb4fafdf13b221b186249"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a07a60f145b6cb4fafdf13b221b186249">Connector_SCP_Reservoir_and_Pipe_Front</a> (double t_target, <a class="el" href="class_reservoir.html">Reservoir</a> *r, <a class="el" href="class_s_c_p.html">SCP</a> *p, double rho, double a, bool inlet_pressure_drop, double &amp;pf)</td></tr>
@@ -162,8 +164,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad26586fd0386a1e2aa1dd70dd7d40495"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac11f3211c2fbf494dc88beb7aab1f7b7" id="r_ac11f3211c2fbf494dc88beb7aab1f7b7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac11f3211c2fbf494dc88beb7aab1f7b7">Connector_LWP_Pipes</a> (double t_target, <a class="el" href="class_l_w_p.html">LWP</a> *p1, bool <a class="el" href="#acda807cd54a5fc5af641d45648846a75">is_front1</a>, <a class="el" href="class_l_w_p.html">LWP</a> *p2, bool <a class="el" href="#a4bd9c5467bb456f947960749b0a3f5a8">is_front2</a>, <a class="el" href="class_l_w_p.html">LWP</a> *p3, bool <a class="el" href="#af7d643bac884c6b232ecfd333186fa0c">is_front3</a>, const double mpout, const double T)</td></tr>
 <tr class="separator:ac11f3211c2fbf494dc88beb7aab1f7b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98128b3719378e6245085a3bbaf0e2bc" id="r_a98128b3719378e6245085a3bbaf0e2bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a98128b3719378e6245085a3bbaf0e2bc">Set_LWP_BC</a> (<a class="el" href="class_l_w_p.html">LWP</a> *p1, const bool <a class="el" href="#ae7110ee6e3b200874cc348328fa26b41">is_front</a>, const double p, const double T, const double v)</td></tr>
-<tr class="separator:a98128b3719378e6245085a3bbaf0e2bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2eac88e0c9e86a5acc9f8794909b037" id="r_aa2eac88e0c9e86a5acc9f8794909b037"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa2eac88e0c9e86a5acc9f8794909b037">Set_LWP_BC</a> (<a class="el" href="class_l_w_p.html">LWP</a> *p1, const double t_target, const bool <a class="el" href="#ae7110ee6e3b200874cc348328fa26b41">is_front</a>, const double p, const double T, const double v)</td></tr>
+<tr class="separator:aa2eac88e0c9e86a5acc9f8794909b037"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79dfff0929287dfc508a4bc86d924f9e" id="r_a79dfff0929287dfc508a4bc86d924f9e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79dfff0929287dfc508a4bc86d924f9e">Connector_LWP_Reservoir_and_Pipe_Front_fun</a> (double rho, double beta, <a class="el" href="class_reservoir.html">Reservoir</a> *r1, <a class="el" href="class_l_w_p.html">LWP</a> *p1, bool inlet_pressure_drop)</td></tr>
 <tr class="separator:a79dfff0929287dfc508a4bc86d924f9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64cb0611c374ae991a0c8751de8a88e8" id="r_a64cb0611c374ae991a0c8751de8a88e8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a64cb0611c374ae991a0c8751de8a88e8">signed_sqrt</a> (double <a class="el" href="_l_w_p__2___valve___b_ccheck_8m.html#a7fe6bc70e52971515c699da7a36c1d87">x</a>)</td></tr>
@@ -666,6 +668,42 @@ Public Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double &amp;</td>          <td class="paramname"><span class="paramname"><em>Tb</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a321a21bed95a6abfc78c66dfc789fd6e" name="a321a21bed95a6abfc78c66dfc789fd6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a321a21bed95a6abfc78c66dfc789fd6e">&#9670;&#160;</a></span>Connector_LWP_Pipe_Front_and_Valve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Connector::Connector_LWP_Pipe_Front_and_Valve </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>t_target</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_l_w_p.html">LWP</a> *</td>          <td class="paramname"><span class="paramname"><em>p</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_valve.html">Valve</a> *</td>          <td class="paramname"><span class="paramname"><em>v</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>p_upstream</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>T_upstream</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1286,8 +1324,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a98128b3719378e6245085a3bbaf0e2bc" name="a98128b3719378e6245085a3bbaf0e2bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98128b3719378e6245085a3bbaf0e2bc">&#9670;&#160;</a></span>Set_LWP_BC()</h2>
+<a id="aa2eac88e0c9e86a5acc9f8794909b037" name="aa2eac88e0c9e86a5acc9f8794909b037"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2eac88e0c9e86a5acc9f8794909b037">&#9670;&#160;</a></span>Set_LWP_BC()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1296,6 +1334,11 @@ Public Attributes</h2></td></tr>
           <td class="memname">void Connector::Set_LWP_BC </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_l_w_p.html">LWP</a> *</td>          <td class="paramname"><span class="paramname"><em>p1</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>t_target</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

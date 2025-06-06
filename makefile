@@ -1,102 +1,43 @@
-# Compiler
-CXX := g++
+# Compiler and flags
+CXX = g++
+# -w disables warnings.
+CXXFLAGS = -w -Wall -Wextra -std=c++17 -g -I$(shell brew --prefix eigen)/include/eigen3
 
-# Compiler flags
-CFLAGS = -g -Wall -std=c++11 -pedantic -O3
-#INC = -I/usr/local/include/eigen3
-INC = -I/opt/homebrew/Cellar/eigen/3.4.0_1/include/eigen3
-LINK = -lmy_tools
+# Directories
+SRC_DIR = src
+OBJ_DIR = obj
+BIN_DIR = bin
+LIB_DIR = lib
 
-INC_CP = -I/Users/hoscsaba/program/CoolProp/include -I/Users/hoscsaba/program/CoolProp/externals/fmtlib
-LINK_CP = -L/Users/hoscsaba/program/CoolProp/build1 -lCoolProp
+# Target
+STATIC_LIB = $(LIB_DIR)/libPSToolbox.a
 
-# =============== END OF NAGY DANI SECTION ==============
-# Source files
-# SRCS := $(wildcard *.cpp)
+# Target
+# TARGET = $(BIN_DIR)/main
 
-# Object files
-#OBJS := $(SRCS:.cpp=.o)
+# Source and object files
+SRCS := $(wildcard $(SRC_DIR)/*.cpp)
+# Exclude specific cpp files
+SRCS := $(filter-out $(SRC_DIR)/CoolPropGas.cpp $(SRC_DIR)/CoolPropHA.cpp $(SRC_DIR)/PSToolboxPlotter.cpp, $(SRCS))
+OBJS := $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
 
-# Executable
-#EXEC := output
+# Default target
+all: $(STATIC_LIB)
 
-# Build rule
-#$(EXEC): $(OBJS)
+# Create static library from object files
+$(STATIC_LIB): $(OBJS)
+	@mkdir -p $(LIB_DIR)
 #	libtool -static -o libmy_tools.a my_tools.o
-#	libtool -static -o libPSToolbox.a PSToolBoxRunner.o PSToolboxBaseEdge.o Gas.o IdealGas.o FrozenMixtureLiquidGas.o Units.o LWP.o SCP.o Reservoir.o Valve.o Connector.o CoolPropGas.o CoolPropHA.o Valve_with_Absorber.o EpanetReader.o
-#$(CXX) $(CXXFLAGS) $^ -o $@
-# =============== END OF NAGY DANI SECTION ==============
+#	libtool -static -o libPSToolbox.a RigidPipe.o PSToolBoxRunner.o PSToolboxBaseEdge.o Gas.o IdealGas.o FrozenMixtureLiquidGas.o Units.o LWP.o SCP.o Reservoir.o Valve.o Connector.o Valve_with_Absorber.o CheckValve.o Pump.o EpanetReader.o SurgeChamber.o Damper.o
+	ar rcs $@ $^
 
-TARGETS = my_tools SurgeChamber Gas IdealGas FrozenMixtureLiquidGas Units LWP SCP Reservoir PSToolboxRunner PSToolboxBaseEdge Valve Connector Valve_with_Absorber EpanetReader CheckValve Pump
+# Compile source files into object files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-all: $(TARGETS)
-	libtool -static -o libmy_tools.a my_tools.o
-	libtool -static -o libPSToolbox.a PSToolBoxRunner.o PSToolboxBaseEdge.o Gas.o IdealGas.o FrozenMixtureLiquidGas.o Units.o LWP.o SCP.o Reservoir.o Valve.o Connector.o Valve_with_Absorber.o CheckValve.o Pump.o EpanetReader.o SurgeChamber.o
-
-# Compile rule for each source file
-my_tools: my_tools.cpp 
-	$(CXX) $(INC) $(CFLAGS) my_tools.cpp -c -o my_tools.o
-
-SurgeChamber: SurgeChamber.cpp 
-	$(CXX) $(INC) $(CFLAGS) SurgeChamber.cpp -c -o SurgeChamber.o
-
-PSToolboxRunner: PSToolboxRunner.cpp 
-	$(CXX) $(INC) $(CFLAGS) PSToolboxRunner.cpp -c -o PSToolboxRunner.o
-
-PSToolboxBaseEdge: PSToolboxBaseEdge.cpp 
-	$(CXX) $(INC) $(CFLAGS) PSToolboxBaseEdge.cpp -c -o PSToolboxBaseEdge.o
-
-Gas: Gas.cpp 
-	$(CXX) $(CFLAGS) Gas.cpp -c -o Gas.o
-
-IdealGas: IdealGas.cpp 
-	$(CXX) $(CFLAGS) IdealGas.cpp -c -o IdealGas.o
-
-FrozenMixtureLiquidGas: FrozenMixtureLiquidGas.cpp 
-	$(CXX) $(CFLAGS) FrozenMixtureLiquidGas.cpp -c -o FrozenMixtureLiquidGas.o
-
-Units: Units.cpp
-	$(CXX) $(CFLAGS) Units.cpp -c -o Units.o
-
-LWP: LWP.cpp
-	$(CXX) $(INC) $(CFLAGS) LWP.cpp -c -o LWP.o
-
-SCP: SCP.cpp
-	$(CXX) $(INC) $(CFLAGS) SCP.cpp -c -o SCP.o
-
-Reservoir: Reservoir.cpp
-	$(CXX) $(INC) $(CFLAGS) Reservoir.cpp -c -o Reservoir.o
-# 	$(CXX) $(INC) $(LINK) $(CFLAGS) Reservoir.cpp -c -o Reservoir.o
-
-Valve: Valve.cpp
-	$(CXX) $(INC) $(CFLAGS) Valve.cpp -c -o Valve.o
-# 	$(CXX) $(INC) $(LINK) $(CFLAGS) Valve.cpp -c -o Valve.o
-
-Pump: Pump.cpp
-	$(CXX) $(INC) $(CFLAGS) Pump.cpp -c -o Pump.o
-
-EpanetReader: EpanetReader.cpp
-	$(CXX) $(INC) $(CFLAGS) EpanetReader.cpp -c -o EpanetReader.o
-
-CheckValve: CheckValve.cpp
-	$(CXX) $(INC) $(CFLAGS) CheckValve.cpp -c -o CheckValve.o
-
-Valve_with_Absorber: Valve_with_absorber.cpp
-	$(CXX) $(INC) $(CFLAGS) Valve_with_Absorber.cpp -c -o Valve_with_Absorber.o
-
-Connector: Connector.cpp
-	$(CXX) $(INC) $(CFLAGS) Connector.cpp -c -o Connector.o
-
-CoolPropGas: CoolPropGas.cpp
-	$(CXX) $(INC_CP) $(LINK_CP) $(CFLAGS) CoolPropGas.cpp -c -o CoolPropGas.o
-
-CoolPropMixture: CoolPropMixture.cpp
-	$(CXX) $(INC_CP) $(LINK_CP) $(CFLAGS) CoolPropMixture.cpp -c -o CoolPropMixture.o
-
-CoolPropHA: CoolPropHA.cpp
-	$(CXX) $(INC_CP) $(LINK_CP) $(CFLAGS) CoolPropHA.cpp -c -o CoolPropHA.o
-
-# Phony target to clean the project
-.PHONY: clean
+# Clean build artifacts
 clean:
-	rm -f $(EXEC) $(OBJS)
+	rm -rf $(OBJ_DIR) $(LIB_DIR)
+
+.PHONY: all clean
