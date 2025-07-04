@@ -477,7 +477,7 @@ void PSToolboxRunner::Run(double t_max) {
 	int rigid_elem_update = true;
 
 	// Simulation
-	double t_global = 0., dt_out = t_max / 100., t_out = -1.e-10;
+	double t_global = 0., dt_out = t_max / 100. / 1000., t_out = -1.e-10;
 	double t_next;
 	double t_save = write_interval;
 	int update_idx;
@@ -578,7 +578,7 @@ void PSToolboxRunner::Run(double t_max) {
 			cout << endl << "t_global : " << t_global;
 		}
 		if (t_global > t_out) {
-			cout << endl << round(t_global / t_max * 100) << "%";
+			cout << endl << "t = " << t_global << " s (" << round(10. * t_global / t_max * 100) / 10. << "%)";
 			t_out += dt_out;
 		}
 
@@ -888,3 +888,5 @@ void PSToolboxRunner::Ini_from_file(string fname, double dt_target) {
 	file.close(); // Close the file
 	cout << endl << "Done.";
 }
+
+

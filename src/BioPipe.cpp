@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <sstream>
 #include <vector>
+#include <cstdio>
 #include "my_tools.h"
 #include "PSToolboxBaseEdge.h"
 #include "BioPipe.h"
@@ -12,33 +13,34 @@
 
 //! Constructor for the slightly compressible pipe class
 BioPipe::BioPipe(const string _name, //!< [in] Name of the slightls compressible pipe
-         const string _cspe_name, //!< [in] Name of the previous node
-         const string _cspv_name, //!< [in] Name of the next node
-         const double _L, //!< [in] Length of the pipe section
-         const double _D,
-         const string _bio_type,//!< [in] Diameter of the pipe
-         const bool _save_data /**< [in] whether to save data*/
+                 const string _cspe_name, //!< [in] Name of the previous node
+                 const string _cspv_name, //!< [in] Name of the next node
+                 const double _L, //!< [in] Length of the pipe section
+                 const double _D,
+                 const string _bio_type, //!< [in] Diameter of the pipe
+                 const bool _save_data /**< [in] whether to save data*/
 ) : PSToolboxBaseEdge("BioPipe", _name, _cspe_name, _cspv_name), Units() {
   save_data = _save_data;
   L = _L;
   D = _D;
+  rh = D / 4.;
   A = D * D * M_PI / 4.; //Cross sectional area of the pipe
   ini_done = false;
   fname = name + ".dat"; //name of the file for saving data about the pipe
   g = 9.81;
 
-  bio_type=_bio_type;
+  bio_type = _bio_type;
 
   // Dummy initialization
   Npts = 1;
   dt = 0.;
-  v_conv=0.;
+  v_conv = 0.;
 
   is_rigid_element = false;
 
   Npts_min = 5;
   Npts_max = 50;
-  is_v_conv_set=false;
+  is_v_conv_set = false;
 }
 
 
@@ -48,10 +50,10 @@ BioPipe::~BioPipe() = default;
 string BioPipe::Info() {
   bool show_pts = true;
   if (!ini_done) {
-    cout<<endl<<"ERROR!!!";
-    cout<<endl<<"BioPipe::Info() called on "<<name<<" but the element is uninitialized!"<<endl;
+    cout << endl << "ERROR!!!";
+    cout << endl << "BioPipe::Info() called on " << name << " but the element is uninitialized!" << endl;
     cin.get();
-    }
+  }
 
   std::ostringstream oss;
   oss << "\n\n Pipe name     : " << name;
@@ -62,18 +64,18 @@ string BioPipe::Info() {
   oss << "\n              D : " << D << " m= " << D * m_to_inch << " in";
   oss << "\n             dt : " << dt << " s";
   oss << "\n       bio_type : " << bio_type;
-  oss << "\n         v_conv : " << v_conv<<" m/s"<<endl;
+  oss << "\n         v_conv : " << v_conv << " m/s" << endl;
 
   //oss << "\n        node #  : ";
   //  for (int i = 0; i < Npts; i++)
   //    oss << setw(4) << setfill(' ') << i << " ";
 
-     oss << std::showpos << std::scientific << std::setprecision(2) << std::setw(4);
-    for (int i = 0; i < C.rows(); i++){
-    	oss << "\n "<<name_of_bio_vars.at(i)<<" :";
-      	for (int j = 0; j < C.cols(); j++)
-    		oss<< C(i,j) << "  ";
-    }
+  oss << std::showpos << std::scientific << std::setprecision(2) << std::setw(4);
+  for (int i = 0; i < C.rows(); i++) {
+    oss << "\n " << name_of_bio_vars.at(i) << " :";
+    for (int j = 0; j < C.cols(); j++)
+      oss << C(i, j) << "  ";
+  }
   oss << endl;
 
   return oss.str();
@@ -85,7 +87,6 @@ void BioPipe::Ini() {
 }
 
 void BioPipe::Ini(double dt_target) {
-
   Ini(1.0, (VectorXd(num_of_bio_vars) << 0.0).finished());
 }
 
@@ -93,13 +94,13 @@ void BioPipe::Ini(double dt_target) {
 /*! \brief Initialize the BioPipe pipe
   Initializes the BioPipe pipe with ....
   */
-void BioPipe::Ini(double dt_target, VectorXd Cini){
+void BioPipe::Ini(double dt_target, VectorXd Cini) {
   t = 0.;
-     if (!is_v_conv_set) {
-    cout<<endl<<"ERROR!!!";
-    cout<<endl<<"BioPipe::Ini() called on "<<name<<" but v_conv is not set!"<<endl;
+  if (!is_v_conv_set) {
+    cout << endl << "ERROR!!!";
+    cout << endl << "BioPipe::Ini() called on " << name << " but v_conv is not set!" << endl;
     cin.get();
-    }
+  }
 
   Npts = round(L / fabs(v_conv) / dt_target); // CFL condition reorganized
   printf("\n BioPipe %5s:  L=%6.1f m, D=%6.1f m/s, dt_target=%5.3e s, Npts=%3d ", name.c_str(), L, D, dt_target, Npts);
@@ -107,85 +108,81 @@ void BioPipe::Ini(double dt_target, VectorXd Cini){
     Npts = Npts_min;
     printf(" -> %d", Npts);
   }
-   if (Npts > Npts_max) {
+  if (Npts > Npts_max) {
     Npts = Npts_max;
     printf(" -> %d", Npts);
   }
 
   // CFL criteria for selecting dt
-  dx=L/(Npts-1);
-  dt=dx/fabs(v_conv);
-  if (bio_type=="tracer") {
-    num_of_bio_vars=1;
+  dx = L / (Npts - 1);
+  dt = dx / fabs(v_conv);
+  if (bio_type == "tracer") {
+    num_of_bio_vars = 1;
     name_of_bio_vars.push_back("    tracer (-)");
     v_conv_vec = VectorXd::Zero(num_of_bio_vars);
     v_conv_vec(0) = v_conv;
-  }
-  else{
-  if (bio_type=="water_age") {
-    num_of_bio_vars=1;
-    name_of_bio_vars.push_back("water_age (hours)");
-    v_conv_vec = VectorXd::Zero(num_of_bio_vars);
-    v_conv_vec(0) = v_conv;
-  }
-  else{
-    if (bio_type=="chlorine"){
-      num_of_bio_vars=1;
-      name_of_bio_vars.push_back("C (mg/l)");
+  } else {
+    if (bio_type == "water_age") {
+      num_of_bio_vars = 1;
+      name_of_bio_vars.push_back("water_age (hours)");
       v_conv_vec = VectorXd::Zero(num_of_bio_vars);
       v_conv_vec(0) = v_conv;
-    }
-    else{
-      if (bio_type=="microbiology"){
-        num_of_bio_vars=4;
-        name_of_bio_vars.push_back("  S_b (mg/l)  ");
-        name_of_bio_vars.push_back("  C_b (CFU/l) ");
-        name_of_bio_vars.push_back("  S_w (mg/l)  ");
-        name_of_bio_vars.push_back("  C_w (CFU/l) ");
+    } else {
+      if (bio_type == "chlorine") {
+        num_of_bio_vars = 1;
+        name_of_bio_vars.push_back("C (mg/l)");
         v_conv_vec = VectorXd::Zero(num_of_bio_vars);
         v_conv_vec(0) = v_conv;
-        v_conv_vec(1) = v_conv;
-        v_conv_vec(2) = 0.0;
-        v_conv_vec(3) = 0.0;
-      }
-      else{
-        cout<<endl<<"ERROR! BioPipe::BioPipe()";
-        cout<<endl<<"\tUnknown bio_type: "<<bio_type;
-        cout<<endl<<"\tPossible choices: water_age, chlorine, microbiology"<<endl;
+      } else {
+        if (bio_type == "microbiology") {
+          num_of_bio_vars = 4;
+          name_of_bio_vars.push_back("  S_b (mg/l)  ");
+          name_of_bio_vars.push_back("  C_b (CFU/l) ");
+          name_of_bio_vars.push_back("  S_w (mg/l)  ");
+          name_of_bio_vars.push_back("  C_w (CFU/l) ");
+          v_conv_vec = VectorXd::Zero(num_of_bio_vars);
+          v_conv_vec(0) = v_conv;
+          v_conv_vec(1) = v_conv;
+          v_conv_vec(2) = 0.0;
+          v_conv_vec(3) = 0.0;
+        } else {
+          cout << endl << "ERROR! BioPipe::BioPipe()";
+          cout << endl << "\tUnknown bio_type: " << bio_type;
+          cout << endl << "\tPossible choices: water_age, chlorine, microbiology" << endl;
+        }
       }
     }
-  }
   }
   x = VectorXd::Zero(Npts);
   for (int i = 0; i < Npts; i++)
     x(i) = i * L / (Npts - 1);
 
-  C = MatrixXd::Zero(num_of_bio_vars,Npts);
+  C = MatrixXd::Zero(num_of_bio_vars, Npts);
   for (int j = 0; j < Npts; ++j)
     C.col(j) = Cini;
-  Cnew=C;
+  Cnew = C;
 
   ini_done = true;
 
   if (save_data) {
     tmpvec.push_back(t);
-    for (int i=0; i<num_of_bio_vars; i++)
-      tmpvec.push_back(C(i,0));
-    for (int i=0; i<num_of_bio_vars; i++)
-      tmpvec.push_back(C(i,Npts-1));
+    for (int i = 0; i < num_of_bio_vars; i++)
+      tmpvec.push_back(C(i, 0));
+    for (int i = 0; i < num_of_bio_vars; i++)
+      tmpvec.push_back(C(i, Npts - 1));
     data.clear();
     data.reserve(100);
     data.push_back(tmpvec);
   }
 }
 
- int BioPipe::Get_iprop(string prop_string){
-	int out;
-   if (prop_string == "Npts")
+int BioPipe::Get_iprop(string prop_string) {
+  int out;
+  if (prop_string == "Npts")
     out = Npts;
- else if (prop_string == "num_of_bio_vars")
+  else if (prop_string == "num_of_bio_vars")
     out = num_of_bio_vars;
-   else {
+  else {
     cout << endl
         << "ERROR! BioPipe::Get_iprop(prop_string), unknown input: prop_string=" << prop_string << endl
         << endl;
@@ -193,7 +190,7 @@ void BioPipe::Ini(double dt_target, VectorXd Cini){
     exit(-1);
   }
   return out;
- }
+}
 
 /*! \brief Return a property of the BioPipe.
   \param prop_string: A string describing the needed property ("L" | "L_feet" | "D" | "D_inch" | "A" | "dt" | "p_front" | "p_back" | "v_front" | "v_back" | "mp_front" | "mp_back" | "frek" | "tnext" | "lambda" | "phi" | "mu" | "rho" | "a")
@@ -218,9 +215,23 @@ double BioPipe::Get_dprop(string prop_string) {
   else if (prop_string == "v_conv")
     out = v_conv;
   else if (prop_string == "mp_back")
-    out = v_conv*A*1000.;
+    out = v_conv * A * 1000.;
   else if (prop_string == "mp_front")
-    out = v_conv*A*1000.;
+    out = v_conv * A * 1000.;
+  else if (prop_string == "chlorine_kb")
+    out = kb;
+  else if (prop_string == "bio_mumax")
+    out = mumax;
+  else if (prop_string == "bio_Y")
+    out = Y;
+  else if (prop_string == "bio_a")
+    out = a;
+  else if (prop_string == "bio_kmort")
+    out = kmort;
+  else if (prop_string == "bio_kb")
+    out = kb_bio;
+  else if (prop_string == "bio_kfs")
+    out = kfs;
   else {
     cout << endl
         << "ERROR! BioPipe::Get_dprop(prop_string), unknown input: prop_string=" << prop_string << endl
@@ -243,7 +254,21 @@ void BioPipe::Set_dprop(string prop_string, double val) {
   } else if (prop_string == "L") {
     L = val;
     dt = L / (Npts - 1) / v_conv;
-  } else {
+  } else if (prop_string == "chlorine_kb") {
+    kb = val;
+  } else if (prop_string == "bio_mumax")
+    mumax = val;
+  else if (prop_string == "bio_Y")
+    Y = val;
+  else if (prop_string == "bio_a")
+    a = val;
+  else if (prop_string == "bio_kmort")
+    kmort = val;
+  else if (prop_string == "bio_kb")
+    kb_bio = val;
+  else if (prop_string == "bio_kfs")
+    kfs = val;
+  else {
     cout << endl
         << "HIBA! BioPipe::Set_dprop(prop_string), ismeretlen bemenet: prop_string=" << prop_string << endl
         << endl;
@@ -256,66 +281,113 @@ void BioPipe::Set_string_prop(string prop_string, string val) {
   } else {
     cout << endl
         << "ERROR! BioPipe::Set_string_prop, unknown input:" << prop_string;
-    cout<<endl<<"Valid inputs: bio_type (water_age, chlorine, microbiology)"<<endl;
+    cout << endl << "Valid inputs: bio_type (water_age, chlorine, microbiology)" << endl;
   }
 }
 
 
 void BioPipe::UpdateInternal(double dummy_t_target) {
+  DEBUG = false;
+  /*
+    if (name == "800514887") {
+      cout << Info();
+      cout << endl << "Entering BioPipe::UpdateInternal";
+      cout << endl << "S=" << endl << S;
+      cout << endl << "v_conv_vec=" << v_conv_vec;
+      cout << endl << "Npts =" << Npts << endl;
+      cin.get();
+    }
+  */
 
-  //if (name == "142")
-  //cout<<Info();
+  double ERR_MIN = 1e-4;
+  double ERR_MAX = 1e-3;
+  double dt_ = dt;
 
-  MatrixXd S = Source();
+  MatrixXd k1 = RHS(C);
+  MatrixXd Y_Eu = C + dt_ * k1;
+  MatrixXd k2 = RHS(C + dt_ * k1);
+  Cnew = C + dt_ * (k1 + k2) / 2.;
+  double err = (k2 - k1).norm();
 
-  //cout<<endl<<"Entering BioPipe::UpdateInternal";
-  //cout<<endl<<"S="<<endl<<S;
-  //cout<<endl<<"v_conv_vec="<<v_conv_vec;
-  //cin.get();
+  // Check for infinity
+  if (std::isinf(err) || std::isnan(err)) {
+    cout << endl << name << " t=" << t << ", dt_=" << dt_ << ", err=" << err << " v_conv=" << v_conv << " L=" << L <<
+        " dt=dx/v_conv=" << fabs(dx / v_conv);
+    cin.get();
+  }
 
-  if (bio_type == "microbiology") {
-    if (v_conv>0.){
-      for (int i = 1; i < Npts; i++)
-        for (int j = 0; j < num_of_bio_vars; j++)
-          Cnew(j,i) = C(j,i)+(-v_conv_vec(j)*(C(j,i) - C(j,i-1))/dx+S(j,i))*dt;
-      }
-    else{
-      for (int i = 0; i < Npts-1; i++)
-        for (int j = 0; j < num_of_bio_vars; j++)
-          Cnew(j,i) = C(j,i)+(-v_conv_vec(j)*(C(j,i+1) - C(j,i))/dx+S(j,i))*dt;
-      }
-      }
-  else{
-    if (v_conv>0.)
-      for (int i = 1; i < Npts; i++)
-        Cnew.col(i) = C.col(i)+(-v_conv*(C.col(i) - C.col(i-1))/dx+S.col(i))*dt;
-    else
-      for (int i = 0; i < Npts-1; i++)
-        Cnew.col(i) = C.col(i)+(-v_conv*(C.col(i+1) - C.col(i))/dx+S.col(i))*dt;
+
+  if (err > ERR_MAX) {
+    dt = 0.5 * dt_;
+    if (dt < DT_MIN)
+      dt = DT_MIN;
+    else if (DEBUG)
+      cout << endl << "Pipe " << name << ": err=" << err << " -> dt decreased: " << dt << endl;
+  }
+
+  if (err < ERR_MIN) {
+    dt = 1.1 * dt_;
+    if (DEBUG)
+      cout << endl << "Pipe " << name << ": err=" << err << " -> dt increased: " << dt << endl;
   }
 
   for (int i = 0; i < Npts; i++)
-        for (int j = 0; j < num_of_bio_vars; j++){
-          if (Cnew(j,i)<0.)
-                C(j,i)=0.;
-          else
-            C(j,i) = Cnew(j,i);
-      }
+    for (int j = 0; j < num_of_bio_vars; j++) {
+      if (Cnew(j, i) < 0.)
+        C(j, i) = 0.;
+      else
+        C(j, i) = Cnew(j, i);
+    }
+}
+
+MatrixXd BioPipe::RHS(MatrixXd C) {
+  MatrixXd S = Source();
+  MatrixXd F = MatrixXd::Zero(num_of_bio_vars, Npts);
+
+  if (bio_type == "microbiology") {
+    if (v_conv > 0.) {
+      for (int i = 1; i < Npts; i++)
+        for (int j = 0; j < num_of_bio_vars; j++)
+          F(j, i) = -v_conv_vec(j) * (C(j, i) - C(j, i - 1)) / dx + S(j, i);
+      //C_new(j, i) = 0.*C(j, i) + (-v_conv_vec(j) * (C(j, i) - C(j, i - 1)) / dx + S(j, i)) * dt;
+    } else {
+      for (int i = 0; i < Npts - 1; i++)
+        for (int j = 0; j < num_of_bio_vars; j++)
+          F(j, i) = -v_conv_vec(j) * (C(j, i + 1) - C(j, i)) / dx + S(j, i);
+      //C_new(j, i) = C(j, i) + (-v_conv_vec(j) * (C(j, i + 1) - C(j, i)) / dx + S(j, i)) * dt;
+    }
+  } else {
+    if (v_conv > 0.)
+      for (int i = 1; i < Npts; i++)
+        F.col(i) = C - v_conv * (C.col(i) - C.col(i - 1)) / dx + S.col(i);
+    else
+      for (int i = 0; i < Npts - 1; i++)
+        F.col(i) = -v_conv * (C.col(i + 1) - C.col(i)) / dx + S.col(i);
+  }
+
+
+  /*
+    if (name == "800514887") {
+      cout << endl << " UpdateInternal() done." << endl;
+      cin.get();
+    }
+    */
+
+  return F;
 }
 
 void BioPipe::UpdateTime(double _t) {
-
   t = _t;
-/*
-  if (name == "5"){
-    cout << endl<<endl<<" Edge 5: "<<C;
-    cin.get();
-    }
-  if (name == "9"){
-    cout << endl<<endl<<" Edge 9 : "<<C;
-cin.get();}
+  /*
+    if (name == "5"){
+      cout << endl<<endl<<" Edge 5: "<<C;
+      cin.get();
+      }
+    if (name == "9"){
+      cout << endl<<endl<<" Edge 9 : "<<C;
+  cin.get();}
 
- */
+   */
 }
 
 void BioPipe::Step(
@@ -334,60 +406,48 @@ void BioPipe::Step(
 
 void BioPipe::Save_data() {
   tmpvec.at(0) = t;
-  for (int i=0; i<num_of_bio_vars; i++)
-    tmpvec.at(tmpvec.size()+i) = C(i,0);
-  for (int i=0; i<num_of_bio_vars; i++)
-    tmpvec.at(tmpvec.size()+i) = C(i,Npts-1);
+  for (int i = 0; i < num_of_bio_vars; i++)
+    tmpvec.at(tmpvec.size() + i) = C(i, 0);
+  for (int i = 0; i < num_of_bio_vars; i++)
+    tmpvec.at(tmpvec.size() + i) = C(i, Npts - 1);
 
   data.push_back(tmpvec);
-
 }
 
 MatrixXd BioPipe::Source() {
-  MatrixXd S = MatrixXd::Zero(num_of_bio_vars,Npts);
+  MatrixXd S = MatrixXd::Zero(num_of_bio_vars, Npts);
 
-  if (bio_type=="tracer") {
-    for (unsigned int i=0; i<Npts; i++)
-            for (unsigned int j=0; j<num_of_bio_vars; j++)
-        		S(j,i) = 0.0;
-  }
-  else{
-    if (bio_type=="water_age") {
-       for (unsigned int i=0; i<Npts; i++)
-            for (unsigned int j=0; j<num_of_bio_vars; j++)
-        		S(j,i) = 1.0;
-    }
-    else{
-      if (bio_type=="chlorine"){
-       for (unsigned int i=0; i<Npts; i++)
-            for (unsigned int j=0; j<num_of_bio_vars; j++)
-        		S(j,i) = -kb*C(j,i);
-      }
-      else{
-        if (bio_type=="microbiology"){
-          double mumax=0.62/24./3600.;
-          double Y = 0.85;
-          double a = 0.9;
-          double kmort = 0.039/24./3600.;
-          double rh=D/4.;
-          double kb_bio=0.5;
-          double kfs = kmort*10.;
-          for (unsigned int i=0; i<Npts; i++){
-        	  double Sb=C(0,i);
-              double Xb=C(1,i);
-              double Sw=C(2,i);
-              double Xw=C(3,i);
+  if (bio_type == "tracer") {
+    for (unsigned int i = 0; i < Npts; i++)
+      for (unsigned int j = 0; j < num_of_bio_vars; j++)
+        S(j, i) = 0.0;
+  } else {
+    if (bio_type == "water_age") {
+      for (unsigned int i = 0; i < Npts; i++)
+        for (unsigned int j = 0; j < num_of_bio_vars; j++)
+          S(j, i) = 1.0;
+    } else {
+      if (bio_type == "chlorine") {
+        for (unsigned int i = 0; i < Npts; i++)
+          for (unsigned int j = 0; j < num_of_bio_vars; j++)
+            S(j, i) = -kb * C(j, i);
+      } else {
+        if (bio_type == "microbiology") {
+          for (unsigned int i = 0; i < Npts; i++) {
+            double Sb = C(0, i);
+            double Xb = C(1, i);
+            double Sw = C(2, i);
+            double Xw = C(3, i);
 
-              S(0,i) = -1/Y*mumax*Sb/(kb_bio+Sb)*Xb + a*kmort*Xb    - kfs/rh*(Sb-Sw);
-              S(1,i) =      mumax*Sb/(kb_bio+Sb)*Xb -   kmort*Xb    - kfs/rh*(Xb-Xw/rh);
-              S(2,i) = -1/Y*mumax*Sw/(kb_bio+Sw)*Xw + a*kmort*Xw/rh + kfs/rh*(Sb-Sw);
-              S(3,i) =      mumax*Sw/(kb_bio+Sw)*Xw -   kmort*Xw/rh + kfs/rh*(Xb-Xw/rh);
-            }
-        }
-        else{
-          cout<<endl<<"ERROR!BioPipe::Source()";
-          cout<<endl<<"\tUnknown bio_type: "<<bio_type;
-          cout<<endl<<"\tPossible choices: water_age, chlorine, microbiology"<<endl;
+            S(0, i) = -1 / Y * mumax * Sb / (kb_bio + Sb) * Xb + a * kmort * Xb - kfs / rh * (Sb - Sw);
+            S(1, i) = mumax * Sb / (kb_bio + Sb) * Xb - kmort * Xb - kfs / rh * (Xb - Xw / rh);
+            S(2, i) = -1 / Y * mumax * Sw / (kb_bio + Sw) * Xw + a * kmort * Xw / rh + kfs / rh * (Sb - Sw);
+            S(3, i) = mumax * Sw / (kb_bio + Sw) * Xw - kmort * Xw / rh + kfs / rh * (Xb - Xw / rh);
+          }
+        } else {
+          cout << endl << "ERROR!BioPipe::Source()";
+          cout << endl << "\tUnknown bio_type: " << bio_type;
+          cout << endl << "\tPossible choices: water_age, chlorine, microbiology" << endl;
         }
       }
     }

@@ -105,6 +105,9 @@ public:
 
 	virtual double Get_dprop(string) { return 0.0; };
 
+	virtual void Set_dprop(string, double) {
+	};
+
 
 	virtual int Get_iprop(string prop_string) {
 		cout << endl << "Get_iprop() called from PSToolboxBaseEdge.";

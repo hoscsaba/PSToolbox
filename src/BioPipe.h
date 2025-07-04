@@ -13,10 +13,20 @@ using namespace Eigen;
 class BioPipe : public PSToolboxBaseEdge, Units {
 private:
     //Data
-    double L, D, A, g, v_conv, dx;
+    double L, D, rh, A, g, v_conv, dx;
     string bio_type;
     int Npts_min, Npts_max;
+    // chlorine
     double kb = 0.5 / 24. / 3600.;
+    // bio
+    double mumax = 0.62 / 24. / 3600.;
+    double Y = 0.85;
+    double a = 0.9;
+    double kmort = 0.039 / 24. / 3600.;
+    double kb_bio = 0.5;
+    double kfs = kmort * 10.;
+    double DT_MIN = 1.;
+
     VectorXd x;
     VectorXd v_conv_vec;
     MatrixXd Cnew;
@@ -32,6 +42,7 @@ private:
     //double Source(int i);
     MatrixXd Source();
 
+    MatrixXd RHS(MatrixXd);
 
     //Saving and plotting data
     vector<vector<double> > data;

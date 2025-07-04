@@ -10,9 +10,9 @@
 static vector<vector<int> > DEFAULT_VECTOR;
 
 PSToolboxBioRunner::PSToolboxBioRunner(vector<PSToolboxBaseEdge *> &_e,
-                                 vector<BioConnector *> &_c, vector<int> &_con_at_edge_start,
-                                 vector<int> &_con_at_edge_end, vector<vector<int> > &_rigid_subsystems =
-		                                 DEFAULT_VECTOR) {
+                                       vector<BioConnector *> &_c, vector<int> &_con_at_edge_start,
+                                       vector<int> &_con_at_edge_end, vector<vector<int> > &_rigid_subsystems =
+		                                       DEFAULT_VECTOR) {
 	edges = _e;
 	cons = _c;
 	con_at_edge_start = _con_at_edge_start;
@@ -28,13 +28,13 @@ PSToolboxBioRunner::PSToolboxBioRunner(vector<PSToolboxBaseEdge *> &_e,
 	save_interval = 1.0;
 	p_start_time = 0.0;
 	p_end_time = 1.0e10;
-	if (_rigid_subsystems.size()>0){
-          cout<<endl<<endl<<"ERROR! PSToolboxBioRunner cannot be used with rigid subsystems!!!"<<endl;
-          cin.get();
-		}
-snapshot_fname="quality";
-snapshot_num=0;
-save_snapshot=false;
+	if (_rigid_subsystems.size() > 0) {
+		cout << endl << endl << "ERROR! PSToolboxBioRunner cannot be used with rigid subsystems!!!" << endl;
+		cin.get();
+	}
+	snapshot_fname = "quality";
+	snapshot_num = 0;
+	save_snapshot = false;
 }
 
 
@@ -47,14 +47,13 @@ void PSToolboxBioRunner::Ini(double dt_target) {
 	//cin.get();
 }
 
-void PSToolboxBioRunner::Ini(double dt_target, VectorXd Cini){
-for (unsigned int i = 0; i < edges.size(); i++)
-  edges.at(i)->Ini(dt_target, Cini);
+void PSToolboxBioRunner::Ini(double dt_target, VectorXd Cini) {
+	for (unsigned int i = 0; i < edges.size(); i++)
+		edges.at(i)->Ini(dt_target, Cini);
 }
 
 
 void PSToolboxBioRunner::Run(double t_max) {
-
 	// for elapsed time measurement
 	auto start = std::chrono::high_resolution_clock::now();
 
@@ -64,7 +63,7 @@ void PSToolboxBioRunner::Run(double t_max) {
 
 	double t_global = 0., dt_out = t_max / 100., t_out = -1.e-10;
 	double t_next;
-    double last_save=-1.e-10;
+	double last_save = -1.e-10;
 	double t_save = write_interval;
 	int update_idx;
 	vector<bool> update_edges(edges.size());
@@ -73,12 +72,11 @@ void PSToolboxBioRunner::Run(double t_max) {
 	double T_TOL = 1.e-10;
 
 	if (save_snapshot) {
-			Write_snapshot(t_global);
-			snapshot_num++;
+		Write_snapshot(t_global);
+		snapshot_num++;
 	}
 
 	while (t_global < t_max) {
-
 		/*
 		 ======================== TIMESTEP PREPARATIONS ===============================
 		 */
@@ -88,8 +86,10 @@ void PSToolboxBioRunner::Run(double t_max) {
 			cout << endl << "t_global : " << t_global;
 		}
 		if (t_global > t_out) {
-			cout << endl << round(t_global / t_max * 100) << "%";
+			cout << endl << "time: " << convertSecondsToTimeFormat(t_global) << "\t (" << round(t_global / t_max * 100)
+					<< "%)";
 			t_out += dt_out;
+			//cin.get();
 		}
 
 		// Find smallest next target time
@@ -147,18 +147,43 @@ void PSToolboxBioRunner::Run(double t_max) {
 							<< " ... ->UpdateInternal()";
 
 				edges.at(i)->UpdateInternal(t_next);
+				//if (edges.at(i)->name == "801018417") {
+				//	cout << endl << "UpdateInternal done.";
+				//	cin.get();
+				//}
 				cons.at(con_at_edge_start.at(i))->Update(t_next, i);
-                cons.at(con_at_edge_end.at(i))->Update(t_next, i);
+				//if (edges.at(i)->name == "801018417") {
+				//	cout << endl << "con_at_edge_start done.";
+				//	cin.get();
+				//}
+				//if (edges.at(i)->name == "801018417") {
+				//	cout << endl << "entering con_at_edge_end...";
+				//	cout << endl << "   name   : " << cons.at(con_at_edge_end.at(i))->name;
+				//	cout << endl << "   BC_type: " << cons.at(con_at_edge_end.at(i))->BC_type;
+				//	cin.get();
+				//}
+				cons.at(con_at_edge_end.at(i))->Update(t_next, i);
+				//if (edges.at(i)->name == "801018417") {
+				//	cout << endl << "con_at_edge_end done.";
+				//	cin.get();
+				//}
 				edges.at(i)->UpdateTime(t_next);
+				//if (edges.at(i)->name == "801018417") {
+				//	cout << endl << "UpdateTime done.";
+				//	cin.get();
+				//}
 
-				if (DEBUG)
-					cout<<endl << " done.";
-
-                if (save_snapshot) {
+				if (DEBUG) {
+					cout << endl << " done.";
+					//	if (edges.at(i)->name == "801018417") {
+					//		cin.get();
+					//	}
+				}
+				if (save_snapshot) {
 					if (last_save + save_interval < t_next) {
 						Write_snapshot(t_global);
-                        snapshot_num++;
-						last_save+= save_interval;
+						snapshot_num++;
+						last_save += save_interval;
 					}
 				}
 			}
@@ -197,73 +222,72 @@ void PSToolboxBioRunner::Save_data_for_ini() {
 }
 
 void PSToolboxBioRunner::Write_snapshot(double t_global) {
-  string outfname = (snapshot_fname+ "_"+std::to_string(snapshot_num)+".dat");
-  cout <<endl<< " PSToolboxBioRunner::Write_snapshot writing snapshot file " << outfname<<" ...";
+	string outfname = (snapshot_fname + "_" + std::to_string(snapshot_num) + ".dat");
+	cout << endl << " PSToolboxBioRunner::Write_snapshot writing snapshot file " << outfname << " ...";
 	FILE *fp;
 	fp = fopen(outfname.c_str(), "w");
-        fprintf(fp,"Time: %5.3e\n",t_global);
+	fprintf(fp, "Time: %5.3e\n", t_global);
 	for (auto &edge: edges) {
 		fprintf(fp, "%s\t", edge->name.c_str());
-                for (int j=0; j<edge->Get_iprop("num_of_bio_vars"); j++)
-                  fprintf(fp, "%+5.3e\t%+5.3e\t", (edge->Get_C_Front())(j), (edge->Get_C_Back())(j));
-                fprintf(fp,"\n");
+		for (int j = 0; j < edge->Get_iprop("num_of_bio_vars"); j++)
+			fprintf(fp, "%+5.3e\t%+5.3e\t", (edge->Get_C_Front())(j), (edge->Get_C_Back())(j));
+		fprintf(fp, "\n");
 	}
 	fclose(fp);
 	cout << " done." << endl;
-
 }
 
-void PSToolboxBioRunner::Load_v_conv_from_file(string fname, double mul){
-  cout << endl << endl << "Loading convective velocities from " << fname << " ...";
+void PSToolboxBioRunner::Load_v_conv_from_file(string fname, double mul) {
+	cout << endl << endl << "Loading convective velocities from " << fname << " ...";
 
 	std::ifstream file(fname); // Open the file
 	if (!file) {
 		std::cerr << "Error opening file!" << std::endl;
 		exit(-1);
 	}
-         std::ifstream infile(fname);
-    if (!infile) {
-        std::cerr << "Error: could not open “" << fname << "” for reading.\n";
-        return;
-    }
+	std::ifstream infile(fname);
+	if (!infile) {
+		std::cerr << "Error: could not open “" << fname << "” for reading.\n";
+		return;
+	}
 
-    std::string line;
-    while (std::getline(infile, line)) {
-        if (line.empty()) continue;
+	std::string line;
+	while (std::getline(infile, line)) {
+		if (line.empty()) continue;
 
-        std::istringstream iss(line);
-        std::string id_str;
-        double v_conv_val, ignore_col3;
+		std::istringstream iss(line);
+		std::string id_str;
+		double v_conv_val, ignore_col3;
 
-        // Read the three columns:
-        //   1) id_str (e.g. "p2" or "p4")
-        //   2) v_conv_val (e.g. "+4.073e-01")
-        //   3) ignore_col3 (e.g. "+8.857e+05")
-        if (!(iss >> id_str >> v_conv_val >> ignore_col3)) {
-            // malformed line—skip or warn
-            std::cerr << "Warning: skipping malformed line:\n    " << line << "\n";
-            continue;
-        }
+		// Read the three columns:
+		//   1) id_str (e.g. "p2" or "p4")
+		//   2) v_conv_val (e.g. "+4.073e-01")
+		//   3) ignore_col3 (e.g. "+8.857e+05")
+		if (!(iss >> id_str >> v_conv_val >> ignore_col3)) {
+			// malformed line—skip or warn
+			std::cerr << "Warning: skipping malformed line:\n    " << line << "\n";
+			continue;
+		}
 
-        // Find the Edge in edges whose ID matches id_str
-       bool is_found=false;
+		// Find the Edge in edges whose ID matches id_str
+		bool is_found = false;
 
-       for (int i=0; i<edges.size(); i++) {
-         	if (edges.at(i)->Get_name() == id_str){
-           		edges.at(i)->Set_v_conv(v_conv_val*mul);
-           		is_found=true;
-                cout<<endl<<"\t ID: "<<id_str<<"\t V_CONV: "<<v_conv_val;
-                break;
-       		}
-        }
+		for (int i = 0; i < edges.size(); i++) {
+			if (edges.at(i)->Get_name() == id_str) {
+				edges.at(i)->Set_v_conv(limitAbs(v_conv_val, 0.5) * mul);
+				is_found = true;
+				cout << endl << "\t ID: " << id_str << "\t V_CONV: " << v_conv_val;
+				break;
+			}
+		}
 
-        if (!is_found) {
-            std::cerr << "Error: edge " << id_str
-                      << " not found;\n";
-            cin.get();
-        }
-    }
-    infile.close();
+		if (!is_found) {
+			std::cerr << "Error: edge " << id_str
+					<< " not found;\n";
+			cin.get();
+		}
+	}
+	infile.close();
 }
 
 void PSToolboxBioRunner::Ini_from_file(string fname, double dt_target) {
@@ -291,4 +315,25 @@ void PSToolboxBioRunner::Ini_from_file(string fname, double dt_target) {
 	}
 	file.close(); // Close the file
 	cout << endl << "Done.";
+}
+
+string PSToolboxBioRunner::convertSecondsToTimeFormat(double totalSeconds) {
+	int totalSecInt = static_cast<int>(std::floor(totalSeconds)); // truncate fractional part
+	int days = totalSecInt / 86400;
+	int hours = (totalSecInt % 86400) / 3600;
+	int minutes = (totalSecInt % 3600) / 60;
+
+	std::ostringstream oss;
+	oss << days << " days "
+			<< std::setw(2) << std::setfill('0') << hours << " hours "
+			<< std::setw(2) << std::setfill('0') << minutes << " mins ";
+
+	return oss.str();
+}
+
+double PSToolboxBioRunner::limitAbs(double value, double maxAbs) {
+	if (std::abs(value) > maxAbs) {
+		return (value > 0 ? 1 : -1) * maxAbs;
+	}
+	return value;
 }
