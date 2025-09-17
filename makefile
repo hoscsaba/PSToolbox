@@ -1,7 +1,7 @@
 # Compiler and flags
 CXX = g++
 # -w disables warnings.
-CXXFLAGS = -w -Wall -Wextra -std=c++17 -g -I$(shell brew --prefix eigen)/include/eigen3
+CXXFLAGS = -w -O3 -Wall -Wextra -std=c++17 -g -I$(shell brew --prefix eigen)/include/eigen3
 
 # Directories
 SRC_DIR = src

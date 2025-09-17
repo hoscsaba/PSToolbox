@@ -87,6 +87,7 @@ LWP::LWP(string _name,
     }
 
     DEBUG = false;
+    suppress_all_output = true;
 }
 
 LWP::~LWP() = default;
@@ -774,25 +775,46 @@ bool LWP::BCLeft(double t_target, string type, double val1, double val2, bool wr
         BC_result_is_consistent = true;
     }
 
-    /*if (type == "MassFlowIn_and_T") {
+    if (type == "MassFlowIn_and_T") {
+        double kappa = gas->Get_kappa_Tp();
+        pBC = p(0);
         double mp = val1;
-        Tnew(0) = val2;
-        double  a = gas->Get_SonicVel( Tnew(0));
-        vnew(0) = (a - beta) * 2. / (kappa - 1);
-        if (vnew(0) < 0) {
-        cout << endl << endl << " ERROR!! LWP pipe: " << name;
-        cout << endl << endl << " LWP::BCLeft(): MassFlowIn_and_T -> negative velocity";
-        cout << endl << "  prescribed mass flow rate: " << mp << " kg/s";
-        cout << endl << "  prescribed temperature   : " << Tnew(0) - 273.15 << " C";
-        cout << endl << "  computed flow velocity   : " << v << " m/s";
-        cout << endl << " Something is wrong. Try increasing the node number and/or decreasing the timestep.";
-        cout << endl << "Exiting..." << endl;
-        exit(-1);
+        TBC = val2;
+        double vold, v_err = 1e3;
+        int i_max = 10;
+        for (int i = 0; i < i_max + 1; i++) {
+            double aBC = gas->Get_SonicVel(TBC, pBC);
+            rhoBC = gas->Get_rho(pBC, TBC);
+            vBC = mp / rhoBC / A;
+            pBC = vBC * rhoBC * aBC + beta_primitive;
+            if (vBC < 0) {
+                cout << endl << endl << " ERROR!! LWP pipe: " << name;
+                cout << endl << endl << " LWP::BCLeft(): MassFlowIn_and_T -> negative velocity";
+                cout << endl << "  prescribed mass flow rate: " << mp << " kg/s";
+                cout << endl << "  prescribed temperature   : " << TBC - 273.15 << " C";
+                cout << endl << "  computed pressure        : " << pBC << " m/s";
+                cout << endl << "  computed flow velocity   : " << vBC << " m/s";
+                cout << endl << " Something is wrong. Try increasing the node number and/or decreasing the timestep.";
+                cout << endl << "Exiting..." << endl;
+                BC_result_is_consistent = false;
+                exit(-1);
+            } else {
+                v_err = fabs(vold - vBC);
+                vold = vBC;
+                if (v_err < 0.1)
+                    break;
+                if (i == i_max) {
+                    printf(
+                        "NOT ENOUGH ITERATIONS IN LWP:: BCLeft::MassFlowIn_and_T:\nmp=%5.3e, TBC=%5.3e, vBC=%5.3e, rhoBC=%5.3e, pBC=%5.3e\n",
+                        val1, val2, vBC, rhoBC, pBC);
+                    //cin.get();
+                }
+                ok = true;
+                BC_result_is_consistent = true;
+            }
         }
-        rhonew(0) = mp / A / vnew(0);
-        pnew(0) = gas->GetP(rhonew(0), Tnew(0));
-        ok = true;
-        }*/
+        //cin.get();
+    }
 
     if (type == "StaticPres_and_StaticTemp_Inlet") {
         pBC = val1;
@@ -974,11 +996,12 @@ bool LWP::BCRight(double t_target, string type, double val1, double val2, bool w
         BC_result_is_consistent = true;
         if (vBC < 0) {
             //BC_result_is_consistent=false;
-            cout << endl << "Name of LWP: " << name;
-            cout << endl << "LWP -> BCRight -> StaticPres_Outlet";
-            cout << endl << "WARNING: vBC = " << vBC << ", should be positive.";
-            cout << endl << "Using WALL BC instead." << endl;
-
+            if (!suppress_all_output) {
+                cout << endl << "Name of LWP: " << name;
+                cout << endl << "LWP -> BCRight -> StaticPres_Outlet";
+                cout << endl << "WARNING: vBC = " << vBC << ", should be positive.";
+                cout << endl << "Using WALL BC instead." << endl;
+            }
             vBC = 0.;
             pBC = alpha;
             double T_old = T(Npts - 1);

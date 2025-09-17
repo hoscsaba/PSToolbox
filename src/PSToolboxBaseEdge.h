@@ -26,7 +26,7 @@ public:
 	vector<double> transient_val;
 	vector<bool> transient_triggered;
 
-	VectorXd C;
+	MatrixXd C;
 
 	PSToolboxBaseEdge(const string edge_type, const string name, const string n1, const string n2);
 
@@ -127,6 +127,21 @@ public:
 
 	void Set_dt_out(double val) { dt_out = val; };
 
+virtual MatrixXd Get_C() {
+        cout << endl << "Get_C() called from PSToolboxBaseEdge.";
+		cout << endl << "This should not happen." << endl;
+		cin.get();
+	return MatrixXd();
+	}
+
+
+virtual VectorXd Get_InnerMeanC(){
+		cout << endl << "Get_InnerMeanC() called from PSToolboxBaseEdge.";
+		cout << endl << "This should not happen." << endl;
+		cin.get();
+	return VectorXd();
+	}
+
 	virtual void Set_inletQualityFront(VectorXd Cin) {
 		cout << endl << "Set_inletQualityFront() called from PSToolboxBaseEdge.";
 		cout << endl << "This should not happen." << endl;
@@ -138,6 +153,13 @@ public:
 		cout << endl << "This should not happen." << endl;
 		cin.get();
 	}
+
+	virtual void Set_max_vals(VectorXd _max_vals){ 
+	cout << endl << "Set_max_vals() called from PSToolboxBaseEdge.";
+		cout << endl << "This should not happen." << endl;
+		cin.get();
+	}
+
 
 	virtual VectorXd Get_C_Front() {
 		cout << endl << "Get_C_Front() called from PSToolboxBaseEdge.";
@@ -166,5 +188,6 @@ public:
 	}
 
 private:
+
 };
 #endif

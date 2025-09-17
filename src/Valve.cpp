@@ -354,14 +354,6 @@ void Valve::Update(double t_target, double pv, double pb, bool monitor_min_max) 
     tmpvec.at(2) = v;
     tmpvec.at(3) = Get_MassFlowRate(pv, 293., pb, 293., x); // Cd * x * M_PI * Dbore * sqrt(2 * ro * (pv - pb));
     data.push_back(tmpvec);
-    // Save all data
-    //for (int i=0; i<yvec.size(); i++){
-    //		tmpvec.at(0) = xvec.at(i);
-    //		tmpvec.at(1) = yvec.at(i).at(0);
-    //		tmpvec.at(2) = yvec.at(i).at(1);
-    //
-    //	}
-    //data.push_back(tmpvec);
   }
 
   if (monitor_min_max) {

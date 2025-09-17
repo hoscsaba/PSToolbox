@@ -38,8 +38,8 @@ BioPipe::BioPipe(const string _name, //!< [in] Name of the slightls compressible
 
   is_rigid_element = false;
 
-  Npts_min = 5;
-  Npts_max = 50;
+  Npts_min = 10;
+  Npts_max = 200;
   is_v_conv_set = false;
 }
 
@@ -64,6 +64,7 @@ string BioPipe::Info() {
   oss << "\n              D : " << D << " m= " << D * m_to_inch << " in";
   oss << "\n             dt : " << dt << " s";
   oss << "\n       bio_type : " << bio_type;
+  oss << "\n           Npts : " << Npts;
   oss << "\n         v_conv : " << v_conv << " m/s" << endl;
 
   //oss << "\n        node #  : ";
@@ -103,7 +104,8 @@ void BioPipe::Ini(double dt_target, VectorXd Cini) {
   }
 
   Npts = round(L / fabs(v_conv) / dt_target); // CFL condition reorganized
-  printf("\n BioPipe %5s:  L=%6.1f m, D=%6.1f m/s, dt_target=%5.3e s, Npts=%3d ", name.c_str(), L, D, dt_target, Npts);
+  printf("\n BioPipe %10s:  L=%6.1f m, D=%6.1f m, v_conv=%5.3f m/s, Tpipe=%5.3f s, dt_target=%5.3e s, Npts=%3d ",
+         name.c_str(), L, D, v_conv, L / fabs(v_conv), dt_target, Npts);
   if (Npts < Npts_min) {
     Npts = Npts_min;
     printf(" -> %d", Npts);
@@ -115,7 +117,12 @@ void BioPipe::Ini(double dt_target, VectorXd Cini) {
 
   // CFL criteria for selecting dt
   dx = L / (Npts - 1);
-  dt = dx / fabs(v_conv);
+  dt_conv = dx / fabs(v_conv);
+  dt = dt_conv;
+
+  if (dt > dt_target)
+    dt = dt_target;
+
   if (bio_type == "tracer") {
     num_of_bio_vars = 1;
     name_of_bio_vars.push_back("    tracer (-)");
@@ -137,9 +144,9 @@ void BioPipe::Ini(double dt_target, VectorXd Cini) {
         if (bio_type == "microbiology") {
           num_of_bio_vars = 4;
           name_of_bio_vars.push_back("  S_b (mg/l)  ");
-          name_of_bio_vars.push_back("  C_b (CFU/l) ");
+          name_of_bio_vars.push_back("  X_b (mg/l) ");
           name_of_bio_vars.push_back("  S_w (mg/l)  ");
-          name_of_bio_vars.push_back("  C_w (CFU/l) ");
+          name_of_bio_vars.push_back("  X_w (mg/m2) ");
           v_conv_vec = VectorXd::Zero(num_of_bio_vars);
           v_conv_vec(0) = v_conv;
           v_conv_vec(1) = v_conv;
@@ -148,7 +155,7 @@ void BioPipe::Ini(double dt_target, VectorXd Cini) {
         } else {
           cout << endl << "ERROR! BioPipe::BioPipe()";
           cout << endl << "\tUnknown bio_type: " << bio_type;
-          cout << endl << "\tPossible choices: water_age, chlorine, microbiology" << endl;
+          cout << endl << "\tPossible choices: tracer, water_age, chlorine, microbiology" << endl;
         }
       }
     }
@@ -286,58 +293,119 @@ void BioPipe::Set_string_prop(string prop_string, string val) {
 }
 
 
-void BioPipe::UpdateInternal(double dummy_t_target) {
+void BioPipe::UpdateInternal(double t_target) {
   DEBUG = false;
-  /*
-    if (name == "800514887") {
-      cout << Info();
-      cout << endl << "Entering BioPipe::UpdateInternal";
-      cout << endl << "S=" << endl << S;
-      cout << endl << "v_conv_vec=" << v_conv_vec;
-      cout << endl << "Npts =" << Npts << endl;
-      cin.get();
-    }
-  */
+  double ERR_MIN;
+  double ERR_MAX;
+  if (bio_type == "water_age") {
+    ERR_MIN = 1.;
+    ERR_MAX = 10.;
+  } else {
+    ERR_MIN = 1e-6;
+    ERR_MAX = 1e-5;
+  }
+  double dt_ = t_target - t;
+  double t_local = t;
+  //double dt_ = dt;
 
-  double ERR_MIN = 1e-4;
-  double ERR_MAX = 1e-3;
-  double dt_ = dt;
+  const int MAX_RETRIES = 25;
+  const double MIN_DT = 1e-14; // safety floor to avoid underflow
+  double err;
 
-  MatrixXd k1 = RHS(C);
-  MatrixXd Y_Eu = C + dt_ * k1;
-  MatrixXd k2 = RHS(C + dt_ * k1);
-  Cnew = C + dt_ * (k1 + k2) / 2.;
-  double err = (k2 - k1).norm();
-
-  // Check for infinity
-  if (std::isinf(err) || std::isnan(err)) {
-    cout << endl << name << " t=" << t << ", dt_=" << dt_ << ", err=" << err << " v_conv=" << v_conv << " L=" << L <<
-        " dt=dx/v_conv=" << fabs(dx / v_conv);
+  //if (name == "P-45")
+  // printf("\n %s", name.c_str());
+  // printf("\n\t  t=%5.3e (pipe internal) | t_local=%5.3e, dt_=%5.3e, t_local+dt=%5.3e, t_target=%5.3e ***", t, t_local,
+  //        dt_, t_local + dt_, t_target);
+  if (dt_ < 1.e-10) {
+    printf("\n %s: extremely small time step detected: %g", name.c_str(), dt_);
     cin.get();
   }
 
+  while (t_local < t_target) {
+    int retries = 0;
+    while (true) {
+      // This leads to problems, might give very small (1e-15) time step values, which remain there for the rest of the simulations.
+      // Do not use.
+      //if (t_local + dt_ > t_target) {
+      //  dt_ = t_target - t_local;
+      //      if (name == "P-45")
+      //  printf("\n\t                   last step: | t_local=%5.3e, dt_=%5.3e, t_local+dt=%5.3e, t_target=%5.3e",
+      //         t_local, dt_, t_local + dt_, t_target);
+      //}
 
-  if (err > ERR_MAX) {
-    dt = 0.5 * dt_;
-    if (dt < DT_MIN)
-      dt = DT_MIN;
-    else if (DEBUG)
-      cout << endl << "Pipe " << name << ": err=" << err << " -> dt decreased: " << dt << endl;
+      // Slopes
+      MatrixXd k1 = RHS(C);
+      MatrixXd Y_Eu = C + dt_ * k1; // Euler predictor (not strictly needed for Heun update)
+      MatrixXd k2 = RHS(Y_Eu);
+
+      // Heun update (candidate)
+      MatrixXd Ccandidate = C + dt_ * (k1 + k2) / 2.0;
+
+      // Error indicator (curvature of RHS over the step)
+      err = (k2 - k1).norm();
+
+      // Accept or reject
+      if (err <= ERR_MAX) {
+        // Accept the step
+        Cnew = std::move(Ccandidate);
+        dt = dt_; // keep the (possibly reduced) step size
+        if (dt > dt_conv)
+          dt = dt_conv;
+        break;
+      }
+      // if (name == "P_45")
+      // printf("\n\t rejecting step | t_local=%5.3e, dt_=%5.3e, t_local+dt=%5.3e, t_target=%5.3e, err=%5.3e", t,
+      //        t_local, dt_,
+      //        t_local + dt_, t_target, err);
+
+      // Reject the step: shrink dt and retry
+      dt_ *= 0.5;
+      ++retries;
+
+      // Safety stops to avoid infinite loop or absurdly small dt
+      if (retries >= MAX_RETRIES || dt_ < MIN_DT) {
+        // Force accept to prevent stalling; you can also throw if preferred.
+        Cnew = std::move(Ccandidate);
+        dt = dt_;
+        cout << endl << "Pipe " << name << " integrator reached MAX_RETRIES (" << MAX_RETRIES << ") or MIN_DT (" <<
+            MIN_DT
+            << "), ";
+        cout << "but error is still " << err << " > ERR_MAX=" << ERR_MAX <<
+            ". Accepting step but this might cause a numerical problem. " << endl;
+        break;
+      }
+    }
+    // if (name == "P-45")
+    // printf("\n\t  t=%5.3e (pipe internal) | t_local=%5.3e, dt_=%5.3e, t_local+dt=%5.3e, t_target=%5.3e, err=%5.3e", t,
+    //         t_local,
+    //         dt_, t_local + dt_, t_target, err);
+
+    t_local += dt_;
+    // Update values
+    double min_vals = 1.e-8;
+    for (int i = 0; i < Npts; i++)
+      for (int j = 0; j < num_of_bio_vars; j++) {
+        if (Cnew(j, i) < min_vals)
+          C(j, i) = min_vals;
+        else {
+          if (Cnew(j, i) > max_vals(j))
+            C(j, i) = max_vals(j);
+          else
+            C(j, i) = Cnew(j, i);
+        }
+      }
   }
+  // if (name == "P-45") {
+  // cout << endl << "\t closing time step.";
+  // cin.get();
+  // }
 
   if (err < ERR_MIN) {
-    dt = 1.1 * dt_;
+    dt = 1.2 * dt_;
     if (DEBUG)
       cout << endl << "Pipe " << name << ": err=" << err << " -> dt increased: " << dt << endl;
   }
-
-  for (int i = 0; i < Npts; i++)
-    for (int j = 0; j < num_of_bio_vars; j++) {
-      if (Cnew(j, i) < 0.)
-        C(j, i) = 0.;
-      else
-        C(j, i) = Cnew(j, i);
-    }
+  t = t_target;
 }
 
 MatrixXd BioPipe::RHS(MatrixXd C) {
@@ -357,27 +425,21 @@ MatrixXd BioPipe::RHS(MatrixXd C) {
       //C_new(j, i) = C(j, i) + (-v_conv_vec(j) * (C(j, i + 1) - C(j, i)) / dx + S(j, i)) * dt;
     }
   } else {
-    if (v_conv > 0.)
+    if (v_conv_vec(0) > 0.)
       for (int i = 1; i < Npts; i++)
-        F.col(i) = C - v_conv * (C.col(i) - C.col(i - 1)) / dx + S.col(i);
+        F.col(i) = -v_conv_vec(0) * (C.col(i) - C.col(i - 1)) / dx + S.col(i);
     else
       for (int i = 0; i < Npts - 1; i++)
-        F.col(i) = -v_conv * (C.col(i + 1) - C.col(i)) / dx + S.col(i);
+        F.col(i) = -v_conv_vec(0) * (C.col(i + 1) - C.col(i)) / dx + S.col(i);
   }
 
-
-  /*
-    if (name == "800514887") {
-      cout << endl << " UpdateInternal() done." << endl;
-      cin.get();
-    }
-    */
 
   return F;
 }
 
 void BioPipe::UpdateTime(double _t) {
   t = _t;
+
   /*
     if (name == "5"){
       cout << endl<<endl<<" Edge 5: "<<C;
@@ -394,6 +456,9 @@ void BioPipe::Step(
   string BC_start_type, double BC_start_val,
   string BC_end_type, double BC_end_val) {
   double dummy_t_target = 0.;
+
+  cout << endl << endl << "??????????? Should not be using this function!!!" << endl;
+  cin.get();
 
   UpdateInternal(dummy_t_target);
 
@@ -439,10 +504,37 @@ MatrixXd BioPipe::Source() {
             double Sw = C(2, i);
             double Xw = C(3, i);
 
+            // S_b (mg/l)
+            // X_b (mg/l)
+            // S_w (mg/l)
+            // X_w (mg/m2)
+
+
             S(0, i) = -1 / Y * mumax * Sb / (kb_bio + Sb) * Xb + a * kmort * Xb - kfs / rh * (Sb - Sw);
-            S(1, i) = mumax * Sb / (kb_bio + Sb) * Xb - kmort * Xb - kfs / rh * (Xb - Xw / rh);
+            S(1, i) = mumax * Sb / (kb_bio + Sb) * Xb - kmort * Xb - kfs / rh * (Xb - Xw / rh) * 0.;
             S(2, i) = -1 / Y * mumax * Sw / (kb_bio + Sw) * Xw + a * kmort * Xw / rh + kfs / rh * (Sb - Sw);
-            S(3, i) = mumax * Sw / (kb_bio + Sw) * Xw - kmort * Xw / rh + kfs / rh * (Xb - Xw / rh);
+            S(3, i) = mumax * Sw / (kb_bio + Sw) * Xw - kmort * Xw / rh + kfs / rh * (Xb - Xw / rh) * 0.;
+
+            // if (name == "800014807") {
+            //   if (i == 2) {
+            //     cout << endl << endl << "name: " << name;
+            //     printf("\nNpoints  = %d", Npts);
+            //     printf("\ndt       = %g", dt);
+            //     printf("\ndtconv   = %g", L / (Npts - 1) / fabs(v_conv));
+            //     printf("\nmumax    = %5.3e", mumax);
+            //     printf("\nkb_bio   = %5.3e", kb_bio);
+            //     printf("\nSb       = %5.3e", Sb);
+            //     printf("\nXb       = %5.3e", Xb);
+            //     printf("\nSource b = %5.3e", S(1, i));
+            //     printf("\nSw       = %5.3e", Sw);
+            //     printf("\nXw       = %5.3e", Xw);
+            //     printf("\nSource w = %5.3e", S(3, i));
+            //     printf("\nkfs.     = %5.3e", kfs);
+            //     printf("\nrh.      = %5.3e", rh);
+            //     printf("\nt_diff   = %5.3e", rh / kfs / 3600.);
+            //     cin.get();
+            //   }
+            // }
           }
         } else {
           cout << endl << "ERROR!BioPipe::Source()";

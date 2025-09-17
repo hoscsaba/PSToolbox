@@ -37,7 +37,7 @@ SCP::SCP(const string _name, //!< [in] Name of the slightls compressible pipe
   S0 = -(hv - he) / L; //slope
   A = D * D * M_PI / 4.; //Cross sectional area of the pipe
   lambda = _lambda;
-  lambda_p_2D = 0.02 / 2. / D;
+  lambda_p_2D = lambda / 2. / D;
   ini_done = false;
   fname = name + ".dat"; //name of the file for saving data about the pipe
   //do_plot_runtime = false;
@@ -328,7 +328,7 @@ void SCP::Ini(double vini, double pstart, int Npts_mul) {
 
   for (int i = 0; i < Npts; i++) {
     x(i) = i * L / (Npts - 1);
-    p(i) = pstart - 0.02 * x(i) / D * ro / 2. * vini * abs(vini) + S0 * g * ro * x(i);
+    p(i) = pstart - lambda * x(i) / D * ro / 2. * vini * abs(vini) + S0 * g * ro * x(i);
     v(i) = vini; //The velocity is the same as density is constant
   }
   ini_done = true;
@@ -520,22 +520,11 @@ void SCP::UpdateInternal(double dummy_t_target) {
 }
 
 void SCP::UpdateTime(double _t) {
-  // _dt is an external dummy variable, for compatibility reasons.
-  //cout << "t=" << t <<"\tp(0)=" << p(0) << "\tp(L)=" << p(Npts-1) <<"\tv(0)=" << v(0) << "\tv(L)="<< v(Npts-1) << endl;
-
+ 
   for (int i = 0; i < Npts; i++) {
     p(i) = pnew(i);
     v(i) = vnew(i);
   }
-
-  /*if(name == "77")
-  {
-    cout << "p(0) = " << p(0) << "\t";
-    cout << "p(1) = " << p(1) << "\t";
-    cout << "p(N/2) = " << p(Npts/2) << "\t";
-    cout << "p(N-2) = " << p(Npts-2) << "\t";
-    cout << "p(N-1) = " << p(Npts-1) << "\n";
-  }*/
 
   t = _t;
 }
@@ -837,7 +826,7 @@ double SCP::Source(int i) {
     exit(-1);
   }
   //cout<<endl<<"source_l="<<source_l<<", other:"<<- lambda_p_2D * v(i) * abs(v(i));
-  lambda_p_2D = 0.02 / 2. / D;
+  lambda_p_2D = lambda / 2. / D;
   source_l = -lambda_p_2D * v(i) * abs(v(i));
   return source_g + source_l;
 }

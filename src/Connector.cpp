@@ -1088,6 +1088,11 @@ bool Connector::Connector_SCP_Pipe_Back_and_Valve(double t_target,
 	// (1) alpha=p+ro*a*v
 	// (2) ro*Apipe*v=valve_mass_flow
 
+//cout<<endl<<"p_downstream:"<<p_downstream;
+//cout<<endl<<"rho         :"<<rho;
+//cout<<endl<<"a           :"<<a;
+//cin.get();
+
 	if (DEBUG)
 		cout << endl << endl << "Connector::Connector_SCP_Pipe_Back_and_Valve: entering DEBUG mode" << endl;
 

@@ -44,7 +44,7 @@ public:
     VectorXd Cin; // If type=1 (free end) or 2 (reservoir), set the ingoing quality
     string BC_type;
     double BC_value;
-    double demand; // kg/s
+    double demand;
     int type;
 
     PSToolboxBaseEdge *s_edges; // s_ = single
@@ -62,4 +62,13 @@ public:
     void Set_InletQuality(VectorXd C_inlet) {
         Cin = C_inlet;
     }
+
+void Set_demand(double val) {
+    demand=val;
+}
+
+ string Get_name(){
+    return name;
+ }
+
 };

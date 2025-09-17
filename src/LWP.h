@@ -18,7 +18,7 @@ private:
 	double phi, alpha, gamma, mu;
 	int Npts;
 	VectorXd x, v, p, T, rho, q;
-	bool ini_done;
+	bool ini_done, suppress_all_output;
 	//void UpdateInternalPoints();
 	//VectorXd &p, VectorXd &v, VectorXd &T, VectorXd &rho);
 	//bool BCLeft(string type, double val1, double val2);
@@ -97,7 +97,7 @@ public:
 		 */
 	double Get_dprop(string prop_string) override;
 
-	void Set_dprop(string prop_string, double val);
+	void Set_dprop(string prop_string, double val) override;
 
 	void Step(double dt_req);
 

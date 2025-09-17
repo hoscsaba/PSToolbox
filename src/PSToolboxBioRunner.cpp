@@ -59,6 +59,7 @@ void PSToolboxBioRunner::Run(double t_max) {
 
 	cout << endl << endl << "Starting simulation...";
 
+
 	// Simulation
 
 	double t_global = 0., dt_out = t_max / 100., t_out = -1.e-10;
@@ -147,31 +148,11 @@ void PSToolboxBioRunner::Run(double t_max) {
 							<< " ... ->UpdateInternal()";
 
 				edges.at(i)->UpdateInternal(t_next);
-				//if (edges.at(i)->name == "801018417") {
-				//	cout << endl << "UpdateInternal done.";
-				//	cin.get();
-				//}
+
 				cons.at(con_at_edge_start.at(i))->Update(t_next, i);
-				//if (edges.at(i)->name == "801018417") {
-				//	cout << endl << "con_at_edge_start done.";
-				//	cin.get();
-				//}
-				//if (edges.at(i)->name == "801018417") {
-				//	cout << endl << "entering con_at_edge_end...";
-				//	cout << endl << "   name   : " << cons.at(con_at_edge_end.at(i))->name;
-				//	cout << endl << "   BC_type: " << cons.at(con_at_edge_end.at(i))->BC_type;
-				//	cin.get();
-				//}
+
 				cons.at(con_at_edge_end.at(i))->Update(t_next, i);
-				//if (edges.at(i)->name == "801018417") {
-				//	cout << endl << "con_at_edge_end done.";
-				//	cin.get();
-				//}
-				edges.at(i)->UpdateTime(t_next);
-				//if (edges.at(i)->name == "801018417") {
-				//	cout << endl << "UpdateTime done.";
-				//	cin.get();
-				//}
+
 
 				if (DEBUG) {
 					cout << endl << " done.";
@@ -221,6 +202,7 @@ void PSToolboxBioRunner::Save_data_for_ini() {
 	cout << " done." << endl;
 }
 
+
 void PSToolboxBioRunner::Write_snapshot(double t_global) {
 	string outfname = (snapshot_fname + "_" + std::to_string(snapshot_num) + ".dat");
 	cout << endl << " PSToolboxBioRunner::Write_snapshot writing snapshot file " << outfname << " ...";
@@ -236,6 +218,159 @@ void PSToolboxBioRunner::Write_snapshot(double t_global) {
 	fclose(fp);
 	cout << " done." << endl;
 }
+
+static inline std::string ltrim(std::string s) {
+	s.erase(s.begin(), std::find_if(s.begin(), s.end(),
+	                                [](unsigned char c) { return !std::isspace(c); }));
+	return s;
+}
+
+void PSToolboxBioRunner::Load_v_conv_from_epanet_export(string fname, double mul) {
+	std::cout << "\n\nLoading convective FLOW RATES from " << fname << " ...";
+
+	std::ifstream in(fname);
+	if (!in) {
+		std::cerr << "\nError: could not open \"" << fname << "\" for reading.\n";
+		return;
+	}
+
+	// name → edge* map for fast lookups
+	std::unordered_map<std::string, PSToolboxBaseEdge *> by_name;
+	by_name.reserve(edges.size());
+	for (auto *e: edges) {
+		by_name.emplace(e->Get_name(), e);
+	}
+
+	std::string line;
+	std::size_t line_no = 0;
+	std::size_t updated = 0, missing = 0, malformed = 0;
+
+	// OPTIONAL: skip the first 3 header lines
+	for (int i = 0; i < 3 && std::getline(in, line); ++i) {
+		++line_no;
+	}
+
+	while (std::getline(in, line)) {
+		//cout<<endl<<line;
+
+		++line_no;
+		if (line.empty()) continue;
+
+		auto trimmed = ltrim(line);
+		if (trimmed.empty()) continue;
+		if (trimmed.rfind('#', 0) == 0) continue; // "# comment"
+		if (trimmed.rfind("//", 0) == 0) continue; // "// comment"
+
+		std::istringstream iss(trimmed);
+		std::string keyword, id;
+		double Q_conv = 0.0;
+
+		// Expect:  Pipe <id> <velocity>
+		if (!(iss >> keyword >> id >> Q_conv)) {
+			std::cerr << "\nWarning: line " << line_no
+					<< " malformed; skipping:\n    " << line;
+			++malformed;
+			continue;
+		}
+		if (keyword != "Pipe") {
+			// Not a pipe line; ignore silently (or count as malformed if you prefer)
+			continue;
+		}
+
+		auto it = by_name.find(id);
+		if (it == by_name.end()) {
+			std::cerr << "\nError: edge \"" << id << "\" not found (line " << line_no << ").";
+			++missing;
+			continue;
+		}
+
+		// Q is in l/s
+		double set_val = Q_conv / it->second->Get_dprop("A") / 1000.;
+		it->second->Set_v_conv(set_val);
+		cout << endl << id << "\t: Q=" << Q_conv << " l/s, v=" << set_val << " m/s is set.";
+		++updated;
+	}
+
+	std::cout << "\nLoaded from " << fname << ". Updated: " << updated
+			<< ", Missing: " << missing
+			<< ", Malformed: " << malformed << ".\n";
+	cout << endl << " Press any key";
+	// cin.get();
+}
+
+void PSToolboxBioRunner::Load_nodal_demand_from_epanet_export(string fname, double mul) {
+	std::cout << "\n\nLoading nodal demands from " << fname << " ...";
+
+	std::ifstream in(fname);
+	if (!in) {
+		std::cerr << "\nError: could not open \"" << fname << "\" for reading.\n";
+		return;
+	}
+
+	// name → edge* map for fast lookups
+	std::unordered_map<std::string, BioConnector *> by_name;
+	by_name.reserve(cons.size());
+	for (auto *e: cons) {
+		by_name.emplace(e->Get_name(), e);
+	}
+
+	std::string line;
+	std::size_t line_no = 0;
+	std::size_t updated = 0, missing = 0, malformed = 0;
+
+	// OPTIONAL: skip the first 3 header lines
+	for (int i = 0; i < 3 && std::getline(in, line); ++i) {
+		++line_no;
+	}
+
+	while (std::getline(in, line)) {
+		cout << endl << line;
+
+		++line_no;
+		if (line.empty()) continue;
+
+		auto trimmed = ltrim(line);
+		if (trimmed.empty()) continue;
+		if (trimmed.rfind('#', 0) == 0) continue; // "# comment"
+		if (trimmed.rfind("//", 0) == 0) continue; // "// comment"
+
+		std::istringstream iss(trimmed);
+		std::string keyword, id;
+		double demand = 0.0;
+
+		// Expect:  Pipe <id> <velocity>
+		if (!(iss >> keyword >> id >> demand)) {
+			std::cerr << "\nWarning: line " << line_no
+					<< " malformed; skipping:\n    " << line;
+			++malformed;
+			continue;
+		}
+		if (keyword != "Junc") {
+			// Not a pipe line; ignore silently (or count as malformed if you prefer)
+			continue;
+		}
+
+		auto it = by_name.find(id);
+		if (it == by_name.end()) {
+			std::cerr << "\nError: node \"" << id << "\" not found (line " << line_no << ").";
+			++missing;
+			continue;
+		}
+
+		// Q is in l/s
+		double set_val = demand; // comes in lps, but needed in kg/s
+		it->second->Set_demand(set_val);
+		cout << endl << id << "\t: demand=" << demand << " l/s is set.";
+		++updated;
+	}
+
+	std::cout << "\nLoaded from " << fname << ". Updated: " << updated
+			<< ", Missing: " << missing
+			<< ", Malformed: " << malformed << ".\n";
+	cout << endl << " Press any key";
+	// cin.get();
+}
+
 
 void PSToolboxBioRunner::Load_v_conv_from_file(string fname, double mul) {
 	cout << endl << endl << "Loading convective velocities from " << fname << " ...";
@@ -337,3 +472,47 @@ double PSToolboxBioRunner::limitAbs(double value, double maxAbs) {
 	}
 	return value;
 }
+
+
+void PSToolboxBioRunner::build_statistics() {
+	double sum_of_inflow = 0.;
+	double sum_of_demand = 0.;
+	for (auto &con: cons) {
+		if (con->demand < 0) {
+			sum_of_inflow += con->demand;
+			cout << endl << "INFLOW: " << con->name << ", Q=" << con->demand << " l/s";
+		} else {
+			sum_of_demand += con->demand;
+		}
+	}
+	cout << endl << endl << "sum of inflow: " << -sum_of_inflow << "l/s = " << -sum_of_inflow * 3600 / 1000. << "m3/h";
+	cout << endl << "sum of demand: " << sum_of_demand << "l/s = " << sum_of_demand * 3600. / 1000. << "m3/h";
+
+	FILE *outFile = fopen("edges.txt", "w");
+	if (!outFile) {
+		std::perror("SToolboxBioRunner::build_statistics()\nError opening file"); // prints system error
+		cin.get();
+	} else
+		fprintf(outFile,
+		        "name; L (m);  D (m); v_conv (m/s); t_conv (h); t_Monod_2x (h); t_mort_2x (h); t_diff_2x (h) \n");
+
+	for (auto &edge: edges) {
+		double v_conv = fabs(edge->Get_dprop("v_conv"));
+		double t_conv = edge->Get_dprop("L") / v_conv / 3600.;
+		double t_Monod = log(2.) / edge->Get_dprop("bio_mumax") / 3600.;
+		double t_mort = log(2.) / edge->Get_dprop("bio_kmort") / 3600.;
+		double kfs = edge->Get_dprop("bio_kfs");
+		double rh = edge->Get_dprop("D") / 4.;
+		double t_diff = 2. / (kfs / rh) / 3600.;
+		fprintf(outFile, "%s; %5.3e; %5.3e; %5.3e; %5.3e; %5.3e; %5.3e; %5.3e;\n",
+		        edge->Get_name().c_str(), edge->Get_dprop("L"), edge->Get_dprop("D"), v_conv,
+		        t_conv, t_Monod, t_mort, t_diff);
+		// if (edge->Get_name() == "800014807") {
+		// 	cout << endl << "rh =" << edge->Get_dprop("D") / 4.;
+		// 	cout << endl << "kfs=" << edge->Get_dprop("bio_kfs");
+		// 	cout << endl << "t_diff=" << t_diff;
+		// }
+	}
+	fclose(outFile);
+}
+

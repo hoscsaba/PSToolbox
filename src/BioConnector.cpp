@@ -37,7 +37,7 @@ BioConnector::BioConnector(
 	DEBUG = _DEBUG;
 	type = 0;
 
-	BC_type = "none";
+	BC_type = "pipes";
 	BC_value = 0;
 
 	// DEBUG=true;
@@ -99,15 +99,16 @@ void BioConnector::Update(double t_target, int update_idx) {
 
 
 void BioConnector::BioConnector_N_BioPipes(double t_target, int update_idx) {
-	//if (name == "52466")
-	//	DEBUG = true;
-	//else
+	// if (name == "38521")
+	// 	DEBUG = true;
+	// else
 	DEBUG = false;
 
 
 	if (DEBUG) {
 		cout << endl << "BioConnector_N_BioPipes() - name of connector : " << name;
 		cout << endl << "\t t_target = " << t_target;
+		cout << endl << "\t demand   = " << demand << " kg/s";
 	}
 
 	vector<bool> is_inflow;
@@ -124,8 +125,8 @@ void BioConnector::BioConnector_N_BioPipes(double t_target, int update_idx) {
 	if (DEBUG) {
 		for (unsigned int i = 0; i < edges_idx.size(); i++) {
 			int idx = edges_idx.at(i);
-			cout << endl << "\t edge: " << edges[idx]->Get_name() << ", is_front: " << is_front[i] << ", v_conv: " <<
-					edges[idx]->Get_dprop("v_conv") << ", is_inflow:" << is_inflow[i];
+			cout << endl << "\t edge: " << edges[idx]->Get_name() << ", is_front: " << is_front[i] << ", Q: " <<
+					edges[idx]->Get_dprop("mp_back") << " kg/s, is_inflow:" << is_inflow[i];
 		}
 		//cin.get();
 	}
@@ -133,14 +134,32 @@ void BioConnector::BioConnector_N_BioPipes(double t_target, int update_idx) {
 	double sum_mp = 0.0, mp;
 	VectorXd C;
 	VectorXd sum_C = VectorXd::Zero(edges.at(0)->Get_iprop("num_of_bio_vars"));
-
 	int num_of_inflows = 0;
+
+	// inflow through demand
+	if (demand < 0) {
+		sum_mp = fabs(demand);
+		C = Cin;
+		sum_C = C * fabs(demand);
+		num_of_inflows++;
+		if (DEBUG)
+			cout << endl << "\tinflow through negative demand " << " Cin=" << C.transpose() << ", sum_C=" <<
+					sum_C.transpose() << ", sum_mp=" << sum_mp << endl;
+		//cin.get();
+	}
+
+	double abs_sum_of_all_flows = 0.;
+	double sum_of_all_flows = -demand;
 	for (unsigned int i = 0; i < edges_idx.size(); i++) {
 		int idx = edges_idx.at(i);
 
+		abs_sum_of_all_flows += fabs(edges.at(idx)->Get_dprop("mp_back"));
+		if (is_inflow.at(i))
+			sum_of_all_flows += fabs(edges.at(idx)->Get_dprop("mp_back"));
+		else
+			sum_of_all_flows -= fabs(edges.at(idx)->Get_dprop("mp_back"));
+
 		if (is_inflow.at(i)) {
-			if (DEBUG)
-				cout << endl << "Getting inflowing C for edge... " << edges.at(idx)->Get_name();
 			if (is_front.at(i))
 				C = edges.at(idx)->Get_C_Front();
 			else
@@ -150,18 +169,24 @@ void BioConnector::BioConnector_N_BioPipes(double t_target, int update_idx) {
 			sum_mp += fabs(mp);
 			num_of_inflows++;
 
-			if (DEBUG)
-				cout << endl << "\tinflow, edge" << edges.at(idx)->Get_name() << " C=" << C.transpose() << ", sum_C=" <<
-						sum_C.transpose() << ", sum_mp=" << sum_mp << endl;
+			if (DEBUG) {
+				cout << endl << "\tinflow, edge " << edges.at(idx)->Get_name() << " C=" << C << ", sum_C=" <<
+						sum_C.transpose() << ", sum_mp=" << sum_mp << "\t C pipe=" << edges.at(idx)->C;
+			}
 			//cin.get();
 		}
 	}
+
 	if (num_of_inflows > 0)
 		C = sum_C / sum_mp;
 	else {
-		//cout << endl << "WARNING!!!! at connector " << name << " there is no inflow. Setting C to zero.";
+		if (DEBUG) {
+			cout << endl << "WARNING!!!! at connector " << name <<
+					" there is no inflow, probably as there is flow at all: sum_of_all_flows=" << sum_of_all_flows;
+			cout << endl << "      Setting C to " << sum_C;
+			cin.get();
+		}
 		C = sum_C;
-		//	cin.get();
 	}
 
 	for (unsigned int i = 0; i < edges_idx.size(); i++) {
@@ -179,8 +204,18 @@ void BioConnector::BioConnector_N_BioPipes(double t_target, int update_idx) {
 		}
 	}
 
-	if (DEBUG)
+	if (fabs(sum_of_all_flows) > 0.5) {
+		cout << endl << endl << "WARNING!";
+		cout << endl << "BioConnector_N_BioPipes() - name of connector : " << name;
+		cout << endl << "sum_of_all_flows = " << sum_of_all_flows <<
+				" - should be approx. 0 (treshold of reporting: 0.5 kg/s).";
 		cin.get();
+	}
+
+	if (DEBUG) {
+		cout << endl << "sum_of_all_flows = " << sum_of_all_flows << " - should be approx. 0.";
+		//	cin.get();
+	}
 }
 
 void BioConnector::BioConnector_Reservoir(double t_target) {
@@ -214,25 +249,39 @@ void BioConnector::BioConnector_FreeEnd(double t_target) {
 	}
 	bool is_inflow = false;
 
-	if ((s_is_front && (s_edges->Get_dprop("v_conv") > 0)) || (!s_is_front && (s_edges->Get_dprop("v_conv") < 0)))
+	if ((s_is_front && (s_edges->Get_dprop("v_conv") > 0.01)) || (!s_is_front && (s_edges->Get_dprop("v_conv") < 0.01)))
 		is_inflow = true;
-	/*
-		if (name == "48854") {
-			cout << endl << "entering BioConnector_FreeEnd";
-			cout << endl << "s_is_front=" << s_is_front;
-			cout << endl << "v_conv    =" << s_edges->Get_dprop("v_conv");
-			cout << endl << "is_inflow =" << is_inflow;
-			cout << endl << "Cin       =" << Cin;
-			cout << endl << "Npts      =" << s_edges->Get_iprop("Npts");
-			cout << endl << "C         =" << s_edges->C;
-			cin.get();
-		}
-	*/
+
+	// if (name == "38520") {
+	// 	cout << endl <<endl<< "Entering BioConnector_FreeEnd";
+	// 	cout << endl << "node name :" << name;
+	// 	cout << endl << "edge name :" << s_edges->name;
+	// 	cout << endl << "s_is_front=" << s_is_front;
+	// 	cout << endl << "v_conv    =" << s_edges->Get_dprop("v_conv");
+	// 	cout << endl << "is_inflow =" << is_inflow;
+	// 	cout << endl << "Cin       =" << Cin;
+	// 	cout << endl << "Npts      =" << s_edges->Get_iprop("Npts");
+	// 	cout << endl << "mean(C)   =" << s_edges->Get_InnerMeanC();
+	// 	cout << endl << "C.rows()  =" << s_edges->C.rows();
+	// 	cout << endl << "C.cols()  =" << s_edges->C.cols();
+	// 	cout << endl << "C         =" << s_edges->C<<endl;
+	// 	//cin.get();
+	// }
+
+	double Cin_mul = 1.;
+	if (t_target > 14. * 24. * 3600)
+		Cin_mul = 0.01;
+
 	if (is_inflow) {
 		if (s_is_front)
-			s_edges->Set_inletQualityFront(Cin);
+			s_edges->Set_inletQualityFront(Cin * Cin_mul);
 		else
-			s_edges->Set_inletQualityBack(Cin);
+			s_edges->Set_inletQualityBack(Cin * Cin_mul);
+	} else {
+		if (s_is_front)
+			s_edges->Set_inletQualityFront(s_edges->Get_InnerMeanC());
+		else
+			s_edges->Set_inletQualityBack(s_edges->Get_InnerMeanC());
 	}
 
 	/*

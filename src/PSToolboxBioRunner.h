@@ -74,8 +74,14 @@ public:
 
 	void Load_v_conv_from_file(string fname, double mul);
 
-	void Set_snapshot_fname(string newval) { snapshot_fname = newval; };
-	void Set_save_snapshot(bool newval) { save_snapshot = newval; };
+	void Load_v_conv_from_epanet_export(string fname, double mul);
+
+	void Load_nodal_demand_from_epanet_export(string fname, double mul);
+
+	void Set_snapshot_fname(string newval) { snapshot_fname = std::move(newval); }
+	void Set_save_snapshot(bool newval) { save_snapshot = newval; }
+
+	void build_statistics();
 
 private:
 	vector<int> con_at_edge_start;
