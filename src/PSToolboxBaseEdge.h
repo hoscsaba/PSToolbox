@@ -26,6 +26,8 @@ public:
 	vector<double> transient_val;
 	vector<bool> transient_triggered;
 
+	bool suppress_all_output;
+
 	MatrixXd C;
 
 	PSToolboxBaseEdge(const string edge_type, const string name, const string n1, const string n2);
@@ -60,6 +62,7 @@ public:
 	double Get_p1() { return p1; };
 	double Get_p2() { return p2; };
 
+	void set_supress_all_output(bool newval) { suppress_all_output = newval; };
 
 	virtual void Ini(int) {
 	};
@@ -127,19 +130,19 @@ public:
 
 	void Set_dt_out(double val) { dt_out = val; };
 
-virtual MatrixXd Get_C() {
-        cout << endl << "Get_C() called from PSToolboxBaseEdge.";
+	virtual MatrixXd Get_C() {
+		cout << endl << "Get_C() called from PSToolboxBaseEdge.";
 		cout << endl << "This should not happen." << endl;
 		cin.get();
-	return MatrixXd();
+		return MatrixXd();
 	}
 
 
-virtual VectorXd Get_InnerMeanC(){
+	virtual VectorXd Get_InnerMeanC() {
 		cout << endl << "Get_InnerMeanC() called from PSToolboxBaseEdge.";
 		cout << endl << "This should not happen." << endl;
 		cin.get();
-	return VectorXd();
+		return VectorXd();
 	}
 
 	virtual void Set_inletQualityFront(VectorXd Cin) {
@@ -154,8 +157,8 @@ virtual VectorXd Get_InnerMeanC(){
 		cin.get();
 	}
 
-	virtual void Set_max_vals(VectorXd _max_vals){ 
-	cout << endl << "Set_max_vals() called from PSToolboxBaseEdge.";
+	virtual void Set_max_vals(VectorXd _max_vals) {
+		cout << endl << "Set_max_vals() called from PSToolboxBaseEdge.";
 		cout << endl << "This should not happen." << endl;
 		cin.get();
 	}
@@ -188,6 +191,5 @@ virtual VectorXd Get_InnerMeanC(){
 	}
 
 private:
-
 };
 #endif

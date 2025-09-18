@@ -1,0 +1,3 @@
+/Users/hoscsaba/Documents/GitHub/PSToolbox/build/CMakeFiles/PSToolbox.dir
+/Users/hoscsaba/Documents/GitHub/PSToolbox/build/CMakeFiles/edit_cache.dir
+/Users/hoscsaba/Documents/GitHub/PSToolbox/build/CMakeFiles/rebuild_cache.dir

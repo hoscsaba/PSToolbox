@@ -18,7 +18,7 @@ private:
 	double phi, alpha, gamma, mu;
 	int Npts;
 	VectorXd x, v, p, T, rho, q;
-	bool ini_done, suppress_all_output;
+	bool ini_done;
 	//void UpdateInternalPoints();
 	//VectorXd &p, VectorXd &v, VectorXd &T, VectorXd &rho);
 	//bool BCLeft(string type, double val1, double val2);
