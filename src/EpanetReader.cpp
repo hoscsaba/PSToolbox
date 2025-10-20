@@ -292,8 +292,8 @@ void EpanetReader::convertToRunner2() {
                 double v = demand / A; //????
                 if (!end1) v = -v;
                 cons.push_back(new Connector(name, edges[idx1], !end1, "Velocity", v, demand, true));
-                cout << "Node " << name << "\t call Connector(" << pipes[idx1].ID << "," << end1 << ",Velocity," << v <<
-                        "," << demand << ")\n";
+                cout << "Node " << name << "\t call Connector(" << pipes[idx1].ID << "," << end1 << ", Velocity: " << v
+                        << ") - demand: " << demand << "\n";
                 //cout<<"demand = "<<demand<<endl;
                 //cin.get();
             }
@@ -309,12 +309,12 @@ void EpanetReader::convertToRunner2() {
                 double demand = 0;
                 cons.push_back(new Connector(name, edges[idx1], !end1, "Pressure", p, demand, true));
                 cout << "Node " << name << "\t call Connector(" << pipes[idx1].ID << "," << end1 << ",Pressure," << p <<
-                        "," << demand << ")\n";
+                        ") - demand: " << demand << "\n";
                 cout << "\t head=" << head << ", elevation=" << elev << ", head-elevation=" << head - elev << "\n";
                 cout << "\t p=" << p / 1000 / 9.81 << " vom" << endl;
                 cout << "demand = " << demand << endl;
 
-                cin.get();
+                //cin.get();
             }
         }
 
@@ -509,8 +509,8 @@ void EpanetReader::convertToBioRunner(const string &bio_type) {
                 if (!end1) v = -v;
                 bio_cons.push_back(new BioConnector(name, edges[idx1], !end1, "Velocity", v, demand, true));
                 cout << "Node " << name << "\t call BioConnector(" << pipes[idx1].ID << "," << end1 << ",Velocity," << v
-                        <<
-                        "," << demand << ")\n";
+                        << ") - demand: " << demand << "\n";
+                cin.get();
             }
             if (junctions[i].type == 1) // reservoir or tank
             {
@@ -524,8 +524,7 @@ void EpanetReader::convertToBioRunner(const string &bio_type) {
                 double demand = 0;
                 bio_cons.push_back(new BioConnector(name, edges[idx1], !end1, "Pressure", p, demand, true));
                 cout << "Node " << name << "\t call BIOConnector(" << pipes[idx1].ID << "," << end1 << ",Pressure," << p
-                        <<
-                        "," << demand << ")\n";
+                        << ") - demand: " << demand << "\n";
             }
         }
 
