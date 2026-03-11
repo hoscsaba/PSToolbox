@@ -1,5 +1,6 @@
 #pragma once
 #include "Gas.h"
+#include <cmath>
 
 class IdealGas : public Gas {
 public:
