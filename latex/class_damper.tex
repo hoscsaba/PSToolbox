@@ -1,0 +1,287 @@
+\doxysection{Damper Class Reference}
+\hypertarget{class_damper}{}\label{class_damper}\index{Damper@{Damper}}
+
+
+Class for modeling \doxylink{class_damper}{Damper}.  
+
+
+
+
+{\ttfamily \+\#include $<$Damper.\+h$>$}
+
+Inheritance diagram for Damper:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_damper}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_damper_adab7c3468d8b69172824d087e9803255}{Damper}} (string \+\_\+nev, double \+\_\+vol, double \+\_\+a, double \+\_\+rho, int \+\_\+num\+\_\+of\+\_\+orifices, double diameter, bool save\+\_\+data)
+\item 
+\doxymbox{\hyperlink{class_damper_adc61f373879c2ccab781af99d40e816a}{Damper}} (string \+\_\+name, double \+\_\+vol, \doxymbox{\hyperlink{class_ideal_gas}{Ideal\+Gas}} \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{class_damper_a2dc72746630cbf4b84932086a002c871}{gas}}, double n\+\_\+poly, int \+\_\+num\+\_\+of\+\_\+orifices, double diameter, bool \+\_\+save\+\_\+data)
+\item 
+\doxymbox{\hyperlink{class_damper_ab6f02fa80f7d6fc20d070c538b7e2149}{Damper}} (string \+\_\+name, double \+\_\+vol, \doxymbox{\hyperlink{class_ideal_gas}{Ideal\+Gas}} \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{class_damper_a2dc72746630cbf4b84932086a002c871}{gas}}, double n\+\_\+poly, int \+\_\+num\+\_\+of\+\_\+orifices, double diameter, bool \+\_\+save\+\_\+data, double Tt)
+\item 
+\doxymbox{\hyperlink{class_damper_a6df8c7c693b4163aec25e3221b33c6cb}{Damper}} (string \+\_\+name, double \+\_\+vol, \doxymbox{\hyperlink{class_gas}{Gas}} \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{class_damper_a2dc72746630cbf4b84932086a002c871}{gas}}, double n\+\_\+poly, int \+\_\+num\+\_\+of\+\_\+orifices, double diameter, bool \+\_\+save\+\_\+data)
+\item 
+\doxymbox{\hyperlink{class_damper_a2c6d388f615fd1e4530c36cd7fd34c29}{\texorpdfstring{$\sim$}{\string~}\+Damper}} ()
+\item 
+void \doxymbox{\hyperlink{class_damper_a7359a8f79e517d33255bbb81be1199f7}{Set\+Debug}} (bool DEBUG)
+\item 
+string \doxymbox{\hyperlink{class_damper_ac65918f740bd91ca6d0590baf435a383}{Get\+Name}} ()
+\item 
+string \doxymbox{\hyperlink{class_damper_a714b50c4696fa862742cfe4bb50a652a}{Info}} ()
+\item 
+void \doxymbox{\hyperlink{class_damper_ad6abfc5827efa00b43f3cffcfc0daac8}{Update}} (double t\+\_\+target, double mp\+\_\+in)
+\item 
+void \doxymbox{\hyperlink{class_damper_a92cd6cf2fc6f78bc46ac86ed1221bc85}{Update\+Dimless\+Pars}} (double pref, double mp\+\_\+nevl, double omega)
+\item 
+void \doxymbox{\hyperlink{class_damper_a0186228fdfa951fdb52fecd9cb63a628}{Ini}} (double \+\_\+pstart)
+\item 
+void \doxymbox{\hyperlink{class_damper_ad019f1a5c3e8a7690bb6366d7657e143}{Ini}} (double \+\_\+pstart, double \+\_\+\+Tstart)
+\item 
+double \doxymbox{\hyperlink{class_damper_a2b4d07f6ca6edb3b958e3337aec9b27f}{Get\+\_\+dprop}} (string prop\+\_\+string)
+\item 
+void \doxymbox{\hyperlink{class_damper_a7d4b895592ec6583bee1e8342d8830dc}{Set\+\_\+dprop}} (string prop\+\_\+string, double val)
+\item 
+double \doxymbox{\hyperlink{class_damper_a105f8c1ab7087bef1b70f78b9a721746}{GetP}} ()
+\item 
+void \doxymbox{\hyperlink{class_damper_ad3bca7f8eb564e8d7133bcfd2dfdedf5}{List\+\_\+data}} ()
+\item 
+void \doxymbox{\hyperlink{class_damper_ae0b0dfa2d7968ae0279e20f288c21b3f}{Save\+\_\+data}} ()
+\item 
+vector$<$ double $>$ \doxymbox{\hyperlink{class_damper_ae5b6ae0651f9fca1ccae257542047a66}{Get\+\_\+dvprop}} (string prop\+\_\+string)
+\item 
+void \doxymbox{\hyperlink{class_damper_a6541e83279a6cb52ff8dcf95516dbfcc}{Plot}} (bool show, bool save)
+\item 
+double \doxymbox{\hyperlink{class_damper_aedd3ccc1f3770054600918315622f94a}{signed\+Sqrt}} (double x)
+\item 
+double \doxymbox{\hyperlink{class_damper_a1a00e8bc1ea18c941492b26f4b9e57d6}{Get\+Mass\+Flow\+Rate}} (double p\+\_\+connect)
+\item 
+double \doxymbox{\hyperlink{class_damper_ae34235f6a7f0842054c3cea16e229104}{Get\+Internal\+Pressure\+Drop}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_units}{Units}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_units_aa10ded064259f35f044246879725b98a}{Units}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_units_a64dc33d12edc3be94cfc72472cefecfe}{\texorpdfstring{$\sim$}{\string~}\+Units}} ()
+\begin{DoxyCompactList}\small\item\em Destuctor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{class_damper_ac8039c78c177b5a90ff02d853f7a3e2a}{is\+\_\+\+Gas}}
+\item 
+string \doxymbox{\hyperlink{class_damper_a86338f6e5bc557652c2151eaaf461e16}{fname}}
+\item 
+\doxymbox{\hyperlink{class_gas}{Gas}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_damper_a2dc72746630cbf4b84932086a002c871}{gas}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \doxymbox{\hyperlink{class_units}{Units}}}
+\begin{DoxyCompactItemize}
+\item 
+double \doxymbox{\hyperlink{class_units_aae98637c25e6a33b2521c48465f29691}{ft\+\_\+to\+\_\+m}}
+\begin{DoxyCompactList}\small\item\em Converts foot to meters. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_ac43b581dc1a05a12a84cba0bde9d0fb3}{m\+\_\+to\+\_\+ft}}
+\begin{DoxyCompactList}\small\item\em Convert meters to foot. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_a825b374297ce7d7d0e03a3908d716ae8}{inch\+\_\+to\+\_\+m}}
+\begin{DoxyCompactList}\small\item\em Convert inches to meters. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_a80da69188cc3184cb3596223bc5d1fc1}{m\+\_\+to\+\_\+inch}}
+\begin{DoxyCompactList}\small\item\em Convert metres to inches. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_a0cf66a20a8f5651c3a5e46ebd6bb4f63}{lbm\+\_\+to\+\_\+kg}}
+\begin{DoxyCompactList}\small\item\em Convert pounds to kilograms. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_acefd99f83c8cf786bd5c6e045283f2e8}{kg\+\_\+to\+\_\+lbm}}
+\begin{DoxyCompactList}\small\item\em Multiplier for conversion from kilogram to pound. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_a5215c9f5e61c890b28bff680e6a511ca}{lbf\+\_\+to\+\_\+N}}
+\begin{DoxyCompactList}\small\item\em Multiplier for conversion of poundforce to Newtons. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_ab7a4c6a874120920d5414ed57178b57b}{N\+\_\+to\+\_\+lbf}}
+\begin{DoxyCompactList}\small\item\em Mulitplier for conversion of Newtons to poundforce. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_a525b1531b6b496d29fab81d65df1b83b}{psi\+\_\+to\+\_\+\+Pa}}
+\begin{DoxyCompactList}\small\item\em Mulitplier ofr conversion of pound per square inch to Pa. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_a1b5a970e875c7153f84b206b5d02ee6d}{Pa\+\_\+to\+\_\+psi}}
+\begin{DoxyCompactList}\small\item\em Multiplier for conversion of pascals to pound per square inch. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_a9ae6f34b3ff8b508d964ec2b605bc1a1}{psi\+\_\+to\+\_\+bar}}
+\begin{DoxyCompactList}\small\item\em Mulitplier for conversion of psi to bar. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_a5c07ef1fbf32eb6f128824ea44f18124}{bar\+\_\+to\+\_\+psi}}
+\begin{DoxyCompactList}\small\item\em Multiplier for conversion of bar to psi. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_a5cf78bb6d35d06600c5b52dd7c451709}{m3\+\_\+to\+\_\+inch3}}
+\begin{DoxyCompactList}\small\item\em Multiplier for conversion of cubic meter to cumbic inch. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_aa8eaefa114dd3f3f71441fca9f530c68}{inch3\+\_\+to\+\_\+m3}}
+\begin{DoxyCompactList}\small\item\em Multiplier for conversion of cubic inches to cubic metres. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for modeling \doxylink{class_damper}{Damper}. 
+
+The class contains data for \doxylink{class_damper}{Damper} 
+
+\label{doc-constructors}
+\Hypertarget{class_damper_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_damper_adab7c3468d8b69172824d087e9803255}\index{Damper@{Damper}!Damper@{Damper}}
+\index{Damper@{Damper}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{Damper()}{Damper()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{class_damper_adab7c3468d8b69172824d087e9803255} 
+Damper::\+\+Damper (\begin{DoxyParamCaption}\item[{string}]{\+\_\+nev}{, }\item[{double}]{\+\_\+vol}{, }\item[{double}]{\+\_\+a}{, }\item[{double}]{\+\_\+rho}{, }\item[{int}]{\+\_\+num\+\_\+of\+\_\+orifices}{, }\item[{double}]{diameter}{, }\item[{bool}]{save\+\_\+data}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_damper_adc61f373879c2ccab781af99d40e816a}\index{Damper@{Damper}!Damper@{Damper}}
+\index{Damper@{Damper}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{Damper()}{Damper()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{class_damper_adc61f373879c2ccab781af99d40e816a} 
+Damper::\+\+Damper (\begin{DoxyParamCaption}\item[{string}]{\+\_\+name}{, }\item[{double}]{\+\_\+vol}{, }\item[{\doxymbox{\hyperlink{class_ideal_gas}{Ideal\+Gas}} \texorpdfstring{$\ast$}{*}}]{gas}{, }\item[{double}]{n\+\_\+poly}{, }\item[{int}]{\+\_\+num\+\_\+of\+\_\+orifices}{, }\item[{double}]{diameter}{, }\item[{bool}]{\+\_\+save\+\_\+data}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_damper_ab6f02fa80f7d6fc20d070c538b7e2149}\index{Damper@{Damper}!Damper@{Damper}}
+\index{Damper@{Damper}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{Damper()}{Damper()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{class_damper_ab6f02fa80f7d6fc20d070c538b7e2149} 
+Damper::\+\+Damper (\begin{DoxyParamCaption}\item[{string}]{\+\_\+name}{, }\item[{double}]{\+\_\+vol}{, }\item[{\doxymbox{\hyperlink{class_ideal_gas}{Ideal\+Gas}} \texorpdfstring{$\ast$}{*}}]{gas}{, }\item[{double}]{n\+\_\+poly}{, }\item[{int}]{\+\_\+num\+\_\+of\+\_\+orifices}{, }\item[{double}]{diameter}{, }\item[{bool}]{\+\_\+save\+\_\+data}{, }\item[{double}]{Tt}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_damper_a6df8c7c693b4163aec25e3221b33c6cb}\index{Damper@{Damper}!Damper@{Damper}}
+\index{Damper@{Damper}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{Damper()}{Damper()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{class_damper_a6df8c7c693b4163aec25e3221b33c6cb} 
+Damper::\+\+Damper (\begin{DoxyParamCaption}\item[{string}]{\+\_\+name}{, }\item[{double}]{\+\_\+vol}{, }\item[{\doxymbox{\hyperlink{class_gas}{Gas}} \texorpdfstring{$\ast$}{*}}]{gas}{, }\item[{double}]{n\+\_\+poly}{, }\item[{int}]{\+\_\+num\+\_\+of\+\_\+orifices}{, }\item[{double}]{diameter}{, }\item[{bool}]{\+\_\+save\+\_\+data}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_damper_a2c6d388f615fd1e4530c36cd7fd34c29}\index{Damper@{Damper}!````~Damper@{\texorpdfstring{$\sim$}{\string~}Damper}}
+\index{````~Damper@{\texorpdfstring{$\sim$}{\string~}Damper}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Damper()}{\string~Damper()}}
+{\footnotesize\ttfamily \label{class_damper_a2c6d388f615fd1e4530c36cd7fd34c29} 
+Damper::\+\texorpdfstring{$\sim$}{\string~}\+Damper (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_damper_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_damper_a2b4d07f6ca6edb3b958e3337aec9b27f}\index{Damper@{Damper}!Get\_dprop@{Get\_dprop}}
+\index{Get\_dprop@{Get\_dprop}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{Get\_dprop()}{Get\_dprop()}}
+{\footnotesize\ttfamily \label{class_damper_a2b4d07f6ca6edb3b958e3337aec9b27f} 
+double Damper::\+\+Get\+\_\+dprop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_damper_ae5b6ae0651f9fca1ccae257542047a66}\index{Damper@{Damper}!Get\_dvprop@{Get\_dvprop}}
+\index{Get\_dvprop@{Get\_dvprop}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{Get\_dvprop()}{Get\_dvprop()}}
+{\footnotesize\ttfamily \label{class_damper_ae5b6ae0651f9fca1ccae257542047a66} 
+vector$<$ double $>$ Damper::\+\+Get\+\_\+dvprop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_damper_ae34235f6a7f0842054c3cea16e229104}\index{Damper@{Damper}!GetInternalPressureDrop@{GetInternalPressureDrop}}
+\index{GetInternalPressureDrop@{GetInternalPressureDrop}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{GetInternalPressureDrop()}{GetInternalPressureDrop()}}
+{\footnotesize\ttfamily \label{class_damper_ae34235f6a7f0842054c3cea16e229104} 
+double Damper::\+\+Get\+Internal\+Pressure\+Drop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_damper_a1a00e8bc1ea18c941492b26f4b9e57d6}\index{Damper@{Damper}!GetMassFlowRate@{GetMassFlowRate}}
+\index{GetMassFlowRate@{GetMassFlowRate}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{GetMassFlowRate()}{GetMassFlowRate()}}
+{\footnotesize\ttfamily \label{class_damper_a1a00e8bc1ea18c941492b26f4b9e57d6} 
+double Damper::\+\+Get\+Mass\+Flow\+Rate (\begin{DoxyParamCaption}\item[{double}]{p\+\_\+connect}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_damper_ac65918f740bd91ca6d0590baf435a383}\index{Damper@{Damper}!GetName@{GetName}}
+\index{GetName@{GetName}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily \label{class_damper_ac65918f740bd91ca6d0590baf435a383} 
+string Damper::\+\+Get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_damper_a105f8c1ab7087bef1b70f78b9a721746}\index{Damper@{Damper}!GetP@{GetP}}
+\index{GetP@{GetP}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{GetP()}{GetP()}}
+{\footnotesize\ttfamily \label{class_damper_a105f8c1ab7087bef1b70f78b9a721746} 
+double Damper::\+\+GetP (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_damper_a714b50c4696fa862742cfe4bb50a652a}\index{Damper@{Damper}!Info@{Info}}
+\index{Info@{Info}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{Info()}{Info()}}
+{\footnotesize\ttfamily \label{class_damper_a714b50c4696fa862742cfe4bb50a652a} 
+string Damper::\+\+Info (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_damper_a0186228fdfa951fdb52fecd9cb63a628}\index{Damper@{Damper}!Ini@{Ini}}
+\index{Ini@{Ini}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_damper_a0186228fdfa951fdb52fecd9cb63a628} 
+void Damper::\+\+Ini (\begin{DoxyParamCaption}\item[{double}]{\+\_\+pstart}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_damper_ad019f1a5c3e8a7690bb6366d7657e143}\index{Damper@{Damper}!Ini@{Ini}}
+\index{Ini@{Ini}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_damper_ad019f1a5c3e8a7690bb6366d7657e143} 
+void Damper::\+\+Ini (\begin{DoxyParamCaption}\item[{double}]{\+\_\+pstart}{, }\item[{double}]{\+\_\+\+Tstart}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_damper_ad3bca7f8eb564e8d7133bcfd2dfdedf5}\index{Damper@{Damper}!List\_data@{List\_data}}
+\index{List\_data@{List\_data}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{List\_data()}{List\_data()}}
+{\footnotesize\ttfamily \label{class_damper_ad3bca7f8eb564e8d7133bcfd2dfdedf5} 
+void Damper::\+\+List\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_damper_a6541e83279a6cb52ff8dcf95516dbfcc}\index{Damper@{Damper}!Plot@{Plot}}
+\index{Plot@{Plot}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{Plot()}{Plot()}}
+{\footnotesize\ttfamily \label{class_damper_a6541e83279a6cb52ff8dcf95516dbfcc} 
+void Damper::\+\+Plot (\begin{DoxyParamCaption}\item[{bool}]{show}{, }\item[{bool}]{save}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_damper_ae0b0dfa2d7968ae0279e20f288c21b3f}\index{Damper@{Damper}!Save\_data@{Save\_data}}
+\index{Save\_data@{Save\_data}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{Save\_data()}{Save\_data()}}
+{\footnotesize\ttfamily \label{class_damper_ae0b0dfa2d7968ae0279e20f288c21b3f} 
+void Damper::\+\+Save\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_damper_a7d4b895592ec6583bee1e8342d8830dc}\index{Damper@{Damper}!Set\_dprop@{Set\_dprop}}
+\index{Set\_dprop@{Set\_dprop}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{Set\_dprop()}{Set\_dprop()}}
+{\footnotesize\ttfamily \label{class_damper_a7d4b895592ec6583bee1e8342d8830dc} 
+void Damper::\+\+Set\+\_\+dprop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{, }\item[{double}]{val}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_damper_a7359a8f79e517d33255bbb81be1199f7}\index{Damper@{Damper}!SetDebug@{SetDebug}}
+\index{SetDebug@{SetDebug}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{SetDebug()}{SetDebug()}}
+{\footnotesize\ttfamily \label{class_damper_a7359a8f79e517d33255bbb81be1199f7} 
+void Damper::\+\+Set\+Debug (\begin{DoxyParamCaption}\item[{bool}]{DEBUG}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_damper_aedd3ccc1f3770054600918315622f94a}\index{Damper@{Damper}!signedSqrt@{signedSqrt}}
+\index{signedSqrt@{signedSqrt}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{signedSqrt()}{signedSqrt()}}
+{\footnotesize\ttfamily \label{class_damper_aedd3ccc1f3770054600918315622f94a} 
+double Damper::\+signed\+Sqrt (\begin{DoxyParamCaption}\item[{double}]{x}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_damper_ad6abfc5827efa00b43f3cffcfc0daac8}\index{Damper@{Damper}!Update@{Update}}
+\index{Update@{Update}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_damper_ad6abfc5827efa00b43f3cffcfc0daac8} 
+void Damper::\+\+Update (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{double}]{mp\+\_\+in}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_damper_a92cd6cf2fc6f78bc46ac86ed1221bc85}\index{Damper@{Damper}!UpdateDimlessPars@{UpdateDimlessPars}}
+\index{UpdateDimlessPars@{UpdateDimlessPars}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{UpdateDimlessPars()}{UpdateDimlessPars()}}
+{\footnotesize\ttfamily \label{class_damper_a92cd6cf2fc6f78bc46ac86ed1221bc85} 
+void Damper::\+\+Update\+Dimless\+Pars (\begin{DoxyParamCaption}\item[{double}]{pref}{, }\item[{double}]{mp\+\_\+nevl}{, }\item[{double}]{omega}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_damper_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_damper_a86338f6e5bc557652c2151eaaf461e16}\index{Damper@{Damper}!fname@{fname}}
+\index{fname@{fname}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{fname}{fname}}
+{\footnotesize\ttfamily \label{class_damper_a86338f6e5bc557652c2151eaaf461e16} 
+string Damper::\+fname}
+
+\Hypertarget{class_damper_a2dc72746630cbf4b84932086a002c871}\index{Damper@{Damper}!gas@{gas}}
+\index{gas@{gas}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{gas}{gas}}
+{\footnotesize\ttfamily \label{class_damper_a2dc72746630cbf4b84932086a002c871} 
+\doxymbox{\hyperlink{class_gas}{Gas}}\texorpdfstring{$\ast$}{*} Damper::\+gas}
+
+\Hypertarget{class_damper_ac8039c78c177b5a90ff02d853f7a3e2a}\index{Damper@{Damper}!is\_Gas@{is\_Gas}}
+\index{is\_Gas@{is\_Gas}!Damper@{Damper}}
+\doxysubsubsection{\texorpdfstring{is\_Gas}{is\_Gas}}
+{\footnotesize\ttfamily \label{class_damper_ac8039c78c177b5a90ff02d853f7a3e2a} 
+bool Damper::\+is\+\_\+\+Gas}
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+src/\+\doxymbox{\hyperlink{_damper_8h}{Damper.\+h}}\item 
+src/\+\doxymbox{\hyperlink{_damper_8cpp}{Damper.\+cpp}}\end{DoxyCompactItemize}

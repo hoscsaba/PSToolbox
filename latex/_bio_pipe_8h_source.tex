@@ -1,0 +1,163 @@
+\doxysection{Bio\+Pipe.\+h}
+\hypertarget{_bio_pipe_8h_source}{}\label{_bio_pipe_8h_source}\index{src/BioPipe.h@{src/BioPipe.h}}
+\doxymbox{\hyperlink{_bio_pipe_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <Eigen/Dense>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_p_s_toolbox_base_edge_8h}{PSToolboxBaseEdge.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_units_8h}{Units.h}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00011\ \textcolor{keyword}{using\ namespace\ }Eigen;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_bio_pipe_a383a18de5cc5b309283cfb6bdba1547a}{BioPipe}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ae5dcabbe9cf289d0ad419a6b1a903fd9}{PSToolboxBaseEdge}},\ \doxymbox{\hyperlink{class_units_aa10ded064259f35f044246879725b98a}{Units}}\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{comment}{//Data}}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{double}\ L,\ D,\ rh,\ A,\ g,\ v\_conv,\ dx,\ dt\_conv;}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{string}\ bio\_type;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{int}\ Npts\_min,\ Npts\_max;}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{comment}{//\ chlorine}}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{double}\ kb\ =\ 1.0\ /\ 24.\ /\ 3600.;}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{comment}{//\ bio\ default\ values}}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{double}\ mumax\ =\ 0.62\ /\ 24.\ /\ 3600.;}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{double}\ Y\ =\ 0.85;}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{double}\ a\ =\ 0.9;}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{double}\ kmort\ =\ 0.039\ /\ 24.\ /\ 3600.;}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{double}\ kb\_bio\ =\ 0.5;}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{double}\ kfs\ =\ kmort\ *\ 10.;}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{double}\ DT\_MIN\ =\ 1.;}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ VectorXd\ x;}
+\DoxyCodeLine{00031\ \ \ \ \ VectorXd\ v\_conv\_vec,\ max\_vals;}
+\DoxyCodeLine{00032\ \ \ \ \ MatrixXd\ Cnew;}
+\DoxyCodeLine{00033\ \ \ \ \ vector<string>\ name\_of\_bio\_vars;}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{int}\ num\_of\_bio\_vars;}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{bool}\ is\_v\_conv\_set;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{bool}\ ini\_done;\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ BCLeft(\textcolor{keywordtype}{string}\ type,\ \textcolor{keywordtype}{double}\ val,\ \textcolor{keywordtype}{double}\ \&pstart,\ \textcolor{keywordtype}{double}\ \&vstart);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ BCRight(\textcolor{keywordtype}{string}\ type,\ \textcolor{keywordtype}{double}\ val,\ \textcolor{keywordtype}{double}\ \&pend,\ \textcolor{keywordtype}{double}\ \&vend);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{comment}{//double\ Source(int\ i);}}
+\DoxyCodeLine{00043\ \ \ \ \ MatrixXd\ Source();}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ MatrixXd\ RHS(MatrixXd);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{comment}{//Saving\ and\ plotting\ data}}
+\DoxyCodeLine{00048\ \ \ \ \ vector<vector<double>\ >\ data;}
+\DoxyCodeLine{00049\ \ \ \ \ vector<double>\ tmpvec;}
+\DoxyCodeLine{00050\ \ \ \ \ vector<double>\ tstatus;\ \textcolor{comment}{//time\ data\ for\ the\ status}}
+\DoxyCodeLine{00051\ \ \ \ \ vector<vector<double>\ >\ vstatus,\ pstatus;}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{bool}\ save\_data;\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{comment}{//bool\ do\_plot\_runtime;}}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{//bool\ ylim\_isset;}}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{comment}{//double\ lim\_pbottom,\ lim\_pup,\ lim\_vbottom,\ lim\_vup;}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00058\ \ \ \ \ \doxymbox{\hyperlink{class_bio_pipe_a383a18de5cc5b309283cfb6bdba1547a}{BioPipe}}(\textcolor{keywordtype}{string}\ \_nev,}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \_cspe\_nev,}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \_cspv\_nev,}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_L,}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_D,}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \_bio\_type,}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ save\_data);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{comment}{//MatrixXd\ C;}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_bio_pipe_a1eb23b2b2066f37e296be0a26c9a9bb5}{Npts}};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \doxymbox{\hyperlink{class_bio_pipe_a02f06d42958f6cf887420d60b649bdf3}{\string~BioPipe}}();}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_bio_pipe_af8d10aa7634982c2adb00d825f543c1f}{Info}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_bio_pipe_aba0dde2705141179b2dd8fde5828f8c9}{Ini}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_bio_pipe_aba0dde2705141179b2dd8fde5828f8c9}{Ini}}(\textcolor{keywordtype}{double}\ dt\_target)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_bio_pipe_aba0dde2705141179b2dd8fde5828f8c9}{Ini}}(\textcolor{keywordtype}{double}\ dt\_target,\ VectorXd\ Cini)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{class_bio_pipe_a7c59565edfcdeca13660cbdbad18f533}{Get\_dprop}}(\textcolor{keywordtype}{string}\ prop\_string)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_bio_pipe_a15867433b13330a4569d36ff4f1afe2d}{Get\_iprop}}(\textcolor{keywordtype}{string})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ vector<double>\ \doxymbox{\hyperlink{class_bio_pipe_aeda81341d297585e9d2008bf41a33ba0}{Get\_dvprop}}(\textcolor{keywordtype}{string}\ prop\_string);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_bio_pipe_ac179690b222935c065622e81866fa51c}{Set\_dprop}}(\textcolor{keywordtype}{string}\ prop\_string,\ \textcolor{keywordtype}{double}\ val)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_bio_pipe_ad2958e0f3541831a06920d4f09ea8c04}{Step}}(}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ BC\_start\_type,\ \textcolor{keywordtype}{double}\ BC\_start\_val,}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ BC\_end\_type,\ \textcolor{keywordtype}{double}\ BC\_end\_val);}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_bio_pipe_a16704bb0cdba251e961cb3faacd86553}{UpdateInternal}}(\textcolor{keywordtype}{double})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_bio_pipe_a3b96dffda874be41f7b713d5ffe016e8}{UpdateTime}}(\textcolor{keywordtype}{double})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_bio_pipe_a4defc47dc3bab108e96f373b652e396c}{Save\_data}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_bio_pipe_a7d5f22ed84c1e5e9eda16f9ebd39a5b6}{Write\_data}}(\textcolor{keywordtype}{string}\ folder)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_bio_pipe_a383550ad4a045bc1454e9956d45b092f}{fname}};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_bio_pipe_af77b22df5fd7fd74b5deea46503f7787}{Set\_string\_prop}}(\textcolor{keywordtype}{string},\ \textcolor{keywordtype}{string})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ VectorXd\ \doxymbox{\hyperlink{class_bio_pipe_ad0d24fe4e1a22595f40529981d83f2bb}{Get\_C\_Front}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ac17bb4ae04013c83ffa45f19ebcfab77}{C}}.col(0);}
+\DoxyCodeLine{00106\ \ \ \ \ \}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \ \ VectorXd\ \doxymbox{\hyperlink{class_bio_pipe_a42a876762abab9f07be7b973cdb19796}{Get\_C\_Back}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ac17bb4ae04013c83ffa45f19ebcfab77}{C}}.col(\doxymbox{\hyperlink{class_bio_pipe_a1eb23b2b2066f37e296be0a26c9a9bb5}{Npts}}\ -\/\ 1);}
+\DoxyCodeLine{00110\ \ \ \ \ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ MatrixXd\ \doxymbox{\hyperlink{class_bio_pipe_ad535b4b6d2b08115bcc0ed73b46d0125}{Get\_C}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ac17bb4ae04013c83ffa45f19ebcfab77}{C}};}
+\DoxyCodeLine{00114\ \ \ \ \ \}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{class_bio_pipe_a73bd2252a848808071b6e1b1da269ebf}{Get\_mp}}()\ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (v\_conv\ *\ 1000.\ *\ A);}
+\DoxyCodeLine{00118\ \ \ \ \ \}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ VectorXd\ \doxymbox{\hyperlink{class_bio_pipe_a92918a9d503694282a1a1cd2617fec52}{Get\_InnerMeanC}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ rows\ =\ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ac17bb4ae04013c83ffa45f19ebcfab77}{C}}.rows();}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ cols\ =\ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ac17bb4ae04013c83ffa45f19ebcfab77}{C}}.cols();}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Make\ sure\ there\ are\ at\ least\ 3\ columns\ (otherwise\ no\ "{}middle"{}\ data)}}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cols\ <=\ 2)\ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Matrix\ must\ have\ more\ than\ 2\ columns\ to\ exclude\ first\ and\ last\ elements."{}});}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ VectorXd\ averages(rows);}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ rows;\ ++i)\ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Take\ segment\ of\ row\ i,\ skipping\ first\ and\ last}}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ sum\ =\ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ac17bb4ae04013c83ffa45f19ebcfab77}{C}}.row(i).segment(1,\ cols\ -\/\ 2).sum();}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ averages(i)\ =\ sum\ /\ (cols\ -\/\ 2);}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ averages;}
+\DoxyCodeLine{00136\ \ \ \ \ \}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_bio_pipe_a4f0aeb802a88cf68abc09a3bc1dde3e5}{Set\_inletQualityFront}}(VectorXd\ Cin)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ac17bb4ae04013c83ffa45f19ebcfab77}{C}}.col(0)\ =\ Cin;}
+\DoxyCodeLine{00140\ \ \ \ \ \}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_bio_pipe_aab1b2263a01969b989eba1d8b62b09a3}{Set\_inletQualityBack}}(VectorXd\ Cin)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ac17bb4ae04013c83ffa45f19ebcfab77}{C}}.col(\doxymbox{\hyperlink{class_bio_pipe_a1eb23b2b2066f37e296be0a26c9a9bb5}{Npts}}\ -\/\ 1)\ =\ Cin;}
+\DoxyCodeLine{00144\ \ \ \ \ \}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_bio_pipe_a6a6425319696df00f131a83424794fc3}{Set\_v\_conv}}(\textcolor{keywordtype}{double}\ v)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ v\_conv\ =\ v;}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ is\_v\_conv\_set\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ vmin\ =\ 1.\ /\ 3600.\ /\ 24.;}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fabs(v\_conv)\ <\ vmin)}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ v\_conv\ =\ vmin;}
+\DoxyCodeLine{00152\ \ \ \ \ \}}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_bio_pipe_ac08880900d8cf7bd6dca9effb59a852a}{Set\_max\_vals}}(VectorXd\ \_max\_vals)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ max\_vals\ =\ \_max\_vals;}
+\DoxyCodeLine{00156\ \ \ \ \ \}}
+\DoxyCodeLine{00157\ \};}
+
+\end{DoxyCode}

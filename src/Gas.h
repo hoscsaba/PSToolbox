@@ -15,6 +15,7 @@ public:
     virtual double Get_rho(double p, double T) = 0;
     virtual double Get_T(double p, double rho) = 0;
     virtual double Get_e_from_Tp(double T,double p) = 0;
+    virtual double Get_h_from_Tp(double T,double p) = 0;
     virtual double Get_SonicVel(double T, double p) = 0;
     virtual double Get_T_from_ep(double e, double p) = 0;
     virtual double Get_T_from_erho(double e, double rho) = 0;

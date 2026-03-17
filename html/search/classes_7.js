@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['lwp_0',['LWP',['../class_l_w_p.html',1,'']]]
+  ['junctionreader_0',['JunctionReader',['../struct_junction_reader.html',1,'']]]
 ];

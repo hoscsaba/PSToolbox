@@ -292,6 +292,193 @@ void Connector::Connector_Reservoir_and_Valve_Inlet(double t_target,
 
 void Connector::Connector_LWP_Pipe_Back_and_Valve(double t_target,
                                                   LWP *p1, Valve *v1, double p_downstream) {
+	// Solve for p,T at pipe end:
+	//
+	// F1(p,T) = alpha - [ p + a(T,p) * m_dot(p,T,p_downstream) / A ] = 0
+	//
+	// F2(p,T) = p / rho(p,T)^kappa - K = 0
+	//
+	// where K is taken from the pipe-side state (frozen entropy / isentropic closure).
+	//
+	// Then apply boundary condition with the converged p,T.
+
+	const double Apipe = p1->Get_dprop("A");
+	const double alpha = p1->GetAlphaPrimitiveAtEnd(t_target);
+	const double kappa = p1->gas->Get_kappa_pv();
+
+	// Initial guess from current boundary state
+	double p = p1->Get_dprop("p_back");
+	double T = p1->Get_dprop("T_back");
+
+	// Reference pipe-side state used for the isentropic constant K
+	// If you have access to the true adjacent-cell state at t_target,
+	// replace these by those values.
+	const double p_ref = p1->Get_dprop("p_back");
+	const double T_ref = p1->Get_dprop("T_back");
+	const double rho_ref = p1->gas->Get_rho(p_ref, T_ref);
+	const double K = p_ref / pow(rho_ref, kappa);
+
+	const int MAX_ITER = 100;
+	const double TOL_F1 = 1e-4 * std::max(1.0, std::fabs(alpha));
+	const double TOL_F2 = 1e-7 * std::max(1.0, std::fabs(K));
+	const double TOL_DP = 1e-8;
+	const double TOL_DT = 1e-8;
+
+	const double P_MIN = 1.0; // Pa
+	const double T_MIN = 50.0; // K
+	const double T_MAX = 5000.0; // K
+
+	auto clamp = [](double x, double xmin, double xmax) -> double {
+		if (x < xmin) return xmin;
+		if (x > xmax) return xmax;
+		return x;
+	};
+
+	auto eval_F = [&](double p_eval, double T_eval,
+	                  double &F1, double &F2,
+	                  double &mdot, double &rho, double &a) {
+		p_eval = std::max(p_eval, P_MIN);
+		T_eval = clamp(T_eval, T_MIN, T_MAX);
+
+		rho = p1->gas->Get_rho(p_eval, T_eval);
+		a = p1->gas->Get_SonicVel(T_eval, p_eval);
+		mdot = v1->Get_MassFlowRate(p_eval, T_eval,
+		                            p_downstream, 293.,
+		                            v1->Get_dprop("x"));
+
+		// F1: characteristic compatibility with valve mass flow
+		F1 = alpha - (p_eval + (mdot / Apipe) * a);
+
+		// F2: frozen entropy / isentropic closure from pipe side
+		F2 = p_eval / pow(rho, kappa) - K;
+	};
+
+	double F1, F2, mdot, rho, a;
+	eval_F(p, T, F1, F2, mdot, rho, a);
+
+	int iter = 0;
+	for (; iter < MAX_ITER; ++iter) {
+		// Check convergence
+		if (std::fabs(F1) < TOL_F1 && std::fabs(F2) < TOL_F2) {
+			break;
+		}
+
+		// Finite-difference increments
+		double dp_fd = 1e-4 * std::max(std::fabs(p), 1.0);
+		double dT_fd = 1e-4 * std::max(std::fabs(T), 1.0);
+
+		dp_fd = std::max(dp_fd, 1.0);
+		dT_fd = std::max(dT_fd, 1e-3);
+
+		// Evaluate Jacobian numerically
+		double F1_p, F2_p, mdot_p, rho_p, a_p;
+		double F1_T, F2_T, mdot_T, rho_T, a_T;
+
+		eval_F(p + dp_fd, T, F1_p, F2_p, mdot_p, rho_p, a_p);
+		eval_F(p, T + dT_fd, F1_T, F2_T, mdot_T, rho_T, a_T);
+
+		const double J11 = (F1_p - F1) / dp_fd; // dF1/dp
+		const double J12 = (F1_T - F1) / dT_fd; // dF1/dT
+		const double J21 = (F2_p - F2) / dp_fd; // dF2/dp
+		const double J22 = (F2_T - F2) / dT_fd; // dF2/dT
+
+		const double det = J11 * J22 - J12 * J21;
+
+		if (std::fabs(det) < 1e-20 || std::isnan(det)) {
+			if (DEBUG) {
+				printf("\n!!!ERROR!!! Connector_LWP_Pipe_Back_and_Valve(): singular Jacobian.");
+				printf("\niter=%d p=%5.3e T=%5.3e F1=%+5.3e F2=%+5.3e det=%+5.3e",
+				       iter, p, T, F1, F2, det);
+			}
+			break;
+		}
+
+		// Solve J * [dp, dT]^T = -[F1, F2]^T
+		double dp = (-F1 * J22 + J12 * F2) / det;
+		double dT = (J21 * F1 - J11 * F2) / det;
+
+		// Limit overly aggressive raw Newton steps
+		const double dp_limit = 0.5 * std::max(std::fabs(p), 1.0);
+		const double dT_limit = 0.2 * std::max(std::fabs(T), 1.0);
+
+		if (std::fabs(dp) > dp_limit) dp = (dp > 0.0 ? dp_limit : -dp_limit);
+		if (std::fabs(dT) > dT_limit) dT = (dT > 0.0 ? dT_limit : -dT_limit);
+
+		// Backtracking line search
+		double lambda = 1.0;
+		bool accepted = false;
+
+		double p_new = p;
+		double T_new = T;
+		double F1_new, F2_new, mdot_new, rho_new, a_new;
+
+		const double norm_old = std::fabs(F1) / std::max(TOL_F1, 1.0)
+		                        + std::fabs(F2) / std::max(TOL_F2, 1.0);
+
+		for (int ls = 0; ls < 12; ++ls) {
+			p_new = std::max(P_MIN, p + lambda * dp);
+			T_new = clamp(T + lambda * dT, T_MIN, T_MAX);
+
+			eval_F(p_new, T_new, F1_new, F2_new, mdot_new, rho_new, a_new);
+
+			const double norm_new = std::fabs(F1_new) / std::max(TOL_F1, 1.0)
+			                        + std::fabs(F2_new) / std::max(TOL_F2, 1.0);
+
+			if (std::isfinite(norm_new) && norm_new < norm_old) {
+				accepted = true;
+				break;
+			}
+
+			lambda *= 0.5;
+		}
+
+		if (!accepted) {
+			if (DEBUG) {
+				printf("\n!!!WARNING!!! Connector_LWP_Pipe_Back_and_Valve(): line search failed.");
+				printf("\niter=%d p=%5.3e T=%5.3e F1=%+5.3e F2=%+5.3e",
+				       iter, p, T, F1, F2);
+			}
+			break;
+		}
+
+		// Update state
+		p = p_new;
+		T = T_new;
+		F1 = F1_new;
+		F2 = F2_new;
+		mdot = mdot_new;
+		rho = rho_new;
+		a = a_new;
+
+		if (DEBUG) {
+			printf("\n(back) iter #%2d: alpha=%5.3e, p=%5.3e, p_downstream=%5.3e, "
+			       "T=%5.3e, rho=%5.3e, a=%5.3e, mp=%5.3e, "
+			       "F1=%+5.3e, F2=%+5.3e, lambda=%5.3e",
+			       iter + 1, alpha, p, p_downstream, T, rho, a, mdot, F1, F2, lambda);
+		}
+
+		// Optional step-size convergence
+		if (std::fabs(lambda * dp) < TOL_DP * std::max(1.0, std::fabs(p)) &&
+		    std::fabs(lambda * dT) < TOL_DT * std::max(1.0, std::fabs(T)) &&
+		    std::fabs(F1) < 10.0 * TOL_F1 &&
+		    std::fabs(F2) < 10.0 * TOL_F2) {
+			break;
+		}
+	}
+
+	if (iter == MAX_ITER) {
+		cout << endl
+				<< "!!!ERROR!!! Connector_Pipe_Back_and_Valve() -> MAX_ITER reached.";
+		printf("\nfinal: alpha=%5.3e, p=%5.3e, T=%5.3e, rho=%5.3e, a=%5.3e, mp=%5.3e, F1=%+5.3e, F2=%+5.3e",
+		       alpha, p, T, rho, a, mdot, F1, F2);
+		cin.get();
+	}
+
+	p1->BCRight(t_target, "StaticPres_Outlet", p, T, true);
+}
+
+void Connector::Connector_LWP_Pipe_Back_and_ValveOLD(double t_target,
+                                                     LWP *p1, Valve *v1, double p_downstream) {
 	// Solve the following system for p,T,rho,v:
 	// (1) alpha=p+ro*a*v
 	// (2) ro*Apipe*v=valve_mass_flow
@@ -299,6 +486,7 @@ void Connector::Connector_LWP_Pipe_Back_and_Valve(double t_target,
 	// (4) rho=rho(p,T)
 	// (5) a  =a(T)
 
+	DEBUG = true;
 	double alpha, Apipe;
 
 	Apipe = p1->Get_dprop("A");
@@ -310,13 +498,14 @@ void Connector::Connector_LWP_Pipe_Back_and_Valve(double t_target,
 	double TOL_p = p / 100., TOL_T = T / 100.;
 	while ((err1 > TOL_p) || (err2 > TOL_T)) {
 		mp = v1->Get_MassFlowRate(p, T, p_downstream, 293., v1->Get_dprop("x"));
+		//cout<<endl<<"Connector_Pipe_Back_and_Valve: pu, pd, mp: "<<p<<", "<<p_downstream<<", "<<mp;
 
 		double a = p1->gas->Get_SonicVel(T, p);
 		double f = alpha - (p + mp / Apipe * a);
 
 		double dp = 0.001 * p;
-		if (fabs(dp) < 10.)
-			dp = 10.;
+		if (fabs(dp) < 1.)
+			dp = 1.;
 
 		mp = v1->Get_MassFlowRate(p + dp, T, p_downstream, 293., v1->Get_dprop("x"));
 
@@ -610,7 +799,7 @@ void Connector::Connector_LWP_Pipe_Front_and_Valve(double t_target,
 	// Solve the following system for p,T,rho,v:
 	// (1) beta=p-ro*a*v
 	// (2) ro*Apipe*v=valve_mass_flow
-	// (3) T=TL
+	// (3) T=T_upstream
 	// (4) rho=rho(p,T)
 	// (5) a  =a(T)
 
@@ -1965,164 +2154,437 @@ bool Connector::connected_to_rigid() {
 
 void Connector::Connector_LWP_Pipes(double t_target,
                                     LWP *p1, LWP *p2) {
-	/*
-       void Connector::Connector_LWP_Pipes(double t_target,
-       LWP *p1, LWP *p2,
-       double& pL, double& pR,
-       double& TL, double& TR,
-       double& rhoL, double& rhoR,
-       double& vL, double& vR) {
-	 */
-	//bool DEBUG=true;
-
 	// Solves:
-	// eq. (1) pL + rhoL*aL*vL = alpha_L
-	// eq. (2) pR - rhoR*aR*vR = beta_R
-	// eq. (3) rhoL*vL*AL   = rhoR*vR*AR (continuity)
-	// eq. (4) rhoL*vL^2*AL = rhoR*vR^2*AR+(pR-pL)*max(AL,AR) (impulse)
-	// eq. (5) (rhoL*vL*eL + pL*vL)*AL = (rhoR*vR*eR + pR*vR)*AR (energy)
-	// eq. (6-7) a = sonic_vel(T,p)
-	// eq. (8-9) e = internal_energy(T,p)
-	// eq. (10-11) gas law
-	// eq. (12) rhoL = rho0 (C0 characteristic)
+	// (1)  pL + rhoL*aL*vL = alphaL
+	// (2)  pR - rhoR*aR*vR = betaR
+	// (3)  rhoL*vL*AL      = rhoR*vR*AR
+	// (4)  hL + vL^2/2     = hR + vR^2/2
+	// (11) pL/rhoL^kappa   = KL
+	// (12) pR/rhoR^kappa   = KR
 	//
-	// 12 unkowns: p, T, rho, v, a, e @ R(ight) and L(eft)
+	// Unknowns finally solved: pL, pR, vL, vR
+	// Then rho,T,a,h are reconstructed.
 
-	bool is_inflow, is_outflow;
+	bool is_inflow = false, is_outflow = false;
 
-	const double AR = p1->Get_dprop("A");
-	const double AL = p2->Get_dprop("A");
-	double A = AR;
-	if (AL > AR)
-		A = AL;
+	// p1 := LEFT pipe, p2 := RIGHT pipe
+	const double AL = p1->Get_dprop("A");
+	const double AR = p2->Get_dprop("A");
+	const double kappa = p1->gas->Get_kappa_pv();
 
+	// Initial values from current boundary states
 	double pL = p1->Get_dprop("p_back");
-	double TL = 293.; //p1->Get_dprop("T_back");
+	double TL = p1->Get_dprop("T_back");
 	double vL = p1->Get_dprop("v_back");
 	double rhoL = p1->gas->Get_rho(pL, TL);
 	double aL = p1->gas->Get_SonicVel(TL, pL);
-	double eL = p1->gas->Get_e_from_Tp(TL, pL) + vL * vL / 2;
+	double hL = p1->gas->Get_h_from_Tp(TL, pL);
 
 	double pR = p2->Get_dprop("p_front");
-	double TR = 293.; //p2->Get_dprop("T_front");
+	double TR = p2->Get_dprop("T_front");
 	double vR = p2->Get_dprop("v_front");
 	double rhoR = p2->gas->Get_rho(pR, TR);
 	double aR = p2->gas->Get_SonicVel(TR, pR);
-	double eR = p1->gas->Get_e_from_Tp(TR, pR) + vR * vR / 2;
-
-	double pR_new, pL_new; //,rhoR_new,rhoL_new,vL_new,vR_new;
+	double hR = p2->gas->Get_h_from_Tp(TR, pR);
 
 	double alphaL = p1->GetAlphaPrimitiveAtEnd(t_target);
 	double betaR = p2->GetBetaPrimitiveAtFront(t_target);
-	if (DEBUG) {
-		printf("\n\n Connector::Connector_LWP_Pipes()");
-		printf("\n pL=%5.3e, TL=%5.3e, vL=%5.3e, rhoL=%5.3e, aL=%5.3e, eL=%5.3e, alphaL=%5.3e",
-		       pL, TL, vL, rhoL, aL, eL, alphaL);
-		printf("\n pR=%5.3e, TR=%5.3e, vR=%5.3e, rhoR=%5.3e, aR=%5.3e, eR=%5.3e, betaR =%5.3e",
-		       pR, TR, vR, rhoR, aR, eR, betaR);
-		cin.get();
-	}
 
-	// Preliminary esrimate assuming constant temperature
-	double aa = 1. / rhoR / AR - 1. / rhoL / AL;
-	double bb = aR + aL;
-	double cc = betaR * AR - alphaL * AL;
-	double DD = bb * bb - 4 * aa * cc;
-	double mp = 0.0;
-	if (DD > 0) {
-		mp = (-bb + sqrt(DD)) / 2. / aa;
-	} else {
-		cout << endl << endl << "ERRORRRRRR!" << endl;
-		cin.get();
-	}
+	// Adjacent-cell values
+	double pL_a, rhoL_a, TL_a, vL_a;
+	double pR_a, rhoR_a, TR_a, vR_a;
 
-	pL = alphaL - aL / AL * mp;
-	pR = betaR + aR / AR * mp;
-	rhoL = p1->gas->Get_rho(pL, TL);
-	//rhoR = p1->GetC0AtEnd(t_target);
-	rhoR = p1->gas->Get_rho(pR, TR);
-	vL = mp / rhoL / AL;
-	vR = mp / rhoR / AR;
+	p1->GetAllPrimitiveAtEnd(t_target, pL_a, vL_a, TL_a, rhoL_a);
+	p2->GetAllPrimitiveAtFront(t_target, pR_a, vR_a, TR_a, rhoR_a);
+
+	const double KL = pL_a / pow(rhoL_a, kappa);
+	const double KR = pR_a / pow(rhoR_a, kappa);
 
 	if (DEBUG) {
-		printf("\n\nEstimate:");
-		printf("\n mp=%5.3e", mp);
-		printf("\n pL=%5.3e, TL=%5.3e, vL=%5.3e, rhoL=%5.3e", pL, TL, vL, rhoL);
-		printf("\n pR=%5.3e, TR=%5.3e, vR=%5.3e, rhoR=%5.3e", pR, TR, vR, rhoR);
-		cin.get();
+		printf("\n\nConnector::Connector_LWP_Pipes()");
+		printf("\nLEFT : p=%5.3e, T=%5.3e, v=%5.3e, rho=%5.3e, a=%5.3e, h=%5.3e, alpha=%5.3e",
+		       pL, TL, vL, rhoL, aL, hL, alphaL);
+		printf("\nRIGHT: p=%5.3e, T=%5.3e, v=%5.3e, rho=%5.3e, a=%5.3e, h=%5.3e, beta =%5.3e",
+		       pR, TR, vR, rhoR, aR, hR, betaR);
 	}
 
-	double err_p = 1e5, TOL_p = 10.;
-	double err_T = 1e5, TOL_T = .1;
-	int iter = 0, MAX_ITER = 1000;
+	// ------------------------------------------------------------------
+	// Helpers
+	// ------------------------------------------------------------------
 
-	while ((fabs(err_p) > TOL_p) || (fabs(err_T) > TOL_T)) {
-		iter++;
-		if (iter == MAX_ITER) {
-			cout << endl << "!!!ERROR!!! Connector::Connector_LWP_Pipes() -> MAX_ITER reached. Exiting" << endl;
-			//printf("\n (front) iter #%2d: pt=%5.3e, rhot=%5.3e, beta=%5.3e, p=%5.3e, T=%5.3e, rho=%5.3e, v=%5.3e, err1=%5.3e, err2=%5.3e, err3=%5.3e", iter,pt,rhot,beta,p,T,rho,v,err1,err2,err3);
-			exit(-1);
+	auto clamp_positive = [](double x, double xmin) -> double {
+		return (x < xmin) ? xmin : x;
+	};
+
+	// Reconstruct left thermodynamic state from p using p/rho^kappa = KL
+	auto left_state_from_p = [&](double p,
+	                             double &rho, double &T, double &a, double &h) {
+		p = clamp_positive(p, 1.0);
+		rho = pow(p / KL, 1.0 / kappa);
+		rho = clamp_positive(rho, 1e-12);
+
+		// Adjust to your gas API if needed:
+		T = p1->gas->Get_T(p, rho);
+		a = p1->gas->Get_SonicVel(T, p);
+		h = p1->gas->Get_h_from_Tp(T, p);
+	};
+
+	// Reconstruct right thermodynamic state from p using p/rho^kappa = KR
+	auto right_state_from_p = [&](double p,
+	                              double &rho, double &T, double &a, double &h) {
+		p = clamp_positive(p, 1.0);
+		rho = pow(p / KR, 1.0 / kappa);
+		rho = clamp_positive(rho, 1e-12);
+
+		// Adjust to your gas API if needed:
+		T = p2->gas->Get_T(p, rho);
+		a = p2->gas->Get_SonicVel(T, p);
+		h = p2->gas->Get_h_from_Tp(T, p);
+	};
+
+	auto vL_from_p = [&](double p) -> double {
+		double rho, T, a, h;
+		left_state_from_p(p, rho, T, a, h);
+		return (alphaL - p) / (rho * a);
+	};
+
+	auto vR_from_p = [&](double p) -> double {
+		double rho, T, a, h;
+		right_state_from_p(p, rho, T, a, h);
+		return (p - betaR) / (rho * a);
+	};
+
+	// Continuity residual for fixed pL, scalar solve in pR:
+	auto continuity_residual = [&](double pR_trial, double pL_fixed) -> double {
+		double rhoL_s, TL_s, aL_s, hL_s;
+		double rhoR_s, TR_s, aR_s, hR_s;
+
+		left_state_from_p(pL_fixed, rhoL_s, TL_s, aL_s, hL_s);
+		right_state_from_p(pR_trial, rhoR_s, TR_s, aR_s, hR_s);
+
+		const double vL_s = (alphaL - pL_fixed) / (rhoL_s * aL_s);
+		const double vR_s = (pR_trial - betaR) / (rhoR_s * aR_s);
+
+		return rhoL_s * vL_s * AL - rhoR_s * vR_s * AR;
+	};
+
+	// Simple bisection
+	auto bisect = [&](auto func, double xlo, double xhi,
+	                  double tol, int maxit, bool &ok) -> double {
+		double flo = func(xlo);
+		double fhi = func(xhi);
+
+		ok = false;
+
+		if (std::isnan(flo) || std::isnan(fhi)) {
+			return 0.5 * (xlo + xhi);
 		}
-		// eq. (1) & (2)
-		double tmpL = rhoL * vL * vL * AL;
-		double tmpR = rhoR * vR * vR * AR;
-		double Atmp = max(AL, AR);
-		//if (iter<3)
-		//pL_new = alphaL - rhoL * aL * vL;
-		pL_new = tmpR / Atmp + pR - tmpL / Atmp;
 
-		pR_new = betaR + rhoR * aR * vR;
+		if (flo == 0.0) {
+			ok = true;
+			return xlo;
+		}
+		if (fhi == 0.0) {
+			ok = true;
+			return xhi;
+		}
 
+		if (flo * fhi > 0.0) {
+			return 0.5 * (xlo + xhi);
+		}
 
-		double v_TRESHOLD = 0.01;
-		vL = (alphaL - pL_new) / rhoL / aL;
-		// eq. (12)
-		if (fabs(vL) > v_TRESHOLD) {
-			rhoL = p1->GetC0AtEnd(t_target);
-			mp = rhoL * vL * AL;
-			if (rhoL < 0) {
-				cout << endl << "!!! ERROR !!!! rhoL=" << rhoL << " < 0 !!!" << endl;
-				cin.get();
+		double xm = 0.5 * (xlo + xhi);
+		for (int it = 0; it < maxit; ++it) {
+			xm = 0.5 * (xlo + xhi);
+			const double fm = func(xm);
+
+			if (std::abs(fm) < tol || std::abs(xhi - xlo) < tol) {
+				ok = true;
+				return xm;
 			}
-			vR = mp / AR / rhoR;
-			rhoR = (pL + rhoL * eL - pR) / eR;
-		} else {
-			pL_new = alphaL - rhoL * aL * vL;
-			vL = 0.;
-			vR = 0.;
-			rhoR = p2->GetC0AtFront(t_target);
-			rhoL = rhoR;
+
+			if (flo * fm <= 0.0) {
+				xhi = xm;
+				fhi = fm;
+			} else {
+				xlo = xm;
+				flo = fm;
+			}
 		}
 
-		// eq. (6-7)
-		aL = p1->gas->Get_SonicVel(TL, pL_new);
-		aR = p2->gas->Get_SonicVel(TR, pR_new);
-		// eq. (8-9)
-		eL = p1->gas->Get_e_from_Tp(TL, pL_new) + vL * vL / 2.;
-		eR = p2->gas->Get_e_from_Tp(TR, pR_new) + vR * vR / 2.;
-		// eq. (10-11)
-		double TL_new = p1->gas->Get_T(rhoL, pL_new);
-		double TR_new = p2->gas->Get_T(rhoR, pR_new);
+		ok = true;
+		return xm;
+	};
 
-		err_T = sqrt(pow(TL - TL_new, 2.) + pow(TR - TR_new, 2.));
-		err_p = sqrt(pow(pL - pL_new, 2.) + pow(pR - pR_new, 2.));
-		pL = (pL + pL_new) / 2.;
-		pR = (pR + pR_new) / 2.;
-		TL = (TL + TL_new) / 2.;
-		TR = (TR + TR_new) / 2.;
-		mp = vL * rhoL * AL;
-		double mpR = vR * rhoR * AR;
+	// ------------------------------------------------------------------
+	// Outer scalar residual in pL
+	// ------------------------------------------------------------------
+	auto outer_residual = [&](double pL_trial) -> double {
+		double rhoL_s, TL_s, aL_s, hL_s;
+		left_state_from_p(pL_trial, rhoL_s, TL_s, aL_s, hL_s);
+		const double vL_s = (alphaL - pL_trial) / (rhoL_s * aL_s);
+
+		// Inner solve for pR from continuity
+		const double pmin = std::max(1.0, 0.2 * std::min(pL_a, pR_a));
+		const double pmax = 5.0 * std::max(pL_a, pR_a);
+
+		auto g = [&](double pR_trial) -> double {
+			return continuity_residual(pR_trial, pL_trial);
+		};
+
+		bool ok_inner = false;
+		double pR_trial = bisect(g, pmin, pmax, 1e-8, 100, ok_inner);
+
+		if (!ok_inner) {
+			// Penalize failed inner solve
+			return 1e30;
+		}
+
+		double rhoR_s, TR_s, aR_s, hR_s;
+		right_state_from_p(pR_trial, rhoR_s, TR_s, aR_s, hR_s);
+		const double vR_s = (pR_trial - betaR) / (rhoR_s * aR_s);
+
+		return (hL_s + 0.5 * vL_s * vL_s) - (hR_s + 0.5 * vR_s * vR_s);
+	};
+
+	// ------------------------------------------------------------------
+	// Outer solve in pL
+	// ------------------------------------------------------------------
+	const double pmin = std::max(1.0, 0.2 * std::min(pL_a, pR_a));
+	const double pmax = 5.0 * std::max(pL_a, pR_a);
+
+	bool ok_outer = false;
+	pL = bisect(outer_residual, pmin, pmax, 1e-8, 100, ok_outer);
+
+	if (!ok_outer) {
 		if (DEBUG) {
-			printf(
-				"\n\t iter=%2d, (L,R) p=%5.3f,%5.3f, T=%5.3f,%5.3f, rho=%5.3f,%5.3f, v=%5.3f,%5.3f, mp=%5.3f, %5.3f, err=%5.3e,%5.3e",
-				iter, pL_new / 1.e5, pR_new / 1.e5, TL, TR, rhoL, rhoR, vL, vR, mp, mpR, err_T, err_p);
+			printf("\n[Connector_LWP_Pipes] outer solve failed, fallback to adjacent-cell values.\n");
 		}
+		pL = pL_a;
 	}
+
+	// Recover pR from continuity
+	auto g_final = [&](double pR_trial) -> double {
+		return continuity_residual(pR_trial, pL);
+	};
+
+	bool ok_inner = false;
+	pR = bisect(g_final, pmin, pmax, 1e-8, 100, ok_inner);
+
+	if (!ok_inner) {
+		if (DEBUG) {
+			printf("\n[Connector_LWP_Pipes] inner solve failed, fallback to adjacent-cell values.\n");
+		}
+		pR = pR_a;
+	}
+
+	// Reconstruct final states
+	left_state_from_p(pL, rhoL, TL, aL, hL);
+	right_state_from_p(pR, rhoR, TR, aR, hR);
+
+	vL = (alphaL - pL) / (rhoL * aL);
+	vR = (pR - betaR) / (rhoR * aR);
+
+	// Flow direction flags
+	is_inflow = (vL > 0.0 && vR > 0.0);
+	is_outflow = (vL < 0.0 && vR < 0.0);
+
+	if (DEBUG) {
+		const double cont_res = rhoL * vL * AL - rhoR * vR * AR;
+		const double ener_res = (hL + 0.5 * vL * vL) - (hR + 0.5 * vR * vR);
+
+		printf("\nSolved junction:");
+		printf("\nLEFT : p=%5.3e, T=%5.3e, rho=%5.3e, a=%5.3e, v=%5.3e",
+		       pL, TL, rhoL, aL, vL);
+		printf("\nRIGHT: p=%5.3e, T=%5.3e, rho=%5.3e, a=%5.3e, v=%5.3e",
+		       pR, TR, rhoR, aR, vR);
+		printf("\nResiduals: continuity=%5.3e, energy=%5.3e", cont_res, ener_res);
+		printf("\nFlags: inflow=%d, outflow=%d\n", (int) is_inflow, (int) is_outflow);
+	}
+
+	// ------------------------------------------------------------------
+	// Write back boundary states
+	// ------------------------------------------------------------------
+	// Replace these with your actual setter calls.
+	// p1->Set_dprop("p_back",   pL);
+	// p1->Set_dprop("T_back",   TL);
+	// p1->Set_dprop("v_back",   vL);
+	// p1->Set_dprop("rho_back", rhoL);
+
+	// p2->Set_dprop("p_front",   pR);
+	// p2->Set_dprop("T_front",   TR);
+	// p2->Set_dprop("v_front",   vR);
+	// p2->Set_dprop("rho_front", rhoR);
+
 	if (vR > 0) {
 		is_outflow = p1->BCRight(t_target, "StaticPres_Outlet", pL, 0, true);
 		is_inflow = p2->BCLeft(t_target, "StaticPres_and_StaticTemp_Inlet", pR, TR, true);
 	} else {
-		is_outflow = p2->BCRight(t_target, "StaticPres_Outlet", pR, 0, true);
-		is_inflow = p1->BCLeft(t_target, "StaticPres_and_StaticTemp_Inlet", pL, TL, true);
+		is_inflow = p1->BCRight(t_target, "StaticPres_and_StaticTemp_Inlet", pR, TR, true);
+		is_outflow = p2->BCLeft(t_target, "StaticPres_Outlet", pL, 0, true);
 	}
 }
+
+
+/////////// OLD ///////////////////
+// void Connector::Connector_LWP_Pipes(double t_target,
+//                                     LWP *p1, LWP *p2) {
+
+// 	// Solves:
+// 	// eq. (1) pL + rhoL*aL*vL = alpha_L
+// 	// eq. (2) pR - rhoR*aR*vR = beta_R
+// 	// eq. (3) rhoL*vL*AL   = rhoR*vR*AR (continuity)
+// 	// eq. (4) hL+vL^2/2=hR+vR^2/2. (adiabatic connection)
+// 	// eq. (5-6) a = sonic_vel(T,p)
+// 	// eq. (7-8) h = internal_energy(T,p)
+// 	// eq. (9-10) gas law
+// 	// eq. (11) pL/rhoL^kappa = KL (from adjacent cell)
+// 	// eq. (12) pR/rhoR^kappa = KR (from adjacent cell)
+// 	//
+// 	// 12 unkowns: p, T, rho, v, a, h @ R(ight) and L(eft)
+
+// 	bool is_inflow, is_outflow;
+
+// 	const double AR = p1->Get_dprop("A");
+// 	const double AL = p2->Get_dprop("A");	
+// 	const kappa = p1->gas->kappa;
+
+// 	// Initialize variables
+// 	double pL = p1->Get_dprop("p_back");
+// 	double TL = p1->Get_dprop("T_back");
+// 	double vL = p1->Get_dprop("v_back");
+// 	double rhoL = p1->gas->Get_rho(pL, TL);
+// 	double aL = p1->gas->Get_SonicVel(TL, pL);
+// 	double hL = p1->gas->Get_h_from_Tp(TL, pL) + vL * vL / 2;
+
+// 	double pR = p2->Get_dprop("p_front");
+// 	double TR = p2->Get_dprop("T_front");
+// 	double vR = p2->Get_dprop("v_front");
+// 	double rhoR = p2->gas->Get_rho(pR, TR);
+// 	double aR = p2->gas->Get_SonicVel(TR, pR);
+// 	double hR = p2->gas->Get_h_from_Tp(TR, pR) + vR * vR / 2;
+
+// 	double pR_new, pL_new; //,rhoR_new,rhoL_new,vL_new,vR_new;
+
+// 	double alphaL = p1->GetAlphaPrimitiveAtEnd(t_target);
+// 	double betaR = p2->GetBetaPrimitiveAtFront(t_target);
+
+// 	double pR_a, rhoR_a, TR_a, vR_a; // Values at adjacent cells
+// 	double pL_a, rhoL_a, TL_a, vL_a; // Values at adjacent cells
+// 	GetAllPrimitiveAtEnd(t_target,pL_a,vL_a,TL_a,rhoL_a);
+// 	GetAllPrimitiveAtFront(t_target,pR_a,vR_a,TR_a,rhoR_a);
+// 	double KL=pL_a/pow(rhoL_a,kappa);
+// 	double KR=pR_a/pow(rhoR_a,kappa);
+
+// 	if (DEBUG) {
+// 		printf("\n\n Connector::Connector_LWP_Pipes()");
+// 		printf("\n pL=%5.3e, TL=%5.3e, vL=%5.3e, rhoL=%5.3e, aL=%5.3e, hL=%5.3e, alphaL=%5.3e",
+// 		       pL, TL, vL, rhoL, aL, hL, alphaL);
+// 		printf("\n pR=%5.3e, TR=%5.3e, vR=%5.3e, rhoR=%5.3e, aR=%5.3e, hR=%5.3e, betaR =%5.3e",
+// 		       pR, TR, vR, rhoR, aR, hR, betaR);
+// 		cin.get();
+// 	}
+
+// 	// Preliminary esrimate assuming constant temperature
+// 	double aa = 1. / rhoR / AR - 1. / rhoL / AL;
+// 	double bb = aR/AR + aL/AL;
+// 	double cc = betaR - alphaL;
+// 	double DD = bb * bb - 4 * aa * cc;
+// 	double mp = 0.0;
+// 	if (DD > 0) {
+// 		mp = (-bb + sqrt(DD)) / 2. / aa;
+// 	} else {
+// 		cout << endl << endl << "ERRORRRRRR!" << endl;
+// 		cin.get();
+// 	}
+
+// 	pL = alphaL - aL / AL * mp;
+// 	pR = betaR + aR / AR * mp;
+// 	rhoL = p1->gas->Get_rho(pL, TL);
+// 	//rhoR = p1->GetC0AtEnd(t_target);
+// 	rhoR = p1->gas->Get_rho(pR, TR);
+// 	vL = mp / rhoL / AL;
+// 	vR = mp / rhoR / AR;
+
+// 	if (DEBUG) {
+// 		printf("\n\nEstimate:");
+// 		printf("\n mp=%5.3e", mp);
+// 		printf("\n pL=%5.3e, TL=%5.3e, vL=%5.3e, rhoL=%5.3e", pL, TL, vL, rhoL);
+// 		printf("\n pR=%5.3e, TR=%5.3e, vR=%5.3e, rhoR=%5.3e", pR, TR, vR, rhoR);
+// 		cin.get();
+// 	}
+
+// 	double err_p = 1e5, TOL_p = 10.;
+// 	double err_T = 1e5, TOL_T = .1;
+// 	int iter = 0, MAX_ITER = 1000;
+
+// 	while ((fabs(err_p) > TOL_p) || (fabs(err_T) > TOL_T)) {
+// 		iter++;
+// 		if (iter == MAX_ITER) {
+// 			cout << endl << "!!!ERROR!!! Connector::Connector_LWP_Pipes() -> MAX_ITER reached. Exiting" << endl;
+// 			//printf("\n (front) iter #%2d: pt=%5.3e, rhot=%5.3e, beta=%5.3e, p=%5.3e, T=%5.3e, rho=%5.3e, v=%5.3e, err1=%5.3e, err2=%5.3e, err3=%5.3e", iter,pt,rhot,beta,p,T,rho,v,err1,err2,err3);
+// 			exit(-1);
+// 		}
+// 		// eq. (1) & (2)
+// 		double tmpL = rhoL * vL * vL * AL;
+// 		double tmpR = rhoR * vR * vR * AR;
+// 		double Atmp = max(AL, AR);
+// 		//if (iter<3)
+// 		//pL_new = alphaL - rhoL * aL * vL;
+// 		pL_new = tmpR / Atmp + pR - tmpL / Atmp;
+
+// 		pR_new = betaR + rhoR * aR * vR;
+
+
+// 		double v_TRESHOLD = 0.01;
+// 		vL = (alphaL - pL_new) / rhoL / aL;
+// 		// eq. (12)
+// 		if (fabs(vL) > v_TRESHOLD) {
+// 			rhoL = p1->GetC0AtEnd(t_target);
+// 			mp = rhoL * vL * AL;
+// 			if (rhoL < 0) {
+// 				cout << endl << "!!! ERROR !!!! rhoL=" << rhoL << " < 0 !!!" << endl;
+// 				cin.get();
+// 			}
+// 			vR = mp / AR / rhoR;
+// 			rhoR = (pL + rhoL * eL - pR) / eR;
+// 		} else {
+// 			pL_new = alphaL - rhoL * aL * vL;
+// 			vL = 0.;
+// 			vR = 0.;
+// 			rhoR = p2->GetC0AtFront(t_target);
+// 			rhoL = rhoR;
+// 		}
+
+// 		// eq. (6-7)
+// 		aL = p1->gas->Get_SonicVel(TL, pL_new);
+// 		aR = p2->gas->Get_SonicVel(TR, pR_new);
+// 		// eq. (8-9)
+// 		eL = p1->gas->Get_e_from_Tp(TL, pL_new) + vL * vL / 2.;
+// 		eR = p2->gas->Get_e_from_Tp(TR, pR_new) + vR * vR / 2.;
+// 		// eq. (10-11)
+// 		double TL_new = p1->gas->Get_T(rhoL, pL_new);
+// 		double TR_new = p2->gas->Get_T(rhoR, pR_new);
+
+// 		err_T = sqrt(pow(TL - TL_new, 2.) + pow(TR - TR_new, 2.));
+// 		err_p = sqrt(pow(pL - pL_new, 2.) + pow(pR - pR_new, 2.));
+// 		pL = (pL + pL_new) / 2.;
+// 		pR = (pR + pR_new) / 2.;
+// 		TL = (TL + TL_new) / 2.;
+// 		TR = (TR + TR_new) / 2.;
+// 		mp = vL * rhoL * AL;
+// 		double mpR = vR * rhoR * AR;
+// 		if (DEBUG) {
+// 			printf(
+// 				"\n\t iter=%2d, (L,R) p=%5.3f,%5.3f, T=%5.3f,%5.3f, rho=%5.3f,%5.3f, v=%5.3f,%5.3f, mp=%5.3f, %5.3f, err=%5.3e,%5.3e",
+// 				iter, pL_new / 1.e5, pR_new / 1.e5, TL, TR, rhoL, rhoR, vL, vR, mp, mpR, err_T, err_p);
+// 		}
+// 	}
+// 	if (vR > 0) {
+// 		is_outflow = p1->BCRight(t_target, "StaticPres_Outlet", pL, 0, true);
+// 		is_inflow = p2->BCLeft(t_target, "StaticPres_and_StaticTemp_Inlet", pR, TR, true);
+// 	} else {
+// 		is_outflow = p2->BCRight(t_target, "StaticPres_Outlet", pR, 0, true);
+// 		is_inflow = p1->BCLeft(t_target, "StaticPres_and_StaticTemp_Inlet", pL, TL, true);
+// 	}
+// }

@@ -7,9 +7,9 @@ Class for modeling \doxylink{class_reservoir}{Reservoir}.
 
 
 
-{\ttfamily \#include $<$Reservoir.\+h$>$}
+{\ttfamily \+\#include $<$Reservoir.\+h$>$}
 
-Inheritance diagram for Reservoir\+:\begin{figure}[H]
+Inheritance diagram for Reservoir:\+\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{class_reservoir}
@@ -18,90 +18,90 @@ Inheritance diagram for Reservoir\+:\begin{figure}[H]
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_reservoir_abc057bd7a56e38184eedf2d2a727f5b2}{Reservoir}} (const string \+\_\+nev, const double \+\_\+vol, const double \+\_\+a, const double \+\_\+rho, const bool save\+\_\+data)
+\doxymbox{\hyperlink{class_reservoir_a74ee2107c675d57d724ed6f35f5e40a9}{Reservoir}} (string \+\_\+nev, double \+\_\+vol, double \+\_\+a, double \+\_\+rho, bool save\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Class for modeling \doxylink{class_reservoir}{Reservoir}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{class_reservoir_a7c2cafd71e8397b755ecbc45c88f8064}{Reservoir}} (const string \+\_\+name, const double \+\_\+vol, \mbox{\hyperlink{class_ideal_gas}{Ideal\+Gas}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_reservoir_a00cb83324b4fa4d62be3ad55e2cab962}{gas}}, double n\+\_\+poly, const bool \+\_\+save\+\_\+data)
+\doxymbox{\hyperlink{class_reservoir_a286d6998530a3efa92d4216c2c01a275}{Reservoir}} (string \+\_\+name, double \+\_\+vol, \doxymbox{\hyperlink{class_ideal_gas}{Ideal\+Gas}} \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{class_reservoir_a00cb83324b4fa4d62be3ad55e2cab962}{gas}}, double n\+\_\+poly, bool \+\_\+save\+\_\+data)
 \item 
-\mbox{\hyperlink{class_reservoir_a3adde596e4e3bf4454d8e4835993be01}{Reservoir}} (const string \+\_\+name, const double \+\_\+vol, \mbox{\hyperlink{class_ideal_gas}{Ideal\+Gas}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_reservoir_a00cb83324b4fa4d62be3ad55e2cab962}{gas}}, double n\+\_\+poly, const bool \+\_\+save\+\_\+data, const double Tt)
+\doxymbox{\hyperlink{class_reservoir_a9e702052cbfbf51d26af2a29beddd30c}{Reservoir}} (string \+\_\+name, double \+\_\+vol, \doxymbox{\hyperlink{class_ideal_gas}{Ideal\+Gas}} \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{class_reservoir_a00cb83324b4fa4d62be3ad55e2cab962}{gas}}, double n\+\_\+poly, bool \+\_\+save\+\_\+data, double Tt)
 \item 
-\mbox{\hyperlink{class_reservoir_acc65e141d64b7d1f884e8efa2bb5d0e0}{Reservoir}} (const string \+\_\+name, const double \+\_\+vol, \mbox{\hyperlink{class_gas}{Gas}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_reservoir_a00cb83324b4fa4d62be3ad55e2cab962}{gas}}, double n\+\_\+poly, const bool \+\_\+save\+\_\+data)
+\doxymbox{\hyperlink{class_reservoir_a9fe717105149b87f1ed469f46f844ede}{Reservoir}} (string \+\_\+name, double \+\_\+vol, \doxymbox{\hyperlink{class_gas}{Gas}} \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{class_reservoir_a00cb83324b4fa4d62be3ad55e2cab962}{gas}}, double n\+\_\+poly, bool \+\_\+save\+\_\+data)
 \item 
-\mbox{\hyperlink{class_reservoir_a2aeb630cdd589baaa670ce3861c93f53}{\texorpdfstring{$\sim$}{\string~}\+Reservoir}} ()
+\doxymbox{\hyperlink{class_reservoir_a2aeb630cdd589baaa670ce3861c93f53}{\texorpdfstring{$\sim$}{\string~}\+Reservoir}} ()
 \item 
-void \mbox{\hyperlink{class_reservoir_acd9a99c6c2fd40c06f443e128851b301}{Set\+Debug}} (const bool DEBUG)
+void \doxymbox{\hyperlink{class_reservoir_a9d5df023e6005fc0cea9fbe70f497c78}{Set\+Debug}} (bool DEBUG)
 \item 
-string \mbox{\hyperlink{class_reservoir_a8f2bec99c8d8cf32873675f79d66d4c9}{Get\+Name}} ()
+string \doxymbox{\hyperlink{class_reservoir_a8f2bec99c8d8cf32873675f79d66d4c9}{Get\+Name}} ()
 \item 
-string \mbox{\hyperlink{class_reservoir_a093db21486b33b07564c0f2a555ef94a}{Info}} ()
+string \doxymbox{\hyperlink{class_reservoir_a093db21486b33b07564c0f2a555ef94a}{Info}} ()
 \item 
-void \mbox{\hyperlink{class_reservoir_acbf42969273a347c5b32fbf40248f38e}{Update}} (double delta\+\_\+t, double mp\+\_\+in, double mp\+\_\+out)
+void \doxymbox{\hyperlink{class_reservoir_af87c2644d27fd59208bcdf9b27d5d989}{Update}} (double t\+\_\+target, double mp\+\_\+in, double mp\+\_\+out)
 \item 
-void \mbox{\hyperlink{class_reservoir_a914e7387e18311fe2e46bcad3ac96d96}{Update\+Dimless\+Pars}} (double pref, double mp\+\_\+nevl, double omega)
+void \doxymbox{\hyperlink{class_reservoir_a914e7387e18311fe2e46bcad3ac96d96}{Update\+Dimless\+Pars}} (double pref, double mp\+\_\+nevl, double omega)
 \item 
-void \mbox{\hyperlink{class_reservoir_a61a6925be17180de646b0c4151c59454}{Ini}} (double \+\_\+pstart)
+void \doxymbox{\hyperlink{class_reservoir_a61a6925be17180de646b0c4151c59454}{Ini}} (double \+\_\+pstart)
 \item 
-void \mbox{\hyperlink{class_reservoir_af0b230c3a0f3a6d3d84dfb0a3e8d8de2}{Ini}} (double \+\_\+pstart, double \+\_\+\+Tstart)
+void \doxymbox{\hyperlink{class_reservoir_af0b230c3a0f3a6d3d84dfb0a3e8d8de2}{Ini}} (double \+\_\+pstart, double \+\_\+\+Tstart)
 \item 
-double \mbox{\hyperlink{class_reservoir_a0c08e2bf607ca1d30718100e78850291}{Get\+\_\+dprop}} (string prop\+\_\+string)
+double \doxymbox{\hyperlink{class_reservoir_a0c08e2bf607ca1d30718100e78850291}{Get\+\_\+dprop}} (string prop\+\_\+string)
 \item 
-void \mbox{\hyperlink{class_reservoir_a846b7cea080db6afa41725f27652b555}{Set\+\_\+dprop}} (string prop\+\_\+string, double val)
+void \doxymbox{\hyperlink{class_reservoir_a846b7cea080db6afa41725f27652b555}{Set\+\_\+dprop}} (string prop\+\_\+string, double val)
 \item 
-double \mbox{\hyperlink{class_reservoir_a929cdd0a58c364b23576c225f3289594}{GetP}} ()
+double \doxymbox{\hyperlink{class_reservoir_a929cdd0a58c364b23576c225f3289594}{GetP}} ()
 \item 
-void \mbox{\hyperlink{class_reservoir_a954e6b343e246da064894b167b858712}{List\+\_\+data}} ()
+void \doxymbox{\hyperlink{class_reservoir_a954e6b343e246da064894b167b858712}{List\+\_\+data}} ()
 \item 
-void \mbox{\hyperlink{class_reservoir_a25e857bf07d44c4e441116cef97002cc}{Save\+\_\+data}} ()
+void \doxymbox{\hyperlink{class_reservoir_a25e857bf07d44c4e441116cef97002cc}{Save\+\_\+data}} ()
 \item 
-vector$<$ double $>$ \mbox{\hyperlink{class_reservoir_aa779b9aee18c7d3a066003c0a488e94c}{Get\+\_\+dvprop}} (string prop\+\_\+string)
+vector$<$ double $>$ \doxymbox{\hyperlink{class_reservoir_aa779b9aee18c7d3a066003c0a488e94c}{Get\+\_\+dvprop}} (string prop\+\_\+string)
 \item 
-void \mbox{\hyperlink{class_reservoir_adc22cbe39c5900ad45dafda317a07afc}{Plot}} (bool show, bool save)
+void \doxymbox{\hyperlink{class_reservoir_adc22cbe39c5900ad45dafda317a07afc}{Plot}} (bool show, bool save)
 \end{DoxyCompactItemize}
-\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_units}{Units}}}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_units}{Units}}}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_units_aa10ded064259f35f044246879725b98a}{Units}} ()
+\doxymbox{\hyperlink{class_units_aa10ded064259f35f044246879725b98a}{Units}} ()
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{class_units_a64dc33d12edc3be94cfc72472cefecfe}{\texorpdfstring{$\sim$}{\string~}\+Units}} ()
+\doxymbox{\hyperlink{class_units_a64dc33d12edc3be94cfc72472cefecfe}{\texorpdfstring{$\sim$}{\string~}\+Units}} ()
 \begin{DoxyCompactList}\small\item\em Destuctor. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{class_reservoir_aa205bfa0a21280929d65f5676aeaeb92}{is\+\_\+\+Gas}}
+bool \doxymbox{\hyperlink{class_reservoir_aa205bfa0a21280929d65f5676aeaeb92}{is\+\_\+\+Gas}}
 \item 
-string \mbox{\hyperlink{class_reservoir_ab7bc173165dec1b596ec7a9c15ab88d2}{fname}}
+string \doxymbox{\hyperlink{class_reservoir_ab7bc173165dec1b596ec7a9c15ab88d2}{fname}}
 \item 
-\mbox{\hyperlink{class_gas}{Gas}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_reservoir_a00cb83324b4fa4d62be3ad55e2cab962}{gas}}
+\doxymbox{\hyperlink{class_gas}{Gas}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_reservoir_a00cb83324b4fa4d62be3ad55e2cab962}{gas}}
 \end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{class_units}{Units}}}
+\doxysubsection*{Public Attributes inherited from \doxymbox{\hyperlink{class_units}{Units}}}
 \begin{DoxyCompactItemize}
 \item 
-double \mbox{\hyperlink{class_units_aae98637c25e6a33b2521c48465f29691}{ft\+\_\+to\+\_\+m}}
+double \doxymbox{\hyperlink{class_units_aae98637c25e6a33b2521c48465f29691}{ft\+\_\+to\+\_\+m}}
 \begin{DoxyCompactList}\small\item\em Converts foot to meters. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{class_units_ac43b581dc1a05a12a84cba0bde9d0fb3}{m\+\_\+to\+\_\+ft}}
+double \doxymbox{\hyperlink{class_units_ac43b581dc1a05a12a84cba0bde9d0fb3}{m\+\_\+to\+\_\+ft}}
 \begin{DoxyCompactList}\small\item\em Convert meters to foot. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{class_units_a825b374297ce7d7d0e03a3908d716ae8}{inch\+\_\+to\+\_\+m}}
+double \doxymbox{\hyperlink{class_units_a825b374297ce7d7d0e03a3908d716ae8}{inch\+\_\+to\+\_\+m}}
 \begin{DoxyCompactList}\small\item\em Convert inches to meters. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{class_units_a80da69188cc3184cb3596223bc5d1fc1}{m\+\_\+to\+\_\+inch}}
+double \doxymbox{\hyperlink{class_units_a80da69188cc3184cb3596223bc5d1fc1}{m\+\_\+to\+\_\+inch}}
 \begin{DoxyCompactList}\small\item\em Convert metres to inches. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{class_units_a0cf66a20a8f5651c3a5e46ebd6bb4f63}{lbm\+\_\+to\+\_\+kg}}
+double \doxymbox{\hyperlink{class_units_a0cf66a20a8f5651c3a5e46ebd6bb4f63}{lbm\+\_\+to\+\_\+kg}}
 \begin{DoxyCompactList}\small\item\em Convert pounds to kilograms. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{class_units_acefd99f83c8cf786bd5c6e045283f2e8}{kg\+\_\+to\+\_\+lbm}}
+double \doxymbox{\hyperlink{class_units_acefd99f83c8cf786bd5c6e045283f2e8}{kg\+\_\+to\+\_\+lbm}}
 \begin{DoxyCompactList}\small\item\em Multiplier for conversion from kilogram to pound. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{class_units_a5215c9f5e61c890b28bff680e6a511ca}{lbf\+\_\+to\+\_\+N}}
+double \doxymbox{\hyperlink{class_units_a5215c9f5e61c890b28bff680e6a511ca}{lbf\+\_\+to\+\_\+N}}
 \begin{DoxyCompactList}\small\item\em Multiplier for conversion of poundforce to Newtons. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{class_units_ab7a4c6a874120920d5414ed57178b57b}{N\+\_\+to\+\_\+lbf}}
+double \doxymbox{\hyperlink{class_units_ab7a4c6a874120920d5414ed57178b57b}{N\+\_\+to\+\_\+lbf}}
 \begin{DoxyCompactList}\small\item\em Mulitplier for conversion of Newtons to poundforce. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{class_units_a525b1531b6b496d29fab81d65df1b83b}{psi\+\_\+to\+\_\+\+Pa}}
+double \doxymbox{\hyperlink{class_units_a525b1531b6b496d29fab81d65df1b83b}{psi\+\_\+to\+\_\+\+Pa}}
 \begin{DoxyCompactList}\small\item\em Mulitplier ofr conversion of pound per square inch to Pa. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{class_units_a1b5a970e875c7153f84b206b5d02ee6d}{Pa\+\_\+to\+\_\+psi}}
+double \doxymbox{\hyperlink{class_units_a1b5a970e875c7153f84b206b5d02ee6d}{Pa\+\_\+to\+\_\+psi}}
 \begin{DoxyCompactList}\small\item\em Multiplier for conversion of pascals to pound per square inch. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{class_units_a9ae6f34b3ff8b508d964ec2b605bc1a1}{psi\+\_\+to\+\_\+bar}}
+double \doxymbox{\hyperlink{class_units_a9ae6f34b3ff8b508d964ec2b605bc1a1}{psi\+\_\+to\+\_\+bar}}
 \begin{DoxyCompactList}\small\item\em Mulitplier for conversion of psi to bar. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{class_units_a5c07ef1fbf32eb6f128824ea44f18124}{bar\+\_\+to\+\_\+psi}}
+double \doxymbox{\hyperlink{class_units_a5c07ef1fbf32eb6f128824ea44f18124}{bar\+\_\+to\+\_\+psi}}
 \begin{DoxyCompactList}\small\item\em Multiplier for conversion of bar to psi. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{class_units_a5cf78bb6d35d06600c5b52dd7c451709}{m3\+\_\+to\+\_\+inch3}}
+double \doxymbox{\hyperlink{class_units_a5cf78bb6d35d06600c5b52dd7c451709}{m3\+\_\+to\+\_\+inch3}}
 \begin{DoxyCompactList}\small\item\em Multiplier for conversion of cubic meter to cumbic inch. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{class_units_aa8eaefa114dd3f3f71441fca9f530c68}{inch3\+\_\+to\+\_\+m3}}
+double \doxymbox{\hyperlink{class_units_aa8eaefa114dd3f3f71441fca9f530c68}{inch3\+\_\+to\+\_\+m3}}
 \begin{DoxyCompactList}\small\item\em Multiplier for conversion of cubic inches to cubic metres. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -110,152 +110,158 @@ Class for modeling \doxylink{class_reservoir}{Reservoir}.
 
 The class contains data for \doxylink{class_reservoir}{Reservoir} 
 
+\label{doc-constructors}
+\Hypertarget{class_reservoir_doc-constructors}
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{class_reservoir_abc057bd7a56e38184eedf2d2a727f5b2}\index{Reservoir@{Reservoir}!Reservoir@{Reservoir}}
+\Hypertarget{class_reservoir_a74ee2107c675d57d724ed6f35f5e40a9}\index{Reservoir@{Reservoir}!Reservoir@{Reservoir}}
 \index{Reservoir@{Reservoir}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{Reservoir()}{Reservoir()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily \label{class_reservoir_abc057bd7a56e38184eedf2d2a727f5b2} 
-Reservoir\+::\+Reservoir (\begin{DoxyParamCaption}\item[{const string}]{\+\_\+name}{, }\item[{const double}]{\+\_\+vol}{, }\item[{const double}]{\+\_\+a}{, }\item[{const double}]{\+\_\+rho}{, }\item[{const bool}]{\+\_\+save\+\_\+data}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{class_reservoir_a74ee2107c675d57d724ed6f35f5e40a9} 
+Reservoir::\+\+Reservoir (\begin{DoxyParamCaption}\item[{string}]{\+\_\+nev}{, }\item[{double}]{\+\_\+vol}{, }\item[{double}]{\+\_\+a}{, }\item[{double}]{\+\_\+rho}{, }\item[{bool}]{save\+\_\+data}{}\end{DoxyParamCaption})}
 
 
 
 Class for modeling \doxylink{class_reservoir}{Reservoir}. 
 
-The class contains data for \doxylink{class_reservoir}{Reservoir} \Hypertarget{class_reservoir_a7c2cafd71e8397b755ecbc45c88f8064}\index{Reservoir@{Reservoir}!Reservoir@{Reservoir}}
+The class contains data for \doxylink{class_reservoir}{Reservoir} \Hypertarget{class_reservoir_a286d6998530a3efa92d4216c2c01a275}\index{Reservoir@{Reservoir}!Reservoir@{Reservoir}}
 \index{Reservoir@{Reservoir}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{Reservoir()}{Reservoir()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily \label{class_reservoir_a7c2cafd71e8397b755ecbc45c88f8064} 
-Reservoir\+::\+Reservoir (\begin{DoxyParamCaption}\item[{const string}]{\+\_\+name}{, }\item[{const double}]{\+\_\+vol}{, }\item[{\mbox{\hyperlink{class_ideal_gas}{Ideal\+Gas}} \texorpdfstring{$\ast$}{*}}]{gas}{, }\item[{double}]{n\+\_\+poly}{, }\item[{const bool}]{\+\_\+save\+\_\+data}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{class_reservoir_a286d6998530a3efa92d4216c2c01a275} 
+Reservoir::\+\+Reservoir (\begin{DoxyParamCaption}\item[{string}]{\+\_\+name}{, }\item[{double}]{\+\_\+vol}{, }\item[{\doxymbox{\hyperlink{class_ideal_gas}{Ideal\+Gas}} \texorpdfstring{$\ast$}{*}}]{gas}{, }\item[{double}]{n\+\_\+poly}{, }\item[{bool}]{\+\_\+save\+\_\+data}{}\end{DoxyParamCaption})}
 
-\Hypertarget{class_reservoir_a3adde596e4e3bf4454d8e4835993be01}\index{Reservoir@{Reservoir}!Reservoir@{Reservoir}}
+\Hypertarget{class_reservoir_a9e702052cbfbf51d26af2a29beddd30c}\index{Reservoir@{Reservoir}!Reservoir@{Reservoir}}
 \index{Reservoir@{Reservoir}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{Reservoir()}{Reservoir()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily \label{class_reservoir_a3adde596e4e3bf4454d8e4835993be01} 
-Reservoir\+::\+Reservoir (\begin{DoxyParamCaption}\item[{const string}]{\+\_\+name}{, }\item[{const double}]{\+\_\+vol}{, }\item[{\mbox{\hyperlink{class_ideal_gas}{Ideal\+Gas}} \texorpdfstring{$\ast$}{*}}]{gas}{, }\item[{double}]{n\+\_\+poly}{, }\item[{const bool}]{\+\_\+save\+\_\+data}{, }\item[{const double}]{Tt}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{class_reservoir_a9e702052cbfbf51d26af2a29beddd30c} 
+Reservoir::\+\+Reservoir (\begin{DoxyParamCaption}\item[{string}]{\+\_\+name}{, }\item[{double}]{\+\_\+vol}{, }\item[{\doxymbox{\hyperlink{class_ideal_gas}{Ideal\+Gas}} \texorpdfstring{$\ast$}{*}}]{gas}{, }\item[{double}]{n\+\_\+poly}{, }\item[{bool}]{\+\_\+save\+\_\+data}{, }\item[{double}]{Tt}{}\end{DoxyParamCaption})}
 
-\Hypertarget{class_reservoir_acc65e141d64b7d1f884e8efa2bb5d0e0}\index{Reservoir@{Reservoir}!Reservoir@{Reservoir}}
+\Hypertarget{class_reservoir_a9fe717105149b87f1ed469f46f844ede}\index{Reservoir@{Reservoir}!Reservoir@{Reservoir}}
 \index{Reservoir@{Reservoir}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{Reservoir()}{Reservoir()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily \label{class_reservoir_acc65e141d64b7d1f884e8efa2bb5d0e0} 
-Reservoir\+::\+Reservoir (\begin{DoxyParamCaption}\item[{const string}]{\+\_\+name}{, }\item[{const double}]{\+\_\+vol}{, }\item[{\mbox{\hyperlink{class_gas}{Gas}} \texorpdfstring{$\ast$}{*}}]{gas}{, }\item[{double}]{n\+\_\+poly}{, }\item[{const bool}]{\+\_\+save\+\_\+data}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{class_reservoir_a9fe717105149b87f1ed469f46f844ede} 
+Reservoir::\+\+Reservoir (\begin{DoxyParamCaption}\item[{string}]{\+\_\+name}{, }\item[{double}]{\+\_\+vol}{, }\item[{\doxymbox{\hyperlink{class_gas}{Gas}} \texorpdfstring{$\ast$}{*}}]{gas}{, }\item[{double}]{n\+\_\+poly}{, }\item[{bool}]{\+\_\+save\+\_\+data}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_reservoir_a2aeb630cdd589baaa670ce3861c93f53}\index{Reservoir@{Reservoir}!````~Reservoir@{\texorpdfstring{$\sim$}{\string~}Reservoir}}
 \index{````~Reservoir@{\texorpdfstring{$\sim$}{\string~}Reservoir}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Reservoir()}{\string~Reservoir()}}
 {\footnotesize\ttfamily \label{class_reservoir_a2aeb630cdd589baaa670ce3861c93f53} 
-Reservoir\+::\texorpdfstring{$\sim$}{\string~}\+Reservoir (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+Reservoir::\+\texorpdfstring{$\sim$}{\string~}\+Reservoir (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
+\label{doc-func-members}
+\Hypertarget{class_reservoir_doc-func-members}
 \doxysubsection{Member Function Documentation}
 \Hypertarget{class_reservoir_a0c08e2bf607ca1d30718100e78850291}\index{Reservoir@{Reservoir}!Get\_dprop@{Get\_dprop}}
 \index{Get\_dprop@{Get\_dprop}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{Get\_dprop()}{Get\_dprop()}}
 {\footnotesize\ttfamily \label{class_reservoir_a0c08e2bf607ca1d30718100e78850291} 
-double Reservoir\+::\+Get\+\_\+dprop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{}\end{DoxyParamCaption})}
+double Reservoir::\+\+Get\+\_\+dprop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_reservoir_aa779b9aee18c7d3a066003c0a488e94c}\index{Reservoir@{Reservoir}!Get\_dvprop@{Get\_dvprop}}
 \index{Get\_dvprop@{Get\_dvprop}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{Get\_dvprop()}{Get\_dvprop()}}
 {\footnotesize\ttfamily \label{class_reservoir_aa779b9aee18c7d3a066003c0a488e94c} 
-vector$<$ double $>$ Reservoir\+::\+Get\+\_\+dvprop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{}\end{DoxyParamCaption})}
+vector$<$ double $>$ Reservoir::\+\+Get\+\_\+dvprop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_reservoir_a8f2bec99c8d8cf32873675f79d66d4c9}\index{Reservoir@{Reservoir}!GetName@{GetName}}
 \index{GetName@{GetName}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
 {\footnotesize\ttfamily \label{class_reservoir_a8f2bec99c8d8cf32873675f79d66d4c9} 
-string Reservoir\+::\+Get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+string Reservoir::\+\+Get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_reservoir_a929cdd0a58c364b23576c225f3289594}\index{Reservoir@{Reservoir}!GetP@{GetP}}
 \index{GetP@{GetP}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{GetP()}{GetP()}}
 {\footnotesize\ttfamily \label{class_reservoir_a929cdd0a58c364b23576c225f3289594} 
-double Reservoir\+::\+GetP (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+double Reservoir::\+\+GetP (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \Hypertarget{class_reservoir_a093db21486b33b07564c0f2a555ef94a}\index{Reservoir@{Reservoir}!Info@{Info}}
 \index{Info@{Info}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{Info()}{Info()}}
 {\footnotesize\ttfamily \label{class_reservoir_a093db21486b33b07564c0f2a555ef94a} 
-string Reservoir\+::\+Info (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+string Reservoir::\+\+Info (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_reservoir_a61a6925be17180de646b0c4151c59454}\index{Reservoir@{Reservoir}!Ini@{Ini}}
 \index{Ini@{Ini}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily \label{class_reservoir_a61a6925be17180de646b0c4151c59454} 
-void Reservoir\+::\+Ini (\begin{DoxyParamCaption}\item[{double}]{\+\_\+pstart}{}\end{DoxyParamCaption})}
+void Reservoir::\+\+Ini (\begin{DoxyParamCaption}\item[{double}]{\+\_\+pstart}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_reservoir_af0b230c3a0f3a6d3d84dfb0a3e8d8de2}\index{Reservoir@{Reservoir}!Ini@{Ini}}
 \index{Ini@{Ini}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily \label{class_reservoir_af0b230c3a0f3a6d3d84dfb0a3e8d8de2} 
-void Reservoir\+::\+Ini (\begin{DoxyParamCaption}\item[{double}]{\+\_\+pstart}{, }\item[{double}]{\+\_\+\+Tstart}{}\end{DoxyParamCaption})}
+void Reservoir::\+\+Ini (\begin{DoxyParamCaption}\item[{double}]{\+\_\+pstart}{, }\item[{double}]{\+\_\+\+Tstart}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_reservoir_a954e6b343e246da064894b167b858712}\index{Reservoir@{Reservoir}!List\_data@{List\_data}}
 \index{List\_data@{List\_data}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{List\_data()}{List\_data()}}
 {\footnotesize\ttfamily \label{class_reservoir_a954e6b343e246da064894b167b858712} 
-void Reservoir\+::\+List\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+void Reservoir::\+\+List\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_reservoir_adc22cbe39c5900ad45dafda317a07afc}\index{Reservoir@{Reservoir}!Plot@{Plot}}
 \index{Plot@{Plot}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{Plot()}{Plot()}}
 {\footnotesize\ttfamily \label{class_reservoir_adc22cbe39c5900ad45dafda317a07afc} 
-void Reservoir\+::\+Plot (\begin{DoxyParamCaption}\item[{bool}]{show}{, }\item[{bool}]{save}{}\end{DoxyParamCaption})}
+void Reservoir::\+\+Plot (\begin{DoxyParamCaption}\item[{bool}]{show}{, }\item[{bool}]{save}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_reservoir_a25e857bf07d44c4e441116cef97002cc}\index{Reservoir@{Reservoir}!Save\_data@{Save\_data}}
 \index{Save\_data@{Save\_data}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{Save\_data()}{Save\_data()}}
 {\footnotesize\ttfamily \label{class_reservoir_a25e857bf07d44c4e441116cef97002cc} 
-void Reservoir\+::\+Save\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+void Reservoir::\+\+Save\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_reservoir_a846b7cea080db6afa41725f27652b555}\index{Reservoir@{Reservoir}!Set\_dprop@{Set\_dprop}}
 \index{Set\_dprop@{Set\_dprop}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{Set\_dprop()}{Set\_dprop()}}
 {\footnotesize\ttfamily \label{class_reservoir_a846b7cea080db6afa41725f27652b555} 
-void Reservoir\+::\+Set\+\_\+dprop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{, }\item[{double}]{val}{}\end{DoxyParamCaption})}
+void Reservoir::\+\+Set\+\_\+dprop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{, }\item[{double}]{val}{}\end{DoxyParamCaption})}
 
-\Hypertarget{class_reservoir_acd9a99c6c2fd40c06f443e128851b301}\index{Reservoir@{Reservoir}!SetDebug@{SetDebug}}
+\Hypertarget{class_reservoir_a9d5df023e6005fc0cea9fbe70f497c78}\index{Reservoir@{Reservoir}!SetDebug@{SetDebug}}
 \index{SetDebug@{SetDebug}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{SetDebug()}{SetDebug()}}
-{\footnotesize\ttfamily \label{class_reservoir_acd9a99c6c2fd40c06f443e128851b301} 
-void Reservoir\+::\+Set\+Debug (\begin{DoxyParamCaption}\item[{const bool}]{DEBUG}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{class_reservoir_a9d5df023e6005fc0cea9fbe70f497c78} 
+void Reservoir::\+\+Set\+Debug (\begin{DoxyParamCaption}\item[{bool}]{DEBUG}{}\end{DoxyParamCaption})}
 
-\Hypertarget{class_reservoir_acbf42969273a347c5b32fbf40248f38e}\index{Reservoir@{Reservoir}!Update@{Update}}
+\Hypertarget{class_reservoir_af87c2644d27fd59208bcdf9b27d5d989}\index{Reservoir@{Reservoir}!Update@{Update}}
 \index{Update@{Update}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{Update()}{Update()}}
-{\footnotesize\ttfamily \label{class_reservoir_acbf42969273a347c5b32fbf40248f38e} 
-void Reservoir\+::\+Update (\begin{DoxyParamCaption}\item[{double}]{delta\+\_\+t}{, }\item[{double}]{mp\+\_\+in}{, }\item[{double}]{mp\+\_\+out}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{class_reservoir_af87c2644d27fd59208bcdf9b27d5d989} 
+void Reservoir::\+\+Update (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{double}]{mp\+\_\+in}{, }\item[{double}]{mp\+\_\+out}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_reservoir_a914e7387e18311fe2e46bcad3ac96d96}\index{Reservoir@{Reservoir}!UpdateDimlessPars@{UpdateDimlessPars}}
 \index{UpdateDimlessPars@{UpdateDimlessPars}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{UpdateDimlessPars()}{UpdateDimlessPars()}}
 {\footnotesize\ttfamily \label{class_reservoir_a914e7387e18311fe2e46bcad3ac96d96} 
-void Reservoir\+::\+Update\+Dimless\+Pars (\begin{DoxyParamCaption}\item[{double}]{pref}{, }\item[{double}]{mp\+\_\+nevl}{, }\item[{double}]{omega}{}\end{DoxyParamCaption})}
+void Reservoir::\+\+Update\+Dimless\+Pars (\begin{DoxyParamCaption}\item[{double}]{pref}{, }\item[{double}]{mp\+\_\+nevl}{, }\item[{double}]{omega}{}\end{DoxyParamCaption})}
 
 
 
+\label{doc-variable-members}
+\Hypertarget{class_reservoir_doc-variable-members}
 \doxysubsection{Member Data Documentation}
 \Hypertarget{class_reservoir_ab7bc173165dec1b596ec7a9c15ab88d2}\index{Reservoir@{Reservoir}!fname@{fname}}
 \index{fname@{fname}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{fname}{fname}}
 {\footnotesize\ttfamily \label{class_reservoir_ab7bc173165dec1b596ec7a9c15ab88d2} 
-string Reservoir\+::fname}
+string Reservoir::\+fname}
 
 \Hypertarget{class_reservoir_a00cb83324b4fa4d62be3ad55e2cab962}\index{Reservoir@{Reservoir}!gas@{gas}}
 \index{gas@{gas}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{gas}{gas}}
 {\footnotesize\ttfamily \label{class_reservoir_a00cb83324b4fa4d62be3ad55e2cab962} 
-\mbox{\hyperlink{class_gas}{Gas}}\texorpdfstring{$\ast$}{*} Reservoir\+::gas}
+\doxymbox{\hyperlink{class_gas}{Gas}}\texorpdfstring{$\ast$}{*} Reservoir::\+gas}
 
 \Hypertarget{class_reservoir_aa205bfa0a21280929d65f5676aeaeb92}\index{Reservoir@{Reservoir}!is\_Gas@{is\_Gas}}
 \index{is\_Gas@{is\_Gas}!Reservoir@{Reservoir}}
 \doxysubsubsection{\texorpdfstring{is\_Gas}{is\_Gas}}
 {\footnotesize\ttfamily \label{class_reservoir_aa205bfa0a21280929d65f5676aeaeb92} 
-bool Reservoir\+::is\+\_\+\+Gas}
+bool Reservoir::\+is\+\_\+\+Gas}
 
 
 
-The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{_reservoir_8h}{Reservoir.\+h}}\item 
-\mbox{\hyperlink{_reservoir_8cpp}{Reservoir.\+cpp}}\end{DoxyCompactItemize}
+src/\+\doxymbox{\hyperlink{_reservoir_8h}{Reservoir.\+h}}\item 
+src/\+\doxymbox{\hyperlink{_reservoir_8cpp}{Reservoir.\+cpp}}\end{DoxyCompactItemize}

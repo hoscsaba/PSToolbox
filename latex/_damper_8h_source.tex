@@ -1,0 +1,121 @@
+\doxysection{Damper.\+h}
+\hypertarget{_damper_8h_source}{}\label{_damper_8h_source}\index{src/Damper.h@{src/Damper.h}}
+\doxymbox{\hyperlink{_damper_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <Eigen/Core>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_units_8h}{Units.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_ideal_gas_8h}{IdealGas.h}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\#include\ "{}/Users/hoscsaba/program/matplotlib-\/cpp/matplotlibcpp.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00012\ \textcolor{keyword}{using\ namespace\ }Eigen;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_damper_adab7c3468d8b69172824d087e9803255}{Damper}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_units_aa10ded064259f35f044246879725b98a}{Units}}\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{bool}\ save\_data;}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{string}\ name;}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{double}\ vol,\ a,\ p,\ t,\ rho,\ T,\ mp;}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{double}\ K,\ dia;}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{int}\ num\_of\_orifices;}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{double}\ beta;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{comment}{//\ \ bool\ is\_Gas;}}
+\DoxyCodeLine{00028\ \ \ \ \ VectorXd\ DamperODE(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ x,\ \textcolor{keyword}{const}\ VectorXd\ \&y,\ \textcolor{keyword}{const}\ VectorXd\ \&pars);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ rk45(\textcolor{keywordtype}{double}\ x\_0,}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x\_max,}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ VectorXd\ y\_0,}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vector<double>\ \&x,\ vector<vector<double>\ >\ \&y,}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ VectorXd\ \&pars);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ vector<vector<double>\ >\ data;}
+\DoxyCodeLine{00037\ \ \ \ \ vector<double>\ tmpvec;}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{bool}\ Ini\_done;}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{double}\ n\_poly;}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{bool}\ DEBUG;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_damper_ac8039c78c177b5a90ff02d853f7a3e2a}{is\_Gas}};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \doxymbox{\hyperlink{class_damper_adab7c3468d8b69172824d087e9803255}{Damper}}(\textcolor{keywordtype}{string}\ \_nev,}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_vol,}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_a,}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_rho,}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_num\_of\_orifices,}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ diameter,}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ save\_data);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \doxymbox{\hyperlink{class_damper_adab7c3468d8b69172824d087e9803255}{Damper}}(\textcolor{keywordtype}{string}\ \_name,}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_vol,}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_ideal_gas}{IdealGas}}\ *\doxymbox{\hyperlink{class_damper_a2dc72746630cbf4b84932086a002c871}{gas}},}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ n\_poly,}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_num\_of\_orifices,}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ diameter,}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_save\_data);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \doxymbox{\hyperlink{class_damper_adab7c3468d8b69172824d087e9803255}{Damper}}(\textcolor{keywordtype}{string}\ \_name,}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_vol,}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_ideal_gas}{IdealGas}}\ *\doxymbox{\hyperlink{class_damper_a2dc72746630cbf4b84932086a002c871}{gas}},}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ n\_poly,}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_num\_of\_orifices,}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ diameter,}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_save\_data,}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ Tt);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \doxymbox{\hyperlink{class_damper_adab7c3468d8b69172824d087e9803255}{Damper}}(\textcolor{keywordtype}{string}\ \_name,}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_vol,}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_gas}{Gas}}\ *\doxymbox{\hyperlink{class_damper_a2dc72746630cbf4b84932086a002c871}{gas}},}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ n\_poly,}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_num\_of\_orifices,}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ diameter,}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_save\_data);}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \doxymbox{\hyperlink{class_damper_a2c6d388f615fd1e4530c36cd7fd34c29}{\string~Damper}}();}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_damper_a7359a8f79e517d33255bbb81be1199f7}{SetDebug}}(\textcolor{keywordtype}{bool}\ DEBUG);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_damper_ac65918f740bd91ca6d0590baf435a383}{GetName}}();}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_damper_a714b50c4696fa862742cfe4bb50a652a}{Info}}();}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_damper_ad6abfc5827efa00b43f3cffcfc0daac8}{Update}}(\textcolor{keywordtype}{double}\ t\_target,\ \textcolor{keywordtype}{double}\ mp\_in);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_damper_a92cd6cf2fc6f78bc46ac86ed1221bc85}{UpdateDimlessPars}}(\textcolor{keywordtype}{double}\ pref,\ \textcolor{keywordtype}{double}\ mp\_nevl,\ \textcolor{keywordtype}{double}\ omega);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{comment}{//void\ Ini();}}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_damper_a0186228fdfa951fdb52fecd9cb63a628}{Ini}}(\textcolor{keywordtype}{double}\ \_pstart);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_damper_a0186228fdfa951fdb52fecd9cb63a628}{Ini}}(\textcolor{keywordtype}{double}\ \_pstart,\ \textcolor{keywordtype}{double}\ \_Tstart);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{class_damper_a2b4d07f6ca6edb3b958e3337aec9b27f}{Get\_dprop}}(\textcolor{keywordtype}{string}\ prop\_string);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_damper_a7d4b895592ec6583bee1e8342d8830dc}{Set\_dprop}}(\textcolor{keywordtype}{string}\ prop\_string,\ \textcolor{keywordtype}{double}\ val);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{class_damper_a105f8c1ab7087bef1b70f78b9a721746}{GetP}}()\ \{\ \textcolor{keywordflow}{return}\ p;\ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_damper_ad3bca7f8eb564e8d7133bcfd2dfdedf5}{List\_data}}();}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_damper_ae0b0dfa2d7968ae0279e20f288c21b3f}{Save\_data}}();}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ vector<double>\ \doxymbox{\hyperlink{class_damper_ae5b6ae0651f9fca1ccae257542047a66}{Get\_dvprop}}(\textcolor{keywordtype}{string}\ prop\_string);}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{comment}{//void\ Plot();}}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_damper_a86338f6e5bc557652c2151eaaf461e16}{fname}};}
+\DoxyCodeLine{00109\ \ \ \ \ \doxymbox{\hyperlink{class_gas}{Gas}}\ *\doxymbox{\hyperlink{class_damper_a2dc72746630cbf4b84932086a002c871}{gas}};}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_damper_a6541e83279a6cb52ff8dcf95516dbfcc}{Plot}}(\textcolor{keywordtype}{bool}\ show,\ \textcolor{keywordtype}{bool}\ save);}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{class_damper_aedd3ccc1f3770054600918315622f94a}{signedSqrt}}(\textcolor{keywordtype}{double}\ x);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{class_damper_a1a00e8bc1ea18c941492b26f4b9e57d6}{GetMassFlowRate}}(\textcolor{keywordtype}{double}\ p\_connect);}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{class_damper_ae34235f6a7f0842054c3cea16e229104}{GetInternalPressureDrop}}();}
+\DoxyCodeLine{00118\ \};}
+
+\end{DoxyCode}

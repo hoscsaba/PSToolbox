@@ -1,0 +1,217 @@
+\doxysection{PSToolbox\+Bio\+Runner Class Reference}
+\hypertarget{class_p_s_toolbox_bio_runner}{}\label{class_p_s_toolbox_bio_runner}\index{PSToolboxBioRunner@{PSToolboxBioRunner}}
+
+
+{\ttfamily \+\#include $<$PSToolbox\+Bio\+Runner.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_adf164d5be9eb4ad4560f3441b90dacc1}{PSToolbox\+Bio\+Runner}} (vector$<$ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}} \texorpdfstring{$\ast$}{*} $>$ \&, vector$<$ \doxymbox{\hyperlink{class_bio_connector}{Bio\+Connector}} \texorpdfstring{$\ast$}{*} $>$ \&, vector$<$ int $>$ \&, vector$<$ int $>$ \&, vector$<$ vector$<$ int $>$ $>$ \&)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a4906b59fcbf3261d2ea3493fbf903c8e}{Run}} (double)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_ababa1e222fcde8866a53fb736e706124}{Set\+\_\+\+Save\+\_\+data}} (bool newval)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_ab34fb5b762690beee52e46304c07d220}{Save\+\_\+data\+\_\+for\+\_\+ini}} ()
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a5336fecf7833e202a8577f503780905d}{Ini\+\_\+from\+\_\+file}} (string fname, double dt\+\_\+target)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a01d9e57b1cf5835c1c9fbd6d1061b00a}{Set\+\_\+\+Folder}} (string newval)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_aff4abc861318ff9569e9d6c0685c13c1}{Set\+\_\+\+DEBUG}} (bool newval)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_af35fc9a80c1644a284824e6e716b1a0b}{Set\+\_\+\+Node\+\_\+mul}} (int newval)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_ad3810afd86182b2b32ef7a916ccaf0d3}{Set\+\_\+\+Pressure\+\_\+limit}} (bool set, double \+\_\+p\+\_\+lim\+Min, double \+\_\+p\+\_\+lim\+Max, string \+\_\+fname, string \+\_\+type)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a0608f9ce8979110ca985ee3a5c7ee667}{Set\+\_\+\+Pressure\+\_\+limit\+\_\+time}} (double start, double end)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a3a6f1519948601f5f0b8c7b81114a8a6}{Set\+\_\+\+Save\+\_\+interval}} (double interval)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a04e78d2af532ad09f348f943307f0c72}{Add\+\_\+\+Runtime\+\_\+modifier}} (\doxymbox{\hyperlink{struct_runtime_bio_modifier}{Runtime\+Bio\+Modifier}} \&rmod)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_ad2371faf9e7aa441d1a0b7ed25b347d4}{List\+Edge\+Info}} ()
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_ae6cae1ba4c15871bc764186791da774f}{Ini}} (double dt\+\_\+target)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a77106c519bd20afa9f34310f52af2ea5}{Ini}} (double dt\+\_\+target, Vector\+Xd Cini)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a5387324186375522c595d1822d66bd5e}{Load\+\_\+v\+\_\+conv\+\_\+from\+\_\+file}} (string fname, double mul)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a8a04fda970af03a2355a43a369ebe96d}{Load\+\_\+v\+\_\+conv\+\_\+from\+\_\+epanet\+\_\+export}} (string fname, double mul)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_af02683d9a509225c5db9446f7fad44b0}{Load\+\_\+nodal\+\_\+demand\+\_\+from\+\_\+epanet\+\_\+export}} (string fname, double mul)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_abb9143a1a60a03c71fcbf4b6ff1a68ed}{Set\+\_\+snapshot\+\_\+fname}} (string newval)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a7c2b13e3707a6ac0b856daccd648732b}{Set\+\_\+save\+\_\+snapshot}} (bool newval)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_ac31108fef807bb02c26912dcbc303059}{build\+\_\+statistics}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}} \texorpdfstring{$\ast$}{*} $>$ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_aa5a07995c4d4b2162570a4006de8159c}{edges}}
+\item 
+vector$<$ \doxymbox{\hyperlink{class_bio_connector}{Bio\+Connector}} \texorpdfstring{$\ast$}{*} $>$ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a670be527923dfce22dce8f4b2b3362d4}{cons}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_p_s_toolbox_bio_runner_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_p_s_toolbox_bio_runner_adf164d5be9eb4ad4560f3441b90dacc1}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\index{PSToolboxBioRunner@{PSToolboxBioRunner}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{PSToolboxBioRunner()}{PSToolboxBioRunner()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_adf164d5be9eb4ad4560f3441b90dacc1} 
+PSToolbox\+Bio\+Runner::\+\+PSToolbox\+Bio\+Runner (\begin{DoxyParamCaption}\item[{vector$<$ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}} \texorpdfstring{$\ast$}{*} $>$ \&}]{\+\_\+e}{, }\item[{vector$<$ \doxymbox{\hyperlink{class_bio_connector}{Bio\+Connector}} \texorpdfstring{$\ast$}{*} $>$ \&}]{\+\_\+c}{, }\item[{vector$<$ int $>$ \&}]{\+\_\+con\+\_\+at\+\_\+edge\+\_\+start}{, }\item[{vector$<$ int $>$ \&}]{\+\_\+con\+\_\+at\+\_\+edge\+\_\+end}{, }\item[{vector$<$ vector$<$ int $>$ $>$ \&}]{\+\_\+rigid\+\_\+subsystems}{ = {\ttfamily DEFAULT\+\_\+VECTOR}}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_p_s_toolbox_bio_runner_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_p_s_toolbox_bio_runner_a04e78d2af532ad09f348f943307f0c72}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!Add\_Runtime\_modifier@{Add\_Runtime\_modifier}}
+\index{Add\_Runtime\_modifier@{Add\_Runtime\_modifier}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{Add\_Runtime\_modifier()}{Add\_Runtime\_modifier()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_a04e78d2af532ad09f348f943307f0c72} 
+void PSToolbox\+Bio\+Runner::\+\+Add\+\_\+\+Runtime\+\_\+modifier (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_runtime_bio_modifier}{Runtime\+Bio\+Modifier}} \&}]{rmod}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_p_s_toolbox_bio_runner_ac31108fef807bb02c26912dcbc303059}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!build\_statistics@{build\_statistics}}
+\index{build\_statistics@{build\_statistics}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{build\_statistics()}{build\_statistics()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_ac31108fef807bb02c26912dcbc303059} 
+void PSToolbox\+Bio\+Runner::\+build\+\_\+statistics (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_p_s_toolbox_bio_runner_ae6cae1ba4c15871bc764186791da774f}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!Ini@{Ini}}
+\index{Ini@{Ini}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_ae6cae1ba4c15871bc764186791da774f} 
+void PSToolbox\+Bio\+Runner::\+\+Ini (\begin{DoxyParamCaption}\item[{double}]{dt\+\_\+target}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_p_s_toolbox_bio_runner_a77106c519bd20afa9f34310f52af2ea5}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!Ini@{Ini}}
+\index{Ini@{Ini}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_a77106c519bd20afa9f34310f52af2ea5} 
+void PSToolbox\+Bio\+Runner::\+\+Ini (\begin{DoxyParamCaption}\item[{double}]{dt\+\_\+target}{, }\item[{Vector\+Xd}]{Cini}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_p_s_toolbox_bio_runner_a5336fecf7833e202a8577f503780905d}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!Ini\_from\_file@{Ini\_from\_file}}
+\index{Ini\_from\_file@{Ini\_from\_file}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{Ini\_from\_file()}{Ini\_from\_file()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_a5336fecf7833e202a8577f503780905d} 
+void PSToolbox\+Bio\+Runner::\+\+Ini\+\_\+from\+\_\+file (\begin{DoxyParamCaption}\item[{string}]{fname}{, }\item[{double}]{dt\+\_\+target}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_p_s_toolbox_bio_runner_ad2371faf9e7aa441d1a0b7ed25b347d4}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!ListEdgeInfo@{ListEdgeInfo}}
+\index{ListEdgeInfo@{ListEdgeInfo}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{ListEdgeInfo()}{ListEdgeInfo()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_ad2371faf9e7aa441d1a0b7ed25b347d4} 
+void PSToolbox\+Bio\+Runner::\+\+List\+Edge\+Info (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_p_s_toolbox_bio_runner_af02683d9a509225c5db9446f7fad44b0}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!Load\_nodal\_demand\_from\_epanet\_export@{Load\_nodal\_demand\_from\_epanet\_export}}
+\index{Load\_nodal\_demand\_from\_epanet\_export@{Load\_nodal\_demand\_from\_epanet\_export}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{Load\_nodal\_demand\_from\_epanet\_export()}{Load\_nodal\_demand\_from\_epanet\_export()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_af02683d9a509225c5db9446f7fad44b0} 
+void PSToolbox\+Bio\+Runner::\+\+Load\+\_\+nodal\+\_\+demand\+\_\+from\+\_\+epanet\+\_\+export (\begin{DoxyParamCaption}\item[{string}]{fname}{, }\item[{double}]{mul}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_p_s_toolbox_bio_runner_a8a04fda970af03a2355a43a369ebe96d}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!Load\_v\_conv\_from\_epanet\_export@{Load\_v\_conv\_from\_epanet\_export}}
+\index{Load\_v\_conv\_from\_epanet\_export@{Load\_v\_conv\_from\_epanet\_export}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{Load\_v\_conv\_from\_epanet\_export()}{Load\_v\_conv\_from\_epanet\_export()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_a8a04fda970af03a2355a43a369ebe96d} 
+void PSToolbox\+Bio\+Runner::\+\+Load\+\_\+v\+\_\+conv\+\_\+from\+\_\+epanet\+\_\+export (\begin{DoxyParamCaption}\item[{string}]{fname}{, }\item[{double}]{mul}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_p_s_toolbox_bio_runner_a5387324186375522c595d1822d66bd5e}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!Load\_v\_conv\_from\_file@{Load\_v\_conv\_from\_file}}
+\index{Load\_v\_conv\_from\_file@{Load\_v\_conv\_from\_file}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{Load\_v\_conv\_from\_file()}{Load\_v\_conv\_from\_file()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_a5387324186375522c595d1822d66bd5e} 
+void PSToolbox\+Bio\+Runner::\+\+Load\+\_\+v\+\_\+conv\+\_\+from\+\_\+file (\begin{DoxyParamCaption}\item[{string}]{fname}{, }\item[{double}]{mul}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_p_s_toolbox_bio_runner_a4906b59fcbf3261d2ea3493fbf903c8e}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!Run@{Run}}
+\index{Run@{Run}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_a4906b59fcbf3261d2ea3493fbf903c8e} 
+void PSToolbox\+Bio\+Runner::\+\+Run (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+max}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_p_s_toolbox_bio_runner_ab34fb5b762690beee52e46304c07d220}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!Save\_data\_for\_ini@{Save\_data\_for\_ini}}
+\index{Save\_data\_for\_ini@{Save\_data\_for\_ini}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{Save\_data\_for\_ini()}{Save\_data\_for\_ini()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_ab34fb5b762690beee52e46304c07d220} 
+void PSToolbox\+Bio\+Runner::\+\+Save\+\_\+data\+\_\+for\+\_\+ini (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_p_s_toolbox_bio_runner_aff4abc861318ff9569e9d6c0685c13c1}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!Set\_DEBUG@{Set\_DEBUG}}
+\index{Set\_DEBUG@{Set\_DEBUG}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{Set\_DEBUG()}{Set\_DEBUG()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_aff4abc861318ff9569e9d6c0685c13c1} 
+void PSToolbox\+Bio\+Runner::\+\+Set\+\_\+\+DEBUG (\begin{DoxyParamCaption}\item[{bool}]{newval}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_p_s_toolbox_bio_runner_a01d9e57b1cf5835c1c9fbd6d1061b00a}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!Set\_Folder@{Set\_Folder}}
+\index{Set\_Folder@{Set\_Folder}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{Set\_Folder()}{Set\_Folder()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_a01d9e57b1cf5835c1c9fbd6d1061b00a} 
+void PSToolbox\+Bio\+Runner::\+\+Set\+\_\+\+Folder (\begin{DoxyParamCaption}\item[{string}]{newval}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_p_s_toolbox_bio_runner_af35fc9a80c1644a284824e6e716b1a0b}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!Set\_Node\_mul@{Set\_Node\_mul}}
+\index{Set\_Node\_mul@{Set\_Node\_mul}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{Set\_Node\_mul()}{Set\_Node\_mul()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_af35fc9a80c1644a284824e6e716b1a0b} 
+void PSToolbox\+Bio\+Runner::\+\+Set\+\_\+\+Node\+\_\+mul (\begin{DoxyParamCaption}\item[{int}]{newval}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_p_s_toolbox_bio_runner_ad3810afd86182b2b32ef7a916ccaf0d3}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!Set\_Pressure\_limit@{Set\_Pressure\_limit}}
+\index{Set\_Pressure\_limit@{Set\_Pressure\_limit}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{Set\_Pressure\_limit()}{Set\_Pressure\_limit()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_ad3810afd86182b2b32ef7a916ccaf0d3} 
+void PSToolbox\+Bio\+Runner::\+\+Set\+\_\+\+Pressure\+\_\+limit (\begin{DoxyParamCaption}\item[{bool}]{set}{, }\item[{double}]{\+\_\+p\+\_\+lim\+Min}{, }\item[{double}]{\+\_\+p\+\_\+lim\+Max}{, }\item[{string}]{\+\_\+fname}{, }\item[{string}]{\+\_\+type}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_p_s_toolbox_bio_runner_a0608f9ce8979110ca985ee3a5c7ee667}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!Set\_Pressure\_limit\_time@{Set\_Pressure\_limit\_time}}
+\index{Set\_Pressure\_limit\_time@{Set\_Pressure\_limit\_time}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{Set\_Pressure\_limit\_time()}{Set\_Pressure\_limit\_time()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_a0608f9ce8979110ca985ee3a5c7ee667} 
+void PSToolbox\+Bio\+Runner::\+\+Set\+\_\+\+Pressure\+\_\+limit\+\_\+time (\begin{DoxyParamCaption}\item[{double}]{start}{, }\item[{double}]{end}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_p_s_toolbox_bio_runner_ababa1e222fcde8866a53fb736e706124}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!Set\_Save\_data@{Set\_Save\_data}}
+\index{Set\_Save\_data@{Set\_Save\_data}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{Set\_Save\_data()}{Set\_Save\_data()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_ababa1e222fcde8866a53fb736e706124} 
+void PSToolbox\+Bio\+Runner::\+\+Set\+\_\+\+Save\+\_\+data (\begin{DoxyParamCaption}\item[{bool}]{newval}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_p_s_toolbox_bio_runner_a3a6f1519948601f5f0b8c7b81114a8a6}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!Set\_Save\_interval@{Set\_Save\_interval}}
+\index{Set\_Save\_interval@{Set\_Save\_interval}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{Set\_Save\_interval()}{Set\_Save\_interval()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_a3a6f1519948601f5f0b8c7b81114a8a6} 
+void PSToolbox\+Bio\+Runner::\+\+Set\+\_\+\+Save\+\_\+interval (\begin{DoxyParamCaption}\item[{double}]{interval}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_p_s_toolbox_bio_runner_a7c2b13e3707a6ac0b856daccd648732b}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!Set\_save\_snapshot@{Set\_save\_snapshot}}
+\index{Set\_save\_snapshot@{Set\_save\_snapshot}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{Set\_save\_snapshot()}{Set\_save\_snapshot()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_a7c2b13e3707a6ac0b856daccd648732b} 
+void PSToolbox\+Bio\+Runner::\+\+Set\+\_\+save\+\_\+snapshot (\begin{DoxyParamCaption}\item[{bool}]{newval}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_p_s_toolbox_bio_runner_abb9143a1a60a03c71fcbf4b6ff1a68ed}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!Set\_snapshot\_fname@{Set\_snapshot\_fname}}
+\index{Set\_snapshot\_fname@{Set\_snapshot\_fname}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{Set\_snapshot\_fname()}{Set\_snapshot\_fname()}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_abb9143a1a60a03c71fcbf4b6ff1a68ed} 
+void PSToolbox\+Bio\+Runner::\+\+Set\+\_\+snapshot\+\_\+fname (\begin{DoxyParamCaption}\item[{string}]{newval}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_p_s_toolbox_bio_runner_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_p_s_toolbox_bio_runner_a670be527923dfce22dce8f4b2b3362d4}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!cons@{cons}}
+\index{cons@{cons}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{cons}{cons}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_a670be527923dfce22dce8f4b2b3362d4} 
+vector$<$\doxymbox{\hyperlink{class_bio_connector}{Bio\+Connector}} \texorpdfstring{$\ast$}{*}$>$ PSToolbox\+Bio\+Runner::\+cons}
+
+\Hypertarget{class_p_s_toolbox_bio_runner_aa5a07995c4d4b2162570a4006de8159c}\index{PSToolboxBioRunner@{PSToolboxBioRunner}!edges@{edges}}
+\index{edges@{edges}!PSToolboxBioRunner@{PSToolboxBioRunner}}
+\doxysubsubsection{\texorpdfstring{edges}{edges}}
+{\footnotesize\ttfamily \label{class_p_s_toolbox_bio_runner_aa5a07995c4d4b2162570a4006de8159c} 
+vector$<$\doxymbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}} \texorpdfstring{$\ast$}{*}$>$ PSToolbox\+Bio\+Runner::\+edges}
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+src/\+\doxymbox{\hyperlink{_p_s_toolbox_bio_runner_8h}{PSToolbox\+Bio\+Runner.\+h}}\item 
+src/\+\doxymbox{\hyperlink{_p_s_toolbox_bio_runner_8cpp}{PSToolbox\+Bio\+Runner.\+cpp}}\end{DoxyCompactItemize}

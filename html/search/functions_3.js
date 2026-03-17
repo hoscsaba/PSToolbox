@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['extract_5fvalue_0',['extract_value',['../class_input.html#a4928a7dc92ba8afab7e63e484c6a79a8',1,'Input']]]
+  ['damper_0',['Damper',['../class_damper.html#adab7c3468d8b69172824d087e9803255',1,'Damper::Damper(string _nev, double _vol, double _a, double _rho, int _num_of_orifices, double diameter, bool save_data)'],['../class_damper.html#adc61f373879c2ccab781af99d40e816a',1,'Damper::Damper(string _name, double _vol, IdealGas *gas, double n_poly, int _num_of_orifices, double diameter, bool _save_data)'],['../class_damper.html#ab6f02fa80f7d6fc20d070c538b7e2149',1,'Damper::Damper(string _name, double _vol, IdealGas *gas, double n_poly, int _num_of_orifices, double diameter, bool _save_data, double Tt)'],['../class_damper.html#a6df8c7c693b4163aec25e3221b33c6cb',1,'Damper::Damper(string _name, double _vol, Gas *gas, double n_poly, int _num_of_orifices, double diameter, bool _save_data)']]]
 ];

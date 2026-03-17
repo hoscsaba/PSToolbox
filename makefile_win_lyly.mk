@@ -1,10 +1,13 @@
 CXX = g++
 CFLAGS = -g -std=c++11 -pedantic
 #TARGETS = my_tools Gas IdealGas FrozenMixtureLiquidGas Units LWP SCP Reservoir Valve Connector Valve_with_Absorber  CoolPropGas
-TARGETS = my_tools SurgeChamber Gas IdealGas FrozenMixtureLiquidGas Units LWP SCP Reservoir PSToolboxRunner PSToolboxBaseEdge Valve Connector Valve_with_Absorber EpanetReader CheckValve Pump
+TARGETS = my_tools SurgeChamber Gas IdealGas FrozenMixtureLiquidGas Units LWP SCP Reservoir PSToolboxRunner PSToolboxBaseEdge Valve Connector Valve_with_Absorber EpanetReader CheckValve Pump Damper ThrottleValve
 INC = -I"C:\Program Files (x86)\Eigen\include\eigen3"
 # LINK = -lmy_tools -lpython2.7
-LINK = -lmy_tools
+LINK = -lmy_tools\
+
+SRC_DIR = src
+INC+=-I$(SRC_DIR)
 
 INC_CP = -I/Users/hoscsaba/program/CoolProp/include -I/Users/hoscsaba/program/CoolProp/externals/fmtlib
 LINK_CP = -L/Users/hoscsaba/program/CoolProp/build1 -lCoolProp
@@ -14,72 +17,78 @@ all:$(TARGETS)
 	ar rvs libmy_tools.a my_tools.o
 	ranlib libmy_tools.a
 	del libPSToolbox.a
-	ar rvs libPSToolbox.a PSToolBoxRunner.o PSToolboxBaseEdge.o Gas.o IdealGas.o FrozenMixtureLiquidGas.o Units.o LWP.o SCP.o Reservoir.o Valve.o Connector.o Valve_with_Absorber.o CheckValve.o Pump.o EpanetReader.o SurgeChamber.o
+	ar rvs libPSToolbox.a PSToolBoxRunner.o PSToolboxBaseEdge.o Gas.o IdealGas.o FrozenMixtureLiquidGas.o Units.o LWP.o SCP.o Reservoir.o Valve.o Connector.o Valve_with_Absorber.o CheckValve.o Pump.o EpanetReader.o  Damper.o ThrottleValve.o
 
 	ranlib libPSToolbox.a
 
 #Compile rule for each source file
-my_tools: my_tools.cpp 
-	$(CXX) $(INC) $(CFLAGS) my_tools.cpp -c -o my_tools.o
+my_tools: $(SRC_DIR)/my_tools.cpp
+	$(CXX) $(INC) $(CFLAGS) $(SRC_DIR)/my_tools.cpp -c -o my_tools.o
 
-SurgeChamber: SurgeChamber.cpp 
-	$(CXX) $(INC) $(CFLAGS) SurgeChamber.cpp -c -o SurgeChamber.o
+Damper: $(SRC_DIR)/Damper.cpp
+	$(CXX) $(INC) $(CFLAGS) $(SRC_DIR)/Damper.cpp -c -o Damper.o
 
-PSToolboxRunner: PSToolboxRunner.cpp 
-	$(CXX) $(INC) $(CFLAGS) PSToolboxRunner.cpp -c -o PSToolboxRunner.o
+ThrottleValve: $(SRC_DIR)/ThrottleValve.cpp
+	$(CXX) $(INC) $(CFLAGS) $(SRC_DIR)/ThrottleValve.cpp -c -o ThrottleValve.o
 
-PSToolboxBaseEdge: PSToolboxBaseEdge.cpp 
-	$(CXX) $(INC) $(CFLAGS) PSToolboxBaseEdge.cpp -c -o PSToolboxBaseEdge.o
+SurgeChamber: $(SRC_DIR)/SurgeChamber.cpp 
+	$(CXX) $(INC) $(CFLAGS) $(SRC_DIR)/SurgeChamber.cpp -c -o SurgeChamber.o
 
-Gas: Gas.cpp 
-	$(CXX) $(CFLAGS) Gas.cpp -c -o Gas.o
+PSToolboxRunner: $(SRC_DIR)/PSToolboxRunner.cpp 
+	$(CXX) $(INC) $(CFLAGS) $(SRC_DIR)/PSToolboxRunner.cpp -c -o PSToolboxRunner.o
 
-IdealGas: IdealGas.cpp 
-	$(CXX) $(CFLAGS) IdealGas.cpp -c -o IdealGas.o
+PSToolboxBaseEdge: $(SRC_DIR)/PSToolboxBaseEdge.cpp 
+	$(CXX) $(INC) $(CFLAGS) $(SRC_DIR)/PSToolboxBaseEdge.cpp -c -o PSToolboxBaseEdge.o
 
-FrozenMixtureLiquidGas: FrozenMixtureLiquidGas.cpp 
-	$(CXX) $(CFLAGS) FrozenMixtureLiquidGas.cpp -c -o FrozenMixtureLiquidGas.o
+Gas: $(SRC_DIR)/Gas.cpp 
+	$(CXX) $(CFLAGS) $(SRC_DIR)/Gas.cpp -c -o Gas.o
 
-Units: Units.cpp
-	$(CXX) $(CFLAGS) Units.cpp -c -o Units.o
+IdealGas: $(SRC_DIR)/IdealGas.cpp 
+	$(CXX) $(CFLAGS) $(SRC_DIR)/IdealGas.cpp -c -o IdealGas.o
 
-LWP: LWP.cpp
-	$(CXX) $(INC) $(CFLAGS) LWP.cpp -c -o LWP.o
+FrozenMixtureLiquidGas: $(SRC_DIR)/FrozenMixtureLiquidGas.cpp 
+	$(CXX) $(CFLAGS) $(SRC_DIR)/FrozenMixtureLiquidGas.cpp -c -o FrozenMixtureLiquidGas.o
 
-SCP: SCP.cpp
-	$(CXX) $(INC) $(CFLAGS) SCP.cpp -c -o SCP.o
+Units: $(SRC_DIR)/Units.cpp
+	$(CXX) $(CFLAGS) $(SRC_DIR)/Units.cpp -c -o Units.o
 
-Reservoir: Reservoir.cpp
-	$(CXX) $(INC) $(CFLAGS) Reservoir.cpp -c -o Reservoir.o
+LWP: $(SRC_DIR)/LWP.cpp
+	$(CXX) $(INC) $(CFLAGS) $(SRC_DIR)/LWP.cpp -c -o LWP.o
+
+SCP: $(SRC_DIR)/SCP.cpp
+	$(CXX) $(INC) $(CFLAGS) $(SRC_DIR)/SCP.cpp -c -o SCP.o
+
+Reservoir: $(SRC_DIR)/Reservoir.cpp
+	$(CXX) $(INC) $(CFLAGS) $(SRC_DIR)/Reservoir.cpp -c -o Reservoir.o
 # 	$(CXX) $(INC) $(LINK) $(CFLAGS) Reservoir.cpp -c -o Reservoir.o
 
-Valve: Valve.cpp
-	$(CXX) $(INC) $(CFLAGS) Valve.cpp -c -o Valve.o
+Valve: $(SRC_DIR)/Valve.cpp
+	$(CXX) $(INC) $(CFLAGS) $(SRC_DIR)/Valve.cpp -c -o Valve.o
 # 	$(CXX) $(INC) $(LINK) $(CFLAGS) Valve.cpp -c -o Valve.o
 
-Pump: Pump.cpp
-	$(CXX) $(INC) $(CFLAGS) Pump.cpp -c -o Pump.o
+Pump: $(SRC_DIR)/Pump.cpp
+	$(CXX) $(INC) $(CFLAGS) $(SRC_DIR)/Pump.cpp -c -o Pump.o
 
-EpanetReader: EpanetReader.cpp
-	$(CXX) $(INC) $(CFLAGS) EpanetReader.cpp -c -o EpanetReader.o
+EpanetReader: $(SRC_DIR)/EpanetReader.cpp
+	$(CXX) $(INC) $(CFLAGS) $(SRC_DIR)/EpanetReader.cpp -c -o EpanetReader.o
 
-CheckValve: CheckValve.cpp
-	$(CXX) $(INC) $(CFLAGS) CheckValve.cpp -c -o CheckValve.o
+CheckValve: $(SRC_DIR)/CheckValve.cpp
+	$(CXX) $(INC) $(CFLAGS) $(SRC_DIR)/CheckValve.cpp -c -o CheckValve.o
 
-Valve_with_Absorber: Valve_with_absorber.cpp
-	$(CXX) $(INC) $(CFLAGS) Valve_with_Absorber.cpp -c -o Valve_with_Absorber.o
+Valve_with_Absorber: $(SRC_DIR)/Valve_with_absorber.cpp
+	$(CXX) $(INC) $(CFLAGS) $(SRC_DIR)/Valve_with_Absorber.cpp -c -o Valve_with_Absorber.o
 
-Connector: Connector.cpp
-	$(CXX) $(INC) $(CFLAGS) Connector.cpp -c -o Connector.o
+Connector: $(SRC_DIR)/Connector.cpp
+	$(CXX) $(INC) $(CFLAGS) $(SRC_DIR)/Connector.cpp -c -o Connector.o
 
-CoolPropGas: CoolPropGas.cpp
-	$(CXX) $(INC_CP) $(LINK_CP) $(CFLAGS) CoolPropGas.cpp -c -o CoolPropGas.o
+CoolPropGas: $(SRC_DIR)/CoolPropGas.cpp
+	$(CXX) $(INC_CP) $(LINK_CP) $(CFLAGS) $(SRC_DIR)/CoolPropGas.cpp -c -o CoolPropGas.o
 
-CoolPropMixture: CoolPropMixture.cpp
-	$(CXX) $(INC_CP) $(LINK_CP) $(CFLAGS) CoolPropMixture.cpp -c -o CoolPropMixture.o
+CoolPropMixture: $(SRC_DIR)/CoolPropMixture.cpp
+	$(CXX) $(INC_CP) $(LINK_CP) $(CFLAGS) $(SRC_DIR)/CoolPropMixture.cpp -c -o CoolPropMixture.o
 
-CoolPropHA: CoolPropHA.cpp
-	$(CXX) $(INC_CP) $(LINK_CP) $(CFLAGS) CoolPropHA.cpp -c -o CoolPropHA.o
+CoolPropHA: $(SRC_DIR)/CoolPropHA.cpp
+	$(CXX) $(INC_CP) $(LINK_CP) $(CFLAGS) $(SRC_DIR)/CoolPropHA.cpp -c -o CoolPropHA.o
 
 
 clean:

@@ -1,0 +1,233 @@
+\doxysection{Bio\+Connector Class Reference}
+\hypertarget{class_bio_connector}{}\label{class_bio_connector}\index{BioConnector@{BioConnector}}
+
+
+{\ttfamily \+\#include $<$Bio\+Connector.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_bio_connector_ab58e69fe91d2ee3f017cd1e3c0466542}{Bio\+Connector}} (string \doxymbox{\hyperlink{class_bio_connector_ad2bdf39e4888e864647baaf50ddd02e0}{name}}, vector$<$ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}} \texorpdfstring{$\ast$}{*} $>$ \&\+\_\+e, vector$<$ bool $>$ \&\+\_\+is\+\_\+front, vector$<$ int $>$ \&\+\_\+edges\+\_\+idx, double \+\_\+demand, bool \+\_\+\+DEBUG)
+\item 
+\doxymbox{\hyperlink{class_bio_connector_ab3a29ee62de4178023df77bc10378715}{Bio\+Connector}} (string \doxymbox{\hyperlink{class_bio_connector_ad2bdf39e4888e864647baaf50ddd02e0}{name}}, \doxymbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}} \texorpdfstring{$\ast$}{*}e1, bool \doxymbox{\hyperlink{class_bio_connector_ab57e2d1d62fd9133b02b6b8cac4a7562}{is\+\_\+front}}, string \doxymbox{\hyperlink{class_bio_connector_a20e8a7a2279d1bcb006eec0a1b217d65}{BC\+\_\+type}}, double \doxymbox{\hyperlink{class_bio_connector_a1881ff7dab070cbadaa2496bab6f7e66}{BC\+\_\+value}}, double \doxymbox{\hyperlink{class_bio_connector_a13f40b13191d5b737124396410d6c398}{demand}}, bool \doxymbox{\hyperlink{class_bio_connector_abdb9129738c2cc12cb77e8ae45405187}{DEBUG}})
+\item 
+\doxymbox{\hyperlink{class_bio_connector_a8e4020d0d3ed79c481e0938f04131790}{\texorpdfstring{$\sim$}{\string~}\+Bio\+Connector}} ()
+\item 
+void \doxymbox{\hyperlink{class_bio_connector_a52002c01bec0aae8ef98a59f77b74aed}{Update}} (double t\+\_\+target, int update\+\_\+idx)
+\item 
+void \doxymbox{\hyperlink{class_bio_connector_a71c449f131dba796fdade203e10ad66a}{Bio\+Connector\+\_\+\+N\+\_\+\+Bio\+Pipes}} (double t\+\_\+target, int update\+\_\+idx)
+\item 
+void \doxymbox{\hyperlink{class_bio_connector_a6be77f206b7de87d593f859e3d7b8a60}{Bio\+Connector\+\_\+\+Reservoir}} (double t\+\_\+target)
+\item 
+void \doxymbox{\hyperlink{class_bio_connector_ad390cd4cdc1c2bae53cd4ac4f01f9709}{Bio\+Connector\+\_\+\+Free\+End}} (double t\+\_\+target)
+\item 
+double \doxymbox{\hyperlink{class_bio_connector_a7fa7467cfcc3ae6f86a0deaecde886fa}{signed\+\_\+sqrt}} (double x)
+\item 
+bool \doxymbox{\hyperlink{class_bio_connector_a16b34ffce1abac464106b33f19c0081f}{connected\+\_\+to\+\_\+rigid}} ()
+\item 
+void \doxymbox{\hyperlink{class_bio_connector_a5a4ac6ea24c891e9fdbc97e492da264d}{Set\+\_\+\+Inlet\+Quality}} (Vector\+Xd C\+\_\+inlet)
+\item 
+void \doxymbox{\hyperlink{class_bio_connector_a17195412446f47389ebd694b8f752b44}{Set\+\_\+demand}} (double val)
+\item 
+string \doxymbox{\hyperlink{class_bio_connector_a5b8ccd8480cb92c0974075f7d3112a9a}{Get\+\_\+name}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{class_bio_connector_ad2bdf39e4888e864647baaf50ddd02e0}{name}}
+\item 
+bool \doxymbox{\hyperlink{class_bio_connector_abdb9129738c2cc12cb77e8ae45405187}{DEBUG}}
+\item 
+Vector\+Xd \doxymbox{\hyperlink{class_bio_connector_ad41247a17adfc40f8b7c2162102b9a18}{Cin}}
+\item 
+string \doxymbox{\hyperlink{class_bio_connector_a20e8a7a2279d1bcb006eec0a1b217d65}{BC\+\_\+type}}
+\item 
+double \doxymbox{\hyperlink{class_bio_connector_a1881ff7dab070cbadaa2496bab6f7e66}{BC\+\_\+value}}
+\item 
+double \doxymbox{\hyperlink{class_bio_connector_a13f40b13191d5b737124396410d6c398}{demand}}
+\item 
+int \doxymbox{\hyperlink{class_bio_connector_a76f8cf493d34a3deb2f0f89a2c5dd25f}{type}}
+\item 
+\doxymbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_bio_connector_ae862537af844ff52de45621b9f897ac5}{s\+\_\+edges}}
+\item 
+bool \doxymbox{\hyperlink{class_bio_connector_ad1a52d7cdbca962fa37d9aeb04f07992}{s\+\_\+is\+\_\+front}}
+\item 
+int \doxymbox{\hyperlink{class_bio_connector_aedb708c06f3c88fcbd0818d2dea38f63}{s\+\_\+edges\+\_\+idx}}
+\item 
+vector$<$ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}} \texorpdfstring{$\ast$}{*} $>$ \doxymbox{\hyperlink{class_bio_connector_a9c865e46a5a299a5a71b9cab9e7e9c11}{edges}}
+\item 
+vector$<$ bool $>$ \doxymbox{\hyperlink{class_bio_connector_ab57e2d1d62fd9133b02b6b8cac4a7562}{is\+\_\+front}}
+\item 
+vector$<$ int $>$ \doxymbox{\hyperlink{class_bio_connector_a1576749162b13d9dce4f85189cda7d3d}{edges\+\_\+idx}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_bio_connector_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_bio_connector_ab58e69fe91d2ee3f017cd1e3c0466542}\index{BioConnector@{BioConnector}!BioConnector@{BioConnector}}
+\index{BioConnector@{BioConnector}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{BioConnector()}{BioConnector()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_bio_connector_ab58e69fe91d2ee3f017cd1e3c0466542} 
+Bio\+Connector::\+\+Bio\+Connector (\begin{DoxyParamCaption}\item[{string}]{name}{, }\item[{vector$<$ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}} \texorpdfstring{$\ast$}{*} $>$ \&}]{\+\_\+e}{, }\item[{vector$<$ bool $>$ \&}]{\+\_\+is\+\_\+front}{, }\item[{vector$<$ int $>$ \&}]{\+\_\+edges\+\_\+idx}{, }\item[{double}]{\+\_\+demand}{, }\item[{bool}]{\+\_\+\+DEBUG}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bio_connector_ab3a29ee62de4178023df77bc10378715}\index{BioConnector@{BioConnector}!BioConnector@{BioConnector}}
+\index{BioConnector@{BioConnector}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{BioConnector()}{BioConnector()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_bio_connector_ab3a29ee62de4178023df77bc10378715} 
+Bio\+Connector::\+\+Bio\+Connector (\begin{DoxyParamCaption}\item[{string}]{name}{, }\item[{\doxymbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}} \texorpdfstring{$\ast$}{*}}]{e1}{, }\item[{bool}]{is\+\_\+front}{, }\item[{string}]{BC\+\_\+type}{, }\item[{double}]{BC\+\_\+value}{, }\item[{double}]{demand}{, }\item[{bool}]{DEBUG}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bio_connector_a8e4020d0d3ed79c481e0938f04131790}\index{BioConnector@{BioConnector}!````~BioConnector@{\texorpdfstring{$\sim$}{\string~}BioConnector}}
+\index{````~BioConnector@{\texorpdfstring{$\sim$}{\string~}BioConnector}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}BioConnector()}{\string~BioConnector()}}
+{\footnotesize\ttfamily \label{class_bio_connector_a8e4020d0d3ed79c481e0938f04131790} 
+Bio\+Connector::\+\texorpdfstring{$\sim$}{\string~}\+Bio\+Connector (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_bio_connector_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_bio_connector_ad390cd4cdc1c2bae53cd4ac4f01f9709}\index{BioConnector@{BioConnector}!BioConnector\_FreeEnd@{BioConnector\_FreeEnd}}
+\index{BioConnector\_FreeEnd@{BioConnector\_FreeEnd}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{BioConnector\_FreeEnd()}{BioConnector\_FreeEnd()}}
+{\footnotesize\ttfamily \label{class_bio_connector_ad390cd4cdc1c2bae53cd4ac4f01f9709} 
+void Bio\+Connector::\+\+Bio\+Connector\+\_\+\+Free\+End (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bio_connector_a71c449f131dba796fdade203e10ad66a}\index{BioConnector@{BioConnector}!BioConnector\_N\_BioPipes@{BioConnector\_N\_BioPipes}}
+\index{BioConnector\_N\_BioPipes@{BioConnector\_N\_BioPipes}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{BioConnector\_N\_BioPipes()}{BioConnector\_N\_BioPipes()}}
+{\footnotesize\ttfamily \label{class_bio_connector_a71c449f131dba796fdade203e10ad66a} 
+void Bio\+Connector::\+\+Bio\+Connector\+\_\+\+N\+\_\+\+Bio\+Pipes (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{int}]{update\+\_\+idx}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bio_connector_a6be77f206b7de87d593f859e3d7b8a60}\index{BioConnector@{BioConnector}!BioConnector\_Reservoir@{BioConnector\_Reservoir}}
+\index{BioConnector\_Reservoir@{BioConnector\_Reservoir}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{BioConnector\_Reservoir()}{BioConnector\_Reservoir()}}
+{\footnotesize\ttfamily \label{class_bio_connector_a6be77f206b7de87d593f859e3d7b8a60} 
+void Bio\+Connector::\+\+Bio\+Connector\+\_\+\+Reservoir (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bio_connector_a16b34ffce1abac464106b33f19c0081f}\index{BioConnector@{BioConnector}!connected\_to\_rigid@{connected\_to\_rigid}}
+\index{connected\_to\_rigid@{connected\_to\_rigid}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{connected\_to\_rigid()}{connected\_to\_rigid()}}
+{\footnotesize\ttfamily \label{class_bio_connector_a16b34ffce1abac464106b33f19c0081f} 
+bool Bio\+Connector::\+connected\+\_\+to\+\_\+rigid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bio_connector_a5b8ccd8480cb92c0974075f7d3112a9a}\index{BioConnector@{BioConnector}!Get\_name@{Get\_name}}
+\index{Get\_name@{Get\_name}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{Get\_name()}{Get\_name()}}
+{\footnotesize\ttfamily \label{class_bio_connector_a5b8ccd8480cb92c0974075f7d3112a9a} 
+string Bio\+Connector::\+\+Get\+\_\+name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_bio_connector_a17195412446f47389ebd694b8f752b44}\index{BioConnector@{BioConnector}!Set\_demand@{Set\_demand}}
+\index{Set\_demand@{Set\_demand}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{Set\_demand()}{Set\_demand()}}
+{\footnotesize\ttfamily \label{class_bio_connector_a17195412446f47389ebd694b8f752b44} 
+void Bio\+Connector::\+\+Set\+\_\+demand (\begin{DoxyParamCaption}\item[{double}]{val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_bio_connector_a5a4ac6ea24c891e9fdbc97e492da264d}\index{BioConnector@{BioConnector}!Set\_InletQuality@{Set\_InletQuality}}
+\index{Set\_InletQuality@{Set\_InletQuality}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{Set\_InletQuality()}{Set\_InletQuality()}}
+{\footnotesize\ttfamily \label{class_bio_connector_a5a4ac6ea24c891e9fdbc97e492da264d} 
+void Bio\+Connector::\+\+Set\+\_\+\+Inlet\+Quality (\begin{DoxyParamCaption}\item[{Vector\+Xd}]{C\+\_\+inlet}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_bio_connector_a7fa7467cfcc3ae6f86a0deaecde886fa}\index{BioConnector@{BioConnector}!signed\_sqrt@{signed\_sqrt}}
+\index{signed\_sqrt@{signed\_sqrt}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{signed\_sqrt()}{signed\_sqrt()}}
+{\footnotesize\ttfamily \label{class_bio_connector_a7fa7467cfcc3ae6f86a0deaecde886fa} 
+double Bio\+Connector::\+signed\+\_\+sqrt (\begin{DoxyParamCaption}\item[{double}]{x}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bio_connector_a52002c01bec0aae8ef98a59f77b74aed}\index{BioConnector@{BioConnector}!Update@{Update}}
+\index{Update@{Update}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_bio_connector_a52002c01bec0aae8ef98a59f77b74aed} 
+void Bio\+Connector::\+\+Update (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{int}]{update\+\_\+idx}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_bio_connector_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_bio_connector_a20e8a7a2279d1bcb006eec0a1b217d65}\index{BioConnector@{BioConnector}!BC\_type@{BC\_type}}
+\index{BC\_type@{BC\_type}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{BC\_type}{BC\_type}}
+{\footnotesize\ttfamily \label{class_bio_connector_a20e8a7a2279d1bcb006eec0a1b217d65} 
+string Bio\+Connector::\+\+BC\+\_\+type}
+
+\Hypertarget{class_bio_connector_a1881ff7dab070cbadaa2496bab6f7e66}\index{BioConnector@{BioConnector}!BC\_value@{BC\_value}}
+\index{BC\_value@{BC\_value}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{BC\_value}{BC\_value}}
+{\footnotesize\ttfamily \label{class_bio_connector_a1881ff7dab070cbadaa2496bab6f7e66} 
+double Bio\+Connector::\+\+BC\+\_\+value}
+
+\Hypertarget{class_bio_connector_ad41247a17adfc40f8b7c2162102b9a18}\index{BioConnector@{BioConnector}!Cin@{Cin}}
+\index{Cin@{Cin}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{Cin}{Cin}}
+{\footnotesize\ttfamily \label{class_bio_connector_ad41247a17adfc40f8b7c2162102b9a18} 
+Vector\+Xd Bio\+Connector::\+\+Cin}
+
+\Hypertarget{class_bio_connector_abdb9129738c2cc12cb77e8ae45405187}\index{BioConnector@{BioConnector}!DEBUG@{DEBUG}}
+\index{DEBUG@{DEBUG}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{DEBUG}{DEBUG}}
+{\footnotesize\ttfamily \label{class_bio_connector_abdb9129738c2cc12cb77e8ae45405187} 
+bool Bio\+Connector::\+\+DEBUG}
+
+\Hypertarget{class_bio_connector_a13f40b13191d5b737124396410d6c398}\index{BioConnector@{BioConnector}!demand@{demand}}
+\index{demand@{demand}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{demand}{demand}}
+{\footnotesize\ttfamily \label{class_bio_connector_a13f40b13191d5b737124396410d6c398} 
+double Bio\+Connector::\+demand}
+
+\Hypertarget{class_bio_connector_a9c865e46a5a299a5a71b9cab9e7e9c11}\index{BioConnector@{BioConnector}!edges@{edges}}
+\index{edges@{edges}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{edges}{edges}}
+{\footnotesize\ttfamily \label{class_bio_connector_a9c865e46a5a299a5a71b9cab9e7e9c11} 
+vector$<$\doxymbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}} \texorpdfstring{$\ast$}{*}$>$ Bio\+Connector::\+edges}
+
+\Hypertarget{class_bio_connector_a1576749162b13d9dce4f85189cda7d3d}\index{BioConnector@{BioConnector}!edges\_idx@{edges\_idx}}
+\index{edges\_idx@{edges\_idx}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{edges\_idx}{edges\_idx}}
+{\footnotesize\ttfamily \label{class_bio_connector_a1576749162b13d9dce4f85189cda7d3d} 
+vector$<$int$>$ Bio\+Connector::\+edges\+\_\+idx}
+
+\Hypertarget{class_bio_connector_ab57e2d1d62fd9133b02b6b8cac4a7562}\index{BioConnector@{BioConnector}!is\_front@{is\_front}}
+\index{is\_front@{is\_front}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{is\_front}{is\_front}}
+{\footnotesize\ttfamily \label{class_bio_connector_ab57e2d1d62fd9133b02b6b8cac4a7562} 
+vector$<$bool$>$ Bio\+Connector::\+is\+\_\+front}
+
+\Hypertarget{class_bio_connector_ad2bdf39e4888e864647baaf50ddd02e0}\index{BioConnector@{BioConnector}!name@{name}}
+\index{name@{name}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily \label{class_bio_connector_ad2bdf39e4888e864647baaf50ddd02e0} 
+string Bio\+Connector::\+name}
+
+\Hypertarget{class_bio_connector_ae862537af844ff52de45621b9f897ac5}\index{BioConnector@{BioConnector}!s\_edges@{s\_edges}}
+\index{s\_edges@{s\_edges}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{s\_edges}{s\_edges}}
+{\footnotesize\ttfamily \label{class_bio_connector_ae862537af844ff52de45621b9f897ac5} 
+\doxymbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}}\texorpdfstring{$\ast$}{*} Bio\+Connector::\+s\+\_\+edges}
+
+\Hypertarget{class_bio_connector_aedb708c06f3c88fcbd0818d2dea38f63}\index{BioConnector@{BioConnector}!s\_edges\_idx@{s\_edges\_idx}}
+\index{s\_edges\_idx@{s\_edges\_idx}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{s\_edges\_idx}{s\_edges\_idx}}
+{\footnotesize\ttfamily \label{class_bio_connector_aedb708c06f3c88fcbd0818d2dea38f63} 
+int Bio\+Connector::\+s\+\_\+edges\+\_\+idx}
+
+\Hypertarget{class_bio_connector_ad1a52d7cdbca962fa37d9aeb04f07992}\index{BioConnector@{BioConnector}!s\_is\_front@{s\_is\_front}}
+\index{s\_is\_front@{s\_is\_front}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{s\_is\_front}{s\_is\_front}}
+{\footnotesize\ttfamily \label{class_bio_connector_ad1a52d7cdbca962fa37d9aeb04f07992} 
+bool Bio\+Connector::\+s\+\_\+is\+\_\+front}
+
+\Hypertarget{class_bio_connector_a76f8cf493d34a3deb2f0f89a2c5dd25f}\index{BioConnector@{BioConnector}!type@{type}}
+\index{type@{type}!BioConnector@{BioConnector}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily \label{class_bio_connector_a76f8cf493d34a3deb2f0f89a2c5dd25f} 
+int Bio\+Connector::\+type}
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+src/\+\doxymbox{\hyperlink{_bio_connector_8h}{Bio\+Connector.\+h}}\item 
+src/\+\doxymbox{\hyperlink{_bio_connector_8cpp}{Bio\+Connector.\+cpp}}\end{DoxyCompactItemize}

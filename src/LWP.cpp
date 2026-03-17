@@ -985,8 +985,8 @@ bool LWP::BCRight(double t_target, string type, double val1, double val2, bool w
             double k = gas->Get_kappa_Tp();
             double R = gas->Get_R();
 
-            cout << endl << "LWP -> BCRight -> StaticPres_Outlet -> choked flow" << endl;
-            cin.get();
+            cout << endl << "LWP -> BCRight -> StaticPres_Outlet -> choked flow: vBC / aBC = " << vBC / aBC;
+            cout << endl << "  -> overwriting with sonic velocity"<<endl;
             TBC = alpha / rhoBC / R / (1 + k);
             pBC = gas->Get_p(rhoBC, TBC);
             aBC = gas->Get_SonicVel(TBC, pBC);

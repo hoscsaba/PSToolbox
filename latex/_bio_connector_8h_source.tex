@@ -1,0 +1,80 @@
+\doxysection{Bio\+Connector.\+h}
+\hypertarget{_bio_connector_8h_source}{}\label{_bio_connector_8h_source}\index{src/BioConnector.h@{src/BioConnector.h}}
+\doxymbox{\hyperlink{_bio_connector_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_reservoir_8h}{Reservoir.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_l_w_p_8h}{LWP.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_s_c_p_8h}{SCP.h}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_valve_8h}{Valve.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_throttle_valve_8h}{ThrottleValve.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_damper_8h}{Damper.h}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_bio_pipe_8h}{BioPipe.h}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\#include\ "{}PSToolboxBaseEdge.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_bio_connector_ab58e69fe91d2ee3f017cd1e3c0466542}{BioConnector}}\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{comment}{//\ BioConnector(bool\ DEBUG);}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{comment}{//type=0}}
+\DoxyCodeLine{00018\ \ \ \ \ \doxymbox{\hyperlink{class_bio_connector_ab58e69fe91d2ee3f017cd1e3c0466542}{BioConnector}}(}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_bio_connector_ad2bdf39e4888e864647baaf50ddd02e0}{name}},}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ vector<PSToolboxBaseEdge\ *>\ \&\_e,}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ vector<bool>\ \&\_is\_front,}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ vector<int>\ \&\_edges\_idx,}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_demand,\ \textcolor{keywordtype}{bool}\ \_DEBUG);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{comment}{//\ type=1}}
+\DoxyCodeLine{00026\ \ \ \ \ \doxymbox{\hyperlink{class_bio_connector_ab58e69fe91d2ee3f017cd1e3c0466542}{BioConnector}}(}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_bio_connector_ad2bdf39e4888e864647baaf50ddd02e0}{name}},}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolboxBaseEdge}}\ *e1,\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_bio_connector_ab57e2d1d62fd9133b02b6b8cac4a7562}{is\_front}},}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_bio_connector_a20e8a7a2279d1bcb006eec0a1b217d65}{BC\_type}},\ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{class_bio_connector_a1881ff7dab070cbadaa2496bab6f7e66}{BC\_value}},}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{class_bio_connector_a13f40b13191d5b737124396410d6c398}{demand}},\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_bio_connector_abdb9129738c2cc12cb77e8ae45405187}{DEBUG}});}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \doxymbox{\hyperlink{class_bio_connector_a8e4020d0d3ed79c481e0938f04131790}{\string~BioConnector}}();}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_bio_connector_a52002c01bec0aae8ef98a59f77b74aed}{Update}}(\textcolor{keywordtype}{double}\ t\_target,\ \textcolor{keywordtype}{int}\ update\_idx);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_bio_connector_a71c449f131dba796fdade203e10ad66a}{BioConnector\_N\_BioPipes}}(\textcolor{keywordtype}{double}\ t\_target,\ \textcolor{keywordtype}{int}\ update\_idx);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_bio_connector_a6be77f206b7de87d593f859e3d7b8a60}{BioConnector\_Reservoir}}(\textcolor{keywordtype}{double}\ t\_target);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_bio_connector_ad390cd4cdc1c2bae53cd4ac4f01f9709}{BioConnector\_FreeEnd}}(\textcolor{keywordtype}{double}\ t\_target);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_bio_connector_ad2bdf39e4888e864647baaf50ddd02e0}{name}};}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_bio_connector_abdb9129738c2cc12cb77e8ae45405187}{DEBUG}};}
+\DoxyCodeLine{00044\ \ \ \ \ VectorXd\ \doxymbox{\hyperlink{class_bio_connector_ad41247a17adfc40f8b7c2162102b9a18}{Cin}};\ \textcolor{comment}{//\ If\ type=1\ (free\ end)\ or\ 2\ (reservoir),\ set\ the\ ingoing\ quality}}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_bio_connector_a20e8a7a2279d1bcb006eec0a1b217d65}{BC\_type}};}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{class_bio_connector_a1881ff7dab070cbadaa2496bab6f7e66}{BC\_value}};}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{class_bio_connector_a13f40b13191d5b737124396410d6c398}{demand}};}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_bio_connector_a76f8cf493d34a3deb2f0f89a2c5dd25f}{type}};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolboxBaseEdge}}\ *\doxymbox{\hyperlink{class_bio_connector_ae862537af844ff52de45621b9f897ac5}{s\_edges}};\ \textcolor{comment}{//\ s\_\ =\ single}}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_bio_connector_ad1a52d7cdbca962fa37d9aeb04f07992}{s\_is\_front}};}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_bio_connector_aedb708c06f3c88fcbd0818d2dea38f63}{s\_edges\_idx}};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ vector<PSToolboxBaseEdge\ *>\ \doxymbox{\hyperlink{class_bio_connector_a9c865e46a5a299a5a71b9cab9e7e9c11}{edges}};}
+\DoxyCodeLine{00055\ \ \ \ \ vector<bool>\ \doxymbox{\hyperlink{class_bio_connector_ab57e2d1d62fd9133b02b6b8cac4a7562}{is\_front}};}
+\DoxyCodeLine{00056\ \ \ \ \ vector<int>\ \doxymbox{\hyperlink{class_bio_connector_a1576749162b13d9dce4f85189cda7d3d}{edges\_idx}};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{class_bio_connector_a7fa7467cfcc3ae6f86a0deaecde886fa}{signed\_sqrt}}(\textcolor{keywordtype}{double}\ x);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_bio_connector_a16b34ffce1abac464106b33f19c0081f}{connected\_to\_rigid}}();}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_bio_connector_a5a4ac6ea24c891e9fdbc97e492da264d}{Set\_InletQuality}}(VectorXd\ C\_inlet)\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_bio_connector_ad41247a17adfc40f8b7c2162102b9a18}{Cin}}\ =\ C\_inlet;}
+\DoxyCodeLine{00064\ \ \ \ \ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_bio_connector_a17195412446f47389ebd694b8f752b44}{Set\_demand}}(\textcolor{keywordtype}{double}\ val)\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \doxymbox{\hyperlink{class_bio_connector_a13f40b13191d5b737124396410d6c398}{demand}}=val;}
+\DoxyCodeLine{00068\ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_bio_connector_a5b8ccd8480cb92c0974075f7d3112a9a}{Get\_name}}()\{}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_bio_connector_ad2bdf39e4888e864647baaf50ddd02e0}{name}};}
+\DoxyCodeLine{00072\ \ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \};}
+
+\end{DoxyCode}

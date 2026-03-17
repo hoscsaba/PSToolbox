@@ -7,9 +7,9 @@ Class to model a slightly compressible pipe.
 
 
 
-{\ttfamily \#include $<$SCP.\+h$>$}
+{\ttfamily \+\#include $<$SCP.\+h$>$}
 
-Inheritance diagram for SCP\+:\begin{figure}[H]
+Inheritance diagram for SCP:\+\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{class_s_c_p}
@@ -18,158 +18,188 @@ Inheritance diagram for SCP\+:\begin{figure}[H]
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_s_c_p_a3dedbee89f8f613bd2987b6fca6dca94}{SCP}} (const string \+\_\+nev, const string \+\_\+cspe\+\_\+nev, const string \+\_\+cspv\+\_\+nev, const double \+\_\+ro, const double \+\_\+a, const double \+\_\+L, const double \+\_\+D, const double \+\_\+lambda, const double \+\_\+he, const double \+\_\+hv, const bool save\+\_\+data)
+\doxymbox{\hyperlink{class_s_c_p_a3dedbee89f8f613bd2987b6fca6dca94}{SCP}} (const string \+\_\+nev, const string \+\_\+cspe\+\_\+nev, const string \+\_\+cspv\+\_\+nev, const double \+\_\+ro, const double \+\_\+a, const double \+\_\+L, const double \+\_\+D, const double \+\_\+lambda, const double \+\_\+he, const double \+\_\+hv, const bool \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a24d0bdb54e1ef80a07b1d0a53f512e15}{save\+\_\+data}})
 \begin{DoxyCompactList}\small\item\em Constructor for the slightly compressible pipe class. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{class_s_c_p_aec0db6047f6437d1ff4de3e5c21a9671}{\texorpdfstring{$\sim$}{\string~}\+SCP}} ()
+\doxymbox{\hyperlink{class_s_c_p_aec0db6047f6437d1ff4de3e5c21a9671}{\texorpdfstring{$\sim$}{\string~}\+SCP}} ()
 \begin{DoxyCompactList}\small\item\em Desctructor of the \doxylink{class_s_c_p}{SCP} class. \end{DoxyCompactList}\item 
-string \mbox{\hyperlink{class_s_c_p_af16d744aa2d09926cf227f260773a82c}{Get\+Name}} ()
+string \doxymbox{\hyperlink{class_s_c_p_af16d744aa2d09926cf227f260773a82c}{Get\+Name}} ()
 \begin{DoxyCompactList}\small\item\em Gives name of the pipe Returns the name of the \doxylink{class_s_c_p}{SCP} pipe. \end{DoxyCompactList}\item 
-string \mbox{\hyperlink{class_s_c_p_a3921a67c908dadf1f0ff21cc9464dcc5}{Info}} ()
+string \doxymbox{\hyperlink{class_s_c_p_a3921a67c908dadf1f0ff21cc9464dcc5}{Info}} ()
 \begin{DoxyCompactList}\small\item\em Return the basic info of the pipe Returns the basic info about the pipe section. If so set, the data within the points is also displayed. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_s_c_p_ac0d7cee77a62cad929b27a02bfd25329}{Ini}} ()
+void \doxymbox{\hyperlink{class_s_c_p_ac0d7cee77a62cad929b27a02bfd25329}{Ini}} ()
 \item 
-void \mbox{\hyperlink{class_s_c_p_afd01c84f7ecfe434523957f646bfbcb1}{Ini}} (int Npts\+\_\+mul)
+void \doxymbox{\hyperlink{class_s_c_p_afd01c84f7ecfe434523957f646bfbcb1}{Ini}} (int Npts\+\_\+mul)
 \begin{DoxyCompactList}\small\item\em Initialize the \doxylink{class_s_c_p}{SCP} pipe Initializes the \doxylink{class_s_c_p}{SCP} pipe with a given number of points at 1 bar pressure and 0 velocity. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_s_c_p_a93dff5300ff677c655f5dc4ab5d8df58}{Ini}} (double dt\+\_\+target)
+void \doxymbox{\hyperlink{class_s_c_p_a93dff5300ff677c655f5dc4ab5d8df58}{Ini}} (double dt\+\_\+target)
 \begin{DoxyCompactList}\small\item\em Initialize the \doxylink{class_s_c_p}{SCP} pipe Initializes the \doxylink{class_s_c_p}{SCP} pipe with .... \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_s_c_p_a7c41b5c5742ed46307d91d73e6a46327}{Ini}} (double vini, double \+\_\+pstart)
-\begin{DoxyCompactList}\small\item\em Initialize the \doxylink{class_s_c_p}{SCP} pipe Initializes the \doxylink{class_s_c_p}{SCP} pipe with 20 grid points and initial uniform flow velocity and pressure. (The generated pressure drops with friction.) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_s_c_p_a9f5e519bf13863e1632f5607624143d1}{Ini}} (double vini, double \+\_\+pstart, int Npts\+\_\+mul)
-\begin{DoxyCompactList}\small\item\em Initialize the \doxylink{class_s_c_p}{SCP} pipe Initializes the \doxylink{class_s_c_p}{SCP} pipe with 20\texorpdfstring{$\ast$}{*}\+Npts\+\_\+mul grid points, initial uniform velocity and pressure at the inlet. (The generated pressure drops with friction.) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_s_c_p_a3709666047b1cf4cc6b6b460430bb83e}{Ini}} (double vini, double \+\_\+pstart, double dt\+\_\+target)
-\begin{DoxyCompactList}\small\item\em Initialize the \doxylink{class_s_c_p}{SCP} pipe Initializes the \doxylink{class_s_c_p}{SCP} pipe with number of grid points that satisfy the given timestep Initial uniform velocity distribution and a pressure at the inlet. (The generated pressure drops with friction.) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_s_c_p_af1f4995d58d75d80ed1738346ff06bf4}{Update\+Dimless\+Pars}} (double pref, double mp\+\_\+nevl, double omega, double xref, double m)
+void \doxymbox{\hyperlink{class_s_c_p_a7c41b5c5742ed46307d91d73e6a46327}{Ini}} (double vini, double \+\_\+pstart)
+\begin{DoxyCompactList}\small\item\em Initialize the \doxylink{class_s_c_p}{SCP} pipe Initializes the \doxylink{class_s_c_p}{SCP} pipe with 20 grid points and initial uniform flow velocity and pressure. (The generated pressure drops with friction.). \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_s_c_p_a9f5e519bf13863e1632f5607624143d1}{Ini}} (double vini, double \+\_\+pstart, int Npts\+\_\+mul)
+\begin{DoxyCompactList}\small\item\em Initialize the \doxylink{class_s_c_p}{SCP} pipe Initializes the \doxylink{class_s_c_p}{SCP} pipe with 20\texorpdfstring{$\ast$}{*}\+Npts\+\_\+mul grid points, initial uniform velocity and pressure at the inlet. (The generated pressure drops with friction.). \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_s_c_p_a3709666047b1cf4cc6b6b460430bb83e}{Ini}} (double vini, double \+\_\+pstart, double dt\+\_\+target)
+\begin{DoxyCompactList}\small\item\em Initialize the \doxylink{class_s_c_p}{SCP} pipe Initializes the \doxylink{class_s_c_p}{SCP} pipe with number of grid points that satisfy the given timestep Initial uniform velocity distribution and a pressure at the inlet. (The generated pressure drops with friction.). \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_s_c_p_af1f4995d58d75d80ed1738346ff06bf4}{Update\+Dimless\+Pars}} (double pref, double mp\+\_\+nevl, double omega, double xref, double m)
 \begin{DoxyCompactList}\small\item\em Calculates the dimensionless parameters Calculates the dimensionless parametwers of the pipe using the input parameters as a base. While these parametersa have a usual definitions, here values need to be passed, and as such any can be used for non-\/dimensionalization. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_s_c_p_ac54934da5fa1da99660c457f008c363b}{Get\+Large\+Pressure\+Values}} (double, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ string $>$ \&)
+void \doxymbox{\hyperlink{class_s_c_p_ac54934da5fa1da99660c457f008c363b}{Get\+Large\+Pressure\+Values}} (double, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ string $>$ \&)
 \item 
-void \mbox{\hyperlink{class_s_c_p_a689ec22745be1e9a4bbe3536bd90e340}{Get\+Small\+Pressure\+Values}} (double, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ string $>$ \&)
+void \doxymbox{\hyperlink{class_s_c_p_a689ec22745be1e9a4bbe3536bd90e340}{Get\+Small\+Pressure\+Values}} (double, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ string $>$ \&)
 \item 
-double \mbox{\hyperlink{class_s_c_p_a046c2c6fa8dedf9d5797b294db9c4f15}{Get\+\_\+dprop}} (string prop\+\_\+string)
+double \doxymbox{\hyperlink{class_s_c_p_a046c2c6fa8dedf9d5797b294db9c4f15}{Get\+\_\+dprop}} (string prop\+\_\+string)
 \begin{DoxyCompactList}\small\item\em Return a property of the \doxylink{class_s_c_p}{SCP}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_s_c_p_ac1f64a4207c1e612da730cebbb44c682}{Set\+\_\+dprop}} (string prop\+\_\+string, double val)
+void \doxymbox{\hyperlink{class_s_c_p_ac1f64a4207c1e612da730cebbb44c682}{Set\+\_\+dprop}} (string prop\+\_\+string, double val)
 \begin{DoxyCompactList}\small\item\em Set a parameter Allows to reset the diameter or length the pipe. Updating the length will rescale the system. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_s_c_p_a58097cfe30d419e07d14bac541d04af5}{Step}} (string BC\+\_\+start\+\_\+type, double BC\+\_\+start\+\_\+val, string BC\+\_\+end\+\_\+type, double BC\+\_\+end\+\_\+val)
-\begin{DoxyCompactList}\small\item\em Take a timestep. Calculates a timestep in the system dependent on the boundary conditions. (Those are given by the same strings and values as the ones in BCLeft and BCRight) Accepted boundary condition types\+: "{}\+Pressure"{} \& "{}\+Velocity"{}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_s_c_p_abe99f0055be7b82310d7566d9a518f13}{Update\+Internal}} (double)
+void \doxymbox{\hyperlink{class_s_c_p_a58097cfe30d419e07d14bac541d04af5}{Step}} (string BC\+\_\+start\+\_\+type, double BC\+\_\+start\+\_\+val, string BC\+\_\+end\+\_\+type, double BC\+\_\+end\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Take a timestep. Calculates a timestep in the system dependent on the boundary conditions. (Those are given by the same strings and values as the ones in BCLeft and BCRight) Accepted boundary condition types:\+ "{}\+Pressure"{} \& "{}\+Velocity"{}. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_s_c_p_abe99f0055be7b82310d7566d9a518f13}{Update\+Internal}} (double)
 \item 
-void \mbox{\hyperlink{class_s_c_p_a4f0c2d221984911a56ab3185259c74c7}{Update\+Time}} (double)
+void \doxymbox{\hyperlink{class_s_c_p_a4f0c2d221984911a56ab3185259c74c7}{Update\+Time}} (double)
 \item 
-void \mbox{\hyperlink{class_s_c_p_adecf0ab382906de50c7a79a1b03bf4ae}{Set\+\_\+\+BC\+\_\+\+Left}} (string type, double val)
+void \doxymbox{\hyperlink{class_s_c_p_acfde911d3ee302955437ed254cb4680a}{Set\+\_\+\+BC\+\_\+\+Left}} (double t\+\_\+target, string type, double val)
 \item 
-void \mbox{\hyperlink{class_s_c_p_abbcdb65bd34be9aae081db1c08151392}{Set\+\_\+\+BC\+\_\+\+Right}} (string type, double val)
+void \doxymbox{\hyperlink{class_s_c_p_a38b6641e0db9064ef5a1de7edf0d46e2}{Set\+\_\+\+BC\+\_\+\+Right}} (double t\+\_\+target, string type, double val)
 \item 
-double \mbox{\hyperlink{class_s_c_p_a89b4153c9fb930954b585a0ca7cf9d7c}{Get\+Alpha\+At\+End}} (double t\+\_\+target)
+double \doxymbox{\hyperlink{class_s_c_p_a89b4153c9fb930954b585a0ca7cf9d7c}{Get\+Alpha\+At\+End}} (double t\+\_\+target)
 \item 
-double \mbox{\hyperlink{class_s_c_p_a6183e93948861f5d3a3282cbf31f977b}{Get\+Beta\+At\+Front}} (double t\+\_\+target)
+double \doxymbox{\hyperlink{class_s_c_p_a6183e93948861f5d3a3282cbf31f977b}{Get\+Beta\+At\+Front}} (double t\+\_\+target)
 \item 
-void \mbox{\hyperlink{class_s_c_p_ac1064fd994d2aebb4a02183e29c3182d}{Get\+Alpha\+At\+End}} (double t\+\_\+target, double \&LHS, double \&coeff\+\_\+Q)
+void \doxymbox{\hyperlink{class_s_c_p_ac1064fd994d2aebb4a02183e29c3182d}{Get\+Alpha\+At\+End}} (double t\+\_\+target, double \&LHS, double \&coeff\+\_\+Q)
 \item 
-void \mbox{\hyperlink{class_s_c_p_a2c240e262befefb8f81d49c83445126f}{Get\+Beta\+At\+Front}} (double t\+\_\+target, double \&LHS, double \&coeff\+\_\+Q)
+void \doxymbox{\hyperlink{class_s_c_p_a2c240e262befefb8f81d49c83445126f}{Get\+Beta\+At\+Front}} (double t\+\_\+target, double \&LHS, double \&coeff\+\_\+Q)
 \item 
-void \mbox{\hyperlink{class_s_c_p_a040698d72852ba3f20c2949941e4733f}{Get\+Edge\+Equation\+Coeffs}} (double, bool, double \&, double \&, double \&, double \&)
+void \doxymbox{\hyperlink{class_s_c_p_a040698d72852ba3f20c2949941e4733f}{Get\+Edge\+Equation\+Coeffs}} (double, bool, double \&, double \&, double \&, double \&)
 \item 
-double \mbox{\hyperlink{class_s_c_p_a6137f34f11cf5c9b4c3fc3c266aac067}{Get\+Alpha\+Primitive\+At\+End}} (double t\+\_\+target)
+double \doxymbox{\hyperlink{class_s_c_p_a6137f34f11cf5c9b4c3fc3c266aac067}{Get\+Alpha\+Primitive\+At\+End}} (double t\+\_\+target)
 \item 
-double \mbox{\hyperlink{class_s_c_p_a67b7c3d88873f91950d4881c42947bc7}{Get\+Beta\+Primitive\+At\+Front}} (double t\+\_\+target)
+double \doxymbox{\hyperlink{class_s_c_p_a67b7c3d88873f91950d4881c42947bc7}{Get\+Beta\+Primitive\+At\+Front}} (double t\+\_\+target)
 \item 
-void \mbox{\hyperlink{class_s_c_p_a15a21288294d0ae18e73ef2fccc1388b}{Save\+\_\+data}} ()
+void \doxymbox{\hyperlink{class_s_c_p_a15a21288294d0ae18e73ef2fccc1388b}{Save\+\_\+data}} ()
 \item 
-void \mbox{\hyperlink{class_s_c_p_a02d0d267e51445438b62a45c1c8c3cd3}{Write\+\_\+data}} (string folder)
-\begin{DoxyCompactList}\small\item\em Exports savied data Exports data saved from previous settings (such as steps and initialization.) Only works if the save\+\_\+data flag was set to true, otherwise an error message is displayed. Data is saved to the previously determined savefile name. No inputs/outputs. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_s_c_p_a788d3c89f8db4ae29abe3d90dea03e54}{Save\+\_\+status}} (bool newfile, bool atonce)
+void \doxymbox{\hyperlink{class_s_c_p_a02d0d267e51445438b62a45c1c8c3cd3}{Write\+\_\+data}} (string folder)
+\begin{DoxyCompactList}\small\item\em Exports saved data Exports data saved from previous settings (such as steps and initialization.) Only works if the save\+\_\+data flag was set to true, otherwise an error message is displayed. Data is saved to the previously determined savefile name. No inputs/\+outputs. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_s_c_p_a788d3c89f8db4ae29abe3d90dea03e54}{Save\+\_\+status}} (bool newfile, bool atonce)
 \item 
-float \mbox{\hyperlink{class_s_c_p_acf9565ea5e961dc2b13593556414a113}{Get\+Penult}} (string what)
-\begin{DoxyCompactList}\small\item\em Export the penultimate values of a given return data Returns the penultimate value of the collected data. Only one value, the one specified by the input value is returned. Possible values\+: t,p\+\_\+front, p\+\_\+back, v\+\_\+front, v\+\_\+back, mp\+\_\+front, mp\+\_\+back. \end{DoxyCompactList}\item 
-vector$<$ double $>$ \mbox{\hyperlink{class_s_c_p_a5736aeb413b6ea08f0c7bd6aa3da1d45}{Get\+\_\+dvprop}} (string prop\+\_\+string)
+float \doxymbox{\hyperlink{class_s_c_p_acf9565ea5e961dc2b13593556414a113}{Get\+Penult}} (string what)
+\begin{DoxyCompactList}\small\item\em Export the penultimate values of a given return data Returns the penultimate value of the collected data. Only one value, the one specified by the input value is returned. Possible values:\+ t,p\+\_\+front, p\+\_\+back, v\+\_\+front, v\+\_\+back, mp\+\_\+front, mp\+\_\+back. \end{DoxyCompactList}\item 
+vector$<$ double $>$ \doxymbox{\hyperlink{class_s_c_p_a5736aeb413b6ea08f0c7bd6aa3da1d45}{Get\+\_\+dvprop}} (string prop\+\_\+string)
 \item 
-void \mbox{\hyperlink{class_s_c_p_a77774ab55f72cd0b175c09d6f7b8fba3}{list\+\_\+pv}} ()
+void \doxymbox{\hyperlink{class_s_c_p_a77774ab55f72cd0b175c09d6f7b8fba3}{list\+\_\+pv}} ()
 \item 
-void \mbox{\hyperlink{class_s_c_p_a72211cc8d46d8e7c7844a46175907751}{Set\+\_\+string\+\_\+prop}} (string, string)
+void \doxymbox{\hyperlink{class_s_c_p_a72211cc8d46d8e7c7844a46175907751}{Set\+\_\+string\+\_\+prop}} (string, string)
 \item 
-void \mbox{\hyperlink{class_s_c_p_a588773d1c994934875af3fdc531ab066}{Add\+\_\+transient}} (string, double, double)
+void \doxymbox{\hyperlink{class_s_c_p_a588773d1c994934875af3fdc531ab066}{Add\+\_\+transient}} (string, double, double)
 \end{DoxyCompactItemize}
-\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}}}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}}}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_p_s_toolbox_base_edge_ae5dcabbe9cf289d0ad419a6b1a903fd9}{PSToolbox\+Base\+Edge}} (const string \mbox{\hyperlink{class_p_s_toolbox_base_edge_aae9cb0874655893e409b145fe256570a}{edge\+\_\+type}}, const string \mbox{\hyperlink{class_p_s_toolbox_base_edge_a3b4da68ffb04db1c11898f3d53f46345}{name}}, const string n1, const string n2)
+\doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ae5dcabbe9cf289d0ad419a6b1a903fd9}{PSToolbox\+Base\+Edge}} (const string \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_aae9cb0874655893e409b145fe256570a}{edge\+\_\+type}}, const string \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a3b4da68ffb04db1c11898f3d53f46345}{name}}, const string n1, const string n2)
 \item 
-virtual \mbox{\hyperlink{class_p_s_toolbox_base_edge_a2292b6b435b696cc29493d09f43fbf65}{\texorpdfstring{$\sim$}{\string~}\+PSToolbox\+Base\+Edge}} ()
+virtual \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a2292b6b435b696cc29493d09f43fbf65}{\texorpdfstring{$\sim$}{\string~}\+PSToolbox\+Base\+Edge}} ()
 \item 
-string \mbox{\hyperlink{class_p_s_toolbox_base_edge_aac5d028f66e59fa00ea43ed11c4174ca}{Get\+\_\+name}} ()
+string \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_aac5d028f66e59fa00ea43ed11c4174ca}{Get\+\_\+name}} ()
 \item 
-string \mbox{\hyperlink{class_p_s_toolbox_base_edge_a15e7c020c3160301c487b45f23ad4453}{Get\+\_\+type}} ()
+string \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a15e7c020c3160301c487b45f23ad4453}{Get\+\_\+type}} ()
 \item 
-void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a7c65f75c7ab39eb4d4771d70e2a2f479}{Set\+\_\+t}} (double tnew)
+void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a7c65f75c7ab39eb4d4771d70e2a2f479}{Set\+\_\+t}} (double tnew)
 \item 
-double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a6a9467311884e28db1b4664c599a3a30}{Get\+\_\+t}} ()
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a6a9467311884e28db1b4664c599a3a30}{Get\+\_\+t}} ()
 \item 
-double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a99daaac3714e8cfafca1def01fbc8efc}{Get\+\_\+dt}} ()
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a99daaac3714e8cfafca1def01fbc8efc}{Get\+\_\+dt}} ()
 \item 
-double \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae0ba8e08d2304a6f7b9cdc61619e772c}{Get\+\_\+tnext}} ()
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ae0ba8e08d2304a6f7b9cdc61619e772c}{Get\+\_\+tnext}} ()
 \item 
-void \mbox{\hyperlink{class_p_s_toolbox_base_edge_aa6856b33f6ed4d341e8a95532ecf0ed6}{Set\+\_\+\+DEBUG}} (bool newval)
+void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_aa6856b33f6ed4d341e8a95532ecf0ed6}{Set\+\_\+\+DEBUG}} (bool newval)
 \item 
-void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a903801bf8174255041aea9547283b8d2}{Set\+\_\+Q}} (double newval)
+void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a903801bf8174255041aea9547283b8d2}{Set\+\_\+Q}} (double newval)
 \item 
-void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a640bca714eb3eec11b73f907a32ec264}{Set\+\_\+p1}} (double newval)
+void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a640bca714eb3eec11b73f907a32ec264}{Set\+\_\+p1}} (double newval)
 \item 
-void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0940a1bda2f70926904472aae2a5bb5e}{Set\+\_\+p2}} (double newval)
+void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a0940a1bda2f70926904472aae2a5bb5e}{Set\+\_\+p2}} (double newval)
 \item 
-double \mbox{\hyperlink{class_p_s_toolbox_base_edge_afae9361aedc8ca0ed48ca0d39f2be49c}{Get\+\_\+Q}} ()
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_afae9361aedc8ca0ed48ca0d39f2be49c}{Get\+\_\+Q}} ()
 \item 
-double \mbox{\hyperlink{class_p_s_toolbox_base_edge_abd8d054059e5c588ad9b802f55ad8c43}{Get\+\_\+p1}} ()
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_abd8d054059e5c588ad9b802f55ad8c43}{Get\+\_\+p1}} ()
 \item 
-double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a606f24ed9cef6fb267e619cf6cfe4c56}{Get\+\_\+p2}} ()
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a606f24ed9cef6fb267e619cf6cfe4c56}{Get\+\_\+p2}} ()
 \item 
-void \mbox{\hyperlink{class_p_s_toolbox_base_edge_a989266da88c5dea78b56f6fada2ff97c}{Set\+\_\+dt\+\_\+out}} (double val)
+void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a0be9137923776708118955590dae2d73}{set\+\_\+supress\+\_\+all\+\_\+output}} (bool newval)
+\item 
+virtual void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a0af0d8ec247c62523c634b8a1062e3f3}{Set\+\_\+\+BC\+\_\+\+Left}} (string type, double val)
+\item 
+virtual void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a748c5ba72543539a2c5a2aba2248bd24}{Set\+\_\+\+BC\+\_\+\+Right}} (string type, double val)
+\item 
+virtual int \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_aaa8d78970b956eab5210f913f8b8eaf6}{Get\+\_\+iprop}} (string prop\+\_\+string)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a989266da88c5dea78b56f6fada2ff97c}{Set\+\_\+dt\+\_\+out}} (double val)
+\item 
+virtual Matrix\+Xd \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a580c32afaec6551883ea53478b5eb437}{Get\+\_\+C}} ()
+\item 
+virtual Vector\+Xd \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a285ac068d0085c10b9f5a075ac5427e9}{Get\+\_\+\+Inner\+MeanC}} ()
+\item 
+virtual void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a6a542cc380839dddea4d7d0596021210}{Set\+\_\+inlet\+Quality\+Front}} (Vector\+Xd Cin)
+\item 
+virtual void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ac74d72d2c3610df69100d0205f236095}{Set\+\_\+inlet\+Quality\+Back}} (Vector\+Xd Cin)
+\item 
+virtual void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_aab267d5735d087387777a99d87dff64f}{Set\+\_\+max\+\_\+vals}} (Vector\+Xd \+\_\+max\+\_\+vals)
+\item 
+virtual Vector\+Xd \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_adbe162054706489cb31774fe37f3b45f}{Get\+\_\+\+C\+\_\+\+Front}} ()
+\item 
+virtual Vector\+Xd \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ab9cab3f0e7a6696ebbd52ba68108c3fa}{Get\+\_\+\+C\+\_\+\+Back}} ()
+\item 
+virtual void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a0230b80efe8c2d957f1a90a8c0e44dfd}{Set\+\_\+v\+\_\+conv}} (double v)
+\item 
+virtual void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a292200d3f09e6bd1326795432bd223a5}{Ini}} (double dt\+\_\+target, Vector\+Xd Cini)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-string \mbox{\hyperlink{class_s_c_p_a77886d757791949bd29efe51e6c47703}{fname}}
+string \doxymbox{\hyperlink{class_s_c_p_a77886d757791949bd29efe51e6c47703}{fname}}
 \end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}}}
+\doxysubsection*{Public Attributes inherited from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}}}
 \begin{DoxyCompactItemize}
 \item 
-string \mbox{\hyperlink{class_p_s_toolbox_base_edge_a3b4da68ffb04db1c11898f3d53f46345}{name}}
+string \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a3b4da68ffb04db1c11898f3d53f46345}{name}}
 \item 
-string \mbox{\hyperlink{class_p_s_toolbox_base_edge_aae9cb0874655893e409b145fe256570a}{edge\+\_\+type}}
+string \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_aae9cb0874655893e409b145fe256570a}{edge\+\_\+type}}
 \item 
-string \mbox{\hyperlink{class_p_s_toolbox_base_edge_a2d9ddbc23532f9d8a66b188e8a27e43c}{node\+\_\+from}}
+string \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a2d9ddbc23532f9d8a66b188e8a27e43c}{node\+\_\+from}}
 \item 
-string \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0d9bd961c5522a605baeb22b0f99af8d}{node\+\_\+to}}
+string \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a0d9bd961c5522a605baeb22b0f99af8d}{node\+\_\+to}}
 \item 
-bool \mbox{\hyperlink{class_p_s_toolbox_base_edge_a24d0bdb54e1ef80a07b1d0a53f512e15}{save\+\_\+data}}
+bool \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a24d0bdb54e1ef80a07b1d0a53f512e15}{save\+\_\+data}}
 \item 
-double \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae8cd470bcb891f1e9b283dacde4e9dd5}{t}}
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ae8cd470bcb891f1e9b283dacde4e9dd5}{t}}
 \item 
-double \mbox{\hyperlink{class_p_s_toolbox_base_edge_ab0ec7fe898994519d478a13ef2011383}{dt}}
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ab0ec7fe898994519d478a13ef2011383}{dt}}
 \item 
-double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}}
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}}
 \item 
-double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a6e6d0ff908fe7190b311c1772277307e}{p1}}
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a6e6d0ff908fe7190b311c1772277307e}{p1}}
 \item 
-double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a09a1c644b0df32b372ce63d71d597eb4}{p2}}
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a09a1c644b0df32b372ce63d71d597eb4}{p2}}
 \item 
-double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a856e2819a845ad99c591445ddc0f4f53}{g}}
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a856e2819a845ad99c591445ddc0f4f53}{g}}
 \item 
-double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a48dd5476af926578963de98aa86703c3}{n\+\_\+act}}
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a48dd5476af926578963de98aa86703c3}{n\+\_\+act}}
 \item 
-double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a7738ae266f40802465d161156de1c41e}{n\+\_\+act\+\_\+new}}
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a7738ae266f40802465d161156de1c41e}{n\+\_\+act\+\_\+new}}
 \item 
-bool \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae4135ab42424ba358454286171dda4b2}{DEBUG}}
+bool \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ae4135ab42424ba358454286171dda4b2}{DEBUG}}
 \item 
-bool \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4936aec9108a7e3f2535b55642efabf1}{is\+\_\+rigid\+\_\+element}}
+bool \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a4936aec9108a7e3f2535b55642efabf1}{is\+\_\+rigid\+\_\+element}}
 \item 
-double \mbox{\hyperlink{class_p_s_toolbox_base_edge_a1623eacb50e05e8764a4eaef553d19f0}{dt\+\_\+out}}
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a1623eacb50e05e8764a4eaef553d19f0}{dt\+\_\+out}}
 \item 
-vector$<$ string $>$ \mbox{\hyperlink{class_p_s_toolbox_base_edge_a8448bfdfafbbd7bcee5bdbed719e3587}{transient\+\_\+type}}
+vector$<$ string $>$ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a8448bfdfafbbd7bcee5bdbed719e3587}{transient\+\_\+type}}
 \item 
-vector$<$ double $>$ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ad61d3abbcb72972c9358dac1b992e978}{transient\+\_\+time}}
+vector$<$ double $>$ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ad61d3abbcb72972c9358dac1b992e978}{transient\+\_\+time}}
 \item 
-vector$<$ double $>$ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ab1244c7f37527f27e0d941650084cc9c}{transient\+\_\+val}}
+vector$<$ double $>$ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ab1244c7f37527f27e0d941650084cc9c}{transient\+\_\+val}}
 \item 
-vector$<$ bool $>$ \mbox{\hyperlink{class_p_s_toolbox_base_edge_ad9cbd59340f5531b215d8b536880e302}{transient\+\_\+triggered}}
+vector$<$ bool $>$ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ad9cbd59340f5531b215d8b536880e302}{transient\+\_\+triggered}}
+\item 
+bool \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a9a4933b265373deca176db29d2679570}{suppress\+\_\+all\+\_\+output}}
+\item 
+Matrix\+Xd \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ac17bb4ae04013c83ffa45f19ebcfab77}{C}}
 \end{DoxyCompactItemize}
 
 
@@ -178,12 +208,14 @@ Class to model a slightly compressible pipe.
 
 A class that is used for modelling a Slightly Compressible Pipe. (The latter means that the liquid is treated as having constant density, and the speed of sound is much higher than the usual flow speeds in the pipe.) The solution of the system will be based on the method of characterisctics (MOC) 
 
+\label{doc-constructors}
+\Hypertarget{class_s_c_p_doc-constructors}
 \doxysubsection{Constructor \& Destructor Documentation}
 \Hypertarget{class_s_c_p_a3dedbee89f8f613bd2987b6fca6dca94}\index{SCP@{SCP}!SCP@{SCP}}
 \index{SCP@{SCP}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{SCP()}{SCP()}}
 {\footnotesize\ttfamily \label{class_s_c_p_a3dedbee89f8f613bd2987b6fca6dca94} 
-SCP\+::\+SCP (\begin{DoxyParamCaption}\item[{const string}]{\+\_\+name}{, }\item[{const string}]{\+\_\+cspe\+\_\+name}{, }\item[{const string}]{\+\_\+cspv\+\_\+name}{, }\item[{const double}]{\+\_\+ro}{, }\item[{const double}]{\+\_\+a}{, }\item[{const double}]{\+\_\+L}{, }\item[{const double}]{\+\_\+D}{, }\item[{const double}]{\+\_\+lambda}{, }\item[{const double}]{\+\_\+he}{, }\item[{const double}]{\+\_\+hv}{, }\item[{const bool}]{\+\_\+save\+\_\+data}{}\end{DoxyParamCaption})}
+SCP::\+\+SCP (\begin{DoxyParamCaption}\item[{const string}]{\+\_\+name}{, }\item[{const string}]{\+\_\+cspe\+\_\+name}{, }\item[{const string}]{\+\_\+cspv\+\_\+name}{, }\item[{const double}]{\+\_\+ro}{, }\item[{const double}]{\+\_\+a}{, }\item[{const double}]{\+\_\+L}{, }\item[{const double}]{\+\_\+D}{, }\item[{const double}]{\+\_\+lambda}{, }\item[{const double}]{\+\_\+he}{, }\item[{const double}]{\+\_\+hv}{, }\item[{const bool}]{\+\_\+save\+\_\+data}{}\end{DoxyParamCaption})}
 
 
 
@@ -191,34 +223,34 @@ Constructor for the slightly compressible pipe class.
 
 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\texttt{ in}}  & {\em \+\_\+name} & Name of the slightls compressible pipe  \\
+\doxymbox{\texttt{in}}  & {\em \+\_\+name} & Name of the slightls compressible pipe  \\
 \hline
-\mbox{\texttt{ in}}  & {\em \+\_\+cspe\+\_\+name} & Name of the previous node  \\
+\doxymbox{\texttt{in}}  & {\em \+\_\+cspe\+\_\+name} & Name of the previous node  \\
 \hline
-\mbox{\texttt{ in}}  & {\em \+\_\+cspv\+\_\+name} & Name of the next node  \\
+\doxymbox{\texttt{in}}  & {\em \+\_\+cspv\+\_\+name} & Name of the next node  \\
 \hline
-\mbox{\texttt{ in}}  & {\em \+\_\+ro} & Density of the fluid in the system (Constant as it is incompressible)  \\
+\doxymbox{\texttt{in}}  & {\em \+\_\+ro} & Density of the fluid in the system (Constant as it is incompressible)  \\
 \hline
-\mbox{\texttt{ in}}  & {\em \+\_\+a} & Speed of sound in the system  \\
+\doxymbox{\texttt{in}}  & {\em \+\_\+a} & Speed of sound in the system  \\
 \hline
-\mbox{\texttt{ in}}  & {\em \+\_\+L} & Length of the pipe section  \\
+\doxymbox{\texttt{in}}  & {\em \+\_\+L} & Length of the pipe section  \\
 \hline
-\mbox{\texttt{ in}}  & {\em \+\_\+D} & Diameter of the pipe  \\
+\doxymbox{\texttt{in}}  & {\em \+\_\+D} & Diameter of the pipe  \\
 \hline
-\mbox{\texttt{ in}}  & {\em \+\_\+lambda} & Friction loss factor  \\
+\doxymbox{\texttt{in}}  & {\em \+\_\+lambda} & Friction loss factor  \\
 \hline
-\mbox{\texttt{ in}}  & {\em \+\_\+he} & Height at the beginning \mbox{[}eleje\mbox{]} of the pipe  \\
+\doxymbox{\texttt{in}}  & {\em \+\_\+he} & Height at the beginning \+[eleje]\+ of the pipe  \\
 \hline
-\mbox{\texttt{ in}}  & {\em \+\_\+hv} & Height at the end \mbox{[}v{\ucr}ge\mbox{]} of the pipe  \\
+\doxymbox{\texttt{in}}  & {\em \+\_\+hv} & Height at the end \+[v{\ucr}ge]\+ of the pipe  \\
 \hline
-\mbox{\texttt{ in}}  & {\em \+\_\+save\+\_\+data} & whether to save data \\
+\doxymbox{\texttt{in}}  & {\em \+\_\+save\+\_\+data} & whether to save data \\
 \hline
 \end{DoxyParams}
 \Hypertarget{class_s_c_p_aec0db6047f6437d1ff4de3e5c21a9671}\index{SCP@{SCP}!````~SCP@{\texorpdfstring{$\sim$}{\string~}SCP}}
 \index{````~SCP@{\texorpdfstring{$\sim$}{\string~}SCP}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}SCP()}{\string~SCP()}}
 {\footnotesize\ttfamily \label{class_s_c_p_aec0db6047f6437d1ff4de3e5c21a9671} 
-SCP\+::\texorpdfstring{$\sim$}{\string~}\+SCP (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+SCP::\+\texorpdfstring{$\sim$}{\string~}\+SCP (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
 
 
 
@@ -226,22 +258,24 @@ Desctructor of the \doxylink{class_s_c_p}{SCP} class.
 
 
 
+\label{doc-func-members}
+\Hypertarget{class_s_c_p_doc-func-members}
 \doxysubsection{Member Function Documentation}
 \Hypertarget{class_s_c_p_a588773d1c994934875af3fdc531ab066}\index{SCP@{SCP}!Add\_transient@{Add\_transient}}
 \index{Add\_transient@{Add\_transient}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{Add\_transient()}{Add\_transient()}}
 {\footnotesize\ttfamily \label{class_s_c_p_a588773d1c994934875af3fdc531ab066} 
-void SCP\+::\+Add\+\_\+transient (\begin{DoxyParamCaption}\item[{string}]{}{, }\item[{double}]{}{, }\item[{double}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+void SCP::\+\+Add\+\_\+transient (\begin{DoxyParamCaption}\item[{string}]{}{, }\item[{double}]{}{, }\item[{double}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
-Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4bfd4f3f231f041db9d47725f96e7f04}{PSToolbox\+Base\+Edge}}.
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a74d8df2271e012467c246c59c6fc37d9}{PSToolbox\+Base\+Edge}}.
 
 \Hypertarget{class_s_c_p_a046c2c6fa8dedf9d5797b294db9c4f15}\index{SCP@{SCP}!Get\_dprop@{Get\_dprop}}
 \index{Get\_dprop@{Get\_dprop}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{Get\_dprop()}{Get\_dprop()}}
 {\footnotesize\ttfamily \label{class_s_c_p_a046c2c6fa8dedf9d5797b294db9c4f15} 
-double SCP\+::\+Get\+\_\+dprop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+double SCP::\+\+Get\+\_\+dprop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -257,83 +291,83 @@ The value that was looked up.
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a9e72bd3b5bf2b0b5869a42615780fcd5}{PSToolbox\+Base\+Edge}}.
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ad023eda6d07c23fbf910fda397a71e1d}{PSToolbox\+Base\+Edge}}.
 
 \Hypertarget{class_s_c_p_a5736aeb413b6ea08f0c7bd6aa3da1d45}\index{SCP@{SCP}!Get\_dvprop@{Get\_dvprop}}
 \index{Get\_dvprop@{Get\_dvprop}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{Get\_dvprop()}{Get\_dvprop()}}
 {\footnotesize\ttfamily \label{class_s_c_p_a5736aeb413b6ea08f0c7bd6aa3da1d45} 
-vector$<$ double $>$ SCP\+::\+Get\+\_\+dvprop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{}\end{DoxyParamCaption})}
+vector$<$ double $>$ SCP::\+\+Get\+\_\+dvprop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_s_c_p_a89b4153c9fb930954b585a0ca7cf9d7c}\index{SCP@{SCP}!GetAlphaAtEnd@{GetAlphaAtEnd}}
 \index{GetAlphaAtEnd@{GetAlphaAtEnd}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{GetAlphaAtEnd()}{GetAlphaAtEnd()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily \label{class_s_c_p_a89b4153c9fb930954b585a0ca7cf9d7c} 
-double SCP\+::\+Get\+Alpha\+At\+End (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{}\end{DoxyParamCaption})}
+double SCP::\+\+Get\+Alpha\+At\+End (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_s_c_p_ac1064fd994d2aebb4a02183e29c3182d}\index{SCP@{SCP}!GetAlphaAtEnd@{GetAlphaAtEnd}}
 \index{GetAlphaAtEnd@{GetAlphaAtEnd}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{GetAlphaAtEnd()}{GetAlphaAtEnd()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily \label{class_s_c_p_ac1064fd994d2aebb4a02183e29c3182d} 
-void SCP\+::\+Get\+Alpha\+At\+End (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{double \&}]{LHS}{, }\item[{double \&}]{coeff\+\_\+Q}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void SCP::\+\+Get\+Alpha\+At\+End (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{double \&}]{LHS}{, }\item[{double \&}]{coeff\+\_\+Q}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_aea2c7b8c320f8c38f80bcef33004e203}{PSToolbox\+Base\+Edge}}.
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a7c0d287cf8a32481f378a9bcf217c4fc}{PSToolbox\+Base\+Edge}}.
 
 \Hypertarget{class_s_c_p_a6137f34f11cf5c9b4c3fc3c266aac067}\index{SCP@{SCP}!GetAlphaPrimitiveAtEnd@{GetAlphaPrimitiveAtEnd}}
 \index{GetAlphaPrimitiveAtEnd@{GetAlphaPrimitiveAtEnd}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{GetAlphaPrimitiveAtEnd()}{GetAlphaPrimitiveAtEnd()}}
 {\footnotesize\ttfamily \label{class_s_c_p_a6137f34f11cf5c9b4c3fc3c266aac067} 
-double SCP\+::\+Get\+Alpha\+Primitive\+At\+End (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{}\end{DoxyParamCaption})}
+double SCP::\+\+Get\+Alpha\+Primitive\+At\+End (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_s_c_p_a6183e93948861f5d3a3282cbf31f977b}\index{SCP@{SCP}!GetBetaAtFront@{GetBetaAtFront}}
 \index{GetBetaAtFront@{GetBetaAtFront}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{GetBetaAtFront()}{GetBetaAtFront()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily \label{class_s_c_p_a6183e93948861f5d3a3282cbf31f977b} 
-double SCP\+::\+Get\+Beta\+At\+Front (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{}\end{DoxyParamCaption})}
+double SCP::\+\+Get\+Beta\+At\+Front (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_s_c_p_a2c240e262befefb8f81d49c83445126f}\index{SCP@{SCP}!GetBetaAtFront@{GetBetaAtFront}}
 \index{GetBetaAtFront@{GetBetaAtFront}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{GetBetaAtFront()}{GetBetaAtFront()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily \label{class_s_c_p_a2c240e262befefb8f81d49c83445126f} 
-void SCP\+::\+Get\+Beta\+At\+Front (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{double \&}]{LHS}{, }\item[{double \&}]{coeff\+\_\+Q}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void SCP::\+\+Get\+Beta\+At\+Front (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{double \&}]{LHS}{, }\item[{double \&}]{coeff\+\_\+Q}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a5de874c4d21ca6317cb4cfd43ece97aa}{PSToolbox\+Base\+Edge}}.
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a741888daa3fcc742e5d5da27dc27531a}{PSToolbox\+Base\+Edge}}.
 
 \Hypertarget{class_s_c_p_a67b7c3d88873f91950d4881c42947bc7}\index{SCP@{SCP}!GetBetaPrimitiveAtFront@{GetBetaPrimitiveAtFront}}
 \index{GetBetaPrimitiveAtFront@{GetBetaPrimitiveAtFront}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{GetBetaPrimitiveAtFront()}{GetBetaPrimitiveAtFront()}}
 {\footnotesize\ttfamily \label{class_s_c_p_a67b7c3d88873f91950d4881c42947bc7} 
-double SCP\+::\+Get\+Beta\+Primitive\+At\+Front (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{}\end{DoxyParamCaption})}
+double SCP::\+\+Get\+Beta\+Primitive\+At\+Front (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_s_c_p_a040698d72852ba3f20c2949941e4733f}\index{SCP@{SCP}!GetEdgeEquationCoeffs@{GetEdgeEquationCoeffs}}
 \index{GetEdgeEquationCoeffs@{GetEdgeEquationCoeffs}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{GetEdgeEquationCoeffs()}{GetEdgeEquationCoeffs()}}
 {\footnotesize\ttfamily \label{class_s_c_p_a040698d72852ba3f20c2949941e4733f} 
-void SCP\+::\+Get\+Edge\+Equation\+Coeffs (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{bool}]{is\+\_\+front}{, }\item[{double \&}]{LHS}{, }\item[{double \&}]{coeff\+\_\+Q}{, }\item[{double \&}]{coeff\+\_\+p1}{, }\item[{double \&}]{coeff\+\_\+p2}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void SCP::\+\+Get\+Edge\+Equation\+Coeffs (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{bool}]{is\+\_\+front}{, }\item[{double \&}]{LHS}{, }\item[{double \&}]{coeff\+\_\+Q}{, }\item[{double \&}]{coeff\+\_\+p1}{, }\item[{double \&}]{coeff\+\_\+p2}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_af6bebd7c3776cea69a35c22e6a52e44e}{PSToolbox\+Base\+Edge}}.
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ae0b8da5086685290d9d581cf450bbb5e}{PSToolbox\+Base\+Edge}}.
 
 \Hypertarget{class_s_c_p_ac54934da5fa1da99660c457f008c363b}\index{SCP@{SCP}!GetLargePressureValues@{GetLargePressureValues}}
 \index{GetLargePressureValues@{GetLargePressureValues}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{GetLargePressureValues()}{GetLargePressureValues()}}
 {\footnotesize\ttfamily \label{class_s_c_p_ac54934da5fa1da99660c457f008c363b} 
-void SCP\+::\+Get\+Large\+Pressure\+Values (\begin{DoxyParamCaption}\item[{double}]{p\+\_\+lim}{, }\item[{vector$<$ double $>$ \&}]{x\+\_\+crit}{, }\item[{vector$<$ double $>$ \&}]{p\+\_\+crit}{, }\item[{vector$<$ double $>$ \&}]{t\+\_\+crit}{, }\item[{vector$<$ string $>$ \&}]{ID\+\_\+crit}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void SCP::\+\+Get\+Large\+Pressure\+Values (\begin{DoxyParamCaption}\item[{double}]{p\+\_\+lim}{, }\item[{vector$<$ double $>$ \&}]{x\+\_\+crit}{, }\item[{vector$<$ double $>$ \&}]{p\+\_\+crit}{, }\item[{vector$<$ double $>$ \&}]{t\+\_\+crit}{, }\item[{vector$<$ string $>$ \&}]{ID\+\_\+crit}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a2ad94e8cf513d6443cecf7f13b449988}{PSToolbox\+Base\+Edge}}.
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ab506e28a8f66f7d90283f53522ea158f}{PSToolbox\+Base\+Edge}}.
 
 \Hypertarget{class_s_c_p_af16d744aa2d09926cf227f260773a82c}\index{SCP@{SCP}!GetName@{GetName}}
 \index{GetName@{GetName}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
 {\footnotesize\ttfamily \label{class_s_c_p_af16d744aa2d09926cf227f260773a82c} 
-string SCP\+::\+Get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+string SCP::\+\+Get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
@@ -346,11 +380,11 @@ name of the pipe
 \index{GetPenult@{GetPenult}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{GetPenult()}{GetPenult()}}
 {\footnotesize\ttfamily \label{class_s_c_p_acf9565ea5e961dc2b13593556414a113} 
-float SCP\+::\+Get\+Penult (\begin{DoxyParamCaption}\item[{string}]{what}{}\end{DoxyParamCaption})}
+float SCP::\+\+Get\+Penult (\begin{DoxyParamCaption}\item[{string}]{what}{}\end{DoxyParamCaption})}
 
 
 
-Export the penultimate values of a given return data Returns the penultimate value of the collected data. Only one value, the one specified by the input value is returned. Possible values\+: t,p\+\_\+front, p\+\_\+back, v\+\_\+front, v\+\_\+back, mp\+\_\+front, mp\+\_\+back. 
+Export the penultimate values of a given return data Returns the penultimate value of the collected data. Only one value, the one specified by the input value is returned. Possible values:\+ t,p\+\_\+front, p\+\_\+back, v\+\_\+front, v\+\_\+back, mp\+\_\+front, mp\+\_\+back. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -361,17 +395,17 @@ Export the penultimate values of a given return data Returns the penultimate val
 \index{GetSmallPressureValues@{GetSmallPressureValues}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{GetSmallPressureValues()}{GetSmallPressureValues()}}
 {\footnotesize\ttfamily \label{class_s_c_p_a689ec22745be1e9a4bbe3536bd90e340} 
-void SCP\+::\+Get\+Small\+Pressure\+Values (\begin{DoxyParamCaption}\item[{double}]{p\+\_\+lim}{, }\item[{vector$<$ double $>$ \&}]{x\+\_\+crit}{, }\item[{vector$<$ double $>$ \&}]{p\+\_\+crit}{, }\item[{vector$<$ double $>$ \&}]{t\+\_\+crit}{, }\item[{vector$<$ string $>$ \&}]{ID\+\_\+crit}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void SCP::\+\+Get\+Small\+Pressure\+Values (\begin{DoxyParamCaption}\item[{double}]{p\+\_\+lim}{, }\item[{vector$<$ double $>$ \&}]{x\+\_\+crit}{, }\item[{vector$<$ double $>$ \&}]{p\+\_\+crit}{, }\item[{vector$<$ double $>$ \&}]{t\+\_\+crit}{, }\item[{vector$<$ string $>$ \&}]{ID\+\_\+crit}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae83f418cc047ab86aa92b89bfc3b4ce8}{PSToolbox\+Base\+Edge}}.
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ab8490a7a316f6b42ce1ccd3d3742642b}{PSToolbox\+Base\+Edge}}.
 
 \Hypertarget{class_s_c_p_a3921a67c908dadf1f0ff21cc9464dcc5}\index{SCP@{SCP}!Info@{Info}}
 \index{Info@{Info}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{Info()}{Info()}}
 {\footnotesize\ttfamily \label{class_s_c_p_a3921a67c908dadf1f0ff21cc9464dcc5} 
-string SCP\+::\+Info (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+string SCP::\+\+Info (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -387,23 +421,23 @@ a string containing all the pipe data, in a printable form.
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4cfb66702f57eb57a4acd23c6d361d2f}{PSToolbox\+Base\+Edge}}.
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a0927f1c2db870e60fbf276ef9e9e7ad4}{PSToolbox\+Base\+Edge}}.
 
 \Hypertarget{class_s_c_p_ac0d7cee77a62cad929b27a02bfd25329}\index{SCP@{SCP}!Ini@{Ini}}
 \index{Ini@{Ini}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
 {\footnotesize\ttfamily \label{class_s_c_p_ac0d7cee77a62cad929b27a02bfd25329} 
-void SCP\+::\+Ini (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void SCP::\+\+Ini (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_ae2c6ff4b9e22ad8a3692f82b53625eb0}{PSToolbox\+Base\+Edge}}.
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ac647054da6e69c8df889ee716a977ebc}{PSToolbox\+Base\+Edge}}.
 
 \Hypertarget{class_s_c_p_a93dff5300ff677c655f5dc4ab5d8df58}\index{SCP@{SCP}!Ini@{Ini}}
 \index{Ini@{Ini}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
 {\footnotesize\ttfamily \label{class_s_c_p_a93dff5300ff677c655f5dc4ab5d8df58} 
-void SCP\+::\+Ini (\begin{DoxyParamCaption}\item[{double}]{dt\+\_\+target}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void SCP::\+\+Ini (\begin{DoxyParamCaption}\item[{double}]{dt\+\_\+target}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -411,17 +445,17 @@ Initialize the \doxylink{class_s_c_p}{SCP} pipe Initializes the \doxylink{class_
 
 
 
-Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a434a2968d633e65cafb2787bc4981c8d}{PSToolbox\+Base\+Edge}}.
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a528df69f2f43ab1785c19eb4ddf6ed9f}{PSToolbox\+Base\+Edge}}.
 
 \Hypertarget{class_s_c_p_a7c41b5c5742ed46307d91d73e6a46327}\index{SCP@{SCP}!Ini@{Ini}}
 \index{Ini@{Ini}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
 {\footnotesize\ttfamily \label{class_s_c_p_a7c41b5c5742ed46307d91d73e6a46327} 
-void SCP\+::\+Ini (\begin{DoxyParamCaption}\item[{double}]{vini}{, }\item[{double}]{pstart}{}\end{DoxyParamCaption})}
+void SCP::\+\+Ini (\begin{DoxyParamCaption}\item[{double}]{vini}{, }\item[{double}]{pstart}{}\end{DoxyParamCaption})}
 
 
 
-Initialize the \doxylink{class_s_c_p}{SCP} pipe Initializes the \doxylink{class_s_c_p}{SCP} pipe with 20 grid points and initial uniform flow velocity and pressure. (The generated pressure drops with friction.) 
+Initialize the \doxylink{class_s_c_p}{SCP} pipe Initializes the \doxylink{class_s_c_p}{SCP} pipe with 20 grid points and initial uniform flow velocity and pressure. (The generated pressure drops with friction.). 
 
 
 \begin{DoxyParams}{Parameters}
@@ -434,11 +468,11 @@ Initialize the \doxylink{class_s_c_p}{SCP} pipe Initializes the \doxylink{class_
 \index{Ini@{Ini}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
 {\footnotesize\ttfamily \label{class_s_c_p_a3709666047b1cf4cc6b6b460430bb83e} 
-void SCP\+::\+Ini (\begin{DoxyParamCaption}\item[{double}]{vini}{, }\item[{double}]{pstart}{, }\item[{double}]{dt\+\_\+target}{}\end{DoxyParamCaption})}
+void SCP::\+\+Ini (\begin{DoxyParamCaption}\item[{double}]{vini}{, }\item[{double}]{pstart}{, }\item[{double}]{dt\+\_\+target}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Initialize the \doxylink{class_s_c_p}{SCP} pipe Initializes the \doxylink{class_s_c_p}{SCP} pipe with number of grid points that satisfy the given timestep Initial uniform velocity distribution and a pressure at the inlet. (The generated pressure drops with friction.) 
+Initialize the \doxylink{class_s_c_p}{SCP} pipe Initializes the \doxylink{class_s_c_p}{SCP} pipe with number of grid points that satisfy the given timestep Initial uniform velocity distribution and a pressure at the inlet. (The generated pressure drops with friction.). 
 
 
 \begin{DoxyParams}{Parameters}
@@ -449,15 +483,19 @@ Initialize the \doxylink{class_s_c_p}{SCP} pipe Initializes the \doxylink{class_
 {\em dt\+\_\+target} & Target timestep, defines the grid \\
 \hline
 \end{DoxyParams}
+
+
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ad3282511b719801f0da9443d60a5e9ec}{PSToolbox\+Base\+Edge}}.
+
 \Hypertarget{class_s_c_p_a9f5e519bf13863e1632f5607624143d1}\index{SCP@{SCP}!Ini@{Ini}}
 \index{Ini@{Ini}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
 {\footnotesize\ttfamily \label{class_s_c_p_a9f5e519bf13863e1632f5607624143d1} 
-void SCP\+::\+Ini (\begin{DoxyParamCaption}\item[{double}]{vini}{, }\item[{double}]{pstart}{, }\item[{int}]{Npts\+\_\+mul}{}\end{DoxyParamCaption})}
+void SCP::\+\+Ini (\begin{DoxyParamCaption}\item[{double}]{vini}{, }\item[{double}]{pstart}{, }\item[{int}]{Npts\+\_\+mul}{}\end{DoxyParamCaption})}
 
 
 
-Initialize the \doxylink{class_s_c_p}{SCP} pipe Initializes the \doxylink{class_s_c_p}{SCP} pipe with 20\texorpdfstring{$\ast$}{*}\+Npts\+\_\+mul grid points, initial uniform velocity and pressure at the inlet. (The generated pressure drops with friction.) 
+Initialize the \doxylink{class_s_c_p}{SCP} pipe Initializes the \doxylink{class_s_c_p}{SCP} pipe with 20\texorpdfstring{$\ast$}{*}\+Npts\+\_\+mul grid points, initial uniform velocity and pressure at the inlet. (The generated pressure drops with friction.). 
 
 
 \begin{DoxyParams}{Parameters}
@@ -472,7 +510,7 @@ Initialize the \doxylink{class_s_c_p}{SCP} pipe Initializes the \doxylink{class_
 \index{Ini@{Ini}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
 {\footnotesize\ttfamily \label{class_s_c_p_afd01c84f7ecfe434523957f646bfbcb1} 
-void SCP\+::\+Ini (\begin{DoxyParamCaption}\item[{int}]{Npts\+\_\+mul}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void SCP::\+\+Ini (\begin{DoxyParamCaption}\item[{int}]{Npts\+\_\+mul}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -485,55 +523,47 @@ Initialize the \doxylink{class_s_c_p}{SCP} pipe Initializes the \doxylink{class_
 \end{DoxyParams}
 
 
-Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a1a152f3ff28fa36b5b6da17bceb2659e}{PSToolbox\+Base\+Edge}}.
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ae6b94a9f3036903620bc38b34473efe2}{PSToolbox\+Base\+Edge}}.
 
 \Hypertarget{class_s_c_p_a77774ab55f72cd0b175c09d6f7b8fba3}\index{SCP@{SCP}!list\_pv@{list\_pv}}
 \index{list\_pv@{list\_pv}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{list\_pv()}{list\_pv()}}
 {\footnotesize\ttfamily \label{class_s_c_p_a77774ab55f72cd0b175c09d6f7b8fba3} 
-void SCP\+::list\+\_\+pv (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+void SCP::\+list\+\_\+pv (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_s_c_p_a15a21288294d0ae18e73ef2fccc1388b}\index{SCP@{SCP}!Save\_data@{Save\_data}}
 \index{Save\_data@{Save\_data}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{Save\_data()}{Save\_data()}}
 {\footnotesize\ttfamily \label{class_s_c_p_a15a21288294d0ae18e73ef2fccc1388b} 
-void SCP\+::\+Save\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void SCP::\+\+Save\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a471c2238911ad58eb45e8afabcf7420d}{PSToolbox\+Base\+Edge}}.
+Implements \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a471c2238911ad58eb45e8afabcf7420d}{PSToolbox\+Base\+Edge}}.
 
 \Hypertarget{class_s_c_p_a788d3c89f8db4ae29abe3d90dea03e54}\index{SCP@{SCP}!Save\_status@{Save\_status}}
 \index{Save\_status@{Save\_status}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{Save\_status()}{Save\_status()}}
 {\footnotesize\ttfamily \label{class_s_c_p_a788d3c89f8db4ae29abe3d90dea03e54} 
-void SCP\+::\+Save\+\_\+status (\begin{DoxyParamCaption}\item[{bool}]{newfile}{, }\item[{bool}]{atonce}{}\end{DoxyParamCaption})}
+void SCP::\+\+Save\+\_\+status (\begin{DoxyParamCaption}\item[{bool}]{newfile}{, }\item[{bool}]{atonce}{}\end{DoxyParamCaption})}
 
-\Hypertarget{class_s_c_p_adecf0ab382906de50c7a79a1b03bf4ae}\index{SCP@{SCP}!Set\_BC\_Left@{Set\_BC\_Left}}
+\Hypertarget{class_s_c_p_acfde911d3ee302955437ed254cb4680a}\index{SCP@{SCP}!Set\_BC\_Left@{Set\_BC\_Left}}
 \index{Set\_BC\_Left@{Set\_BC\_Left}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{Set\_BC\_Left()}{Set\_BC\_Left()}}
-{\footnotesize\ttfamily \label{class_s_c_p_adecf0ab382906de50c7a79a1b03bf4ae} 
-void SCP\+::\+Set\+\_\+\+BC\+\_\+\+Left (\begin{DoxyParamCaption}\item[{string}]{type}{, }\item[{double}]{val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily \label{class_s_c_p_acfde911d3ee302955437ed254cb4680a} 
+void SCP::\+\+Set\+\_\+\+BC\+\_\+\+Left (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{string}]{type}{, }\item[{double}]{val}{}\end{DoxyParamCaption})}
 
-
-
-Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a4a8e4feaa0adcb81485fe7ea79b953e3}{PSToolbox\+Base\+Edge}}.
-
-\Hypertarget{class_s_c_p_abbcdb65bd34be9aae081db1c08151392}\index{SCP@{SCP}!Set\_BC\_Right@{Set\_BC\_Right}}
+\Hypertarget{class_s_c_p_a38b6641e0db9064ef5a1de7edf0d46e2}\index{SCP@{SCP}!Set\_BC\_Right@{Set\_BC\_Right}}
 \index{Set\_BC\_Right@{Set\_BC\_Right}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{Set\_BC\_Right()}{Set\_BC\_Right()}}
-{\footnotesize\ttfamily \label{class_s_c_p_abbcdb65bd34be9aae081db1c08151392} 
-void SCP\+::\+Set\+\_\+\+BC\+\_\+\+Right (\begin{DoxyParamCaption}\item[{string}]{type}{, }\item[{double}]{val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
-
-
-
-Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a3f4024efd82f0dc3b46ba987f3594ae7}{PSToolbox\+Base\+Edge}}.
+{\footnotesize\ttfamily \label{class_s_c_p_a38b6641e0db9064ef5a1de7edf0d46e2} 
+void SCP::\+\+Set\+\_\+\+BC\+\_\+\+Right (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{, }\item[{string}]{type}{, }\item[{double}]{val}{}\end{DoxyParamCaption})}
 
 \Hypertarget{class_s_c_p_ac1f64a4207c1e612da730cebbb44c682}\index{SCP@{SCP}!Set\_dprop@{Set\_dprop}}
 \index{Set\_dprop@{Set\_dprop}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{Set\_dprop()}{Set\_dprop()}}
 {\footnotesize\ttfamily \label{class_s_c_p_ac1f64a4207c1e612da730cebbb44c682} 
-void SCP\+::\+Set\+\_\+dprop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{, }\item[{double}]{val}{}\end{DoxyParamCaption})}
+void SCP::\+\+Set\+\_\+dprop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{, }\item[{double}]{val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -541,43 +571,47 @@ Set a parameter Allows to reset the diameter or length the pipe. Updating the le
 
 
 \begin{DoxyParams}{Parameters}
-{\em prop\+\_\+string} & \mbox{[}in\mbox{]} The paramtere to change. Accepted values are "{}\+L"{} and "{}\+D"{} \\
+{\em prop\+\_\+string} & \+[in]\+ The paramtere to change. Accepted values are "{}\+L"{} and "{}\+D"{} \\
 \hline
-{\em val} & \mbox{[}in\mbox{]} The new value of the set parameter, in SI units. \\
+{\em val} & \+[in]\+ The new value of the set parameter, in SI units. \\
 \hline
 \end{DoxyParams}
 \begin{DoxySeeAlso}{See also}
 \doxylink{class_s_c_p_a046c2c6fa8dedf9d5797b294db9c4f15}{Get\+\_\+dprop} 
 \end{DoxySeeAlso}
+
+
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_aa66d9a12ac8da866f2e2e45d76bca258}{PSToolbox\+Base\+Edge}}.
+
 \Hypertarget{class_s_c_p_a72211cc8d46d8e7c7844a46175907751}\index{SCP@{SCP}!Set\_string\_prop@{Set\_string\_prop}}
 \index{Set\_string\_prop@{Set\_string\_prop}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{Set\_string\_prop()}{Set\_string\_prop()}}
 {\footnotesize\ttfamily \label{class_s_c_p_a72211cc8d46d8e7c7844a46175907751} 
-void SCP\+::\+Set\+\_\+string\+\_\+prop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{, }\item[{string}]{val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void SCP::\+\+Set\+\_\+string\+\_\+prop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{, }\item[{string}]{val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a68bf3dade1793a9d247e28b648a1947d}{PSToolbox\+Base\+Edge}}.
+Implements \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a68bf3dade1793a9d247e28b648a1947d}{PSToolbox\+Base\+Edge}}.
 
 \Hypertarget{class_s_c_p_a58097cfe30d419e07d14bac541d04af5}\index{SCP@{SCP}!Step@{Step}}
 \index{Step@{Step}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{Step()}{Step()}}
 {\footnotesize\ttfamily \label{class_s_c_p_a58097cfe30d419e07d14bac541d04af5} 
-void SCP\+::\+Step (\begin{DoxyParamCaption}\item[{string}]{BC\+\_\+start\+\_\+type}{, }\item[{double}]{BC\+\_\+start\+\_\+val}{, }\item[{string}]{BC\+\_\+end\+\_\+type}{, }\item[{double}]{BC\+\_\+end\+\_\+val}{}\end{DoxyParamCaption})}
+void SCP::\+\+Step (\begin{DoxyParamCaption}\item[{string}]{BC\+\_\+start\+\_\+type}{, }\item[{double}]{BC\+\_\+start\+\_\+val}{, }\item[{string}]{BC\+\_\+end\+\_\+type}{, }\item[{double}]{BC\+\_\+end\+\_\+val}{}\end{DoxyParamCaption})}
 
 
 
-Take a timestep. Calculates a timestep in the system dependent on the boundary conditions. (Those are given by the same strings and values as the ones in BCLeft and BCRight) Accepted boundary condition types\+: "{}\+Pressure"{} \& "{}\+Velocity"{}. 
+Take a timestep. Calculates a timestep in the system dependent on the boundary conditions. (Those are given by the same strings and values as the ones in BCLeft and BCRight) Accepted boundary condition types:\+ "{}\+Pressure"{} \& "{}\+Velocity"{}. 
 
 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\texttt{ in}}  & {\em BC\+\_\+start\+\_\+type} & the type of the boundary condition at the beginning of the pipe ("{}\+Pressure"{} \texorpdfstring{$\vert$}{|} "{}\+Velocity"{}) \\
+\doxymbox{\texttt{in}}  & {\em BC\+\_\+start\+\_\+type} & the type of the boundary condition at the beginning of the pipe ("{}\+Pressure"{} \texorpdfstring{$\vert$}{|} "{}\+Velocity"{}) \\
 \hline
-\mbox{\texttt{ in}}  & {\em BC\+\_\+start\+\_\+val} & The value associated with the boundary condition at the start of the pipe \\
+\doxymbox{\texttt{in}}  & {\em BC\+\_\+start\+\_\+val} & The value associated with the boundary condition at the start of the pipe \\
 \hline
-\mbox{\texttt{ in}}  & {\em BC\+\_\+end\+\_\+type} & the type of the boundary condition at the end of the pipe ("{}\+Pressure"{} \texorpdfstring{$\vert$}{|} "{}\+Velocity"{}) \\
+\doxymbox{\texttt{in}}  & {\em BC\+\_\+end\+\_\+type} & the type of the boundary condition at the end of the pipe ("{}\+Pressure"{} \texorpdfstring{$\vert$}{|} "{}\+Velocity"{}) \\
 \hline
-\mbox{\texttt{ in}}  & {\em BC\+\_\+end\+\_\+val} & The value associated with the boundary condition at the end of the pipe \\
+\doxymbox{\texttt{in}}  & {\em BC\+\_\+end\+\_\+val} & The value associated with the boundary condition at the end of the pipe \\
 \hline
 \end{DoxyParams}
 \begin{DoxySeeAlso}{See also}
@@ -587,7 +621,7 @@ BCLeft, BCRight
 \index{UpdateDimlessPars@{UpdateDimlessPars}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{UpdateDimlessPars()}{UpdateDimlessPars()}}
 {\footnotesize\ttfamily \label{class_s_c_p_af1f4995d58d75d80ed1738346ff06bf4} 
-void SCP\+::\+Update\+Dimless\+Pars (\begin{DoxyParamCaption}\item[{double}]{pref}{, }\item[{double}]{mp\+\_\+nevl}{, }\item[{double}]{omega}{, }\item[{double}]{xref}{, }\item[{double}]{m}{}\end{DoxyParamCaption})}
+void SCP::\+\+Update\+Dimless\+Pars (\begin{DoxyParamCaption}\item[{double}]{pref}{, }\item[{double}]{mp\+\_\+nevl}{, }\item[{double}]{omega}{, }\item[{double}]{xref}{, }\item[{double}]{m}{}\end{DoxyParamCaption})}
 
 
 
@@ -595,63 +629,65 @@ Calculates the dimensionless parameters Calculates the dimensionless parametwers
 
 
 \begin{DoxyParams}{Parameters}
-{\em pref} & \mbox{[}in\mbox{]} Reference pressure \\
+{\em pref} & \+[in]\+ Reference pressure \\
 \hline
-{\em mp\+\_\+nevl} & \mbox{[}in\mbox{]} Design mass flow rate \\
+{\em mp\+\_\+nevl} & \+[in]\+ Design mass flow rate \\
 \hline
-{\em omega} & \mbox{[}in\mbox{]} Referency frequency, ususally the natural frequency of the valve \\
+{\em omega} & \+[in]\+ Referency frequency, ususally the natural frequency of the valve \\
 \hline
-{\em xref} & \mbox{[}in\mbox{]} Referecne length, usually equals the compession the reference (atmospheric) pressure would excert on the valve \\
+{\em xref} & \+[in]\+ Referecne length, usually equals the compession the reference (atmospheric) pressure would excert on the valve \\
 \hline
-{\em m} & \mbox{[}in\mbox{]} reference mass, ususally the moving mass of the spring-\/mass-\/damper system in the valve. \\
+{\em m} & \+[in]\+ reference mass, ususally the moving mass of the spring-\/mass-\/damper system in the valve. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{class_s_c_p_abe99f0055be7b82310d7566d9a518f13}\index{SCP@{SCP}!UpdateInternal@{UpdateInternal}}
 \index{UpdateInternal@{UpdateInternal}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{UpdateInternal()}{UpdateInternal()}}
 {\footnotesize\ttfamily \label{class_s_c_p_abe99f0055be7b82310d7566d9a518f13} 
-void SCP\+::\+Update\+Internal (\begin{DoxyParamCaption}\item[{double}]{dummy\+\_\+t\+\_\+target}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void SCP::\+\+Update\+Internal (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a9f3cbf5b741dcd4e923e5ae0aa91a46f}{PSToolbox\+Base\+Edge}}.
+Implements \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a9f3cbf5b741dcd4e923e5ae0aa91a46f}{PSToolbox\+Base\+Edge}}.
 
 \Hypertarget{class_s_c_p_a4f0c2d221984911a56ab3185259c74c7}\index{SCP@{SCP}!UpdateTime@{UpdateTime}}
 \index{UpdateTime@{UpdateTime}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{UpdateTime()}{UpdateTime()}}
 {\footnotesize\ttfamily \label{class_s_c_p_a4f0c2d221984911a56ab3185259c74c7} 
-void SCP\+::\+Update\+Time (\begin{DoxyParamCaption}\item[{double}]{\+\_\+t}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void SCP::\+\+Update\+Time (\begin{DoxyParamCaption}\item[{double}]{\+\_\+t}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_ad767d5a177bb91562a880b57c6ba5fe0}{PSToolbox\+Base\+Edge}}.
+Implements \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ad767d5a177bb91562a880b57c6ba5fe0}{PSToolbox\+Base\+Edge}}.
 
 \Hypertarget{class_s_c_p_a02d0d267e51445438b62a45c1c8c3cd3}\index{SCP@{SCP}!Write\_data@{Write\_data}}
 \index{Write\_data@{Write\_data}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{Write\_data()}{Write\_data()}}
 {\footnotesize\ttfamily \label{class_s_c_p_a02d0d267e51445438b62a45c1c8c3cd3} 
-void SCP\+::\+Write\+\_\+data (\begin{DoxyParamCaption}\item[{string}]{folder}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+void SCP::\+\+Write\+\_\+data (\begin{DoxyParamCaption}\item[{string}]{folder}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Exports savied data Exports data saved from previous settings (such as steps and initialization.) Only works if the save\+\_\+data flag was set to true, otherwise an error message is displayed. Data is saved to the previously determined savefile name. No inputs/outputs. 
+Exports saved data Exports data saved from previous settings (such as steps and initialization.) Only works if the save\+\_\+data flag was set to true, otherwise an error message is displayed. Data is saved to the previously determined savefile name. No inputs/\+outputs. 
 
 
 
-Implements \mbox{\hyperlink{class_p_s_toolbox_base_edge_a80ed1e641d737c138cc1ae74826ce128}{PSToolbox\+Base\+Edge}}.
+Implements \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a80ed1e641d737c138cc1ae74826ce128}{PSToolbox\+Base\+Edge}}.
 
 
 
+\label{doc-variable-members}
+\Hypertarget{class_s_c_p_doc-variable-members}
 \doxysubsection{Member Data Documentation}
 \Hypertarget{class_s_c_p_a77886d757791949bd29efe51e6c47703}\index{SCP@{SCP}!fname@{fname}}
 \index{fname@{fname}!SCP@{SCP}}
 \doxysubsubsection{\texorpdfstring{fname}{fname}}
 {\footnotesize\ttfamily \label{class_s_c_p_a77886d757791949bd29efe51e6c47703} 
-string SCP\+::fname}
+string SCP::\+fname}
 
 
 
-The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{_s_c_p_8h}{SCP.\+h}}\item 
-\mbox{\hyperlink{_s_c_p_8cpp}{SCP.\+cpp}}\end{DoxyCompactItemize}
+src/\+\doxymbox{\hyperlink{_s_c_p_8h}{SCP.\+h}}\item 
+src/\+\doxymbox{\hyperlink{_s_c_p_8cpp}{SCP.\+cpp}}\end{DoxyCompactItemize}

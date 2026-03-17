@@ -1,4 +1,27 @@
 var searchData=
 [
-  ['x_0',['x',['../_l_w_p__2___valve___b_ccheck_8m.html#a7fe6bc70e52971515c699da7a36c1d87',1,'LWP_2_Valve_BCcheck.m']]]
+  ['_7ebioconnector_0',['~BioConnector',['../class_bio_connector.html#a8e4020d0d3ed79c481e0938f04131790',1,'BioConnector']]],
+  ['_7ebiopipe_1',['~BioPipe',['../class_bio_pipe.html#a02f06d42958f6cf887420d60b649bdf3',1,'BioPipe']]],
+  ['_7echeckvalve_2',['~CheckValve',['../class_check_valve.html#aff4e46bae47e34130e176e8107dc367d',1,'CheckValve']]],
+  ['_7econnector_3',['~Connector',['../class_connector.html#a0f084edc18ed6e3a25314689d5bf9244',1,'Connector']]],
+  ['_7ecoolpropgas_4',['~CoolPropGas',['../class_cool_prop_gas.html#afc0b27b4930716c9ddf56009e7ddcf3e',1,'CoolPropGas']]],
+  ['_7ecoolpropha_5',['~CoolPropHA',['../class_cool_prop_h_a.html#ab1afb9392c65e67f7ab209f303d06013',1,'CoolPropHA']]],
+  ['_7edamper_6',['~Damper',['../class_damper.html#a2c6d388f615fd1e4530c36cd7fd34c29',1,'Damper']]],
+  ['_7efrozenmixtureliquidgas_7',['~FrozenMixtureLiquidGas',['../class_frozen_mixture_liquid_gas.html#ade32be4a13dae29aa3a3b41928b674c8',1,'FrozenMixtureLiquidGas']]],
+  ['_7egas_8',['~Gas',['../class_gas.html#a78b0365eb5310af7b1f2f1092be31926',1,'Gas']]],
+  ['_7eidealgas_9',['~IdealGas',['../class_ideal_gas.html#a7d9f446fa962f4b1e9b1ff897fb66c11',1,'IdealGas']]],
+  ['_7elwp_10',['~LWP',['../class_l_w_p.html#ae7a68b0cb90fb2661ff90dd6b35bd650',1,'LWP']]],
+  ['_7eprv_11',['~PRV',['../class_p_r_v.html#a0280c64c4a76755a14c338c1f9f5bd99',1,'PRV']]],
+  ['_7epstoolboxbaseedge_12',['~PSToolboxBaseEdge',['../class_p_s_toolbox_base_edge.html#a2292b6b435b696cc29493d09f43fbf65',1,'PSToolboxBaseEdge']]],
+  ['_7epstoolboxplotter_13',['~PSToolboxPlotter',['../class_p_s_toolbox_plotter.html#aa6f31df55cfd5b1ad9314607af84b925',1,'PSToolboxPlotter']]],
+  ['_7epump_14',['~Pump',['../class_pump.html#a267110970a4eb99ef63014945e372762',1,'Pump']]],
+  ['_7ereservoir_15',['~Reservoir',['../class_reservoir.html#a2aeb630cdd589baaa670ce3861c93f53',1,'Reservoir']]],
+  ['_7erigidpipe_16',['~RigidPipe',['../class_rigid_pipe.html#af8cfc340e1597344943e9c496b6d199e',1,'RigidPipe']]],
+  ['_7escp_17',['~SCP',['../class_s_c_p.html#aec0db6047f6437d1ff4de3e5c21a9671',1,'SCP']]],
+  ['_7esurgechamber_18',['~SurgeChamber',['../class_surge_chamber.html#ab41801b6206f8b90a488406dd7755a24',1,'SurgeChamber']]],
+  ['_7etank_19',['~Tank',['../class_tank.html#a9e4fce49ae7fe871894c1a3122c10269',1,'Tank']]],
+  ['_7ethrottlevalve_20',['~ThrottleValve',['../class_throttle_valve.html#a956599299199d3b9cde9b23c2c8c0800',1,'ThrottleValve']]],
+  ['_7eunits_21',['~Units',['../class_units.html#a64dc33d12edc3be94cfc72472cefecfe',1,'Units']]],
+  ['_7evalve_22',['~Valve',['../class_valve.html#ac59a5787dce2cf623fe3b6a42b7add15',1,'Valve']]],
+  ['_7evalve_5fwith_5fabsorber_23',['~Valve_with_Absorber',['../class_valve__with___absorber.html#a2e66b1ac4b68b7e9b230b350daa7a8c6',1,'Valve_with_Absorber']]]
 ];

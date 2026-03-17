@@ -1,0 +1,66 @@
+\doxysection{Throttle\+Valve.\+h}
+\hypertarget{_throttle_valve_8h_source}{}\label{_throttle_valve_8h_source}\index{src/ThrottleValve.h@{src/ThrottleValve.h}}
+\doxymbox{\hyperlink{_throttle_valve_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <Eigen/Dense>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_units_8h}{Units.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_ideal_gas_8h}{IdealGas.h}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00010\ \textcolor{keyword}{using\ namespace\ }Eigen;}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_throttle_valve_a27b51bb9c47f78340291b67385ddf315}{ThrottleValve}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_units_aa10ded064259f35f044246879725b98a}{Units}}\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{bool}\ save\_data;\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{string}\ name;\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{double}\ A\_flowthrough;}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{double}\ Cd;\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{double}\ ro\ \textcolor{comment}{/*Desity\ of\ fluid\ in\ the\ valve\ */},\ Dbore\ \textcolor{comment}{/*Smallest\ cross\ section\ in\ valve*/},\ xe,\ p\_set\ \textcolor{comment}{/*\ set\ pressure\ */};}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{double}\ mp\_nevl;\ \textcolor{comment}{/*Design\ pressure\ */}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{double}\ mp;\ \textcolor{comment}{//\ actual\ mass\ flow\ rate}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{double}\ t,\ x\ ,\ v,\ p\ \textcolor{comment}{/*inlet\ side\ pressure\ in\ the\ valve\ */};}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ ini\_done;\ }
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ vector<vector<double>\ >\ data;}
+\DoxyCodeLine{00031\ \ \ \ \ vector<double>\ tmpvec;}
+\DoxyCodeLine{00032\ \ \ \ \ \doxymbox{\hyperlink{class_gas}{Gas}}\ *gas;}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{bool}\ is\_Gas;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{double}\ Get\_MassFlowRate\_Compressible(\textcolor{keywordtype}{double}\ p\_upstream,\ \textcolor{keywordtype}{double}\ T\_upstream,\ \textcolor{keywordtype}{double}\ p\_downstream,}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ T\_downstream);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{double}\ Get\_MassFlowRate\_Compressible\_Choked(\textcolor{keywordtype}{double}\ p\_upstream,\ \textcolor{keywordtype}{double}\ T\_upstream);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{double}\ Get\_MassFlowRate\_Compressible\_UnChoked(\textcolor{keywordtype}{double}\ p\_upstream,\ \textcolor{keywordtype}{double}\ T\_upstream,\ \textcolor{keywordtype}{double}\ p\_downstream);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{double}\ Get\_MassFlowRate\_InCompressible(\textcolor{keywordtype}{double}\ p\_upstream,\ \textcolor{keywordtype}{double}\ p\_downstream,\ \textcolor{keywordtype}{double}\ rho);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{double}\ signum(\textcolor{keywordtype}{double}\ x);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00047\ \ \ \ \ \doxymbox{\hyperlink{class_throttle_valve_a27b51bb9c47f78340291b67385ddf315}{ThrottleValve}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \_nev,}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \_A,}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \_Cd,}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \_ro,}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ save\_data);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \doxymbox{\hyperlink{class_throttle_valve_a27b51bb9c47f78340291b67385ddf315}{ThrottleValve}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \_nev,}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \_A,}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \_Cd,}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_gas}{Gas}}\ *\_gas,}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ save\_data);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \doxymbox{\hyperlink{class_throttle_valve_a956599299199d3b9cde9b23c2c8c0800}{\string~ThrottleValve}}();}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_throttle_valve_a09353965a96ee26e394fdd7638f5af12}{GetName}}();}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{string}\ \doxymbox{\hyperlink{class_throttle_valve_a99e2deed48379096c79ca226d3a1c404}{fname}};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{class_throttle_valve_ac68c9c962c2043a6e74bb2aceb86c979}{Get\_MassFlowRate}}(\textcolor{keywordtype}{double}\ p\_upstream,\ \textcolor{keywordtype}{double}\ T\_upstream,\ \textcolor{keywordtype}{double}\ p\_downstream,\ \textcolor{keywordtype}{double}\ T\_downstream);}
+\DoxyCodeLine{00066\ \};}
+
+\end{DoxyCode}

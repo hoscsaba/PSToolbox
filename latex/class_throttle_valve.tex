@@ -1,0 +1,133 @@
+\doxysection{Throttle\+Valve Class Reference}
+\hypertarget{class_throttle_valve}{}\label{class_throttle_valve}\index{ThrottleValve@{ThrottleValve}}
+
+
+A class for handling both liquid and fluid valves A class for storing data regarding a valve and allowing for a solution of the differential equation describing the movement of the spring, mass damper system.  
+
+
+
+
+{\ttfamily \+\#include $<$Throttle\+Valve.\+h$>$}
+
+Inheritance diagram for Throttle\+Valve:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_throttle_valve}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_throttle_valve_a27b51bb9c47f78340291b67385ddf315}{Throttle\+Valve}} (const string \+\_\+nev, const double \+\_\+A, const double \+\_\+\+Cd, const double \+\_\+ro, const bool save\+\_\+data)
+\item 
+\doxymbox{\hyperlink{class_throttle_valve_a72e3afc5e52e24612aeafd1bf7800156}{Throttle\+Valve}} (const string \+\_\+nev, const double \+\_\+A, const double \+\_\+\+Cd, \doxymbox{\hyperlink{class_gas}{Gas}} \texorpdfstring{$\ast$}{*}\+\_\+gas, const bool save\+\_\+data)
+\item 
+\doxymbox{\hyperlink{class_throttle_valve_a956599299199d3b9cde9b23c2c8c0800}{\texorpdfstring{$\sim$}{\string~}\+Throttle\+Valve}} ()
+\item 
+string \doxymbox{\hyperlink{class_throttle_valve_a09353965a96ee26e394fdd7638f5af12}{Get\+Name}} ()
+\item 
+double \doxymbox{\hyperlink{class_throttle_valve_ac68c9c962c2043a6e74bb2aceb86c979}{Get\+\_\+\+Mass\+Flow\+Rate}} (double p\+\_\+upstream, double T\+\_\+upstream, double p\+\_\+downstream, double T\+\_\+downstream)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_units}{Units}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_units_aa10ded064259f35f044246879725b98a}{Units}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_units_a64dc33d12edc3be94cfc72472cefecfe}{\texorpdfstring{$\sim$}{\string~}\+Units}} ()
+\begin{DoxyCompactList}\small\item\em Destuctor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{class_throttle_valve_a99e2deed48379096c79ca226d3a1c404}{fname}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \doxymbox{\hyperlink{class_units}{Units}}}
+\begin{DoxyCompactItemize}
+\item 
+double \doxymbox{\hyperlink{class_units_aae98637c25e6a33b2521c48465f29691}{ft\+\_\+to\+\_\+m}}
+\begin{DoxyCompactList}\small\item\em Converts foot to meters. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_ac43b581dc1a05a12a84cba0bde9d0fb3}{m\+\_\+to\+\_\+ft}}
+\begin{DoxyCompactList}\small\item\em Convert meters to foot. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_a825b374297ce7d7d0e03a3908d716ae8}{inch\+\_\+to\+\_\+m}}
+\begin{DoxyCompactList}\small\item\em Convert inches to meters. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_a80da69188cc3184cb3596223bc5d1fc1}{m\+\_\+to\+\_\+inch}}
+\begin{DoxyCompactList}\small\item\em Convert metres to inches. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_a0cf66a20a8f5651c3a5e46ebd6bb4f63}{lbm\+\_\+to\+\_\+kg}}
+\begin{DoxyCompactList}\small\item\em Convert pounds to kilograms. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_acefd99f83c8cf786bd5c6e045283f2e8}{kg\+\_\+to\+\_\+lbm}}
+\begin{DoxyCompactList}\small\item\em Multiplier for conversion from kilogram to pound. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_a5215c9f5e61c890b28bff680e6a511ca}{lbf\+\_\+to\+\_\+N}}
+\begin{DoxyCompactList}\small\item\em Multiplier for conversion of poundforce to Newtons. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_ab7a4c6a874120920d5414ed57178b57b}{N\+\_\+to\+\_\+lbf}}
+\begin{DoxyCompactList}\small\item\em Mulitplier for conversion of Newtons to poundforce. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_a525b1531b6b496d29fab81d65df1b83b}{psi\+\_\+to\+\_\+\+Pa}}
+\begin{DoxyCompactList}\small\item\em Mulitplier ofr conversion of pound per square inch to Pa. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_a1b5a970e875c7153f84b206b5d02ee6d}{Pa\+\_\+to\+\_\+psi}}
+\begin{DoxyCompactList}\small\item\em Multiplier for conversion of pascals to pound per square inch. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_a9ae6f34b3ff8b508d964ec2b605bc1a1}{psi\+\_\+to\+\_\+bar}}
+\begin{DoxyCompactList}\small\item\em Mulitplier for conversion of psi to bar. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_a5c07ef1fbf32eb6f128824ea44f18124}{bar\+\_\+to\+\_\+psi}}
+\begin{DoxyCompactList}\small\item\em Multiplier for conversion of bar to psi. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_a5cf78bb6d35d06600c5b52dd7c451709}{m3\+\_\+to\+\_\+inch3}}
+\begin{DoxyCompactList}\small\item\em Multiplier for conversion of cubic meter to cumbic inch. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_units_aa8eaefa114dd3f3f71441fca9f530c68}{inch3\+\_\+to\+\_\+m3}}
+\begin{DoxyCompactList}\small\item\em Multiplier for conversion of cubic inches to cubic metres. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class for handling both liquid and fluid valves A class for storing data regarding a valve and allowing for a solution of the differential equation describing the movement of the spring, mass damper system. 
+
+\label{doc-constructors}
+\Hypertarget{class_throttle_valve_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_throttle_valve_a27b51bb9c47f78340291b67385ddf315}\index{ThrottleValve@{ThrottleValve}!ThrottleValve@{ThrottleValve}}
+\index{ThrottleValve@{ThrottleValve}!ThrottleValve@{ThrottleValve}}
+\doxysubsubsection{\texorpdfstring{ThrottleValve()}{ThrottleValve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_throttle_valve_a27b51bb9c47f78340291b67385ddf315} 
+Throttle\+Valve::\+\+Throttle\+Valve (\begin{DoxyParamCaption}\item[{const string}]{\+\_\+nev}{, }\item[{const double}]{\+\_\+A}{, }\item[{const double}]{\+\_\+\+Cd}{, }\item[{const double}]{\+\_\+ro}{, }\item[{const bool}]{save\+\_\+data}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_throttle_valve_a72e3afc5e52e24612aeafd1bf7800156}\index{ThrottleValve@{ThrottleValve}!ThrottleValve@{ThrottleValve}}
+\index{ThrottleValve@{ThrottleValve}!ThrottleValve@{ThrottleValve}}
+\doxysubsubsection{\texorpdfstring{ThrottleValve()}{ThrottleValve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_throttle_valve_a72e3afc5e52e24612aeafd1bf7800156} 
+Throttle\+Valve::\+\+Throttle\+Valve (\begin{DoxyParamCaption}\item[{const string}]{\+\_\+nev}{, }\item[{const double}]{\+\_\+A}{, }\item[{const double}]{\+\_\+\+Cd}{, }\item[{\doxymbox{\hyperlink{class_gas}{Gas}} \texorpdfstring{$\ast$}{*}}]{\+\_\+gas}{, }\item[{const bool}]{save\+\_\+data}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_throttle_valve_a956599299199d3b9cde9b23c2c8c0800}\index{ThrottleValve@{ThrottleValve}!````~ThrottleValve@{\texorpdfstring{$\sim$}{\string~}ThrottleValve}}
+\index{````~ThrottleValve@{\texorpdfstring{$\sim$}{\string~}ThrottleValve}!ThrottleValve@{ThrottleValve}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ThrottleValve()}{\string~ThrottleValve()}}
+{\footnotesize\ttfamily \label{class_throttle_valve_a956599299199d3b9cde9b23c2c8c0800} 
+Throttle\+Valve::\+\texorpdfstring{$\sim$}{\string~}\+Throttle\+Valve (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_throttle_valve_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_throttle_valve_ac68c9c962c2043a6e74bb2aceb86c979}\index{ThrottleValve@{ThrottleValve}!Get\_MassFlowRate@{Get\_MassFlowRate}}
+\index{Get\_MassFlowRate@{Get\_MassFlowRate}!ThrottleValve@{ThrottleValve}}
+\doxysubsubsection{\texorpdfstring{Get\_MassFlowRate()}{Get\_MassFlowRate()}}
+{\footnotesize\ttfamily \label{class_throttle_valve_ac68c9c962c2043a6e74bb2aceb86c979} 
+double Throttle\+Valve::\+\+Get\+\_\+\+Mass\+Flow\+Rate (\begin{DoxyParamCaption}\item[{double}]{p\+\_\+upstream}{, }\item[{double}]{T\+\_\+upstream}{, }\item[{double}]{p\+\_\+downstream}{, }\item[{double}]{T\+\_\+downstream}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_throttle_valve_a09353965a96ee26e394fdd7638f5af12}\index{ThrottleValve@{ThrottleValve}!GetName@{GetName}}
+\index{GetName@{GetName}!ThrottleValve@{ThrottleValve}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily \label{class_throttle_valve_a09353965a96ee26e394fdd7638f5af12} 
+string Throttle\+Valve::\+\+Get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_throttle_valve_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_throttle_valve_a99e2deed48379096c79ca226d3a1c404}\index{ThrottleValve@{ThrottleValve}!fname@{fname}}
+\index{fname@{fname}!ThrottleValve@{ThrottleValve}}
+\doxysubsubsection{\texorpdfstring{fname}{fname}}
+{\footnotesize\ttfamily \label{class_throttle_valve_a99e2deed48379096c79ca226d3a1c404} 
+string Throttle\+Valve::\+fname}
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+src/\+\doxymbox{\hyperlink{_throttle_valve_8h}{Throttle\+Valve.\+h}}\item 
+src/\+\doxymbox{\hyperlink{_throttle_valve_8cpp}{Throttle\+Valve.\+cpp}}\end{DoxyCompactItemize}

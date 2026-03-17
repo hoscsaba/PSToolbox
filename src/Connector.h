@@ -84,8 +84,13 @@ public:
     void Connector_LWP_Pipe_Back_and_Valve(double t_target,
                                            LWP *p, Valve *v, double p_downstream);
 
+    void Connector_LWP_Pipe_Back_and_ValveOLD(double t_target,
+                                              LWP *p, Valve *v, double p_downstream);
+
+
     void Connector_LWP_Pipe_Front_and_Valve(double t_target,
                                             LWP *p, Valve *v, double p_upstream, double T_upstream);
+
 
     void Connector_LWP_Pipe_Back_Valve_Front(double t_target,
                                              LWP *p1, Valve *v1, LWP *p2);

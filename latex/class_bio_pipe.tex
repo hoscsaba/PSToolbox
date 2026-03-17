@@ -1,0 +1,496 @@
+\doxysection{Bio\+Pipe Class Reference}
+\hypertarget{class_bio_pipe}{}\label{class_bio_pipe}\index{BioPipe@{BioPipe}}
+
+
+{\ttfamily \+\#include $<$Bio\+Pipe.\+h$>$}
+
+Inheritance diagram for Bio\+Pipe:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_bio_pipe}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_bio_pipe_a383a18de5cc5b309283cfb6bdba1547a}{Bio\+Pipe}} (string \+\_\+nev, string \+\_\+cspe\+\_\+nev, string \+\_\+cspv\+\_\+nev, double \+\_\+L, double \+\_\+D, string \+\_\+bio\+\_\+type, bool \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a24d0bdb54e1ef80a07b1d0a53f512e15}{save\+\_\+data}})
+\begin{DoxyCompactList}\small\item\em Constructor for the slightly compressible pipe class. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_bio_pipe_a02f06d42958f6cf887420d60b649bdf3}{\texorpdfstring{$\sim$}{\string~}\+Bio\+Pipe}} ()
+\begin{DoxyCompactList}\small\item\em Desctructor of the \doxylink{class_bio_pipe}{Bio\+Pipe} class. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{class_bio_pipe_af8d10aa7634982c2adb00d825f543c1f}{Info}} () override
+\item 
+void \doxymbox{\hyperlink{class_bio_pipe_aba0dde2705141179b2dd8fde5828f8c9}{Ini}} () override
+\item 
+void \doxymbox{\hyperlink{class_bio_pipe_af9cc6ef140891503ca49b35f39cbd95e}{Ini}} (double dt\+\_\+target) override
+\item 
+void \doxymbox{\hyperlink{class_bio_pipe_abf020844b0c26d2381f713688ffc73ac}{Ini}} (double dt\+\_\+target, Vector\+Xd Cini) override
+\begin{DoxyCompactList}\small\item\em Initialize the \doxylink{class_bio_pipe}{Bio\+Pipe} pipe Initializes the \doxylink{class_bio_pipe}{Bio\+Pipe} pipe with .... \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_bio_pipe_a7c59565edfcdeca13660cbdbad18f533}{Get\+\_\+dprop}} (string prop\+\_\+string) override
+\begin{DoxyCompactList}\small\item\em Return a property of the \doxylink{class_bio_pipe}{Bio\+Pipe}. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_bio_pipe_a15867433b13330a4569d36ff4f1afe2d}{Get\+\_\+iprop}} (string) override
+\item 
+vector$<$ double $>$ \doxymbox{\hyperlink{class_bio_pipe_aeda81341d297585e9d2008bf41a33ba0}{Get\+\_\+dvprop}} (string prop\+\_\+string)
+\item 
+void \doxymbox{\hyperlink{class_bio_pipe_ac179690b222935c065622e81866fa51c}{Set\+\_\+dprop}} (string prop\+\_\+string, double val) override
+\begin{DoxyCompactList}\small\item\em Set a parameter Allows to reset the diameter or length the pipe. Updating the length will rescale the system. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_bio_pipe_ad2958e0f3541831a06920d4f09ea8c04}{Step}} (string BC\+\_\+start\+\_\+type, double BC\+\_\+start\+\_\+val, string BC\+\_\+end\+\_\+type, double BC\+\_\+end\+\_\+val)
+\item 
+void \doxymbox{\hyperlink{class_bio_pipe_a16704bb0cdba251e961cb3faacd86553}{Update\+Internal}} (double) override
+\item 
+void \doxymbox{\hyperlink{class_bio_pipe_a3b96dffda874be41f7b713d5ffe016e8}{Update\+Time}} (double) override
+\item 
+void \doxymbox{\hyperlink{class_bio_pipe_a4defc47dc3bab108e96f373b652e396c}{Save\+\_\+data}} () override
+\item 
+void \doxymbox{\hyperlink{class_bio_pipe_a7d5f22ed84c1e5e9eda16f9ebd39a5b6}{Write\+\_\+data}} (string folder) override
+\begin{DoxyCompactList}\small\item\em Exports saved data Exports data saved from previous settings (such as steps and initialization.) Only works if the save\+\_\+data flag was set to true, otherwise an error message is displayed. Data is saved to the previously determined savefile name. No inputs/\+outputs. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_bio_pipe_af77b22df5fd7fd74b5deea46503f7787}{Set\+\_\+string\+\_\+prop}} (string, string) override
+\item 
+Vector\+Xd \doxymbox{\hyperlink{class_bio_pipe_ad0d24fe4e1a22595f40529981d83f2bb}{Get\+\_\+\+C\+\_\+\+Front}} () override
+\item 
+Vector\+Xd \doxymbox{\hyperlink{class_bio_pipe_a42a876762abab9f07be7b973cdb19796}{Get\+\_\+\+C\+\_\+\+Back}} () override
+\item 
+Matrix\+Xd \doxymbox{\hyperlink{class_bio_pipe_ad535b4b6d2b08115bcc0ed73b46d0125}{Get\+\_\+C}} () override
+\item 
+double \doxymbox{\hyperlink{class_bio_pipe_a73bd2252a848808071b6e1b1da269ebf}{Get\+\_\+mp}} ()
+\item 
+Vector\+Xd \doxymbox{\hyperlink{class_bio_pipe_a92918a9d503694282a1a1cd2617fec52}{Get\+\_\+\+Inner\+MeanC}} () override
+\item 
+void \doxymbox{\hyperlink{class_bio_pipe_a4f0aeb802a88cf68abc09a3bc1dde3e5}{Set\+\_\+inlet\+Quality\+Front}} (Vector\+Xd Cin) override
+\item 
+void \doxymbox{\hyperlink{class_bio_pipe_aab1b2263a01969b989eba1d8b62b09a3}{Set\+\_\+inlet\+Quality\+Back}} (Vector\+Xd Cin) override
+\item 
+void \doxymbox{\hyperlink{class_bio_pipe_a6a6425319696df00f131a83424794fc3}{Set\+\_\+v\+\_\+conv}} (double v) override
+\item 
+void \doxymbox{\hyperlink{class_bio_pipe_ac08880900d8cf7bd6dca9effb59a852a}{Set\+\_\+max\+\_\+vals}} (Vector\+Xd \+\_\+max\+\_\+vals) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ae5dcabbe9cf289d0ad419a6b1a903fd9}{PSToolbox\+Base\+Edge}} (const string \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_aae9cb0874655893e409b145fe256570a}{edge\+\_\+type}}, const string \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a3b4da68ffb04db1c11898f3d53f46345}{name}}, const string n1, const string n2)
+\item 
+virtual \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a2292b6b435b696cc29493d09f43fbf65}{\texorpdfstring{$\sim$}{\string~}\+PSToolbox\+Base\+Edge}} ()
+\item 
+string \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_aac5d028f66e59fa00ea43ed11c4174ca}{Get\+\_\+name}} ()
+\item 
+string \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a15e7c020c3160301c487b45f23ad4453}{Get\+\_\+type}} ()
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a7c65f75c7ab39eb4d4771d70e2a2f479}{Set\+\_\+t}} (double tnew)
+\item 
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a6a9467311884e28db1b4664c599a3a30}{Get\+\_\+t}} ()
+\item 
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a99daaac3714e8cfafca1def01fbc8efc}{Get\+\_\+dt}} ()
+\item 
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ae0ba8e08d2304a6f7b9cdc61619e772c}{Get\+\_\+tnext}} ()
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_aa6856b33f6ed4d341e8a95532ecf0ed6}{Set\+\_\+\+DEBUG}} (bool newval)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a903801bf8174255041aea9547283b8d2}{Set\+\_\+Q}} (double newval)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a640bca714eb3eec11b73f907a32ec264}{Set\+\_\+p1}} (double newval)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a0940a1bda2f70926904472aae2a5bb5e}{Set\+\_\+p2}} (double newval)
+\item 
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_afae9361aedc8ca0ed48ca0d39f2be49c}{Get\+\_\+Q}} ()
+\item 
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_abd8d054059e5c588ad9b802f55ad8c43}{Get\+\_\+p1}} ()
+\item 
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a606f24ed9cef6fb267e619cf6cfe4c56}{Get\+\_\+p2}} ()
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a0be9137923776708118955590dae2d73}{set\+\_\+supress\+\_\+all\+\_\+output}} (bool newval)
+\item 
+virtual void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ae6b94a9f3036903620bc38b34473efe2}{Ini}} (int)
+\item 
+virtual void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ad3282511b719801f0da9443d60a5e9ec}{Ini}} (double vini, double pstart, double dt\+\_\+target)
+\item 
+virtual void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a0af0d8ec247c62523c634b8a1062e3f3}{Set\+\_\+\+BC\+\_\+\+Left}} (string type, double val)
+\item 
+virtual void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a748c5ba72543539a2c5a2aba2248bd24}{Set\+\_\+\+BC\+\_\+\+Right}} (string type, double val)
+\item 
+virtual void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ab506e28a8f66f7d90283f53522ea158f}{Get\+Large\+Pressure\+Values}} (double, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ string $>$ \&)
+\item 
+virtual void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ab8490a7a316f6b42ce1ccd3d3742642b}{Get\+Small\+Pressure\+Values}} (double, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ double $>$ \&, vector$<$ string $>$ \&)
+\item 
+virtual void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a741888daa3fcc742e5d5da27dc27531a}{Get\+Beta\+At\+Front}} (double t\+\_\+target, double \&LHS, double \&coeff\+\_\+Q)
+\item 
+virtual void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a7c0d287cf8a32481f378a9bcf217c4fc}{Get\+Alpha\+At\+End}} (double t\+\_\+target, double \&LHS, double \&coeff\+\_\+Q)
+\item 
+virtual void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ae0b8da5086685290d9d581cf450bbb5e}{Get\+Edge\+Equation\+Coeffs}} (double t\+\_\+target, bool is\+\_\+front, double \&LHS, double \&coeff\+\_\+Q, double \&coeff\+\_\+p1, double \&coeff\+\_\+p2)
+\item 
+virtual void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a74d8df2271e012467c246c59c6fc37d9}{Add\+\_\+transient}} (string, double, double)
+\item 
+void \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a989266da88c5dea78b56f6fada2ff97c}{Set\+\_\+dt\+\_\+out}} (double val)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{class_bio_pipe_a1eb23b2b2066f37e296be0a26c9a9bb5}{Npts}}
+\item 
+string \doxymbox{\hyperlink{class_bio_pipe_a383550ad4a045bc1454e9956d45b092f}{fname}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge}{PSToolbox\+Base\+Edge}}}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a3b4da68ffb04db1c11898f3d53f46345}{name}}
+\item 
+string \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_aae9cb0874655893e409b145fe256570a}{edge\+\_\+type}}
+\item 
+string \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a2d9ddbc23532f9d8a66b188e8a27e43c}{node\+\_\+from}}
+\item 
+string \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a0d9bd961c5522a605baeb22b0f99af8d}{node\+\_\+to}}
+\item 
+bool \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a24d0bdb54e1ef80a07b1d0a53f512e15}{save\+\_\+data}}
+\item 
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ae8cd470bcb891f1e9b283dacde4e9dd5}{t}}
+\item 
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ab0ec7fe898994519d478a13ef2011383}{dt}}
+\item 
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a0da838f60a940da4411b23bfcb2923e5}{Q}}
+\item 
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a6e6d0ff908fe7190b311c1772277307e}{p1}}
+\item 
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a09a1c644b0df32b372ce63d71d597eb4}{p2}}
+\item 
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a856e2819a845ad99c591445ddc0f4f53}{g}}
+\item 
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a48dd5476af926578963de98aa86703c3}{n\+\_\+act}}
+\item 
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a7738ae266f40802465d161156de1c41e}{n\+\_\+act\+\_\+new}}
+\item 
+bool \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ae4135ab42424ba358454286171dda4b2}{DEBUG}}
+\item 
+bool \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a4936aec9108a7e3f2535b55642efabf1}{is\+\_\+rigid\+\_\+element}}
+\item 
+double \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a1623eacb50e05e8764a4eaef553d19f0}{dt\+\_\+out}}
+\item 
+vector$<$ string $>$ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a8448bfdfafbbd7bcee5bdbed719e3587}{transient\+\_\+type}}
+\item 
+vector$<$ double $>$ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ad61d3abbcb72972c9358dac1b992e978}{transient\+\_\+time}}
+\item 
+vector$<$ double $>$ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ab1244c7f37527f27e0d941650084cc9c}{transient\+\_\+val}}
+\item 
+vector$<$ bool $>$ \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ad9cbd59340f5531b215d8b536880e302}{transient\+\_\+triggered}}
+\item 
+bool \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a9a4933b265373deca176db29d2679570}{suppress\+\_\+all\+\_\+output}}
+\item 
+Matrix\+Xd \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ac17bb4ae04013c83ffa45f19ebcfab77}{C}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_bio_pipe_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_bio_pipe_a383a18de5cc5b309283cfb6bdba1547a}\index{BioPipe@{BioPipe}!BioPipe@{BioPipe}}
+\index{BioPipe@{BioPipe}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{BioPipe()}{BioPipe()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_a383a18de5cc5b309283cfb6bdba1547a} 
+Bio\+Pipe::\+\+Bio\+Pipe (\begin{DoxyParamCaption}\item[{string}]{\+\_\+nev}{, }\item[{string}]{\+\_\+cspe\+\_\+nev}{, }\item[{string}]{\+\_\+cspv\+\_\+nev}{, }\item[{double}]{\+\_\+L}{, }\item[{double}]{\+\_\+D}{, }\item[{string}]{\+\_\+bio\+\_\+type}{, }\item[{bool}]{save\+\_\+data}{}\end{DoxyParamCaption})}
+
+
+
+Constructor for the slightly compressible pipe class. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em \+\_\+nev} & Name of the slightls compressible pipe  \\
+\hline
+\doxymbox{\texttt{in}}  & {\em \+\_\+cspe\+\_\+nev} & Name of the previous node  \\
+\hline
+\doxymbox{\texttt{in}}  & {\em \+\_\+cspv\+\_\+nev} & Name of the next node  \\
+\hline
+\doxymbox{\texttt{in}}  & {\em \+\_\+L} & Length of the pipe section  \\
+\hline
+\doxymbox{\texttt{in}}  & {\em \+\_\+bio\+\_\+type} & Diameter of the pipe  \\
+\hline
+\doxymbox{\texttt{in}}  & {\em save\+\_\+data} & whether to save data \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_bio_pipe_a02f06d42958f6cf887420d60b649bdf3}\index{BioPipe@{BioPipe}!````~BioPipe@{\texorpdfstring{$\sim$}{\string~}BioPipe}}
+\index{````~BioPipe@{\texorpdfstring{$\sim$}{\string~}BioPipe}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}BioPipe()}{\string~BioPipe()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_a02f06d42958f6cf887420d60b649bdf3} 
+Bio\+Pipe::\+\texorpdfstring{$\sim$}{\string~}\+Bio\+Pipe (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Desctructor of the \doxylink{class_bio_pipe}{Bio\+Pipe} class. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_bio_pipe_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_bio_pipe_ad535b4b6d2b08115bcc0ed73b46d0125}\index{BioPipe@{BioPipe}!Get\_C@{Get\_C}}
+\index{Get\_C@{Get\_C}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Get\_C()}{Get\_C()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_ad535b4b6d2b08115bcc0ed73b46d0125} 
+Matrix\+Xd Bio\+Pipe::\+\+Get\+\_\+C (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a580c32afaec6551883ea53478b5eb437}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_bio_pipe_a42a876762abab9f07be7b973cdb19796}\index{BioPipe@{BioPipe}!Get\_C\_Back@{Get\_C\_Back}}
+\index{Get\_C\_Back@{Get\_C\_Back}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Get\_C\_Back()}{Get\_C\_Back()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_a42a876762abab9f07be7b973cdb19796} 
+Vector\+Xd Bio\+Pipe::\+\+Get\+\_\+\+C\+\_\+\+Back (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ab9cab3f0e7a6696ebbd52ba68108c3fa}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_bio_pipe_ad0d24fe4e1a22595f40529981d83f2bb}\index{BioPipe@{BioPipe}!Get\_C\_Front@{Get\_C\_Front}}
+\index{Get\_C\_Front@{Get\_C\_Front}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Get\_C\_Front()}{Get\_C\_Front()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_ad0d24fe4e1a22595f40529981d83f2bb} 
+Vector\+Xd Bio\+Pipe::\+\+Get\+\_\+\+C\+\_\+\+Front (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_adbe162054706489cb31774fe37f3b45f}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_bio_pipe_a7c59565edfcdeca13660cbdbad18f533}\index{BioPipe@{BioPipe}!Get\_dprop@{Get\_dprop}}
+\index{Get\_dprop@{Get\_dprop}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Get\_dprop()}{Get\_dprop()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_a7c59565edfcdeca13660cbdbad18f533} 
+double Bio\+Pipe::\+\+Get\+\_\+dprop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Return a property of the \doxylink{class_bio_pipe}{Bio\+Pipe}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prop\+\_\+string} & A string describing the needed property ("{}\+L"{} \texorpdfstring{$\vert$}{|} "{}\+L\+\_\+feet"{} \texorpdfstring{$\vert$}{|} "{}\+D"{} \texorpdfstring{$\vert$}{|} "{}\+D\+\_\+inch"{} \texorpdfstring{$\vert$}{|} "{}\+A"{} \texorpdfstring{$\vert$}{|} "{}dt"{} \texorpdfstring{$\vert$}{|} "{}p\+\_\+front"{} \texorpdfstring{$\vert$}{|} "{}p\+\_\+back"{} \texorpdfstring{$\vert$}{|} "{}v\+\_\+front"{} \texorpdfstring{$\vert$}{|} "{}v\+\_\+back"{} \texorpdfstring{$\vert$}{|} "{}mp\+\_\+front"{} \texorpdfstring{$\vert$}{|} "{}mp\+\_\+back"{} \texorpdfstring{$\vert$}{|} "{}frek"{} \texorpdfstring{$\vert$}{|} "{}tnext"{} \texorpdfstring{$\vert$}{|} "{}lambda"{} \texorpdfstring{$\vert$}{|} "{}phi"{} \texorpdfstring{$\vert$}{|} "{}mu"{} \texorpdfstring{$\vert$}{|} "{}rho"{} \texorpdfstring{$\vert$}{|} "{}a"{}) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value that was looked up. 
+\end{DoxyReturn}
+
+
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ad023eda6d07c23fbf910fda397a71e1d}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_bio_pipe_aeda81341d297585e9d2008bf41a33ba0}\index{BioPipe@{BioPipe}!Get\_dvprop@{Get\_dvprop}}
+\index{Get\_dvprop@{Get\_dvprop}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Get\_dvprop()}{Get\_dvprop()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_aeda81341d297585e9d2008bf41a33ba0} 
+vector$<$ double $>$ Bio\+Pipe::\+\+Get\+\_\+dvprop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bio_pipe_a92918a9d503694282a1a1cd2617fec52}\index{BioPipe@{BioPipe}!Get\_InnerMeanC@{Get\_InnerMeanC}}
+\index{Get\_InnerMeanC@{Get\_InnerMeanC}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Get\_InnerMeanC()}{Get\_InnerMeanC()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_a92918a9d503694282a1a1cd2617fec52} 
+Vector\+Xd Bio\+Pipe::\+\+Get\+\_\+\+Inner\+MeanC (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a285ac068d0085c10b9f5a075ac5427e9}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_bio_pipe_a15867433b13330a4569d36ff4f1afe2d}\index{BioPipe@{BioPipe}!Get\_iprop@{Get\_iprop}}
+\index{Get\_iprop@{Get\_iprop}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Get\_iprop()}{Get\_iprop()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_a15867433b13330a4569d36ff4f1afe2d} 
+int Bio\+Pipe::\+\+Get\+\_\+iprop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_aaa8d78970b956eab5210f913f8b8eaf6}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_bio_pipe_a73bd2252a848808071b6e1b1da269ebf}\index{BioPipe@{BioPipe}!Get\_mp@{Get\_mp}}
+\index{Get\_mp@{Get\_mp}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Get\_mp()}{Get\_mp()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_a73bd2252a848808071b6e1b1da269ebf} 
+double Bio\+Pipe::\+\+Get\+\_\+mp (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_bio_pipe_af8d10aa7634982c2adb00d825f543c1f}\index{BioPipe@{BioPipe}!Info@{Info}}
+\index{Info@{Info}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Info()}{Info()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_af8d10aa7634982c2adb00d825f543c1f} 
+string Bio\+Pipe::\+\+Info (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a0927f1c2db870e60fbf276ef9e9e7ad4}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_bio_pipe_aba0dde2705141179b2dd8fde5828f8c9}\index{BioPipe@{BioPipe}!Ini@{Ini}}
+\index{Ini@{Ini}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_bio_pipe_aba0dde2705141179b2dd8fde5828f8c9} 
+void Bio\+Pipe::\+\+Ini (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ac647054da6e69c8df889ee716a977ebc}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_bio_pipe_af9cc6ef140891503ca49b35f39cbd95e}\index{BioPipe@{BioPipe}!Ini@{Ini}}
+\index{Ini@{Ini}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_bio_pipe_af9cc6ef140891503ca49b35f39cbd95e} 
+void Bio\+Pipe::\+\+Ini (\begin{DoxyParamCaption}\item[{double}]{dt\+\_\+target}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a528df69f2f43ab1785c19eb4ddf6ed9f}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_bio_pipe_abf020844b0c26d2381f713688ffc73ac}\index{BioPipe@{BioPipe}!Ini@{Ini}}
+\index{Ini@{Ini}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Ini()}{Ini()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{class_bio_pipe_abf020844b0c26d2381f713688ffc73ac} 
+void Bio\+Pipe::\+\+Ini (\begin{DoxyParamCaption}\item[{double}]{dt\+\_\+target}{, }\item[{Vector\+Xd}]{Cini}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Initialize the \doxylink{class_bio_pipe}{Bio\+Pipe} pipe Initializes the \doxylink{class_bio_pipe}{Bio\+Pipe} pipe with .... 
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a292200d3f09e6bd1326795432bd223a5}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_bio_pipe_a4defc47dc3bab108e96f373b652e396c}\index{BioPipe@{BioPipe}!Save\_data@{Save\_data}}
+\index{Save\_data@{Save\_data}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Save\_data()}{Save\_data()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_a4defc47dc3bab108e96f373b652e396c} 
+void Bio\+Pipe::\+\+Save\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a471c2238911ad58eb45e8afabcf7420d}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_bio_pipe_ac179690b222935c065622e81866fa51c}\index{BioPipe@{BioPipe}!Set\_dprop@{Set\_dprop}}
+\index{Set\_dprop@{Set\_dprop}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Set\_dprop()}{Set\_dprop()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_ac179690b222935c065622e81866fa51c} 
+void Bio\+Pipe::\+\+Set\+\_\+dprop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{, }\item[{double}]{val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Set a parameter Allows to reset the diameter or length the pipe. Updating the length will rescale the system. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prop\+\_\+string} & \+[in]\+ The paramtere to change. Accepted values are "{}\+L"{} and "{}\+D"{} \\
+\hline
+{\em val} & \+[in]\+ The new value of the set parameter, in SI units. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_bio_pipe_a7c59565edfcdeca13660cbdbad18f533}{Get\+\_\+dprop} 
+\end{DoxySeeAlso}
+
+
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_aa66d9a12ac8da866f2e2e45d76bca258}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_bio_pipe_aab1b2263a01969b989eba1d8b62b09a3}\index{BioPipe@{BioPipe}!Set\_inletQualityBack@{Set\_inletQualityBack}}
+\index{Set\_inletQualityBack@{Set\_inletQualityBack}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Set\_inletQualityBack()}{Set\_inletQualityBack()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_aab1b2263a01969b989eba1d8b62b09a3} 
+void Bio\+Pipe::\+\+Set\+\_\+inlet\+Quality\+Back (\begin{DoxyParamCaption}\item[{Vector\+Xd}]{Cin}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ac74d72d2c3610df69100d0205f236095}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_bio_pipe_a4f0aeb802a88cf68abc09a3bc1dde3e5}\index{BioPipe@{BioPipe}!Set\_inletQualityFront@{Set\_inletQualityFront}}
+\index{Set\_inletQualityFront@{Set\_inletQualityFront}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Set\_inletQualityFront()}{Set\_inletQualityFront()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_a4f0aeb802a88cf68abc09a3bc1dde3e5} 
+void Bio\+Pipe::\+\+Set\+\_\+inlet\+Quality\+Front (\begin{DoxyParamCaption}\item[{Vector\+Xd}]{Cin}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a6a542cc380839dddea4d7d0596021210}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_bio_pipe_ac08880900d8cf7bd6dca9effb59a852a}\index{BioPipe@{BioPipe}!Set\_max\_vals@{Set\_max\_vals}}
+\index{Set\_max\_vals@{Set\_max\_vals}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Set\_max\_vals()}{Set\_max\_vals()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_ac08880900d8cf7bd6dca9effb59a852a} 
+void Bio\+Pipe::\+\+Set\+\_\+max\+\_\+vals (\begin{DoxyParamCaption}\item[{Vector\+Xd}]{\+\_\+max\+\_\+vals}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_aab267d5735d087387777a99d87dff64f}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_bio_pipe_af77b22df5fd7fd74b5deea46503f7787}\index{BioPipe@{BioPipe}!Set\_string\_prop@{Set\_string\_prop}}
+\index{Set\_string\_prop@{Set\_string\_prop}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Set\_string\_prop()}{Set\_string\_prop()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_af77b22df5fd7fd74b5deea46503f7787} 
+void Bio\+Pipe::\+\+Set\+\_\+string\+\_\+prop (\begin{DoxyParamCaption}\item[{string}]{prop\+\_\+string}{, }\item[{string}]{val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a68bf3dade1793a9d247e28b648a1947d}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_bio_pipe_a6a6425319696df00f131a83424794fc3}\index{BioPipe@{BioPipe}!Set\_v\_conv@{Set\_v\_conv}}
+\index{Set\_v\_conv@{Set\_v\_conv}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Set\_v\_conv()}{Set\_v\_conv()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_a6a6425319696df00f131a83424794fc3} 
+void Bio\+Pipe::\+\+Set\+\_\+v\+\_\+conv (\begin{DoxyParamCaption}\item[{double}]{v}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a0230b80efe8c2d957f1a90a8c0e44dfd}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_bio_pipe_ad2958e0f3541831a06920d4f09ea8c04}\index{BioPipe@{BioPipe}!Step@{Step}}
+\index{Step@{Step}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Step()}{Step()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_ad2958e0f3541831a06920d4f09ea8c04} 
+void Bio\+Pipe::\+\+Step (\begin{DoxyParamCaption}\item[{string}]{BC\+\_\+start\+\_\+type}{, }\item[{double}]{BC\+\_\+start\+\_\+val}{, }\item[{string}]{BC\+\_\+end\+\_\+type}{, }\item[{double}]{BC\+\_\+end\+\_\+val}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bio_pipe_a16704bb0cdba251e961cb3faacd86553}\index{BioPipe@{BioPipe}!UpdateInternal@{UpdateInternal}}
+\index{UpdateInternal@{UpdateInternal}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{UpdateInternal()}{UpdateInternal()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_a16704bb0cdba251e961cb3faacd86553} 
+void Bio\+Pipe::\+\+Update\+Internal (\begin{DoxyParamCaption}\item[{double}]{t\+\_\+target}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a9f3cbf5b741dcd4e923e5ae0aa91a46f}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_bio_pipe_a3b96dffda874be41f7b713d5ffe016e8}\index{BioPipe@{BioPipe}!UpdateTime@{UpdateTime}}
+\index{UpdateTime@{UpdateTime}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{UpdateTime()}{UpdateTime()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_a3b96dffda874be41f7b713d5ffe016e8} 
+void Bio\+Pipe::\+\+Update\+Time (\begin{DoxyParamCaption}\item[{double}]{\+\_\+t}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_ad767d5a177bb91562a880b57c6ba5fe0}{PSToolbox\+Base\+Edge}}.
+
+\Hypertarget{class_bio_pipe_a7d5f22ed84c1e5e9eda16f9ebd39a5b6}\index{BioPipe@{BioPipe}!Write\_data@{Write\_data}}
+\index{Write\_data@{Write\_data}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Write\_data()}{Write\_data()}}
+{\footnotesize\ttfamily \label{class_bio_pipe_a7d5f22ed84c1e5e9eda16f9ebd39a5b6} 
+void Bio\+Pipe::\+\+Write\+\_\+data (\begin{DoxyParamCaption}\item[{string}]{folder}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Exports saved data Exports data saved from previous settings (such as steps and initialization.) Only works if the save\+\_\+data flag was set to true, otherwise an error message is displayed. Data is saved to the previously determined savefile name. No inputs/\+outputs. 
+
+
+
+Implements \doxymbox{\hyperlink{class_p_s_toolbox_base_edge_a80ed1e641d737c138cc1ae74826ce128}{PSToolbox\+Base\+Edge}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_bio_pipe_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_bio_pipe_a383550ad4a045bc1454e9956d45b092f}\index{BioPipe@{BioPipe}!fname@{fname}}
+\index{fname@{fname}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{fname}{fname}}
+{\footnotesize\ttfamily \label{class_bio_pipe_a383550ad4a045bc1454e9956d45b092f} 
+string Bio\+Pipe::\+fname}
+
+\Hypertarget{class_bio_pipe_a1eb23b2b2066f37e296be0a26c9a9bb5}\index{BioPipe@{BioPipe}!Npts@{Npts}}
+\index{Npts@{Npts}!BioPipe@{BioPipe}}
+\doxysubsubsection{\texorpdfstring{Npts}{Npts}}
+{\footnotesize\ttfamily \label{class_bio_pipe_a1eb23b2b2066f37e296be0a26c9a9bb5} 
+int Bio\+Pipe::\+\+Npts}
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+src/\+\doxymbox{\hyperlink{_bio_pipe_8h}{Bio\+Pipe.\+h}}\item 
+src/\+\doxymbox{\hyperlink{_bio_pipe_8cpp}{Bio\+Pipe.\+cpp}}\end{DoxyCompactItemize}

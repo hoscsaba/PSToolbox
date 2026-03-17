@@ -1,0 +1,142 @@
+\doxysection{PSToolbox\+Bio\+Runner.\+h}
+\hypertarget{_p_s_toolbox_bio_runner_8h_source}{}\label{_p_s_toolbox_bio_runner_8h_source}\index{src/PSToolboxBioRunner.h@{src/PSToolboxBioRunner.h}}
+\doxymbox{\hyperlink{_p_s_toolbox_bio_runner_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_p_s_toolbox_base_edge_8h}{PSToolboxBaseEdge.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_bio_connector_8h}{BioConnector.h}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <Eigen/Dense>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_runtime_bio_modifier}{RuntimeBioModifier}}\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{struct_runtime_bio_modifier_a722cf2beb6c2bfb23253e6ae436f6fa3}{time}};}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{struct_runtime_bio_modifier_a6a818fb75ee03f3ce5c01d9b176c586c}{set\_time}}\ =\ 0.0;}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct_runtime_bio_modifier_a71364fb069f1b9f69b56a5442c59f797}{done}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct_runtime_bio_modifier_a3799716bcf117d2234706c3eb18b98d6}{has\_started}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00014\ \ \ \ \ vector<int>\ \doxymbox{\hyperlink{struct_runtime_bio_modifier_ac187c8c6e92b49967eecf250299355dc}{connectors}};}
+\DoxyCodeLine{00015\ \ \ \ \ vector<double>\ \doxymbox{\hyperlink{struct_runtime_bio_modifier_a7d25afba2a12732f51a0bcc612211f7d}{demands}};}
+\DoxyCodeLine{00016\ \ \ \ \ vector<double>\ \doxymbox{\hyperlink{struct_runtime_bio_modifier_a425ea5fc5758f1e2f92e19f62c4dde32}{old\_demands}};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{struct_runtime_bio_modifier_aa8f87d081c2fad017887e29b7760bfc9}{Add}}(\textcolor{keywordtype}{int}\ idx,\ \textcolor{keywordtype}{double}\ demand)\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_runtime_bio_modifier_ac187c8c6e92b49967eecf250299355dc}{connectors}}.push\_back(idx);}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_runtime_bio_modifier_a7d25afba2a12732f51a0bcc612211f7d}{demands}}.push\_back(demand);}
+\DoxyCodeLine{00021\ \ \ \ \ \};}
+\DoxyCodeLine{00022\ \};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_adf164d5be9eb4ad4560f3441b90dacc1}{PSToolboxBioRunner}}\ \{}
+\DoxyCodeLine{00025\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_adf164d5be9eb4ad4560f3441b90dacc1}{PSToolboxBioRunner}}(}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ vector<PSToolboxBaseEdge\ *>\ \&,}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ vector<BioConnector\ *>\ \&,}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ vector<int>\ \&,}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ vector<int>\ \&,}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ vector<vector<int>\ >\ \&);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ vector<PSToolboxBaseEdge\ *>\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_aa5a07995c4d4b2162570a4006de8159c}{edges}};}
+\DoxyCodeLine{00034\ \ \ \ \ vector<BioConnector\ *>\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a670be527923dfce22dce8f4b2b3362d4}{cons}};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a4906b59fcbf3261d2ea3493fbf903c8e}{Run}}(\textcolor{keywordtype}{double});}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_ababa1e222fcde8866a53fb736e706124}{Set\_Save\_data}}(\textcolor{keywordtype}{bool}\ newval)\ \{\ save\_data\ =\ newval;\ \};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_ab34fb5b762690beee52e46304c07d220}{Save\_data\_for\_ini}}();}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a5336fecf7833e202a8577f503780905d}{Ini\_from\_file}}(\textcolor{keywordtype}{string}\ fname,\ \textcolor{keywordtype}{double}\ dt\_target);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a01d9e57b1cf5835c1c9fbd6d1061b00a}{Set\_Folder}}(\textcolor{keywordtype}{string}\ newval)\ \{\ folder\ =\ newval;\ \};}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_aff4abc861318ff9569e9d6c0685c13c1}{Set\_DEBUG}}(\textcolor{keywordtype}{bool}\ newval)\ \{\ DEBUG\ =\ newval;\ \};}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_af35fc9a80c1644a284824e6e716b1a0b}{Set\_Node\_mul}}(\textcolor{keywordtype}{int}\ newval)\ \{\ Node\_mul\ =\ newval;\ \};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_ad3810afd86182b2b32ef7a916ccaf0d3}{Set\_Pressure\_limit}}(\textcolor{keywordtype}{bool}\ set,\ \textcolor{keywordtype}{double}\ \_p\_limMin,\ \textcolor{keywordtype}{double}\ \_p\_limMax,\ \textcolor{keywordtype}{string}\ \_fname,\ \textcolor{keywordtype}{string}\ \_type)\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ set\_limit\ =\ set;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ p\_limMin\ =\ \_p\_limMin;}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ p\_limMax\ =\ \_p\_limMax;}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ limits\_fname\ =\ \_fname;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ limits\_type\ =\ \_type;}
+\DoxyCodeLine{00054\ \ \ \ \ \};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a0608f9ce8979110ca985ee3a5c7ee667}{Set\_Pressure\_limit\_time}}(\textcolor{keywordtype}{double}\ start,\ \textcolor{keywordtype}{double}\ end)\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ p\_start\_time\ =\ start;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ p\_end\_time\ =\ end;}
+\DoxyCodeLine{00059\ \ \ \ \ \};}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a3a6f1519948601f5f0b8c7b81114a8a6}{Set\_Save\_interval}}(\textcolor{keywordtype}{double}\ interval)\ \{\ save\_interval\ =\ interval;\ \};}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{comment}{//void\ Set\_Write\_interval(double\ interval)\ \{write\_interval\ =\ interval;\};}}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a04e78d2af532ad09f348f943307f0c72}{Add\_Runtime\_modifier}}(\doxymbox{\hyperlink{struct_runtime_bio_modifier}{RuntimeBioModifier}}\ \&rmod)\ \{\ modifiers.push\_back(rmod);\ \};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_ad2371faf9e7aa441d1a0b7ed25b347d4}{ListEdgeInfo}}()\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_aa5a07995c4d4b2162570a4006de8159c}{edges}}.size();\ i++)\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_aa5a07995c4d4b2162570a4006de8159c}{edges}}.at(i)-\/>Info();}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ cin.get();}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00069\ \ \ \ \ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_ae6cae1ba4c15871bc764186791da774f}{Ini}}(\textcolor{keywordtype}{double}\ dt\_target);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_ae6cae1ba4c15871bc764186791da774f}{Ini}}(\textcolor{keywordtype}{double}\ dt\_target,\ VectorXd\ Cini);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a5387324186375522c595d1822d66bd5e}{Load\_v\_conv\_from\_file}}(\textcolor{keywordtype}{string}\ fname,\ \textcolor{keywordtype}{double}\ mul);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a8a04fda970af03a2355a43a369ebe96d}{Load\_v\_conv\_from\_epanet\_export}}(\textcolor{keywordtype}{string}\ fname,\ \textcolor{keywordtype}{double}\ mul);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_af02683d9a509225c5db9446f7fad44b0}{Load\_nodal\_demand\_from\_epanet\_export}}(\textcolor{keywordtype}{string}\ fname,\ \textcolor{keywordtype}{double}\ mul);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_abb9143a1a60a03c71fcbf4b6ff1a68ed}{Set\_snapshot\_fname}}(\textcolor{keywordtype}{string}\ newval)\ \{\ snapshot\_fname\ =\ std::move(newval);\ \}}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_a7c2b13e3707a6ac0b856daccd648732b}{Set\_save\_snapshot}}(\textcolor{keywordtype}{bool}\ newval)\ \{\ save\_snapshot\ =\ newval;\ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_p_s_toolbox_bio_runner_ac31108fef807bb02c26912dcbc303059}{build\_statistics}}();}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00087\ \ \ \ \ vector<int>\ con\_at\_edge\_start;}
+\DoxyCodeLine{00088\ \ \ \ \ vector<int>\ con\_at\_edge\_end;}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{bool}\ DEBUG;}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{int}\ Node\_mul;}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{bool}\ ini\_done;}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{comment}{//min-\/max\ pressure}}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{double}\ p\_limMin;}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{double}\ p\_limMax;}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{double}\ p\_start\_time;}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{double}\ p\_end\_time;}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{int}\ snapshot\_num;}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{string}\ snapshot\_fname;}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{bool}\ save\_snapshot;}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{bool}\ set\_limit;}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{string}\ limits\_fname;}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{string}\ limits\_type;}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{comment}{//save\ stuff}}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{bool}\ save\_data;}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{double}\ write\_interval;}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{double}\ save\_interval;}
+\DoxyCodeLine{00111\ \ \ \ \ vector<vector<int>\ >\ rigid\_subsystems;}
+\DoxyCodeLine{00112\ \ \ \ \ vector<vector<int>\ >\ flexible\_pipes\_connected\_to\_subsystems;}
+\DoxyCodeLine{00113\ \ \ \ \ vector<vector<bool>\ >\ flexible\_pipes\_connected\_to\_subsystems\_is\_front;}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ vector<int>\ num\_of\_edges;}
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{comment}{//\ list\ of\ nodes\ in\ the\ rs}}
+\DoxyCodeLine{00117\ \ \ \ \ vector<vector<int>\ >\ rs\_idx\_nodes;}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{comment}{//\ list\ of\ edges\ in\ the\ rs}}
+\DoxyCodeLine{00119\ \ \ \ \ vector<vector<int>\ >\ rs\_idx\_edges;}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{comment}{//\ \ rs\_idx\_nodes\_edges.at(i).at(j)\ :\ edges\ connected\ to\ node\ j\ in\ rs\ i}}
+\DoxyCodeLine{00121\ \ \ \ \ vector<vector<vector<int>\ >\ >\ rs\_idx\_nodes\_edges;}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{comment}{//\ \ rs\_idx\_nodes\_edges.at(i).at(j)\ :\ edge\ direction\ connected\ to\ node\ j\ in\ rs\ i}}
+\DoxyCodeLine{00123\ \ \ \ \ vector<vector<vector<bool>\ >\ >\ rs\_idx\_nodes\_is\_front;}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{comment}{//runtime\ modifiers}}
+\DoxyCodeLine{00126\ \ \ \ \ vector<RuntimeBioModifier>\ modifiers;}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{comment}{//save\ folder}}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordtype}{string}\ folder;}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{string}\ convertSecondsToTimeFormat(\textcolor{keywordtype}{double}\ totalSeconds);}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordtype}{double}\ limitAbs(\textcolor{keywordtype}{double}\ value,\ \textcolor{keywordtype}{double}\ maxAbs);}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{void}\ Write\_snapshot(\textcolor{keywordtype}{double});}
+\DoxyCodeLine{00136\ \};}
+
+\end{DoxyCode}

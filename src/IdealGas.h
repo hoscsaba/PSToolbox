@@ -31,6 +31,10 @@ public:
         return T * cV;
     }
 
+    double Get_h_from_Tp(double T, double p) override {
+        return T * cp;
+    }
+
     double Get_SonicVel(double T, double p) override {
         return sqrt(kappa * R * T);
     }

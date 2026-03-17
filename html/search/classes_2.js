@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['epanetreader_0',['EpanetReader',['../class_epanet_reader.html',1,'']]]
+  ['damper_0',['Damper',['../class_damper.html',1,'']]],
+  ['datapair_1',['Datapair',['../struct_datapair.html',1,'']]]
 ];

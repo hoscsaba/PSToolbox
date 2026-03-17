@@ -653,7 +653,7 @@ void Valve::Save_data() {
 
     FILE *pFile;
     pFile = fopen(fname.c_str(), "w");
-    fprintf(pFile, "t (s); x (m); v (m/s); mdot (kg/s)\n");
+    fprintf(pFile, "t (s); x (mm); v (m/s); mdot (kg/s)\n");
     for (int i = 0; i < data.size(); i++)
       fprintf(pFile, "%8.6e; %8.6e; %+8.6e; %+8.6e\n",
               data.at(i).at(0),
