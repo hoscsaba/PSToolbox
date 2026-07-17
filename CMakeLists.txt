@@ -7,6 +7,7 @@ project(PSToolbox LANGUAGES CXX)
 # You can toggle these if needed
 option(PSTOOLBOX_WARNINGS "Enable compiler warnings" ON)
 option(PSTOOLBOX_BUILD_TESTS "Build tests" OFF)
+option(BUILD_SHARED_LIBS "Build PSToolbox as a shared library (DLL on Windows)" OFF)
 
 # ---- C++ standard & compile options ----
 set(CMAKE_CXX_STANDARD 17)
@@ -36,6 +37,13 @@ if(NOT Eigen3_FOUND)
   # Fallback: let caller pass -DEIGEN3_INCLUDE_DIR=/path/to/eigen3
   if(DEFINED EIGEN3_INCLUDE_DIR)
     include_directories(${EIGEN3_INCLUDE_DIR})
+  elseif(PSTOOLBOX_FETCH_EIGEN)
+    include(FetchContent)
+    FetchContent_Declare(eigen
+      URL https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
+      DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+    )
+    FetchContent_MakeAvailable(eigen)
   else()
     # As a last resort, try Homebrew default on macOS (similar to: -I$(brew --prefix eigen)/include/eigen3)
     if(APPLE)
@@ -68,7 +76,7 @@ foreach(_f IN LISTS _exclude_list)
 endforeach()
 
 # ---- Library target ----
-add_library(PSToolbox STATIC ${PSTOOLBOX_SOURCES})
+add_library(PSToolbox ${PSTOOLBOX_SOURCES})
 
 # If Eigen3::Eigen is available, link it; otherwise just rely on include dirs added above
 if(TARGET Eigen3::Eigen)
@@ -78,9 +86,17 @@ endif()
 # Public include directories (if you have headers under include/ add it here)
 target_include_directories(PSToolbox
   PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
     $<INSTALL_INTERFACE:include>
 )
+
+if(MSVC)
+  target_compile_definitions(PSToolbox PUBLIC _USE_MATH_DEFINES)
+endif()
+
+if(WIN32 AND BUILD_SHARED_LIBS)
+  set_target_properties(PSToolbox PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
+endif()
 
 # Compile options roughly matching Makefile intent
 if(NOT MSVC)
